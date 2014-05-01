@@ -29,8 +29,8 @@
 					Description : ${offres.offre_description}<br/>
 					Plus de renseignements : ${offres.eleve_mail}@hei.fr<br/>
 					<br/>
-					Association<br/>
-					Président<br/>
+					Association : ${offres.structure_nom}<br/>
+					Président : ${offres.structure_president}<br/>
 					${offres.offre_place} places disponibles<br/>
 					<a href="validerannonce?id=${offres.cle_offre }">Valider</a>
 					</p>

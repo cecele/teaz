@@ -20,8 +20,8 @@ public class AnnonceDaoImpl implements AnnonceDao {
 
 
 //-----------------------------------------------------------------------------------------------------------------
-// création d 'une annonce en statut non validé pour mise en ligne et date_miseenligne null par défaut
-// acces en écriture
+// crï¿½ation d 'une annonce en statut non validï¿½ pour mise en ligne et date_miseenligne null par dï¿½faut
+// acces en ï¿½criture
 	public void ajouterAnnonce (Offre offre ){
 		if (offre.getDate_tea() != null || offre.getHeure_debut() != null || offre.getHeure_fin() != null  || offre.getEleve_mail() != null  || offre.getOffre_titre() != null){
 			try {
@@ -57,8 +57,8 @@ public class AnnonceDaoImpl implements AnnonceDao {
 					}
 		}
 //-----------------------------------------------------------------------------------------------------------------
-//mise au statut valide de l'annonce et donc modification de la date de mise en ligne ce processus est efféctué par le reponsable TEA et provoque l'affichage de l'annonce dans la liste
-//acces en écriture
+//mise au statut valide de l'annonce et donc modification de la date de mise en ligne ce processus est effï¿½ctuï¿½ par le reponsable TEA et provoque l'affichage de l'annonce dans la liste
+//acces en ï¿½criture
 
 public void annonce_validation (Integer cle_offre,Date datedujour){
 	try {
@@ -106,8 +106,8 @@ public void offre_placemoins (Integer cle_offre){
 	}
 }
 //-----------------------------------------------------------------------------------------------------------------
-//mise à 0 du statut pour enlever l'affichage
-//acces en ecriture--- a effectuer quand le nombre de place est à 0
+//mise ï¿½ 0 du statut pour enlever l'affichage
+//acces en ecriture--- a effectuer quand le nombre de place est ï¿½ 0
 
 
 public void annonce_miseHorsLigne (Integer cle_offre){
@@ -129,8 +129,8 @@ public void annonce_miseHorsLigne (Integer cle_offre){
 	}
 }
 //-----------------------------------------------------------------------------------------------------------------
-//récupération des annonces  valide par ordres decroissant de dates sans structure
-//accès en lecture
+//rï¿½cupï¿½ration des annonces  valide par ordres decroissant de dates sans structure
+//accï¿½s en lecture
 	
 	public List<Offre> listerOffre(){
 		List<Offre> offres = new ArrayList<Offre>();
@@ -159,7 +159,7 @@ public void annonce_miseHorsLigne (Integer cle_offre){
 						);
 				
 				offres.add(offre);	
-				System.out.println(results.getString("eleve_mail"));
+				System.out.println(results.getString("structure_nom"));
 			}
 			// Fermer la connexion
 			results.close();
@@ -172,8 +172,8 @@ public void annonce_miseHorsLigne (Integer cle_offre){
 			return offres;
 		}
 	//-----------------------------------------------------------------------------------------------------------------
-	//récupération des annonces non valide par ordres decroissant 
-	//accès en lecture
+	//rï¿½cupï¿½ration des annonces non valide par ordres decroissant 
+	//accï¿½s en lecture
 		
 	public List<Offre> listerOffreNonValide(){
 		List<Offre> offres = new ArrayList<Offre>();
@@ -182,7 +182,7 @@ public void annonce_miseHorsLigne (Integer cle_offre){
 					.getConnection();
 
 			Statement stmt = connection.createStatement();
-			ResultSet results = stmt.executeQuery("SELECT * FROM offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE statut=1 ORDER BY date_tea DESC");
+			ResultSet results = stmt.executeQuery("SELECT * FROM offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE statut=0 ORDER BY date_tea DESC");
 			
 			while (results.next()) {
 				Offre offre =new Offre(results.getInt("cle_offre"),
@@ -215,8 +215,8 @@ public void annonce_miseHorsLigne (Integer cle_offre){
 			return offres;
 		}
 	//-----------------------------------------------------------------------------------------------------------------
-	//récupération des noms et président de la structure pour une offre particulière. Dans le cas d'un professeur le président de la structure sera l'enseignant et une structure enseignant est crée
-	//accès en lecture
+	//rï¿½cupï¿½ration des noms et prï¿½sident de la structure pour une offre particuliï¿½re. Dans le cas d'un professeur le prï¿½sident de la structure sera l'enseignant et une structure enseignant est crï¿½e
+	//accï¿½s en lecture
 	public Structure getStructure(Integer cle_offre){
 		Structure structure = new Structure(null,null,null);
 		try {
@@ -246,8 +246,8 @@ public void annonce_miseHorsLigne (Integer cle_offre){
 			return structure;	
 	}
 	//-----------------------------------------------------------------------------------------------------------------
-		///suppression d'une offre non pourvue ou qui n'est plus nécessaire (attention verification offre non pourvue)
-		//accès en ecriture
+		///suppression d'une offre non pourvue ou qui n'est plus nï¿½cessaire (attention verification offre non pourvue)
+		//accï¿½s en ecriture
 	public void deleteOffre(Integer cleoffre) {
 		
 		try {
@@ -271,7 +271,7 @@ public void annonce_miseHorsLigne (Integer cle_offre){
 	}
 	//-----------------------------------------------------------------------------------------------------------------
 	///Nombre de places dispos pour une offre donnee
-	//accès en lecture
+	//accï¿½s en lecture
 	
 	public int getNbPlaces(int idOffre) {
         
@@ -301,8 +301,8 @@ public void annonce_miseHorsLigne (Integer cle_offre){
 	
 	
 	//-----------------------------------------------------------------------------------------------------------------
-			///Nombre d'heure de TEA validées sur l'année
-			//accès en lecture
+			///Nombre d'heure de TEA validï¿½es sur l'annï¿½e
+			//accï¿½s en lecture
 
 	
 

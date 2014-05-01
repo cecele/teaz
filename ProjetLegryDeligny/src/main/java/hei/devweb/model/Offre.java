@@ -127,5 +127,21 @@ public class Offre{
 	public void setStatut(Integer statut) {
 		this.statut = statut;
 	}
+
+	public String getStructure_nom() {
+		return structure_nom;
+	}
+
+	public void setStructure_nom(String structure_nom) {
+		this.structure_nom = structure_nom;
+	}
+
+	public String getStructure_president() {
+		return structure_president;
+	}
+
+	public void setStructure_president(String structure_president) {
+		this.structure_president = structure_president;
+	}
 	
 }
