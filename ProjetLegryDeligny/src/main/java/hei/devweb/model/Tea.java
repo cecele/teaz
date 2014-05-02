@@ -11,6 +11,7 @@ Integer statut_valide;
 Date date_validation;
 Integer cle_offre;
 String id_eleve;
+
 public Tea(Integer cle_tea, Date date_tea_realisee, Integer nbheure_realisee,
 		Integer statut_valide, Date date_validation, Integer cle_offre,
 		String id_eleve) {
