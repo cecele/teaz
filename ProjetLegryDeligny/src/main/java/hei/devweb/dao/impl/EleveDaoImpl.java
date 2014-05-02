@@ -113,7 +113,9 @@ public class EleveDaoImpl implements EleveDao {
 				stmt.setString(1,classe);
 				ResultSet results = stmt.executeQuery();
 				
-				while (results.next()) {
+				
+				results.next();
+				
 					Eleve eleve =new Eleve(
 				results.getString("id_eleve"),
 				results.getString("eleve_nom"),
@@ -131,7 +133,7 @@ public class EleveDaoImpl implements EleveDao {
 				
 					eleves.add(eleve);	
 					
-				}
+				
 					// Fermer la connexion
 					results.close();
 					stmt.close();

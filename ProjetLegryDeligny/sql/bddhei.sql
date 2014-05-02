@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: 127.0.0.1
--- Généré le: Mer 30 Avril 2014 à 17:03
+-- Généré le: Ven 02 Mai 2014 à 14:12
 -- Version du serveur: 5.6.11-log
 -- Version de PHP: 5.4.14
 
@@ -50,6 +50,7 @@ CREATE TABLE IF NOT EXISTS `classe` (
   `cle_classe` int(11) NOT NULL AUTO_INCREMENT,
   `classe` char(3) DEFAULT NULL,
   `annee` char(4) DEFAULT NULL,
+  `nb_tea` int(11) NOT NULL,
   PRIMARY KEY (`cle_classe`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
@@ -57,8 +58,8 @@ CREATE TABLE IF NOT EXISTS `classe` (
 -- Contenu de la table `classe`
 --
 
-INSERT INTO `classe` (`cle_classe`, `classe`, `annee`) VALUES
-(1, 'H43', '2014');
+INSERT INTO `classe` (`cle_classe`, `classe`, `annee`, `nb_tea`) VALUES
+(1, 'H43', '2014', 0);
 
 -- --------------------------------------------------------
 
@@ -171,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `tea` (
   `cle_tea` int(11) NOT NULL AUTO_INCREMENT,
   `date_tea_realisee` date DEFAULT NULL,
   `nbheure_realisee` int(11) DEFAULT NULL,
-  `staut_valide` int(11) DEFAULT NULL,
+  `statut_valide` int(11) DEFAULT NULL,
   `date_validation` date DEFAULT NULL,
   `cle_offre` int(11) NOT NULL,
   `id_eleve` char(6) NOT NULL,
@@ -184,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `tea` (
 -- Contenu de la table `tea`
 --
 
-INSERT INTO `tea` (`cle_tea`, `date_tea_realisee`, `nbheure_realisee`, `staut_valide`, `date_validation`, `cle_offre`, `id_eleve`) VALUES
+INSERT INTO `tea` (`cle_tea`, `date_tea_realisee`, `nbheure_realisee`, `statut_valide`, `date_validation`, `cle_offre`, `id_eleve`) VALUES
 (1, '2014-04-30', 2, 0, NULL, 1, '10153');
 
 --
