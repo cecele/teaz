@@ -45,38 +45,7 @@ public class TeaDaoImpl implements TeaDao {
 			
 		return nbtotal;
 	}
-	//-----------------------------------------------------------------------------------------------------------------
-		//calcul du nombre d'heure de tea valides par élève
-		//acc�s en lecture
 	
-	public int getNbHeureTeaValide(String ideleve){
-		int nbtotal=0;
-		
-		// recuperation de la cl� classe la plus recente
-		try {
-			Connection connection = DataSourceProvider.getDataSource()
-					.getConnection();
-
-			
-			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT SUM(nbheure_realisee) as total FROM tea WHERE id_eleve=? AND statut_valide=1");
-			stmt.setString(1,ideleve);
-			ResultSet results = stmt.executeQuery();
-			
-			nbtotal=results.getInt("total");
-			
-			// Fermer la connexion
-			results.close();
-			stmt.close();
-			connection.close();
-			
-			}
-		catch (SQLException e) {
-							e.printStackTrace();
-						}
-		
-			
-		return nbtotal;
-	}
 	//-----------------------------------------------------------------------------------------------------------------
 			//recupération des heures de TEA d'un eleve en fonction son id
 			//acc�s en lecture
@@ -194,7 +163,7 @@ catch (SQLException e) {
 return teas;	
 }
 //-----------------------------------------------------------------------------------------------------------------
-		//calcul du nombre d'heure de tea en attente
+		//calcul du nombre d'heure de tea en attente 
 		//acc�s en lecture
 	
 	public int getNbHeureTeaEnAttente(){
@@ -206,7 +175,7 @@ return teas;
 					.getConnection();
 
 			
-			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT SUM(nbheure_realisee) as total FROM tea");
+			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT SUM(nbheure_realisee) as total FROM tea WHERE statut_valide=0");
 			
 			ResultSet results = stmt.executeQuery();
 			
@@ -225,4 +194,71 @@ return teas;
 			
 		return nbtotal;
 	}
+	//-----------------------------------------------------------------------------------------------------------------
+			//calcul du nombre d'heure de tea valides par élève
+			//acc�s en lecture
+		
+		public int getNbHeureTeaValide(String ideleve){
+			int nbtotal=0;
+			
+			// recuperation de la cl� classe la plus recente
+			try {
+				Connection connection = DataSourceProvider.getDataSource()
+						.getConnection();
+
+				
+				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT SUM(nbheure_realisee) as total FROM tea WHERE id_eleve=? AND statut_valide=1");
+				stmt.setString(1,ideleve);
+				ResultSet results = stmt.executeQuery();
+				
+				nbtotal=results.getInt("total");
+				
+				// Fermer la connexion
+				results.close();
+				stmt.close();
+				connection.close();
+				
+				}
+			catch (SQLException e) {
+								e.printStackTrace();
+							}
+			
+				
+			return nbtotal;
+		}
+	//-----------------------------------------------------------------------------------------------------------------
+		//calcul du nombre de tea dues pour un élève en fonction de son id
+		//acc�s en lecture
+		
+		public int getNbHeureDues(String ideleve){
+			int nbtotal=0;
+			
+			// recuperation de la cl� classe la plus recente
+			try {
+				Connection connection = DataSourceProvider.getDataSource()
+						.getConnection();
+
+				
+				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT SUM(classe.nb_tea) as total FROM appartenir INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE appartenir.id_eleve=?");
+				stmt.setString(1,ideleve);
+				ResultSet results = stmt.executeQuery();
+				
+				nbtotal=results.getInt("total");
+				
+				// Fermer la connexion
+				results.close();
+				stmt.close();
+				connection.close();
+				
+				}
+			catch (SQLException e) {
+								e.printStackTrace();
+							}
+			
+				
+			return nbtotal;
+		}
+		
+		
+		
 }
