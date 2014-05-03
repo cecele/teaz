@@ -82,6 +82,11 @@ private static Manager instance;
 		return TeaDao.getTeaByEleve(string);
 	}
 
+	public Eleve getEleveById(String champId) {
+		System.out.println("Dans m�thode: GetEleveById");
+		return EleveDao.getEleveById(champId);
+	}
+
 
 
 }

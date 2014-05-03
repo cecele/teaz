@@ -41,6 +41,6 @@
 	<ul>
 		<li class="menu"><a href="validationannonces">Annonces en attente</a></li>
 		<li class="menu"><a href="gestiontea">Gestion des TEA</a></li>
-		<li class="menu"><a href="#">Se déconnecter</a></li>
+		<li class="menu"><a href="deconnexion">Se déconnecter</a></li>
 	</ul>
 </aside>

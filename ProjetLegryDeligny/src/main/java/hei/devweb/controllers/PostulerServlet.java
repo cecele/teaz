@@ -41,6 +41,7 @@ public class PostulerServlet extends HttpServlet {
 			Manager.getInstance().offre_placemoins(id);
 		}
 		else if(nbPlaces == 1)
+			Manager.getInstance().ajouterTea(id,matricule);
 			Manager.getInstance().annonce_miseHorsLigne(id);
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/tea.jsp");

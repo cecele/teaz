@@ -1,7 +1,6 @@
 package hei.devweb.controllers;
 
 import hei.devweb.metier.Manager;
-import hei.devweb.model.Offre;
 import hei.devweb.model.Tea;
 
 import java.io.IOException;
@@ -20,7 +19,7 @@ public class TeaServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		List<Tea> teas = Manager.getInstance().getTeaByEleve("11105");
+		List<Tea> teas = Manager.getInstance().getTeaByEleve("10153");
 		request.setAttribute("teas",teas);
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/tea.jsp");

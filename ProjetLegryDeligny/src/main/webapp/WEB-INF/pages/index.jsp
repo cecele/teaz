@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
    	<head>
@@ -23,11 +24,26 @@
 					<header>
 						<h2>Coucou</h2>
 					</header>
-					<p id="accueil">Superski vous propose un aperçu des meilleures stations de ski de France.<br/>
-					Nous avons dépéché nos meilleurs testeurs, et avons effectué une revue d'effectif des forces en présence. Que vous aimiez les vacances en famille, les descentes de poudreuse ou les soirées enflammées, soyez surs que nous avons la station qui vous plaira.<br/>
-					Un petit apercu des pistes est également disponible, ainsi qu'une liste des compétitions françaises ! Oui, on sait, c'est totalement superflu, mais on s'est dis que ça ferait classe d'avoir autant d'informations sur notre site. Eh oui, il faut vendre de nos jours ...<br/>
-					Allez, bonne année !</p>
-					
+					<form method="post" action="connexion">             
+						<fieldset>     
+							<c:if test="${empty sessionScope.sessionEleve}">            
+							<legend>Connexion</legend>                 
+							<p>Vous pouvez vous connecter via ce formulaire.</p>                  
+							<label for="nom">Matricule H</label>                 
+							<input id="id_eleve" name="id_eleve"  size="20" maxlength="60" />                 
+							<span class="erreur">${form.erreurs['id_eleve']}</span><br />                  
+							<label for="motdepasse">Mot de passe</label>                 
+							<input type="password" id="motdepasse" name="motdepasse" value="" size="20" maxlength="20" />                 
+							<span class="erreur">${form.erreurs['motdepasse']}</span><br />                  
+							<input type="submit" value="Connexion" class="sansLabel" /><br />                                  
+							<p class="${empty form.erreurs ? 'succes' : 'erreur'}">${form.resultat}</p>  
+							</c:if>
+							<c:if test="${!empty sessionScope.sessionEleve}">                     
+								<%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>                     
+								<p class="succes">Vous êtes connecté(e) avec l'id : ${sessionScope.sessionEleve.id_eleve}</p>                 
+							</c:if>           
+						</fieldset>         
+					</form>
 			</article>
 			
 		</section>	

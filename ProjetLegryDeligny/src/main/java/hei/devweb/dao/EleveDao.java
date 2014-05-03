@@ -8,4 +8,6 @@ public interface EleveDao {
 
 	List<Eleve> getEleveTotal();
 
+	Eleve getEleveById(String champId);
+
 }

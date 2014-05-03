@@ -36,6 +36,22 @@
     <servlet-name>Postuler</servlet-name>
     <servlet-class>hei.devweb.controllers.PostulerServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Connexion</servlet-name>
+    <servlet-class>hei.devweb.controllers.ConnexionServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Deconnexion</servlet-name>
+    <servlet-class>hei.devweb.controllers.DeconnexionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Deconnexion</servlet-name>
+    <url-pattern>/deconnexion</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Connexion</servlet-name>
+    <url-pattern>/connexion</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Postuler</servlet-name>
     <url-pattern>/postuler</url-pattern>
