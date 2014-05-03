@@ -31,12 +31,15 @@ public class PostulerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Integer id  = Integer.parseInt(request.getParameter("id"));
-		
+		String matricule = "11105";
 		
 		int nbPlaces = Manager.getInstance().getNbPlaces(id);
 		System.out.println(nbPlaces);
 		if(nbPlaces > 1)
+		{
+			Manager.getInstance().ajouterTea(id,matricule);
 			Manager.getInstance().offre_placemoins(id);
+		}
 		else if(nbPlaces == 1)
 			Manager.getInstance().annonce_miseHorsLigne(id);
 		
