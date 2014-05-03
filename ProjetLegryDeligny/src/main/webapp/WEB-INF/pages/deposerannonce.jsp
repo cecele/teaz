@@ -26,9 +26,9 @@
 						<td><label for="date" >Date</label></td>
 						<td><input type="date" name="date" id="date" required></td>
 						<td><label for="hdebut" >Heure de début</label></td>
-						<td><input type="time" name="hdebut" id="hdebut" required></td>
+						<td><input type="number" min="1" max="23" name="hdebut" id="hdebut" required></td>
 						<td><label for="hfin" >Heure de fin</label></td>
-						<td><input type="time" name="hfin" id="hfin" required></td>	
+						<td><input type="number" min="1" max="23" name="hfin" id="hfin" required></td>	
 					</tr>
 					<tr>
 						<td><label for="titre" >Titre</label></td>
