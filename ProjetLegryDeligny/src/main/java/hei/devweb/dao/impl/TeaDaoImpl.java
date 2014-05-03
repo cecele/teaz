@@ -129,7 +129,7 @@ public class TeaDaoImpl implements TeaDao {
 			results.getInt("cle_tea"),
 			results.getDate("date_tea_realisee"),
 			results.getInt("nbheure_realisee"),
-			results.getInt("statut_valdie"),
+			results.getInt("statut_valide"),
 			results.getDate("date_validation"),
 			results.getInt("cle_offre"),
 			results.getString("id_eleve"));
@@ -168,7 +168,7 @@ try {
 	results.getInt("cle_tea"),
 	results.getDate("date_tea_realisee"),
 	results.getInt("nbheure_realisee"),
-	results.getInt("statut_valdie"),
+	results.getInt("statut_valide"),
 	results.getDate("date_validation"),
 	results.getInt("cle_offre"),
 	results.getString("id_eleve"));
@@ -206,7 +206,7 @@ while (results.next()) {
 results.getInt("cle_tea"),
 results.getDate("date_tea_realisee"),
 results.getInt("nbheure_realisee"),
-results.getInt("statut_valdie"),
+results.getInt("statut_valide"),
 results.getDate("date_validation"),
 results.getInt("cle_offre"),
 results.getString("id_eleve"));
