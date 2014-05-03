@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>  
 <!DOCTYPE html>
 <html>
    	<head>
@@ -16,10 +18,16 @@
 	<!-- Corps -->
    		<section>
  
-			<h1>TEA</h1>			
-	
+			<h1>TEA</h1>	
+			<c:if test="${empty teas}">		
 			<article>
-					<table><tr><td><h2 class="valide">21/10/13 (HEI4)</h2></td><td class="center"><h2 class="valide">Valide</h2></td> <td class="right"><h2 class="valide">3H</h2></td></tr></table>
+				<p>Aucune heure de TEA réalisée...</p>
+			</article> 
+			</c:if>		
+			<c:forEach var="teas" items="${teas}">
+			
+			<article>
+					<table><tr><td><h2 class="${teas.statut_valide == 1 ? 'valide' : 'attente'}"><fmt:formatDate value="${teas.date_tea_realisee}" pattern="d MMMM yyyy"/></h2></td><td class="center"><h2 class="${teas.statut_valide == 1 ? 'valide' : 'attente'}">${teas.statut_valide == 1 ? 'Validée' : 'En attente'}</h2></td> <td class="right"><h2 class="${teas.statut_valide == 1 ? 'valide' : 'attente'}">${teas.nbheure_realisee}H</h2></td></tr></table>
 					<hr/>
 					<p>
 					Demandeur : Integrale HEI<br/>
@@ -28,15 +36,8 @@
 					Evenement: Intégrale HEI
 					</p>
 			</article>
-			<article>
-					<table><tr><td><h2 class="attente">21/10/13 (HEI4)</h2></td><td class="center"><h2 class="attente">En attente</h2></td> <td class="right"><h2 class="attente">3H</h2></td></tr></table>
-					<hr/>
-					<p>Demandeur : Integrale HEI<br/>
-					Président : Timothée Rosset<br/>
-					<br/>
-					Evenement: Intégrale HEI
-					</p>
-			</article>
+			
+			</c:forEach>
 			
 		</section>	
     </body>

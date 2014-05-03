@@ -19,11 +19,15 @@
    		<section>
  
 			<h1>Annonces</h1>			
-			
+			<c:if test="${empty offres}">
+			<article>
+				<p>Il n'y a pas d'offres disponibles actuellement</p>
+			</article> 
+			</c:if>
 			<c:forEach var="offres" items="${offres}">
 			<article>
 				
-					<table><tr><td><h2><fmt:formatDate value="${offres.date_tea}" pattern="d MMMM yyyy"/></h2></td><td class="center"><h2>${offres.offre_titre}</h2></td> <td class="right"><h2>${offres.heure_debut} - ${offres.heure_fin}</h2></td></tr></table>		
+					<table><tr><td><h2><fmt:formatDate value="${offres.date_tea}" pattern="d MMMM yyyy"/></h2></td><td class="center"><h2>${offres.offre_titre}</h2></td> <td class="right"><h2>${offres.heure_debut}H - ${offres.heure_fin}H</h2></td></tr></table>		
 					<hr/>
 					<p>
 					Description : ${offres.offre_description}<br/>

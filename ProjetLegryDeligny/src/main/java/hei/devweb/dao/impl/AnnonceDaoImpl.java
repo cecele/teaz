@@ -182,7 +182,7 @@ public void annonce_miseHorsLigne (Integer cle_offre){
 					.getConnection();
 
 			Statement stmt = connection.createStatement();
-			ResultSet results = stmt.executeQuery("SELECT * FROM offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE statut=0 ORDER BY date_tea DESC");
+			ResultSet results = stmt.executeQuery("SELECT * FROM offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE statut=0 AND offre_place>0 ORDER BY date_tea DESC");
 			
 			while (results.next()) {
 				Offre offre =new Offre(results.getInt("cle_offre"),

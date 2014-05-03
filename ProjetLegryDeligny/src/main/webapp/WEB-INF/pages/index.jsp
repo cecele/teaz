@@ -38,8 +38,7 @@
 							<input type="submit" value="Connexion" class="sansLabel" /><br />                                  
 							<p class="${empty form.erreurs ? 'succes' : 'erreur'}">${form.resultat}</p>  
 							</c:if>
-							<c:if test="${!empty sessionScope.sessionEleve}">                     
-								<%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>                     
+							<c:if test="${!empty sessionScope.sessionEleve}">                                         
 								<p class="succes">Vous êtes connecté(e) avec l'id : ${sessionScope.sessionEleve.id_eleve}</p>                 
 							</c:if>           
 						</fieldset>         

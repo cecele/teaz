@@ -18,8 +18,12 @@
 	<!-- Corps -->
    		<section>
  
-			<h1>Annonces</h1>			
-			
+			<h1>Annonces</h1>	
+			<c:if test="${empty offres}">		
+			<article>
+				<p>Rien à valider, bon boulot !</p>
+			</article> 
+			</c:if>
 			<c:forEach var="offres" items="${offres}">
 			<article>
 				
