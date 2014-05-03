@@ -14,8 +14,8 @@ import hei.devweb.model.Eleve;
 public class EleveDaoImpl implements EleveDao {
 	
 	//-----------------------------------------------------------------------------------------------------------------
-	//récupération des information d'un eleve en fonction de id (son id est numero de matricule sans le h)
-	//accès en lecture
+	//rï¿½cupï¿½ration des information d'un eleve en fonction de id (son id est numero de matricule sans le h)
+	//accï¿½s en lecture
 	
 	public Eleve getEleveById(String ideleve){
 		Eleve eleve = new Eleve(null,null,null, null, null, null, null, null, null, null, null,null,null);
@@ -56,8 +56,8 @@ public class EleveDaoImpl implements EleveDao {
 			return eleve;	
 	}
 	//-----------------------------------------------------------------------------------------------------------------
-		//recherche d'élève par nom retourne la liste des élèves dont le nom contient la recherche
-		//accès en lecture
+		//recherche d'ï¿½lï¿½ve par nom retourne la liste des ï¿½lï¿½ves dont le nom contient la recherche
+		//accï¿½s en lecture
 	public List<Eleve> rechercheEleveByNom(String nom){
 		List<Eleve> eleves = new ArrayList<Eleve>();
 		try {
@@ -100,8 +100,8 @@ public class EleveDaoImpl implements EleveDao {
 			return eleves;	
 	}
 	//-----------------------------------------------------------------------------------------------------------------
-			//recherche d'élève par classe retourne la liste des elèves de cette classe quelque soit l'année
-			//accès en lecture
+			//recherche d'ï¿½lï¿½ve par classe retourne la liste des elï¿½ves de cette classe quelque soit l'annï¿½e
+			//accï¿½s en lecture
 		public List<Eleve> rechercheEleveByClasse(String classe){
 			List<Eleve> eleves = new ArrayList<Eleve>();
 			try {
@@ -113,7 +113,9 @@ public class EleveDaoImpl implements EleveDao {
 				stmt.setString(1,classe);
 				ResultSet results = stmt.executeQuery();
 				
-				while (results.next()) {
+				
+				results.next();
+				
 					Eleve eleve =new Eleve(
 				results.getString("id_eleve"),
 				results.getString("eleve_nom"),
@@ -131,7 +133,7 @@ public class EleveDaoImpl implements EleveDao {
 				
 					eleves.add(eleve);	
 					
-				}
+				
 					// Fermer la connexion
 					results.close();
 					stmt.close();
@@ -144,8 +146,8 @@ public class EleveDaoImpl implements EleveDao {
 				return eleves;	
 		}
 		//-----------------------------------------------------------------------------------------------------------------
-		//recherche d'élève par classe et année retourne la liste des elèves de cette classe quelque soit l'année
-		//accès en lecture
+		//recherche d'ï¿½lï¿½ve par classe et annï¿½e retourne la liste des elï¿½ves de cette classe quelque soit l'annï¿½e
+		//accï¿½s en lecture
 	public List<Eleve> rechercheEleveByClasse(String classe, String annee){
 		List<Eleve> eleves = new ArrayList<Eleve>();
 		try {
@@ -189,8 +191,8 @@ public class EleveDaoImpl implements EleveDao {
 			return eleves;	
 	}
 	//-----------------------------------------------------------------------------------------------------------------
-		//récupération de la liste totale  des eleves de l'école
-		//accès en lecture
+		//rï¿½cupï¿½ration de la liste totale  des eleves de l'ï¿½cole
+		//accï¿½s en lecture
 	public List<Eleve> getEleveTotal(){
 		List<Eleve> eleves = new ArrayList<Eleve>();
 		try {
@@ -232,8 +234,8 @@ public class EleveDaoImpl implements EleveDao {
 			return eleves;	
 	}
 	//-----------------------------------------------------------------------------------------------------------------
-			//récupération de la liste totale  des eleves de l'école encore en activité à l'école (non diplomé)
-			//accès en lecture
+			//rï¿½cupï¿½ration de la liste totale  des eleves de l'ï¿½cole encore en activitï¿½ ï¿½ l'ï¿½cole (non diplomï¿½)
+			//accï¿½s en lecture
 		public List<Eleve> getEleveTotalEnCours(){
 			List<Eleve> eleves = new ArrayList<Eleve>();
 			try {
@@ -275,8 +277,8 @@ public class EleveDaoImpl implements EleveDao {
 				return eleves;	
 		}
 		//-----------------------------------------------------------------------------------------------------------------
-		//récupération de la liste totale  des eleves de l'école sorti de l'école ( diplomé)
-		//accès en lecture
+		//rï¿½cupï¿½ration de la liste totale  des eleves de l'ï¿½cole sorti de l'ï¿½cole ( diplomï¿½)
+		//accï¿½s en lecture
 	public List<Eleve> getEleveTotalDiplome(){
 		List<Eleve> eleves = new ArrayList<Eleve>();
 		try {
@@ -318,14 +320,14 @@ public class EleveDaoImpl implements EleveDao {
 			return eleves;	
 	}
 	//-----------------------------------------------------------------------------------------------------------------
-			//Calcul de la promotion de l'élève : recuperation de classe en cours pour le calcul
-			//accès en lecture
+			//Calcul de la promotion de l'ï¿½lï¿½ve : recuperation de classe en cours pour le calcul
+			//accï¿½s en lecture
 	
 	public String getPromotion(String ideleve){
 		String classeencours="";
 		int cleclasse=0;
 		
-		// recuperation de la clé classe la plus recente
+		// recuperation de la clï¿½ classe la plus recente
 		try {
 			Connection connection = DataSourceProvider.getDataSource()
 					.getConnection();
@@ -373,8 +375,8 @@ public class EleveDaoImpl implements EleveDao {
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------------
-	//Changement du profil d'un étudiant (0=;1=;2=;) par défaut le profil est étudiant de base =0
-	//accès en ecriture (update)
+	//Changement du profil d'un ï¿½tudiant (0=;1=;2=;) par dï¿½faut le profil est ï¿½tudiant de base =0
+	//accï¿½s en ecriture (update)
 	public void eleveChgtProfil (Integer ideleve, Integer profil){
 		try {
 			Connection connection = DataSourceProvider.getDataSource()
@@ -394,6 +396,56 @@ public class EleveDaoImpl implements EleveDao {
 			e.printStackTrace();
 		}
 	}
-	
+//-----------------------------------------------------------------------------------------------------------------
+//mise Ã  jour du nombre d'heure de tea due
+//accï¿½s en ecriture (update)
+	public void majTeaByClasse (){
+		try {
+			Connection connection = DataSourceProvider.getDataSource()
+					.getConnection();
+
+			PreparedStatement stmt = (PreparedStatement) connection
+					.prepareStatement("UPDATE classe SET nb_tea=3 WHERE classe LIKE `H2%`");
+			stmt.executeUpdate();
+			// Fermer la connexion
+
+			stmt.close();
+			connection.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			Connection connection = DataSourceProvider.getDataSource()
+					.getConnection();
+
+			PreparedStatement stmt = (PreparedStatement) connection
+					.prepareStatement("UPDATE classe SET nb_tea=6 WHERE classe LIKE `H3%` OR classe LIKE `H4%` ");
+			stmt.executeUpdate();
+			// Fermer la connexion
+
+			stmt.close();
+			connection.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			Connection connection = DataSourceProvider.getDataSource()
+					.getConnection();
+
+			PreparedStatement stmt = (PreparedStatement) connection
+					.prepareStatement("UPDATE classe SET nb_tea=0 WHERE classe LIKE `H1%` OR classe LIKE `H5%` OR classe LIKE `CES` ");
+			stmt.executeUpdate();
+			// Fermer la connexion
+
+			stmt.close();
+			connection.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 }

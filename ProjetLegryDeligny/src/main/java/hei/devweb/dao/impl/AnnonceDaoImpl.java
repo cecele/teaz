@@ -300,11 +300,6 @@ public void annonce_miseHorsLigne (Integer cle_offre){
 }
 	
 	
-	//-----------------------------------------------------------------------------------------------------------------
-			///Nombre d'heure de TEA valid�es sur l'ann�e
-			//acc�s en lecture
-
-	
 
 }
 
