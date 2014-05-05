@@ -1,6 +1,7 @@
 package hei.devweb.controllers;
 
 import hei.devweb.metier.Manager;
+import hei.devweb.model.Eleve;
 import hei.devweb.model.Offre;
 
 import java.io.IOException;
@@ -12,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ValidationAnnoncesServlet

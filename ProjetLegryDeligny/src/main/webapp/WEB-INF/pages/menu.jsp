@@ -7,13 +7,13 @@
 			<a href="index">Accueil</a>
 		</li>
 		<li>
-			<a href="#">Integrale</a>
+			<a href="integrale?id=1">Integrale</a>
 			<ul>
-				<li><a href="#">Comité</a></li>
-				<li><a href="#">PES</a></li>
-				<li><a href="#">BDA</a></li>
-				<li><a href="#">BCS</a></li>
-				<li><a href="#">PET</a></li>
+				<li><a href="integrale?id=2">Comité</a></li>
+				<li><a href="integrale?id=3">PES</a></li>
+				<li><a href="integrale?id=4">BDA</a></li>
+				<li><a href="integrale?id=5">BCS</a></li>
+				<li><a href="integrale?id=6">PET</a></li>
 			</ul>
 		</li>
 		<li>
@@ -22,7 +22,9 @@
 			<ul>
 				<li><a href="tea">Mes TEA</a></li>
 				<li><a href="annonces">Annonces</a></li>
-				<li><a href="deposerannonce">Déposer une annonce</a></li>
+				<c:if test="${sessionScope.sessionEleve.eleve_profil==1 || sessionScope.sessionEleve.eleve_profil==2|| sessionScope.sessionEleve.eleve_profil==4|| sessionScope.sessionEleve.eleve_profil==999}">
+					<li><a href="deposerannonce">Déposer une annonce</a></li>
+				</c:if>
 			</ul>
 			</c:if>
 		</li>
@@ -34,17 +36,33 @@
 	<h2>Mon profil</h2>
 	<ul>
 		<li>${sessionScope.sessionEleve.eleve_prenom} ${sessionScope.sessionEleve.eleve_nom}</li>
-		<li>Profil : etudiant</li>
+		<li>Profil : <c:choose>
+		<c:when test="${sessionScope.sessionEleve.eleve_profil==0}" >Etudiant</c:when>
+		<c:when test="${sessionScope.sessionEleve.eleve_profil==1}" >Responsable</c:when>
+		<c:when test="${sessionScope.sessionEleve.eleve_profil==2}" >Admin BDE</c:when>
+		<c:when test="${sessionScope.sessionEleve.eleve_profil==3}" >Administration des études</c:when>
+		<c:when test="${sessionScope.sessionEleve.eleve_profil==4}" >SuperAdmin</c:when>
+		<c:when test="${sessionScope.sessionEleve.eleve_profil==999}" >Secours</c:when>
+		</c:choose></li>
 		<li>Matricule : ${sessionScope.sessionEleve.id_eleve}</li>
-		<li>Promotion 2015</li>
+		<li>Classe </li>
 		<li>TEA restantes : 0h</li>
 	</ul>
+	<c:if test="${sessionScope.sessionEleve.eleve_profil==4|| sessionScope.sessionEleve.eleve_profil==999}">
 	<ul>
 		<li class="menu"><a href="administration">Panneau d'administration</a></li>
 	</ul>
+	</c:if>
+	
 	<ul>
+	<c:if test="${sessionScope.sessionEleve.eleve_profil==2|| sessionScope.sessionEleve.eleve_profil==4|| sessionScope.sessionEleve.eleve_profil==999}">
 		<li class="menu"><a href="validationannonces">Annonces en attente</a></li>
+	</c:if>	
+	<c:if test="${sessionScope.sessionEleve.eleve_profil==2|| sessionScope.sessionEleve.eleve_profil==3|| sessionScope.sessionEleve.eleve_profil==4|| sessionScope.sessionEleve.eleve_profil==999}">
 		<li class="menu"><a href="gestiontea">Gestion des TEA</a></li>
+	</c:if>
+	</ul>
+	<ul>
 		<li class="menu"><a href="deconnexion">Se déconnecter</a></li>
 	</ul>
 	</c:if>

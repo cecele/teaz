@@ -20,9 +20,8 @@ public class PostulerServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();    
-		Eleve eleve = (Eleve) (session.getAttribute("eleve"));
-		// String matricule = eleve.getId_eleve();
-		String matricule ="10153";
+		Eleve eleve = (Eleve) (session.getAttribute("sessionEleve"));
+		String matricule = eleve.getId_eleve();
 		
 		Integer id  = Integer.parseInt(request.getParameter("id"));
 		
@@ -41,6 +40,11 @@ public class PostulerServlet extends HttpServlet {
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/tea.jsp");
 		view.forward(request, response);
+	}
+	
+	public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+		
+	
 	}
 
 }

@@ -44,6 +44,14 @@
     <servlet-name>Deconnexion</servlet-name>
     <servlet-class>hei.devweb.controllers.DeconnexionServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Integrale</servlet-name>
+    <servlet-class>hei.devweb.controllers.IntegraleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Integrale</servlet-name>
+    <url-pattern>/integrale</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Deconnexion</servlet-name>
     <url-pattern>/deconnexion</url-pattern>

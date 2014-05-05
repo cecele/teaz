@@ -21,7 +21,11 @@ public class ConnexionServlet extends HttpServlet {
 	public static final String VUE              = "/WEB-INF/pages/index.jsp";    
 	
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) 
-			throws ServletException, IOException {         
+			throws ServletException, IOException {       
+		HttpSession session = request.getSession();    
+		Eleve eleve = (Eleve) (session.getAttribute("sessionEleve"));
+		request.setAttribute("eleve",eleve);
+		
 		/* Affichage de la page de connexion */         
 		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );     
 		}     
