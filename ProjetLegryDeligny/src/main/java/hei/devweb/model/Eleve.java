@@ -18,7 +18,14 @@ public class Eleve{
 	Integer eleve_profil;
 	Integer diplome;
 	String motdepasse;
+	String classe;
+	Integer teaRestante;
+	Integer teaAfaire;
+	Integer teaEnAttente;
+
 	
+
+
 
 
 
@@ -26,7 +33,8 @@ public Eleve(String id_eleve, String eleve_nom, String eleve_prenom,
 			Date date_naissance, Integer numrue, String nomrue,
 			String codepostal, String ville, Date date_entree,
 			Integer cotisant, Integer eleve_profil, Integer diplome,
-			String motdepasse) {
+			String motdepasse, String classe, Integer teaRestante,
+			Integer teaAfaire, Integer teaEnAttente) {
 		super();
 		this.id_eleve = id_eleve;
 		this.eleve_nom = eleve_nom;
@@ -41,6 +49,43 @@ public Eleve(String id_eleve, String eleve_nom, String eleve_prenom,
 		this.eleve_profil = eleve_profil;
 		this.diplome = diplome;
 		this.motdepasse = motdepasse;
+		this.classe = classe;
+		this.teaRestante = teaRestante;
+		this.teaAfaire = teaAfaire;
+		this.teaEnAttente = teaEnAttente;
+	}
+
+public Integer getTeaRestante() {
+		return teaRestante;
+	}
+
+	public void setTeaRestante(Integer teaRestante) {
+		this.teaRestante = teaRestante;
+	}
+
+	public Integer getTeaAfaire() {
+		return teaAfaire;
+	}
+
+	public void setTeaAfaire(Integer teaAfaire) {
+		this.teaAfaire = teaAfaire;
+	}
+
+	public Integer getTeaEnAttente() {
+		return teaEnAttente;
+	}
+
+	public void setTeaEnAttente(Integer teaEnAttente) {
+		this.teaEnAttente = teaEnAttente;
+	}
+
+	
+public String getClasse() {
+		return classe;
+	}
+
+	public void setClasse(String classe) {
+		this.classe = classe;
 	}
 
 public String getMotdepasse() {

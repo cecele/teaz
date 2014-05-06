@@ -10,9 +10,50 @@ import hei.devweb.dao.StructureDao;
 import hei.devweb.model.Structure;
 
 public class StructureDaoImpl implements StructureDao {
-	
+//-----------------------------------------------------------------------------------------------------------------
+	// AJOUT/SUPPRESION
+//-----------------------------------------------------------------------------------------------------------------
 	//-----------------------------------------------------------------------------------------------------------------
-	// recuperation des structures enregistrées à hei par ordre alphabetique de nom de structure
+		// creation de mandature pour une structure
+		// acces en ecriture
+					
+					public void StructureChangement (String idelev, Integer clestructure,String annee ){
+						// creation de la mandature
+						try {
+							Connection connection = DataSourceProvider.getDataSource()
+									.getConnection();
+
+							PreparedStatement stmt = (PreparedStatement) connection
+									.prepareStatement("INSERT INTO `presider`(id_eleve`,`cle_structure`,`annee_appartenance`) VALUES(?,?,?) ");
+							stmt.setString(1,idelev);
+							stmt.setInt(2,clestructure);
+							stmt.setString(3, annee);
+							stmt.executeUpdate();
+							// Fermer la connexion
+
+							stmt.close();
+							connection.close();
+
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+						
+						//mise ï¿½ jour du nom du prï¿½sident de la structure PUTAIN DE DOUBLE JOINTURE
+					}
+					
+	//-----------------------------------------------------------------------------------------------------------------
+	// creation d'une structure
+	// acces en ecriture		
+					
+//-----------------------------------------------------------------------------------------------------------------
+	// MODIFICATION ET MISE A JOUR
+//-----------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------
+	// AFFICHAGE
+//-----------------------------------------------------------------------------------------------------------------
+
+	//-----------------------------------------------------------------------------------------------------------------
+	// recuperation des structures enregistrï¿½es ï¿½ hei par ordre alphabetique de nom de structure
 	// acces en lecture
 	
 	public Structure getStructure_OrdreNom(){
@@ -45,7 +86,7 @@ public class StructureDaoImpl implements StructureDao {
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------------
-		// recuperation des structures enregistrées à hei par ordre alphabetique de nom de président
+		// recuperation des structures enregistrï¿½es ï¿½ hei par ordre alphabetique de nom de prï¿½sident
 		// acces en lecture
 		
 		public Structure getStructure_OrdrePresident(){
@@ -77,7 +118,7 @@ public class StructureDaoImpl implements StructureDao {
 				return structure;	
 		}
 //-----------------------------------------------------------------------------------------------------------------
-// recuperation de la structure en fonction de l'élève
+// recuperation de la structure en fonction de l'ï¿½lï¿½ve
 // acces en lecture
 				
 				public Structure getStructure_ElevePresident(String ideleve){
@@ -132,35 +173,9 @@ public class StructureDaoImpl implements StructureDao {
 										}
 						return structure;	
 				}
-	//-----------------------------------------------------------------------------------------------------------------
-	// creation de mandature pour une structure
-	// acces en ecriture
-				
-				public void StructureChangement (String idelev, Integer clestructure,String annee ){
-					// creation de la mandature
-					try {
-						Connection connection = DataSourceProvider.getDataSource()
-								.getConnection();
-
-						PreparedStatement stmt = (PreparedStatement) connection
-								.prepareStatement("INSERT INTO `presider`(ìd_eleve`,`cle_structure`,`annee_appartenance`) VALUES(?,?,?) ");
-						stmt.setString(1,idelev);
-						stmt.setInt(2,clestructure);
-						stmt.setString(3, annee);
-						stmt.executeUpdate();
-						// Fermer la connexion
-
-						stmt.close();
-						connection.close();
-
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-					
-					//mise à jour du nom du président de la structure PUTAIN DE DOUBLE JOINTURE
-				}
+	
 //-----------------------------------------------------------------------------------------------------------------
-//mise à jour du nom du president de la structure 
+//mise ï¿½ jour du nom du president de la structure 
 
 // acces en ecriture
 							

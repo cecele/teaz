@@ -1,7 +1,6 @@
 package hei.devweb.controllers;
 
 import hei.devweb.metier.Manager;
-import hei.devweb.model.Eleve;
 import hei.devweb.model.Offre;
 
 import java.io.IOException;
@@ -14,7 +13,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class DeposerAnnonceServlet extends HttpServlet {
 
@@ -53,10 +51,11 @@ public class DeposerAnnonceServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		HttpSession session = request.getSession();    
-		Eleve eleve = (Eleve) (session.getAttribute("sessionEleve"));
-		request.setAttribute("eleve",eleve);
+		Date actuelle = new Date();
+		SimpleDateFormat formatDateJour = new SimpleDateFormat("yyyy-MM-dd");
+		String dateformatee = formatDateJour.format(actuelle);
+
+		request.setAttribute("date",dateformatee);
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/deposerannonce.jsp");
 		view.forward(request, response);

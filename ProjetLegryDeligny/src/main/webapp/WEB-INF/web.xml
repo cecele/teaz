@@ -1,5 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <filter>
+    <filter-name>EleveFilter</filter-name>
+    <filter-class>hei.devweb.filters.EleveFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>EleveFilter</filter-name>
+    <url-pattern>/tea</url-pattern>
+    <url-pattern>/annonces</url-pattern>
+    <url-pattern>/deposerannonce</url-pattern>
+    <url-pattern>/fairetea</url-pattern>
+    <url-pattern>/administration</url-pattern>
+    <url-pattern>/validationannonces</url-pattern>
+    <url-pattern>/validationtea</url-pattern>
+    <url-pattern>/gestiontea</url-pattern>
+  </filter-mapping>
+  
+  
+  <filter>
+    <filter-name>ResponsableFilter</filter-name>
+    <filter-class>hei.devweb.filters.ResponsableFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>ResponsableFilter</filter-name>
+    <url-pattern>/deposerannonce</url-pattern>
+    <url-pattern>/fairetea</url-pattern>
+  </filter-mapping>
+  
+  <filter>
+    <filter-name>AdministrationFilter</filter-name>
+    <filter-class>hei.devweb.filters.AdministrationFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AdministrationFilter</filter-name>
+    <url-pattern>/gestiontea</url-pattern>
+  </filter-mapping>
+  
+  
+  <filter>
+    <filter-name>SuperAdminFilter</filter-name>
+    <filter-class>hei.devweb.filters.SuperAdminFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>SuperAdminFilter</filter-name>
+    <url-pattern>/administration</url-pattern>
+  </filter-mapping>
+  
+  
+  <filter>
+    <filter-name>BdeFilter</filter-name>
+    <filter-class>hei.devweb.filters.BdeFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>BdeFilter</filter-name>
+    <url-pattern>/validationannonces</url-pattern>
+    <url-pattern>/validationtea</url-pattern>
+  </filter-mapping>
+  
   <servlet>
     <servlet-name>Accueil</servlet-name>
     <servlet-class>hei.devweb.controllers.AccueilServlet</servlet-class>
@@ -48,6 +105,22 @@
     <servlet-name>Integrale</servlet-name>
     <servlet-class>hei.devweb.controllers.IntegraleServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>FaireTea</servlet-name>
+    <servlet-class>hei.devweb.controllers.FaireTeaServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ValidationTea</servlet-name>
+    <servlet-class>hei.devweb.controllers.ValidationTeaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ValidationTea</servlet-name>
+    <url-pattern>/validationtea</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>FaireTea</servlet-name>
+    <url-pattern>/fairetea</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Integrale</servlet-name>
     <url-pattern>/integrale</url-pattern>

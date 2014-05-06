@@ -17,7 +17,10 @@ import java.util.List;
 
 
 public class AnnonceDaoImpl implements AnnonceDao {
-
+	
+//-----------------------------------------------------------------------------------------------------------------
+// AJOUT/SUPPRESION
+//-----------------------------------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------------------------------
 // cr�ation d 'une annonce en statut non valid� pour mise en ligne et date_miseenligne null par d�faut
@@ -56,6 +59,34 @@ public class AnnonceDaoImpl implements AnnonceDao {
 						}
 					}
 		}
+	//-----------------------------------------------------------------------------------------------------------------
+	///suppression d'une offre non pourvue ou qui n'est plus n�cessaire (attention verification offre non pourvue)
+	//acc�s en ecriture
+public void deleteOffre(Integer cleoffre) {
+	
+	try {
+		Connection connection = DataSourceProvider.getDataSource()
+				.getConnection();
+
+		PreparedStatement stmt = (PreparedStatement) connection
+				.prepareStatement("DELETE  FROM offre WHERE cle_offre=?");
+		stmt.setInt(1,cleoffre);
+		stmt.executeUpdate();
+		// Fermer la connexion
+
+		stmt.close();
+		connection.close();
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	
+
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+//  MISE A JOUR
+//-----------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------
 //mise au statut valide de l'annonce et donc modification de la date de mise en ligne ce processus est eff�ctu� par le reponsable TEA et provoque l'affichage de l'annonce dans la liste
 //acces en �criture
@@ -82,9 +113,8 @@ public void annonce_validation (Integer cle_offre,Date datedujour){
 		e.printStackTrace();
 	}
 }
-
 //-----------------------------------------------------------------------------------------------------------------
-// decrementation de l'offre
+//decrementation de l'offre
 //acces en ecriture -----ATTENTION---- VERIFIER QUE OFFRE_PLACE>0 avant de decrementer
 
 public void offre_placemoins (Integer cle_offre){
@@ -105,29 +135,36 @@ public void offre_placemoins (Integer cle_offre){
 		e.printStackTrace();
 	}
 }
-//-----------------------------------------------------------------------------------------------------------------
-//mise � 0 du statut pour enlever l'affichage
-//acces en ecriture--- a effectuer quand le nombre de place est � 0
+	//-----------------------------------------------------------------------------------------------------------------
+	//mise � 0 du statut pour enlever l'affichage
+	//acces en ecriture--- a effectuer quand le nombre de place est � 0
 
 
-public void annonce_miseHorsLigne (Integer cle_offre){
-	try {
-		Connection connection = DataSourceProvider.getDataSource()
-				.getConnection();
+	public void annonce_miseHorsLigne (Integer cle_offre){
+		try {
+			Connection connection = DataSourceProvider.getDataSource()
+					.getConnection();
 
-		PreparedStatement stmt = (PreparedStatement) connection
-				.prepareStatement("UPDATE offre SET statut=0 WHERE cle_offre=?");
-		stmt.setInt(1,cle_offre);	
-		stmt.executeUpdate();
-		// Fermer la connexion
+			PreparedStatement stmt = (PreparedStatement) connection
+					.prepareStatement("UPDATE offre SET statut=0 WHERE cle_offre=?");
+			stmt.setInt(1,cle_offre);	
+			stmt.executeUpdate();
+			// Fermer la connexion
 
-		stmt.close();
-		connection.close();
+			stmt.close();
+			connection.close();
 
-	} catch (SQLException e) {
-		e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
-}
+
+
+
+//-----------------------------------------------------------------------------------------------------------------
+		// AFFICHAGE
+//-----------------------------------------------------------------------------------------------------------------
+
 //-----------------------------------------------------------------------------------------------------------------
 //r�cup�ration des annonces  valide par ordres decroissant de dates sans structure
 //acc�s en lecture
@@ -245,30 +282,7 @@ public void annonce_miseHorsLigne (Integer cle_offre){
 							}
 			return structure;	
 	}
-	//-----------------------------------------------------------------------------------------------------------------
-		///suppression d'une offre non pourvue ou qui n'est plus n�cessaire (attention verification offre non pourvue)
-		//acc�s en ecriture
-	public void deleteOffre(Integer cleoffre) {
-		
-		try {
-			Connection connection = DataSourceProvider.getDataSource()
-					.getConnection();
 
-			PreparedStatement stmt = (PreparedStatement) connection
-					.prepareStatement("DELETE  FROM offre WHERE cle_offre=?");
-			stmt.setInt(1,cleoffre);
-			stmt.executeUpdate();
-			// Fermer la connexion
-
-			stmt.close();
-			connection.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		
-	}
 	//-----------------------------------------------------------------------------------------------------------------
 	///Nombre de places dispos pour une offre donnee
 	//acc�s en lecture

@@ -12,17 +12,145 @@ import hei.devweb.dao.EleveDao;
 import hei.devweb.model.Eleve;
 
 public class EleveDaoImpl implements EleveDao {
+//-----------------------------------------------------------------------------------------------------------------
+	// AJOUT/SUPPRESION
+//-----------------------------------------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------------------------------------
+	//création d'un élève
+	//acc�s en ecriture (update)
 	
+	public void CreateEleve(Eleve eleve){
+		if (eleve.getId_eleve() !=null || eleve.getEleve_nom() !=null ||eleve.getEleve_prenom() !=null ||eleve.getDate_naissance() !=null ||eleve.getNumrue()!=null ||eleve.getNomrue() !=null ||eleve.getCodepostal() !=null || eleve.getVille()!=null ||eleve.getDate_entree() !=null ){
+			try {
+				Connection connection = DataSourceProvider.getDataSource()
+						.getConnection();
+				java.util.Date utilDate_naissance = eleve.getDate_naissance();
+			    java.sql.Date sqlDateNaissance = new java.sql.Date(utilDate_naissance.getTime());
+			    
+				java.util.Date utilDate_entree = eleve.getDate_entree();
+			    java.sql.Date sqlDateEntree = new java.sql.Date(utilDate_entree.getTime());
+			    
+			    
+				// Utiliser la connexion
+				PreparedStatement stmt = (PreparedStatement) connection
+						.prepareStatement("INSERT INTO `Eleve`(`id_eleve`,`eleve_nom`,`eleve_prenom`,`date_naissance`,`numrue`,`nomrue`,`codepostal`,`ville`,`date_entree`,`cotisant`,`eleve_profil`,`diplome`,`motdepasse`) VALUES(?,?,?,?,?,?,?,?,?,0,0,0,'motdepasse')");
+						stmt.setString(1, eleve.getId_eleve());
+						stmt.setString(2, eleve.getEleve_nom());
+						stmt.setString(3, eleve.getEleve_prenom());
+						stmt.setDate(4, sqlDateNaissance);
+						stmt.setInt(5, eleve.getNumrue());
+						stmt.setString(6, eleve.getNomrue());
+						stmt.setString(7, eleve.getCodepostal());
+						stmt.setString(8, eleve.getVille());
+						stmt.setDate(9, sqlDateEntree);
+											
+						stmt.executeUpdate();
+
+						// Fermer la connexion
+						stmt.close();
+						connection.close();
+
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+		}
+		
+	//-----------------------------------------------------------------------------------------------------------------
+		//  MISE A JOUR
+	//-----------------------------------------------------------------------------------------------------------------
+		
+//-----------------------------------------------------------------------------------------------------------------
+		//Changement du profil d'un �tudiant (0=;1=;2=;) par d�faut le profil est �tudiant de base =0
+		//acc�s en ecriture (update)
+		public void eleveChgtProfil (Integer ideleve, Integer profil){
+			try {
+				Connection connection = DataSourceProvider.getDataSource()
+						.getConnection();
+
+				PreparedStatement stmt = (PreparedStatement) connection
+						.prepareStatement("UPDATE eleve SET eleve_profil=? WHERE id_eleve=?");
+				stmt.setInt(1,profil);
+				stmt.setInt(2,ideleve);	
+				stmt.executeUpdate();
+				// Fermer la connexion
+
+				stmt.close();
+				connection.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	//-----------------------------------------------------------------------------------------------------------------
+	//mise à jour du nombre d'heure de tea due
+	//acc�s en ecriture (update)
+		public void majTeaByClasse (){
+			try {
+				Connection connection = DataSourceProvider.getDataSource()
+						.getConnection();
+
+				PreparedStatement stmt = (PreparedStatement) connection
+						.prepareStatement("UPDATE classe SET nb_tea=3 WHERE classe LIKE `H2%`");
+				stmt.executeUpdate();
+				// Fermer la connexion
+
+				stmt.close();
+				connection.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				Connection connection = DataSourceProvider.getDataSource()
+						.getConnection();
+
+				PreparedStatement stmt = (PreparedStatement) connection
+						.prepareStatement("UPDATE classe SET nb_tea=6 WHERE classe LIKE `H3%` OR classe LIKE `H4%` ");
+				stmt.executeUpdate();
+				// Fermer la connexion
+
+				stmt.close();
+				connection.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			try {
+				Connection connection = DataSourceProvider.getDataSource()
+						.getConnection();
+
+				PreparedStatement stmt = (PreparedStatement) connection
+						.prepareStatement("UPDATE classe SET nb_tea=0 WHERE classe LIKE `H1%` OR classe LIKE `H5%` OR classe LIKE `CES` ");
+				stmt.executeUpdate();
+				// Fermer la connexion
+
+				stmt.close();
+				connection.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+//-----------------------------------------------------------------------------------------------------------------
+	// AFFICHAGE
+//-----------------------------------------------------------------------------------------------------------------
+
 
 	//-----------------------------------------------------------------------------------------------------------------
 	//r�cup�ration des information d'un eleve en fonction de id (son id est numero de matricule sans le h)
 	//acc�s en lecture
 	
 	public Eleve getEleveById(String ideleve){
-		Eleve eleve = new Eleve(null,null,null, null, null, null, null, null, null, null, null,null,null);
+		Eleve eleve = new Eleve(null,null,null, null, null, null, null, null, null, null, null,null,null,null, null, null, null);
+				
+		Connection connection;
 		try {
-			Connection connection = DataSourceProvider.getDataSource()
-					.getConnection();
+			connection = DataSourceProvider.getDataSource()
+						.getConnection();
+		
 
 			
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE id_eleve=?");
@@ -43,17 +171,22 @@ public class EleveDaoImpl implements EleveDao {
 			results.getInt("cotisant"),
 			results.getInt("eleve_profil"),
 			results.getInt("eleve_profil"),
-			results.getString("motdepasse"));
+			results.getString("motdepasse"),
+			getPromotion(results.getString("id_eleve")), null, null, null
+			
+			
+			
+			);
 				
 				// Fermer la connexion
 				results.close();
 				stmt.close();
 				connection.close();
-				
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-			catch (SQLException e) {
-								e.printStackTrace();
-							}
+		
 			return eleve;	
 	}
 	//-----------------------------------------------------------------------------------------------------------------
@@ -84,7 +217,8 @@ public class EleveDaoImpl implements EleveDao {
 			results.getInt("cotisant"),
 			results.getInt("eleve_profil"),
 			results.getInt("diplome"),
-			results.getString("motdepasse"));
+			results.getString("motdepasse"),
+			getPromotion(results.getString("id_eleve")), null, null, null);
 			
 				eleves.add(eleve);	
 				
@@ -130,7 +264,8 @@ public class EleveDaoImpl implements EleveDao {
 				results.getInt("cotisant"),
 				results.getInt("eleve_profil"),
 				results.getInt("diplome"),
-				results.getString("motdepasse"));
+				results.getString("motdepasse"),
+				getPromotion(results.getString("id_eleve")), null, null, null);
 				
 					eleves.add(eleve);	
 					
@@ -175,7 +310,8 @@ public class EleveDaoImpl implements EleveDao {
 			results.getInt("cotisant"),
 			results.getInt("eleve_profil"),
 			results.getInt("diplome"),
-			results.getString("motdepasse"));
+			results.getString("motdepasse"),
+			getPromotion(results.getString("id_eleve")), null, null, null);
 			
 				eleves.add(eleve);	
 				
@@ -218,7 +354,8 @@ public class EleveDaoImpl implements EleveDao {
 			results.getInt("cotisant"),
 			results.getInt("eleve_profil"),
 			results.getInt("diplome"),
-			results.getString("motdepasse"));
+			results.getString("motdepasse"),
+			getPromotion(results.getString("id_eleve")), null, null, null);
 			
 				eleves.add(eleve);	
 				
@@ -261,7 +398,8 @@ public class EleveDaoImpl implements EleveDao {
 				results.getInt("cotisant"),
 				results.getInt("eleve_profil"),
 				results.getInt("diplome"),
-				results.getString("motdepasse"));
+				results.getString("motdepasse"),
+				getPromotion(results.getString("id_eleve")), null, null, null);
 				
 					eleves.add(eleve);	
 					
@@ -304,7 +442,8 @@ public class EleveDaoImpl implements EleveDao {
 			results.getInt("cotisant"),
 			results.getInt("eleve_profil"),
 			results.getInt("diplome"),
-			results.getString("motdepasse"));
+			results.getString("motdepasse"),
+			getPromotion(results.getString("id_eleve")), null, null, null);
 			
 				eleves.add(eleve);	
 				
@@ -375,78 +514,5 @@ public class EleveDaoImpl implements EleveDao {
 		return classeencours;
 	}
 	
-	//-----------------------------------------------------------------------------------------------------------------
-	//Changement du profil d'un �tudiant (0=;1=;2=;) par d�faut le profil est �tudiant de base =0
-	//acc�s en ecriture (update)
-	public void eleveChgtProfil (Integer ideleve, Integer profil){
-		try {
-			Connection connection = DataSourceProvider.getDataSource()
-					.getConnection();
-
-			PreparedStatement stmt = (PreparedStatement) connection
-					.prepareStatement("UPDATE eleve SET eleve_profil=? WHERE id_eleve=?");
-			stmt.setInt(1,profil);
-			stmt.setInt(2,ideleve);	
-			stmt.executeUpdate();
-			// Fermer la connexion
-
-			stmt.close();
-			connection.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-//-----------------------------------------------------------------------------------------------------------------
-//mise à jour du nombre d'heure de tea due
-//acc�s en ecriture (update)
-	public void majTeaByClasse (){
-		try {
-			Connection connection = DataSourceProvider.getDataSource()
-					.getConnection();
-
-			PreparedStatement stmt = (PreparedStatement) connection
-					.prepareStatement("UPDATE classe SET nb_tea=3 WHERE classe LIKE `H2%`");
-			stmt.executeUpdate();
-			// Fermer la connexion
-
-			stmt.close();
-			connection.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		try {
-			Connection connection = DataSourceProvider.getDataSource()
-					.getConnection();
-
-			PreparedStatement stmt = (PreparedStatement) connection
-					.prepareStatement("UPDATE classe SET nb_tea=6 WHERE classe LIKE `H3%` OR classe LIKE `H4%` ");
-			stmt.executeUpdate();
-			// Fermer la connexion
-
-			stmt.close();
-			connection.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			Connection connection = DataSourceProvider.getDataSource()
-					.getConnection();
-
-			PreparedStatement stmt = (PreparedStatement) connection
-					.prepareStatement("UPDATE classe SET nb_tea=0 WHERE classe LIKE `H1%` OR classe LIKE `H5%` OR classe LIKE `CES` ");
-			stmt.executeUpdate();
-			// Fermer la connexion
-
-			stmt.close();
-			connection.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
 	
 }

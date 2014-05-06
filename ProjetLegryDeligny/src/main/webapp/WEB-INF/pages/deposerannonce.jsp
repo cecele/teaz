@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html>
    	<head>
@@ -23,7 +24,7 @@
 				<form method="post" action="deposerannonce">
 				<table>
 					<tr>
-						<td><label for="date" >Date</label></td>
+						<td><label for="date" min="2014-05-06" >Date</label></td>
 						<td><input type="date" name="date" id="date" required></td>
 						<td><label for="hdebut" >Heure de début</label></td>
 						<td><input type="number" min="1" max="23" name="hdebut" id="hdebut" required></td>
