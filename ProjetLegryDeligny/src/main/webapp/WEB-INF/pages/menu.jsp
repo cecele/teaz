@@ -47,7 +47,7 @@
 		</c:choose></li>
 		<li>Matricule : ${sessionScope.sessionEleve.id_eleve}</li>
 		<li>Classe : ${sessionScope.sessionEleve.classe}</li>
-		<li>TEA restantes : ${sessionScope.sessionEleve.teaRestante}h</li>
+		<li>TEA restantes : ${sessionScope.sessionEleve.teaAfaire}h</li>
 	</ul>
 	<c:if test="${sessionScope.sessionEleve.eleve_profil==4|| sessionScope.sessionEleve.eleve_profil==999}">
 	<ul>
