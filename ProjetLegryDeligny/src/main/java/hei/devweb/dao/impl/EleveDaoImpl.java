@@ -63,7 +63,7 @@ public class EleveDaoImpl implements EleveDao {
 //-----------------------------------------------------------------------------------------------------------------
 		//Changement du profil d'un �tudiant (0=;1=;2=;) par d�faut le profil est �tudiant de base =0
 		//acc�s en ecriture (update)
-		public void eleveChgtProfil (Integer ideleve, Integer profil){
+		public void eleveChgtProfil (String ideleve, Integer profil){
 			try {
 				Connection connection = DataSourceProvider.getDataSource()
 						.getConnection();
@@ -71,17 +71,17 @@ public class EleveDaoImpl implements EleveDao {
 				PreparedStatement stmt = (PreparedStatement) connection
 						.prepareStatement("UPDATE eleve SET eleve_profil=? WHERE id_eleve=?");
 				stmt.setInt(1,profil);
-				stmt.setInt(2,ideleve);	
+				stmt.setString(2,ideleve);	
 				stmt.executeUpdate();
 				// Fermer la connexion
 
 				stmt.close();
 				connection.close();
-
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
+		
 	//-----------------------------------------------------------------------------------------------------------------
 	//mise à jour du nombre d'heure de tea due
 	//acc�s en ecriture (update)
@@ -144,7 +144,7 @@ public class EleveDaoImpl implements EleveDao {
 	//acc�s en lecture
 	
 	public Eleve getEleveById(String ideleve){
-		Eleve eleve = new Eleve(null,null,null, null, null, null, null, null, null, null, null,null,null,null, null, null, null);
+		Eleve eleve = new Eleve(null,null,null, null, null, null, null, null, null, null, null,null,null,null, null, null, null, null);
 				
 		Connection connection;
 		try {
@@ -172,7 +172,7 @@ public class EleveDaoImpl implements EleveDao {
 			results.getInt("eleve_profil"),
 			results.getInt("eleve_profil"),
 			results.getString("motdepasse"),
-			getPromotion(results.getString("id_eleve")), null, null, null
+			getPromotion(results.getString("id_eleve")), null, null, null,null
 			
 			
 			
@@ -218,7 +218,7 @@ public class EleveDaoImpl implements EleveDao {
 			results.getInt("eleve_profil"),
 			results.getInt("diplome"),
 			results.getString("motdepasse"),
-			getPromotion(results.getString("id_eleve")), null, null, null);
+			getPromotion(results.getString("id_eleve")), null, null, null,null);
 			
 				eleves.add(eleve);	
 				
@@ -265,7 +265,7 @@ public class EleveDaoImpl implements EleveDao {
 				results.getInt("eleve_profil"),
 				results.getInt("diplome"),
 				results.getString("motdepasse"),
-				getPromotion(results.getString("id_eleve")), null, null, null);
+				getPromotion(results.getString("id_eleve")), null, null, null,null);
 				
 					eleves.add(eleve);	
 					
@@ -311,7 +311,7 @@ public class EleveDaoImpl implements EleveDao {
 			results.getInt("eleve_profil"),
 			results.getInt("diplome"),
 			results.getString("motdepasse"),
-			getPromotion(results.getString("id_eleve")), null, null, null);
+			getPromotion(results.getString("id_eleve")), null, null, null,null);
 			
 				eleves.add(eleve);	
 				
@@ -355,7 +355,7 @@ public class EleveDaoImpl implements EleveDao {
 			results.getInt("eleve_profil"),
 			results.getInt("diplome"),
 			results.getString("motdepasse"),
-			getPromotion(results.getString("id_eleve")), null, null, null);
+			getPromotion(results.getString("id_eleve")), null, null, null,null);
 			
 				eleves.add(eleve);	
 				
@@ -399,7 +399,7 @@ public class EleveDaoImpl implements EleveDao {
 				results.getInt("eleve_profil"),
 				results.getInt("diplome"),
 				results.getString("motdepasse"),
-				getPromotion(results.getString("id_eleve")), null, null, null);
+				getPromotion(results.getString("id_eleve")), null, null, null,null);
 				
 					eleves.add(eleve);	
 					
@@ -443,7 +443,7 @@ public class EleveDaoImpl implements EleveDao {
 			results.getInt("eleve_profil"),
 			results.getInt("diplome"),
 			results.getString("motdepasse"),
-			getPromotion(results.getString("id_eleve")), null, null, null);
+			getPromotion(results.getString("id_eleve")), null, null, null,null);
 			
 				eleves.add(eleve);	
 				
@@ -514,5 +514,53 @@ public class EleveDaoImpl implements EleveDao {
 		return classeencours;
 	}
 	
+	// Lister les eleves responsables de structure 
+	
+	public List<Eleve> getEleveResponsables(int profil){
+		List<Eleve> eleves = new ArrayList<Eleve>();
+		try {
+			Connection connection = DataSourceProvider.getDataSource()
+					.getConnection();
+
+			
+			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE eleve_profil=?");
+			stmt.setInt(1,profil);
+			ResultSet results = stmt.executeQuery();
+			
+			while (results.next()) {
+				Eleve eleve =new Eleve(
+			results.getString("id_eleve"),
+			results.getString("eleve_nom"),
+			results.getString("eleve_prenom"),
+			results.getDate("date_naissance"),
+			results.getInt("numrue"),
+			results.getString("nomrue"),
+			results.getString("codepostal"),
+			results.getString("ville"),
+			results.getDate("date_entree"),
+			results.getInt("cotisant"),
+			results.getInt("eleve_profil"),
+			results.getInt("diplome"),
+			results.getString("motdepasse"),
+			getPromotion(results.getString("id_eleve")), null, null, null,null);
+			
+				eleves.add(eleve);	
+				
+			}
+				// Fermer la connexion
+				results.close();
+				stmt.close();
+				connection.close();
+				
+		}
+			catch (SQLException e) {
+								e.printStackTrace();
+							}
+			return eleves;		
+	}
+
+	
+	
+
 	
 }

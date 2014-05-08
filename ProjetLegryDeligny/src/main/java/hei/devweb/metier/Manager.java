@@ -97,6 +97,16 @@ private static Manager instance;
 		return TeaDao.listerTeaAFaire();
 	}
 
+	public List<Eleve> getEleveResponsables(int i) {
+		System.out.println("dans méthode getEleveResponsables");
+		return EleveDao.getEleveResponsables(i);
+	}
+
+	public void retirerDroits(String id) {
+		System.out.println("dans méthode retirerDroits");
+		EleveDao.eleveChgtProfil(id,0);
+	}
+
 
 
 }

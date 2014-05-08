@@ -10,4 +10,8 @@ public interface EleveDao {
 
 	Eleve getEleveById(String champId);
 
+	List<Eleve> getEleveResponsables(int i);
+
+	void eleveChgtProfil(String id, Integer i);
+
 }

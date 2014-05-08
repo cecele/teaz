@@ -105,6 +105,22 @@
     <servlet-name>ValidationTea</servlet-name>
     <servlet-class>hei.devweb.controllers.ValidationTeaServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>FaireTeaValider</servlet-name>
+    <servlet-class>hei.devweb.controllers.FaireTeaValiderServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GestionAdministration</servlet-name>
+    <servlet-class>hei.devweb.controllers.GestionAdministrationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GestionAdministration</servlet-name>
+    <url-pattern>/gestionadministration</url-pattern>
+  </servlet-mapping> 
+  <servlet-mapping>
+    <servlet-name>FaireTeaValider</servlet-name>
+    <url-pattern>/faireteavalider</url-pattern>
+  </servlet-mapping> 
   <servlet-mapping>
     <servlet-name>ValidationTea</servlet-name>
     <url-pattern>/validationtea</url-pattern>

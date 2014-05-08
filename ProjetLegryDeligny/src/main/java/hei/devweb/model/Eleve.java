@@ -22,7 +22,7 @@ public class Eleve{
 	Integer teaRestante;
 	Integer teaAfaire;
 	Integer teaEnAttente;
-
+	Integer cleStructure;
 	
 
 
@@ -34,7 +34,7 @@ public Eleve(String id_eleve, String eleve_nom, String eleve_prenom,
 			String codepostal, String ville, Date date_entree,
 			Integer cotisant, Integer eleve_profil, Integer diplome,
 			String motdepasse, String classe, Integer teaRestante,
-			Integer teaAfaire, Integer teaEnAttente) {
+			Integer teaAfaire, Integer teaEnAttente, Integer cleStructure) {
 		super();
 		this.id_eleve = id_eleve;
 		this.eleve_nom = eleve_nom;
@@ -53,7 +53,16 @@ public Eleve(String id_eleve, String eleve_nom, String eleve_prenom,
 		this.teaRestante = teaRestante;
 		this.teaAfaire = teaAfaire;
 		this.teaEnAttente = teaEnAttente;
+		this.cleStructure = cleStructure;
 	}
+
+public Integer getCleStructure() {
+	return cleStructure;
+}
+
+public void setCleStructure(Integer cleStructure) {
+	this.cleStructure = cleStructure;
+}
 
 public Integer getTeaRestante() {
 		return teaRestante;
