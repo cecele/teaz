@@ -63,7 +63,7 @@ public class EleveDaoImpl implements EleveDao {
 	//-----------------------------------------------------------------------------------------------------------------
 		
 //-----------------------------------------------------------------------------------------------------------------
-		//Changement du profil d'un �tudiant (0=;1=;2=;) par d�faut le profil est �tudiant de base =0
+		//Changement du profil d'un �tudiant (0=;1=;2=;3=) par d�faut le profil est �tudiant de base =0
 		//acc�s en ecriture (update)
 		public void eleveChgtProfil (String ideleve, Integer profil){
 			try {
@@ -143,18 +143,23 @@ public class EleveDaoImpl implements EleveDao {
 //-----------------------------------------------------------------------------------------------------------------
 //récupération de la cle_structure d'un élève en fonction de son id
 //acc�s en lecture
-//COMPARER LES DATES------REQUETE FAUSSE
+
 		public Integer getCleStructureById(String ideleve){
 			int res=0;
+			
 			Date date=new Date();
+			java.util.Date utilDate_syst = date;
+		    java.sql.Date sqlDateSyst = new java.sql.Date(utilDate_syst.getTime());
+		    
 			try {
 				Connection connection = DataSourceProvider.getDataSource()
 						.getConnection();
 
 				
 				
-				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT cle_structure FROM presider WHERE id_eleve=? " );
+				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT cle_structure FROM presider WHERE id_eleve=? AND date_fin>? " );
 				stmt.setString(1,ideleve);
+				stmt.setDate(2, sqlDateSyst);
 				ResultSet results = stmt.executeQuery();
 				results.next();
 				res= results.getInt("cle_structure");
@@ -208,7 +213,7 @@ public class EleveDaoImpl implements EleveDao {
 			TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 			TeaDaoImpl.getNbHeureDues(results.getString("id_eleve"))-TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 			TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
-			null
+			getCleStructureById(results.getString("id_eleve"))
 			);
 				
 				// Fermer la connexion
@@ -255,7 +260,7 @@ public class EleveDaoImpl implements EleveDao {
 						TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureDues(results.getString("id_eleve"))-TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
-						null
+						getCleStructureById(results.getString("id_eleve"))
 						);
 							
 			
@@ -308,7 +313,7 @@ public class EleveDaoImpl implements EleveDao {
 						TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureDues(results.getString("id_eleve"))-TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
-						null
+						getCleStructureById(results.getString("id_eleve"))
 						);
 				
 					eleves.add(eleve);	
@@ -359,7 +364,8 @@ public class EleveDaoImpl implements EleveDao {
 						TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureDues(results.getString("id_eleve"))-TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
-						null);
+						getCleStructureById(results.getString("id_eleve"))
+						);
 				eleves.add(eleve);	
 				
 			}
@@ -406,7 +412,7 @@ public class EleveDaoImpl implements EleveDao {
 						TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureDues(results.getString("id_eleve"))-TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
-						null
+						getCleStructureById(results.getString("id_eleve"))
 						);
 				eleves.add(eleve);	
 				
@@ -454,7 +460,7 @@ public class EleveDaoImpl implements EleveDao {
 							TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 							TeaDaoImpl.getNbHeureDues(results.getString("id_eleve"))-TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 							TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
-							null
+							getCleStructureById(results.getString("id_eleve"))
 							);
 				
 					eleves.add(eleve);	
@@ -503,7 +509,7 @@ public class EleveDaoImpl implements EleveDao {
 						TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureDues(results.getString("id_eleve"))-TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
-						null
+						getCleStructureById(results.getString("id_eleve"))
 						);
 				eleves.add(eleve);	
 				
@@ -605,8 +611,8 @@ public class EleveDaoImpl implements EleveDao {
 						TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureDues(results.getString("id_eleve"))-TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
-						null
-						);                                                          
+						getCleStructureById(results.getString("id_eleve"))
+						);                                                         
 				eleves.add(eleve);                                                        
 				}                                 
 			// Fermer la connexion                                
