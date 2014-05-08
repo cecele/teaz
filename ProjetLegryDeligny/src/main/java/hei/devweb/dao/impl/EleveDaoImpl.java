@@ -146,11 +146,14 @@ public class EleveDaoImpl implements EleveDao {
 		public boolean president(String ideleve){
 			boolean res= false;
 			int rep= 0;
+			java.util.Date utildate = new Date();
+		    java.sql.Date sqlDate = new java.sql.Date(utildate.getTime());
 			try {
 				Connection connection = DataSourceProvider.getDataSource()
 						.getConnection();
-				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT COUNT(cle_structure) as total FROM presider WHERE id_eleve=?" );
+				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT COUNT(cle_structure) as total FROM presider WHERE id_eleve=? AND date_fin>?" );
 				stmt.setString(1,ideleve);
+				stmt.setDate(2, sqlDate);
 				ResultSet results = stmt.executeQuery();
 				results.next();
 				rep= results.getInt("total");
