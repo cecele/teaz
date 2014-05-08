@@ -140,7 +140,42 @@ public void offre_placemoins (Integer cle_offre){
 	//acces en ecriture--- a effectuer quand le nombre de place est � 0
 
 
-	public void annonce_miseHorsLigne (Integer cle_offre){
+	public void annonce_miseHorsLigne (Offre offre){
+		
+		java.util.Date utilDate_depot = offre.getDate_depot();
+	    java.sql.Date sqlDateDepot = new java.sql.Date(utilDate_depot.getTime());
+	    
+		java.util.Date utilDate_tea = offre.getDate_tea();
+	    java.sql.Date sqlDateTea = new java.sql.Date(utilDate_tea.getTime());
+	    
+		try {
+			Connection connection = DataSourceProvider.getDataSource()
+					.getConnection();
+
+			PreparedStatement stmt = (PreparedStatement) connection
+					.prepareStatement("UPDATE offre SET date_tea=?,heure_debut=?,heure_fin=?,statut=0,offre_descritpion=?,eleve_mail=?, offre_titre=?, offre_place=? WHERE cle_offre=?");
+			stmt.setDate(1, sqlDateTea);
+			stmt.setString(2, offre.getHeure_debut());
+			stmt.setString(3, offre.getHeure_fin());
+			stmt.setString(4, offre.getOffre_description());
+			stmt.setString(5, offre.getEleve_mail());
+			stmt.setString(6, offre.getOffre_titre());
+			stmt.setInt(7,offre.getOffre_place());
+			stmt.executeUpdate();
+			// Fermer la connexion
+
+			stmt.close();
+			connection.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	//-----------------------------------------------------------------------------------------------------------------
+		//modification de l'offre par le propriétaire de l'offre
+		//acces en ecriture--- 
+	
+	public void AnnonceModification (Integer cle_offre){
 		try {
 			Connection connection = DataSourceProvider.getDataSource()
 					.getConnection();
@@ -158,8 +193,6 @@ public void offre_placemoins (Integer cle_offre){
 			e.printStackTrace();
 		}
 	}
-
-
 
 //-----------------------------------------------------------------------------------------------------------------
 		// AFFICHAGE
@@ -314,6 +347,10 @@ public void offre_placemoins (Integer cle_offre){
         }
         return nbPlaces;
 }
+	
+	public void annonce_miseHorsLigne(Integer id) {
+		
+	}
 	
 	
 

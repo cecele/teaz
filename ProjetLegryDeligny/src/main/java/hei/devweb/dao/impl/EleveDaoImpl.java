@@ -141,6 +141,34 @@ public class EleveDaoImpl implements EleveDao {
 //-----------------------------------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------------------------------
+//booléen permettant de savoir si un élève est président de structure pour l'année en cours
+//acc�s en lecture
+		public boolean president(String ideleve){
+			boolean res= false;
+			int rep= 0;
+			try {
+				Connection connection = DataSourceProvider.getDataSource()
+						.getConnection();
+				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT COUNT(cle_structure) as total FROM presider WHERE id_eleve=?" );
+				stmt.setString(1,ideleve);
+				ResultSet results = stmt.executeQuery();
+				results.next();
+				rep= results.getInt("total");
+				if(rep>0) res=true;
+				// Fermer la connexion
+				results.close();
+				stmt.close();
+				connection.close();
+				
+		}
+			catch (SQLException e) {
+								e.printStackTrace();
+							}
+			return res;
+			
+		}
+		
+//-----------------------------------------------------------------------------------------------------------------
 //récupération de la cle_structure d'un élève en fonction de son id
 //acc�s en lecture
 
@@ -213,9 +241,9 @@ public class EleveDaoImpl implements EleveDao {
 			TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 			TeaDaoImpl.getNbHeureDues(results.getString("id_eleve"))-TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 			TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
-			getCleStructureById(results.getString("id_eleve"))
+			null
 			);
-				
+			if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
 				// Fermer la connexion
 				results.close();
 				stmt.close();
@@ -260,8 +288,11 @@ public class EleveDaoImpl implements EleveDao {
 						TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureDues(results.getString("id_eleve"))-TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
-						getCleStructureById(results.getString("id_eleve"))
+						null
 						);
+				
+				if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
+					
 							
 			
 				eleves.add(eleve);	
@@ -313,9 +344,11 @@ public class EleveDaoImpl implements EleveDao {
 						TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureDues(results.getString("id_eleve"))-TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
-						getCleStructureById(results.getString("id_eleve"))
+						null
 						);
 				
+				if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
+					
 					eleves.add(eleve);	
 					
 				
@@ -364,8 +397,11 @@ public class EleveDaoImpl implements EleveDao {
 						TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureDues(results.getString("id_eleve"))-TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
-						getCleStructureById(results.getString("id_eleve"))
+						null
 						);
+				
+				if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
+					
 				eleves.add(eleve);	
 				
 			}
@@ -412,8 +448,11 @@ public class EleveDaoImpl implements EleveDao {
 						TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureDues(results.getString("id_eleve"))-TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
-						getCleStructureById(results.getString("id_eleve"))
+						null
 						);
+				
+				if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
+					
 				eleves.add(eleve);	
 				
 			}
@@ -460,8 +499,11 @@ public class EleveDaoImpl implements EleveDao {
 							TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 							TeaDaoImpl.getNbHeureDues(results.getString("id_eleve"))-TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 							TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
-							getCleStructureById(results.getString("id_eleve"))
+							null
 							);
+					
+					if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
+						
 				
 					eleves.add(eleve);	
 					
@@ -509,8 +551,11 @@ public class EleveDaoImpl implements EleveDao {
 						TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureDues(results.getString("id_eleve"))-TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
-						getCleStructureById(results.getString("id_eleve"))
+						null
 						);
+				
+				if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
+					
 				eleves.add(eleve);	
 				
 			}
@@ -611,8 +656,11 @@ public class EleveDaoImpl implements EleveDao {
 						TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureDues(results.getString("id_eleve"))-TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
-						getCleStructureById(results.getString("id_eleve"))
-						);                                                         
+						null
+						);
+				
+				if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
+					                                                         
 				eleves.add(eleve);                                                        
 				}                                 
 			// Fermer la connexion                                
