@@ -23,7 +23,7 @@
 	
 			<article>
 				<h2>Groupe responsables de structure</h2>
-				<form method="POST" action="gestionadministration?act=1">
+				<form method="POST" action="ajouterdroit?act=1">
 				<table class="tableau">
 					<thead>
 						<tr>
@@ -51,7 +51,7 @@
 				</form>
 				
 				<h2>Groupe administration du BDE</h2>
-				<form method="POST" action="administration">
+				<form method="POST" action="ajouterdroit?act=2">
 				<table class="tableau">
 					<thead>
 						<tr>
@@ -66,7 +66,7 @@
 						<td>${adminbde.id_eleve}</td>
 						<td>${adminbde.eleve_nom}</td>
 						<td>${adminbde.eleve_prenom}</td>
-						<td>Retirer</td>
+						<td><a href="gestionadministration?id=${adminbde.id_eleve}">Retirer</a></td>
 					</tr>
 					</c:forEach>
 					<tr>
@@ -79,7 +79,7 @@
 				</form>
 				
 				<h2>Groupe administration des études</h2>
-				<form method="POST" action="administration">
+				<form method="POST" action="ajouterdroit?act=3">
 				<table class="tableau">
 					<thead>
 						<tr>
@@ -94,7 +94,7 @@
 						<td>${admin.id_eleve}</td>
 						<td>${admin.eleve_nom}</td>
 						<td>${admin.eleve_prenom}</td>
-						<td>Retirer</td>
+						<td><a href="gestionadministration?id=${admin.id_eleve}">Retirer</a></td>
 					</tr>
 					</c:forEach>
 					<tr>
@@ -107,7 +107,7 @@
 				</form>
 				
 				<h2>Groupe SuperAdmin</h2>
-				<form method="POST" action="administration">
+				<form method="POST" action="ajouterdroit?act=4">
 				<table class="tableau">
 					<thead>
 						<tr>
@@ -122,7 +122,7 @@
 						<td>${superadmin.id_eleve}</td>
 						<td>${superadmin.eleve_nom}</td>
 						<td>${superadmin.eleve_prenom}</td>
-						<td>Retirer</td>
+						<td><a href="gestionadministration?id=${superadmin.id_eleve}">Retirer</a></td>
 					</tr>
 					</c:forEach>
 					<tr>
@@ -134,6 +134,32 @@
 				</table>
 				</form>
 				
+			</article>
+			<article>
+				<h2>Gestion des commissions</h2>
+				<form method="POST" action="ajoutercommission">
+				<table class="tableau">
+					<thead>
+						<tr>
+							<th>Nom</th>
+							<th>Matricule Président</th>
+							<th>Action</th>
+						</tr>
+					</thead>	
+					<c:forEach var="commissions" items="${commission}">
+					<tr>
+						<td>${commission.structure_nom}</td>
+						<td>${commission.structure_nom}</td>
+						<td><a href="supprimercommission?id=${commission.cle_structure}">Retirer</a></td>
+					</tr>
+					</c:forEach>
+					<tr>
+						<td><input type="text" name="nom" id="nom" required/></td>
+						<td><input type="text" name="id" id="id" required/></td>
+						<td><input type="submit" value="Ajouter"/></td>
+					</tr>
+				</table>
+				</form>
 			</article>
 		</section>	
     </body>

@@ -113,6 +113,22 @@
     <servlet-name>GestionAdministration</servlet-name>
     <servlet-class>hei.devweb.controllers.GestionAdministrationServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>AjouterDroit</servlet-name>
+    <servlet-class>hei.devweb.controllers.AjouterDroitServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Recherche</servlet-name>
+    <servlet-class>hei.devweb.controllers.RechercheServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Recherche</servlet-name>
+    <url-pattern>/recherche</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AjouterDroit</servlet-name>
+    <url-pattern>/ajouterdroit</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>GestionAdministration</servlet-name>
     <url-pattern>/gestionadministration</url-pattern>

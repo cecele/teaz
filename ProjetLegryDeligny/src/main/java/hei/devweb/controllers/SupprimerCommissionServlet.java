@@ -1,11 +1,9 @@
 package hei.devweb.controllers;
 
 import hei.devweb.metier.Manager;
-import hei.devweb.model.Eleve;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,16 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class GestionAdministrationServlet
+ * Servlet implementation class SupprimerCommissionServlet
  */
-@WebServlet("/GestionAdministrationServlet")
-public class GestionAdministrationServlet extends HttpServlet {
+@WebServlet("/SupprimerCommissionServlet")
+public class SupprimerCommissionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GestionAdministrationServlet() {
+    public SupprimerCommissionServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,20 +29,15 @@ public class GestionAdministrationServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-			String id  = request.getParameter("id");
-			Manager.getInstance().retirerDroits(id);
-			
-			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/administration.jsp");
-			view.forward(request, response);
-		
+		String id  = request.getParameter("id");
+		//Manager.getInstance().supprimerCommission(id);
 	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-
+		// TODO Auto-generated method stub
 	}
 
 }

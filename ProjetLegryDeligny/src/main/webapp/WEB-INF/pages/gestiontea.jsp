@@ -21,7 +21,7 @@
 	
 			<article>
 				<h2>Filtre</h2>
-				<form method="POST" action="filtrer">
+				<form method="POST" action="recherche">
 					<table>
 						<tr>
 							<td><label for="matricule" >Matricule</label></td>
@@ -35,11 +35,34 @@
 							<td><label for="classe" >Classe</label></td>
 							<td>
 								<select name="classe" id="classe" required >
-									<option value="h1">h1</option>
-									<option value="h2">h2</option>
-									<option value="h3">h3</option>
-									<option value="h4">h4</option>
-									<option value="h5">h5</option>
+									<option value="tous">tous</option>
+									<option value="h1a">1A</option>
+									<option value="h1b">1B</option>
+									<option value="h1c">1C</option>
+									<option value="h1d">1D</option>
+									<option value="h1e">1E</option>
+									<option value="h1f">1F</option>
+									<option value="h1g">1G</option>
+									<option value="h2a">2A</option>
+									<option value="h2b">2B</option>
+									<option value="h2c">2C</option>
+									<option value="h2d">2D</option>
+									<option value="h2e">2E</option>
+									<option value="h2f">2F</option>
+									<option value="h31">h31</option>
+									<option value="h32">h32</option>
+									<option value="h33">h33</option>
+									<option value="h34">h34</option>
+									<option value="h35">h35</option>
+									<option value="h36">h36</option>
+									<option value="h38">h38</option>
+									<option value="h41">h41</option>
+									<option value="h42">h42</option>
+									<option value="h43">h43</option>
+									<option value="h44">h44</option>
+									<option value="h48">h48</option>
+									<option value="h51">h51</option>
+									<option value="h52">h52</option>
 								</select>
 							</td>
 						</tr>

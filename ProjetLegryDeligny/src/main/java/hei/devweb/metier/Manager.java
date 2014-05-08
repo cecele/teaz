@@ -6,11 +6,14 @@ import java.util.List;
 import hei.devweb.dao.AnnonceDao;
 import hei.devweb.dao.EleveDao;
 import hei.devweb.dao.TeaDao;
+import hei.devweb.dao.StructureDao;
 import hei.devweb.dao.impl.AnnonceDaoImpl;
 import hei.devweb.dao.impl.EleveDaoImpl;
 import hei.devweb.dao.impl.TeaDaoImpl;
+import hei.devweb.dao.impl.StructureDaoImpl;
 import hei.devweb.model.Offre;
 import hei.devweb.model.Eleve;
+import hei.devweb.model.Structure;
 import hei.devweb.model.Tea;
 
 public class Manager {
@@ -19,6 +22,7 @@ private static Manager instance;
 	private AnnonceDao AnnonceDao = new AnnonceDaoImpl();
 	private EleveDao EleveDao = new EleveDaoImpl();
 	private TeaDao TeaDao = new TeaDaoImpl();
+	private StructureDao StructureDao = new StructureDaoImpl();
 
 	public static Manager getInstance() {
 		if (instance == null) {
@@ -111,6 +115,11 @@ private static Manager instance;
 		System.out.println("dans méthode ajouterDroits");
 		EleveDao.eleveChgtProfil(id,droit);
 		
+	}
+
+	public List<Structure> getStructure_OrdreNom() {
+		System.out.println("dans méthode getStructure_OrdreNom");
+		return StructureDao.getStructure_OrdreNom();
 	}
 
 

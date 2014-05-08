@@ -3,6 +3,7 @@ package hei.devweb.controllers;
 import hei.devweb.metier.Manager;
 import hei.devweb.model.Eleve;
 import hei.devweb.model.Offre;
+import hei.devweb.model.Structure;
 
 import java.io.IOException;
 import java.util.List;
@@ -32,6 +33,9 @@ public class AdministrationServlet extends HttpServlet {
 		
 		List<Eleve> superadmin = Manager.getInstance().getEleveResponsables(4);
 		request.setAttribute("superadmin",superadmin);
+		
+		List<Structure> commission = Manager.getInstance().getStructure_OrdreNom();
+		request.setAttribute("commission",commission);
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/administration.jsp");
 		view.forward(request, response);
