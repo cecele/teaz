@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.mysql.jdbc.PreparedStatement;
@@ -19,6 +20,7 @@ public class EleveDaoImpl implements EleveDao {
 	//création d'un élève
 	//acc�s en ecriture (update)
 	
+
 	public void CreateEleve(Eleve eleve){
 		if (eleve.getId_eleve() !=null || eleve.getEleve_nom() !=null ||eleve.getEleve_prenom() !=null ||eleve.getDate_naissance() !=null ||eleve.getNumrue()!=null ||eleve.getNomrue() !=null ||eleve.getCodepostal() !=null || eleve.getVille()!=null ||eleve.getDate_entree() !=null ){
 			try {
@@ -77,13 +79,11 @@ public class EleveDaoImpl implements EleveDao {
 
 				stmt.close();
 				connection.close();
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		
-		
-	
 	//-----------------------------------------------------------------------------------------------------------------
 	//mise à jour du nombre d'heure de tea due
 	//acc�s en ecriture (update)
@@ -140,20 +140,50 @@ public class EleveDaoImpl implements EleveDao {
 	// AFFICHAGE
 //-----------------------------------------------------------------------------------------------------------------
 
+//-----------------------------------------------------------------------------------------------------------------
+//récupération de la cle_structure d'un élève en fonction de son id
+//acc�s en lecture
+//COMPARER LES DATES------REQUETE FAUSSE
+		public Integer getCleStructureById(String ideleve){
+			int res=0;
+			Date date=new Date();
+			try {
+				Connection connection = DataSourceProvider.getDataSource()
+						.getConnection();
 
+				
+				
+				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT cle_structure FROM presider WHERE id_eleve=? " );
+				stmt.setString(1,ideleve);
+				ResultSet results = stmt.executeQuery();
+				results.next();
+				res= results.getInt("cle_structure");
+				// Fermer la connexion
+				results.close();
+				stmt.close();
+				connection.close();
+				
+		}
+			catch (SQLException e) {
+								e.printStackTrace();
+							}
+			return res;
+			
+		}
+		
 	//-----------------------------------------------------------------------------------------------------------------
 	//r�cup�ration des information d'un eleve en fonction de id (son id est numero de matricule sans le h)
 	//acc�s en lecture
 	
 	public Eleve getEleveById(String ideleve){
-		Eleve eleve = new Eleve(null,null,null, null, null, null, null, null, null, null, null,null,null,null, null, null, null, null);
-				
-		Connection connection;
-		try {
-			connection = DataSourceProvider.getDataSource()
-						.getConnection();
+		Eleve eleve = new Eleve(null,null,null, null, null, null, null, null, null, null, null,null,null,null, null,null, null, null); 
+			
 		
+		try {
+			Connection connection = DataSourceProvider.getDataSource()
+					.getConnection();
 
+			
 			
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE id_eleve=?");
 			stmt.setString(1,ideleve);
@@ -174,21 +204,22 @@ public class EleveDaoImpl implements EleveDao {
 			results.getInt("eleve_profil"),
 			results.getInt("eleve_profil"),
 			results.getString("motdepasse"),
-			getPromotion(results.getString("id_eleve")), null, null, null,null
-			
-			
-			
+			getPromotion(results.getString("id_eleve")),
+			TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
+			TeaDaoImpl.getNbHeureDues(results.getString("id_eleve"))-TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
+			TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
+			null
 			);
 				
 				// Fermer la connexion
 				results.close();
 				stmt.close();
 				connection.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+				
 		}
-		
+			catch (SQLException e) {
+								e.printStackTrace();
+							}
 			return eleve;	
 	}
 	//-----------------------------------------------------------------------------------------------------------------
@@ -206,21 +237,27 @@ public class EleveDaoImpl implements EleveDao {
 			ResultSet results = stmt.executeQuery();
 			
 			while (results.next()) {
-				Eleve eleve =new Eleve(
-			results.getString("id_eleve"),
-			results.getString("eleve_nom"),
-			results.getString("eleve_prenom"),
-			results.getDate("date_naissance"),
-			results.getInt("numrue"),
-			results.getString("nomrue"),
-			results.getString("codepostal"),
-			results.getString("ville"),
-			results.getDate("date_entree"),
-			results.getInt("cotisant"),
-			results.getInt("eleve_profil"),
-			results.getInt("diplome"),
-			results.getString("motdepasse"),
-			getPromotion(results.getString("id_eleve")), null, null, null,null);
+				Eleve 		eleve = new Eleve(
+						results.getString("id_eleve"),
+						results.getString("eleve_nom"),
+						results.getString("eleve_prenom"),
+						results.getDate("date_naissance"),
+						results.getInt("numrue"),
+						results.getString("nomrue"),
+						results.getString("codepostal"),
+						results.getString("ville"),
+						results.getDate("date_entree"),
+						results.getInt("cotisant"),
+						results.getInt("eleve_profil"),
+						results.getInt("eleve_profil"),
+						results.getString("motdepasse"),
+						getPromotion(results.getString("id_eleve")),
+						TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
+						TeaDaoImpl.getNbHeureDues(results.getString("id_eleve"))-TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
+						TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
+						null
+						);
+							
 			
 				eleves.add(eleve);	
 				
@@ -253,21 +290,26 @@ public class EleveDaoImpl implements EleveDao {
 				
 				results.next();
 				
-					Eleve eleve =new Eleve(
-				results.getString("id_eleve"),
-				results.getString("eleve_nom"),
-				results.getString("eleve_prenom"),
-				results.getDate("date_naissance"),
-				results.getInt("numrue"),
-				results.getString("nomrue"),
-				results.getString("codepostal"),
-				results.getString("ville"),
-				results.getDate("date_entree"),
-				results.getInt("cotisant"),
-				results.getInt("eleve_profil"),
-				results.getInt("diplome"),
-				results.getString("motdepasse"),
-				getPromotion(results.getString("id_eleve")), null, null, null,null);
+				Eleve 		eleve = new Eleve(
+						results.getString("id_eleve"),
+						results.getString("eleve_nom"),
+						results.getString("eleve_prenom"),
+						results.getDate("date_naissance"),
+						results.getInt("numrue"),
+						results.getString("nomrue"),
+						results.getString("codepostal"),
+						results.getString("ville"),
+						results.getDate("date_entree"),
+						results.getInt("cotisant"),
+						results.getInt("eleve_profil"),
+						results.getInt("eleve_profil"),
+						results.getString("motdepasse"),
+						getPromotion(results.getString("id_eleve")),
+						TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
+						TeaDaoImpl.getNbHeureDues(results.getString("id_eleve"))-TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
+						TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
+						null
+						);
 				
 					eleves.add(eleve);	
 					
@@ -299,22 +341,25 @@ public class EleveDaoImpl implements EleveDao {
 			ResultSet results = stmt.executeQuery();
 			
 			while (results.next()) {
-				Eleve eleve =new Eleve(
-			results.getString("id_eleve"),
-			results.getString("eleve_nom"),
-			results.getString("eleve_prenom"),
-			results.getDate("date_naissance"),
-			results.getInt("numrue"),
-			results.getString("nomrue"),
-			results.getString("codepostal"),
-			results.getString("ville"),
-			results.getDate("date_entree"),
-			results.getInt("cotisant"),
-			results.getInt("eleve_profil"),
-			results.getInt("diplome"),
-			results.getString("motdepasse"),
-			getPromotion(results.getString("id_eleve")), null, null, null,null);
-			
+				Eleve 		eleve = new Eleve(
+						results.getString("id_eleve"),
+						results.getString("eleve_nom"),
+						results.getString("eleve_prenom"),
+						results.getDate("date_naissance"),
+						results.getInt("numrue"),
+						results.getString("nomrue"),
+						results.getString("codepostal"),
+						results.getString("ville"),
+						results.getDate("date_entree"),
+						results.getInt("cotisant"),
+						results.getInt("eleve_profil"),
+						results.getInt("eleve_profil"),
+						results.getString("motdepasse"),
+						getPromotion(results.getString("id_eleve")),
+						TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
+						TeaDaoImpl.getNbHeureDues(results.getString("id_eleve"))-TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
+						TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
+						null);
 				eleves.add(eleve);	
 				
 			}
@@ -343,22 +388,26 @@ public class EleveDaoImpl implements EleveDao {
 			ResultSet results = stmt.executeQuery();
 			
 			while (results.next()) {
-				Eleve eleve =new Eleve(
-			results.getString("id_eleve"),
-			results.getString("eleve_nom"),
-			results.getString("eleve_prenom"),
-			results.getDate("date_naissance"),
-			results.getInt("numrue"),
-			results.getString("nomrue"),
-			results.getString("codepostal"),
-			results.getString("ville"),
-			results.getDate("date_entree"),
-			results.getInt("cotisant"),
-			results.getInt("eleve_profil"),
-			results.getInt("diplome"),
-			results.getString("motdepasse"),
-			getPromotion(results.getString("id_eleve")), null, null, null,null);
-			
+				Eleve 		eleve = new Eleve(
+						results.getString("id_eleve"),
+						results.getString("eleve_nom"),
+						results.getString("eleve_prenom"),
+						results.getDate("date_naissance"),
+						results.getInt("numrue"),
+						results.getString("nomrue"),
+						results.getString("codepostal"),
+						results.getString("ville"),
+						results.getDate("date_entree"),
+						results.getInt("cotisant"),
+						results.getInt("eleve_profil"),
+						results.getInt("eleve_profil"),
+						results.getString("motdepasse"),
+						getPromotion(results.getString("id_eleve")),
+						TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
+						TeaDaoImpl.getNbHeureDues(results.getString("id_eleve"))-TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
+						TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
+						null
+						);
 				eleves.add(eleve);	
 				
 			}
@@ -387,21 +436,26 @@ public class EleveDaoImpl implements EleveDao {
 				ResultSet results = stmt.executeQuery();
 				
 				while (results.next()) {
-					Eleve eleve =new Eleve(
-				results.getString("id_eleve"),
-				results.getString("eleve_nom"),
-				results.getString("eleve_prenom"),
-				results.getDate("date_naissance"),
-				results.getInt("numrue"),
-				results.getString("nomrue"),
-				results.getString("codepostal"),
-				results.getString("ville"),
-				results.getDate("date_entree"),
-				results.getInt("cotisant"),
-				results.getInt("eleve_profil"),
-				results.getInt("diplome"),
-				results.getString("motdepasse"),
-				getPromotion(results.getString("id_eleve")), null, null, null,null);
+					Eleve 		eleve = new Eleve(
+							results.getString("id_eleve"),
+							results.getString("eleve_nom"),
+							results.getString("eleve_prenom"),
+							results.getDate("date_naissance"),
+							results.getInt("numrue"),
+							results.getString("nomrue"),
+							results.getString("codepostal"),
+							results.getString("ville"),
+							results.getDate("date_entree"),
+							results.getInt("cotisant"),
+							results.getInt("eleve_profil"),
+							results.getInt("eleve_profil"),
+							results.getString("motdepasse"),
+							getPromotion(results.getString("id_eleve")),
+							TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
+							TeaDaoImpl.getNbHeureDues(results.getString("id_eleve"))-TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
+							TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
+							null
+							);
 				
 					eleves.add(eleve);	
 					
@@ -431,22 +485,26 @@ public class EleveDaoImpl implements EleveDao {
 			ResultSet results = stmt.executeQuery();
 			
 			while (results.next()) {
-				Eleve eleve =new Eleve(
-			results.getString("id_eleve"),
-			results.getString("eleve_nom"),
-			results.getString("eleve_prenom"),
-			results.getDate("date_naissance"),
-			results.getInt("numrue"),
-			results.getString("nomrue"),
-			results.getString("codepostal"),
-			results.getString("ville"),
-			results.getDate("date_entree"),
-			results.getInt("cotisant"),
-			results.getInt("eleve_profil"),
-			results.getInt("diplome"),
-			results.getString("motdepasse"),
-			getPromotion(results.getString("id_eleve")), null, null, null,null);
-			
+				Eleve 		eleve = new Eleve(
+						results.getString("id_eleve"),
+						results.getString("eleve_nom"),
+						results.getString("eleve_prenom"),
+						results.getDate("date_naissance"),
+						results.getInt("numrue"),
+						results.getString("nomrue"),
+						results.getString("codepostal"),
+						results.getString("ville"),
+						results.getDate("date_entree"),
+						results.getInt("cotisant"),
+						results.getInt("eleve_profil"),
+						results.getInt("eleve_profil"),
+						results.getString("motdepasse"),
+						getPromotion(results.getString("id_eleve")),
+						TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
+						TeaDaoImpl.getNbHeureDues(results.getString("id_eleve"))-TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
+						TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
+						null
+						);
 				eleves.add(eleve);	
 				
 			}
@@ -515,56 +573,55 @@ public class EleveDaoImpl implements EleveDao {
 			
 		return classeencours;
 	}
-	
-	// Lister les eleves responsables de structure 
-	
-	public List<Eleve> getEleveResponsables(int profil){
-		List<Eleve> eleves = new ArrayList<Eleve>();
-		try {
-			Connection connection = DataSourceProvider.getDataSource()
-					.getConnection();
 
-			
-			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE eleve_profil=?");
-			stmt.setInt(1,profil);
-			ResultSet results = stmt.executeQuery();
-			
-			while (results.next()) {
-				Eleve eleve =new Eleve(
-			results.getString("id_eleve"),
-			results.getString("eleve_nom"),
-			results.getString("eleve_prenom"),
-			results.getDate("date_naissance"),
-			results.getInt("numrue"),
-			results.getString("nomrue"),
-			results.getString("codepostal"),
-			results.getString("ville"),
-			results.getDate("date_entree"),
-			results.getInt("cotisant"),
-			results.getInt("eleve_profil"),
-			results.getInt("diplome"),
-			results.getString("motdepasse"),
-			getPromotion(results.getString("id_eleve")), null, null, null,null);
-			
-				eleves.add(eleve);	
-				
-			}
-				// Fermer la connexion
-				results.close();
-				stmt.close();
-				connection.close();
-				
-		}
-			catch (SQLException e) {
-								e.printStackTrace();
-							}
-			return eleves;		
-	}
+	//-----------------------------------------------------------------------------------------------------------------
+	//récupération des élèves responsables d'assos
+	//acc�s en lecture
 
 	
 
-	
-	
+	public List<Eleve> getEleveResponsables(int profil){                 
+		List<Eleve> eleves = new ArrayList<Eleve>();               
+		try {                         
+			Connection connection = DataSourceProvider.getDataSource()                                        
+					.getConnection();                                                  
+			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE eleve_profil=?");                         stmt.setInt(1,profil);                         ResultSet results = stmt.executeQuery();                                            
+			while (results.next()) {                                 
+				Eleve eleve =new Eleve(                         
+						results.getString("id_eleve"),                         
+						results.getString("eleve_nom"),                         
+						results.getString("eleve_prenom"),                         
+						results.getDate("date_naissance"),                         
+						results.getInt("numrue"),                         
+						results.getString("nomrue"),                         
+						results.getString("codepostal"),                        
+						results.getString("ville"),                         
+						results.getDate("date_entree"),                         
+						results.getInt("cotisant"),                         
+						results.getInt("eleve_profil"),                         
+						results.getInt("diplome"),                         
+						results.getString("motdepasse"),                         
+						getPromotion(results.getString("id_eleve")),
+						TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
+						TeaDaoImpl.getNbHeureDues(results.getString("id_eleve"))-TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
+						TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
+						null
+						);                                                          
+				eleves.add(eleve);                                                        
+				}                                 
+			// Fermer la connexion                                
+			results.close();                                 
+			stmt.close();                                 
+			connection.close();                                                 
+			}                         
+		catch (SQLException e) {      
+				  e.printStackTrace();  }                        
+		
+		
+		
+		return eleves;                         }
 
+
+	
 	
 }

@@ -448,7 +448,7 @@ return teas;
 			//calcul du nombre d'heure de tea valides par élève
 			//acc�s en lecture
 		
-		public int getNbHeureTeaValide(String ideleve){
+		public static int getNbHeureTeaValide(String ideleve){
 			int nbtotal=0;
 			
 			
@@ -480,7 +480,7 @@ return teas;
 		//calcul du nombre de tea dues pour un élève en fonction de son id
 		//acc�s en lecture
 		
-		public int getNbHeureDues(String ideleve){
+		public static int getNbHeureDues(String ideleve){
 			int nbtotal=0;
 			
 			
@@ -490,6 +490,38 @@ return teas;
 
 				
 				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT SUM(classe.nb_tea) as total FROM appartenir INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE appartenir.id_eleve=?");
+				stmt.setString(1,ideleve);
+				ResultSet results = stmt.executeQuery();
+				
+				nbtotal=results.getInt("total");
+				
+				// Fermer la connexion
+				results.close();
+				stmt.close();
+				connection.close();
+				
+				}
+			catch (SQLException e) {
+								e.printStackTrace();
+							}
+			
+				
+			return nbtotal;
+		}
+		//-----------------------------------------------------------------------------------------------------------------
+		//calcul du nombre de tea dues pour un élève en fonction de son id
+		//acc�s en lecture
+		
+		public static int getNbHeureEnAttente(String ideleve){
+			int nbtotal=0;
+			
+			
+			try {
+				Connection connection = DataSourceProvider.getDataSource()
+						.getConnection();
+
+				
+				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT SUM(nbheure_realisee) as total FROM tea WHERE id_eleve=?");
 				stmt.setString(1,ideleve);
 				ResultSet results = stmt.executeQuery();
 				
@@ -541,106 +573,15 @@ return teas;
 					return nbtotal;
 				}
 				
-				// Liste de TEA En attente de validation par le resp TEA
-				@Override
-				public List<Tea> listerTeaAValider(){
-					List<Tea> teas = new ArrayList<Tea>();
-					try {
-						Connection connection = DataSourceProvider.getDataSource()
-								.getConnection();
-
-						
-						PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tea INNER JOIN offre ON tea.cle_offre=offre.cle_offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE statut_valide=1");
-						ResultSet results = stmt.executeQuery();
-						
-						while (results.next()) {
-							Tea tea =new Tea(
-						results.getInt("cle_tea"),
-						results.getDate("date_tea_realisee"),
-						results.getInt("nbheure_realisee"),
-						results.getInt("statut_valide"),
-						results.getDate("date_validation"),
-						results.getInt("cle_offre"),
-						results.getString("id_eleve"),
-						results.getDate("date_depot"),
-						results.getDate("date_miseenligne"),
-						results.getDate("date_tea"),
-						results.getString("heure_debut"),
-						results.getString("heure_fin"),
-						results.getInt("statut"),
-						results.getString("offre_description"),
-						results.getString("eleve_mail"),
-						results.getString("offre_titre"),
-						results.getInt("cle_structure"),
-						results.getInt("offre_place"),
-						results.getString("structure_nom"),
-						results.getString("structure_president")
-						);
-						
-							teas.add(tea);	
-							
-						}
-							// Fermer la connexion
-							results.close();
-							stmt.close();
-							connection.close();
-							
-					}
-						catch (SQLException e) {
-											e.printStackTrace();
-										}
-						return teas;	
+				
+				public List<Tea> listerTeaAValider() {
+					
+					return null;
 				}
 				
-				// Liste de TEA En attente de validation par le resp TEA
-				@Override
-				public List<Tea> listerTeaAFaire(){
-					List<Tea> teas = new ArrayList<Tea>();
-					try {
-						Connection connection = DataSourceProvider.getDataSource()
-								.getConnection();
-
-						
-						PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tea INNER JOIN offre ON tea.cle_offre=offre.cle_offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE statut_valide=0");
-						ResultSet results = stmt.executeQuery();
-						
-						while (results.next()) {
-							Tea tea =new Tea(
-						results.getInt("cle_tea"),
-						results.getDate("date_tea_realisee"),
-						results.getInt("nbheure_realisee"),
-						results.getInt("statut_valide"),
-						results.getDate("date_validation"),
-						results.getInt("cle_offre"),
-						results.getString("id_eleve"),
-						results.getDate("date_depot"),
-						results.getDate("date_miseenligne"),
-						results.getDate("date_tea"),
-						results.getString("heure_debut"),
-						results.getString("heure_fin"),
-						results.getInt("statut"),
-						results.getString("offre_description"),
-						results.getString("eleve_mail"),
-						results.getString("offre_titre"),
-						results.getInt("cle_structure"),
-						results.getInt("offre_place"),
-						results.getString("structure_nom"),
-						results.getString("structure_president")
-						);
-						
-							teas.add(tea);	
-							
-						}
-							// Fermer la connexion
-							results.close();
-							stmt.close();
-							connection.close();
-							
-					}
-						catch (SQLException e) {
-											e.printStackTrace();
-										}
-						return teas;	
+				public List<Tea> listerTeaAFaire() {
+					
+					return null;
 				}
 
 			

@@ -39,7 +39,7 @@ public class AnnonceDaoImpl implements AnnonceDao {
 			    
 				// Utiliser la connexion
 				PreparedStatement stmt = (PreparedStatement) connection
-						.prepareStatement("INSERT INTO `offre`(`date_depot`,`date_tea`,`heure_debut`,`heure_fin`,`statut`,`offre_description`,`eleve_mail`,`offre_titre`,`offre_place`,`cle_structure`) VALUES(?,?,?,?,0,?,?,?,?,?)");
+						.prepareStatement("INSERT INTO `offre`(`date_depot`,`date_tea`,`heure_debut`,`heure_fin`,`statut`,`offre_description`,`eleve_mail`,`offre_titre`,`offre_place`,`cle_structure`) VALUES(?,?,?,?,0,?,?,?,?,1)");
 						stmt.setDate(1, sqlDateDepot);
 						stmt.setDate(2, sqlDateTea);
 						stmt.setString(3, offre.getHeure_debut());
@@ -48,7 +48,6 @@ public class AnnonceDaoImpl implements AnnonceDao {
 						stmt.setString(6, offre.getEleve_mail());
 						stmt.setString(7, offre.getOffre_titre());
 						stmt.setInt(8,offre.getOffre_place());
-						stmt.setInt(9,offre.getCle_structure());
 						stmt.executeUpdate();
 
 						// Fermer la connexion
@@ -256,7 +255,7 @@ public void offre_placemoins (Integer cle_offre){
 	//r�cup�ration des noms et pr�sident de la structure pour une offre particuli�re. Dans le cas d'un professeur le pr�sident de la structure sera l'enseignant et une structure enseignant est cr�e
 	//acc�s en lecture
 	public Structure getStructure(Integer cle_offre){
-		Structure structure = new Structure(null,null,null);
+		Structure structure = new Structure(null,null,null,null);
 		try {
 			Connection connection = DataSourceProvider.getDataSource()
 					.getConnection();
@@ -270,7 +269,9 @@ public void offre_placemoins (Integer cle_offre){
 			structure = new Structure(
 			results.getInt("cle_structure"),
 			results.getString("structure_nom"),
-			results.getString("structure_president"));
+			StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
+			StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
+				);
 				
 				// Fermer la connexion
 				results.close();
