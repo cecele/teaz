@@ -35,7 +35,7 @@ public class AdministrationServlet extends HttpServlet {
 		request.setAttribute("superadmin",superadmin);
 		
 		List<Structure> commission = Manager.getInstance().getStructure_OrdreNom();
-		request.setAttribute("commission",commission);
+		request.setAttribute("commissions",commission);
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/administration.jsp");
 		view.forward(request, response);

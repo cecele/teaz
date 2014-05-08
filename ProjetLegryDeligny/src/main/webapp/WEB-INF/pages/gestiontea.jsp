@@ -83,21 +83,19 @@
 							<th>A faire</th>
 							<th>Fait</th>
 							<th>En attente</th>
-							<th>Restant</th>
 							<th>Justif</th>
 						</tr>
 					</thead>	
 					<c:forEach var="eleves" items="${eleves}">
 					<tr>
-						<td><img src="img/${eleves.teaRestante == 0 ? 'vert' : 'rouge' }.png" alt ="${eleves.teaRestante == 0 ? 'vert' : 'rouge' }"/></td>
+						<td><img src="img/${eleves.teaAfaire == 0 ? 'vert' : 'rouge' }.png" alt ="${eleves.teaAfaire == 0 ? 'vert' : 'rouge' }"/></td>
 						<td>${eleves.id_eleve}</td>
 						<td>${eleves.eleve_nom}</td>
 						<td>${eleves.eleve_prenom}</td>
 						<td>${eleves.classe}</td>
 						<td>${eleves.teaAfaire}</td>
-						<td>0</td>
+						<td>${eleves.teaFaite}</td>
 						<td>${eleves.teaEnAttente}</td>
-						<td>${eleves.teaRestante}</td>
 						<td><a href="detail?id=${eleves.id_eleve}">Détail</a></td>
 					</tr>
 					</c:forEach>

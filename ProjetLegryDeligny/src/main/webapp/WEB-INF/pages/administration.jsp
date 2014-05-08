@@ -141,7 +141,7 @@
 				<table class="tableau">
 					<thead>
 						<tr>
-							<th>Nom</th>
+							<th>Nom de la commission</th>
 							<th>Matricule Président</th>
 							<th>Action</th>
 						</tr>
@@ -150,7 +150,7 @@
 					<tr>
 						<td>${commission.structure_nom}</td>
 						<td>${commission.structure_nom}</td>
-						<td><a href="supprimercommission?id=${commission.cle_structure}">Retirer</a></td>
+						<td><a href="supprimercommission?id=${commission.cle_structure}">Supprimer</a></td>
 					</tr>
 					</c:forEach>
 					<tr>
