@@ -1,6 +1,7 @@
 package hei.devweb.controllers;
 
 import hei.devweb.metier.Manager;
+import hei.devweb.model.Eleve;
 
 import java.io.IOException;
 
@@ -40,11 +41,20 @@ public class GestionAdministrationServlet extends HttpServlet {
 		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		String id = request.getParameter("matricule");
+		String nom = request.getParameter("nom");
+		String prenom = request.getParameter("prenom");
+		int droit = Integer.parseInt(request.getParameter("act"));
+		
+		Eleve test = Manager.getInstance().getEleveById(id);
+		if(nom.equalsIgnoreCase(test.getEleve_nom()) && prenom.equalsIgnoreCase(test.getEleve_prenom())){
+			Manager.getInstance().ajouterDroits(id,droit);
+			
+		}
+		response.sendRedirect("administration");
+
 	}
 
 }

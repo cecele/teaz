@@ -23,7 +23,7 @@
 	
 			<article>
 				<h2>Groupe responsables de structure</h2>
-				<form method="POST" action="gestionadministration">
+				<form method="POST" action="gestionadministration?act=1">
 				<table class="tableau">
 					<thead>
 						<tr>

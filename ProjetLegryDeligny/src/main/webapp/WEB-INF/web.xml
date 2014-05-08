@@ -116,11 +116,11 @@
   <servlet-mapping>
     <servlet-name>GestionAdministration</servlet-name>
     <url-pattern>/gestionadministration</url-pattern>
-  </servlet-mapping> 
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>FaireTeaValider</servlet-name>
     <url-pattern>/faireteavalider</url-pattern>
-  </servlet-mapping> 
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>ValidationTea</servlet-name>
     <url-pattern>/validationtea</url-pattern>

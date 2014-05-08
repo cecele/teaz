@@ -82,6 +82,8 @@ public class EleveDaoImpl implements EleveDao {
 			}
 		}
 		
+		
+	
 	//-----------------------------------------------------------------------------------------------------------------
 	//mise à jour du nombre d'heure de tea due
 	//acc�s en ecriture (update)
@@ -558,6 +560,8 @@ public class EleveDaoImpl implements EleveDao {
 							}
 			return eleves;		
 	}
+
+	
 
 	
 	

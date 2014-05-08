@@ -107,6 +107,12 @@ private static Manager instance;
 		EleveDao.eleveChgtProfil(id,0);
 	}
 
+	public void ajouterDroits(String id, int droit) {
+		System.out.println("dans méthode ajouterDroits");
+		EleveDao.eleveChgtProfil(id,droit);
+		
+	}
+
 
 
 }
