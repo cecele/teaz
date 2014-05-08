@@ -30,10 +30,10 @@
 					<table><tr><td><h2 class="${teas.statut_valide == 1 ? 'valide' : 'attente'}"><fmt:formatDate value="${teas.date_tea_realisee}" pattern="d MMMM yyyy"/></h2></td><td class="center"><h2 class="${teas.statut_valide == 1 ? 'valide' : 'attente'}">${teas.statut_valide == 1 ? 'Validée' : 'En attente'}</h2></td> <td class="right"><h2 class="${teas.statut_valide == 1 ? 'valide' : 'attente'}">${teas.nbheure_realisee}H</h2></td></tr></table>
 					<hr/>
 					<p>
-					Demandeur : Integrale HEI<br/>
-					Président : Timothée Rosset<br/>
+					Demandeur : ${teas.structure_nom}<br/>
+					Président : ${teas.structure_president}<br/>
 					<br/>
-					Evenement: Intégrale HEI
+					Evenement: ${teas.offre_titre}
 					</p>
 			</article>
 			

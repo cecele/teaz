@@ -87,6 +87,16 @@ private static Manager instance;
 		return EleveDao.getEleveById(champId);
 	}
 
+	public List<Tea> listerTeaAValider() {
+		System.out.println("dans méthode listerTeaAValider");
+		return TeaDao.listerTeaAValider();
+	}
+	
+	public List<Tea> listerTeaAFaire() {
+		System.out.println("dans méthode listerTeaAFaire");
+		return TeaDao.listerTeaAFaire();
+	}
+
 
 
 }

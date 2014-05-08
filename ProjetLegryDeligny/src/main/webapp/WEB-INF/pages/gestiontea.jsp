@@ -53,28 +53,29 @@
 				<table class="tableau">
 					<thead>
 						<tr>
-							<th>Matricule</th>
+							<th colspan="2">Matricule</th>
 							<th>Nom</th>
 							<th>Prénom</th>
 							<th>Classe</th>
-							<th>Fait n-1</th>
 							<th>A faire</th>
 							<th>Fait</th>
+							<th>En attente</th>
 							<th>Restant</th>
 							<th>Justif</th>
 						</tr>
 					</thead>	
 					<c:forEach var="eleves" items="${eleves}">
 					<tr>
+						<td><img src="img/${eleves.teaRestante == 0 ? 'vert' : 'rouge' }.png" alt ="${eleves.teaRestante == 0 ? 'vert' : 'rouge' }"/></td>
 						<td>${eleves.id_eleve}</td>
 						<td>${eleves.eleve_nom}</td>
 						<td>${eleves.eleve_prenom}</td>
-						<td>H43</td>
-						<td>6</td>
+						<td>${eleves.classe}</td>
+						<td>${eleves.teaAfaire}</td>
 						<td>0</td>
-						<td>15</td>
-						<td>0</td>
-						<td><a href="detail">Détail</a></td>
+						<td>${eleves.teaEnAttente}</td>
+						<td>${eleves.teaRestante}</td>
+						<td><a href="detail?id=${eleves.id_eleve}">Détail</a></td>
 					</tr>
 					</c:forEach>
 				</table>
