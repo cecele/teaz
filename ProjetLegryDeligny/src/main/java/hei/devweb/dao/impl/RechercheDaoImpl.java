@@ -15,12 +15,13 @@ public class RechercheDaoImpl implements RechercheDao {
 	
 	
 	//-----------------------------------------------------------------------------------------------------------------
-	//effectuer une recherche par paramètre (4 choix possibles, mettre null lorsque le paramètre n'est pas pris en compte!)
+	//effectuer une recherche par paramètre d'élève (4 choix possibles, mettre null lorsque le paramètre n'est pas pris en compte!)
 	//acc�s en lecture
 
 public List<Eleve> rechercheByParameter(String ideleve, String nom, String prenom, String classe, String orderBy){
 List<Eleve> eleves = new ArrayList<Eleve>();
 
+if(orderBy==null)orderBy="eleve_nom";
 
 	try {
 		Connection connection = DataSourceProvider.getDataSource()
@@ -29,57 +30,65 @@ List<Eleve> eleves = new ArrayList<Eleve>();
 
 		// recherche effectuée par matricule uniquement : il doit être exact!
 		if(ideleve!=null || nom==null ||prenom==null || classe==null ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE id_eleve=? ORDER BY eleve_nom");
-		stmt.setString(1,ideleve);}
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE id_eleve=? ORDER BY ?");
+		stmt.setString(1,ideleve);
+		stmt.setString(2,orderBy);}
 		
 		
 		// recherche par nom uniquement
 		if(ideleve==null || nom!=null ||prenom==null || classe==null ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE eleve_nom LIKE `?%`ORDER BY eleve_nom");
-		stmt.setString(1,nom);}
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE eleve_nom LIKE `?%`ORDER BY ?");
+		stmt.setString(1,nom);
+		stmt.setString(2,orderBy);}
 		
 		
 		// recherche par prenom
 		if(ideleve==null || nom==null ||prenom!=null || classe==null ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE eleve_prenom LIKE `?%`ORDER BY eleve_nom");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE eleve_prenom LIKE `?%`ORDER BY ?");
 		stmt.setString(1,prenom);
+		stmt.setString(2,orderBy);
 		}
 				
 		// recherche par classe
 		if(ideleve==null || nom==null ||prenom==null || classe!=null ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? ORDER BY eleve_nom");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? ORDER BY ?");
 		stmt.setString(1,classe);
+		stmt.setString(2,orderBy);
 		}
 		
 		
 		// recherche par nom prenom
 		if(ideleve==null || nom!=null ||prenom!=null || classe==null ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE eleve_nom LIKE `?%` AND eleve_prenom LIKE `?%`ORDER BY eleve_nom");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE eleve_nom LIKE `?%` AND eleve_prenom LIKE `?%`ORDER BY ?");
 		stmt.setString(1,nom);
 		stmt.setString(2,prenom);
+		stmt.setString(3,orderBy);
 		}
 		
 		
 		// recherche par nom classe
 		if(ideleve==null || nom!=null ||prenom==null || classe!=null ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_nom LIKE `?%`ORDER BY eleve_nom");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_nom LIKE `?%`ORDER BY ?");
 		stmt.setString(1,classe);
 		stmt.setString(2,nom);
+		stmt.setString(3,orderBy);
 		}
 		
 		// recherche par prenom classe
 		if(ideleve==null || nom==null ||prenom!=null || classe!=null ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_prenom LIKE `?%`ORDER BY eleve_nom");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_prenom LIKE `?%`ORDER BY ?");
 		stmt.setString(1,classe);
 		stmt.setString(2,prenom);
+		stmt.setString(3,orderBy);
 		}
 				
 		// recherche par nom prenom et  classe
 		if(ideleve==null || nom!=null ||prenom!=null || classe!=null ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_nom LIKE `?%` AND eleve_prenom LIKE`?%`ORDER BY eleve_nom");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_nom LIKE `?%` AND eleve_prenom LIKE`?%`ORDER BY ?");
 		stmt.setString(1,classe);
 		stmt.setString(2,nom);
-		stmt.setString(3,prenom);}
+		stmt.setString(3,prenom);
+		stmt.setString(4,orderBy);}
 		
 		
 		ResultSet results = stmt.executeQuery();
@@ -126,11 +135,5 @@ List<Eleve> eleves = new ArrayList<Eleve>();
 
 return eleves;
 }
-//-----------------------------------------------------------------------------------------------------------------
-//trier une recherche à l'aide d'un paramètre
-//acces en lecture
-public List<Eleve> rechercheByParameterOrderBy(){
-List<Eleve> eleves = new ArrayList<Eleve>();
-return eleves;
-}
+
 }
