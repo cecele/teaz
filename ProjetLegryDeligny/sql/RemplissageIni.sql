@@ -1,11 +1,9 @@
-/*! bdd + remplissage
-
 -- phpMyAdmin SQL Dump
 -- version 3.5.8.1
 -- http://www.phpmyadmin.net
 --
 -- Client: 127.0.0.1
--- Généré le: Ven 09 Mai 2014 à 16:40
+-- Généré le: Ven 09 Mai 2014 à 17:58
 -- Version du serveur: 5.6.11-log
 -- Version de PHP: 5.4.14
 
