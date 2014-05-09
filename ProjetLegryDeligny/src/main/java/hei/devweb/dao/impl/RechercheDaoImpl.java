@@ -131,5 +131,6 @@ return eleves;
 //acces en lecture
 public List<Eleve> rechercheByParameterOrderBy(){
 List<Eleve> eleves = new ArrayList<Eleve>();
-
+return eleves;
+}
 }
