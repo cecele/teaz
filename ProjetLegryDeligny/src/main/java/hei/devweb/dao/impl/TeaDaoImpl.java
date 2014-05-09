@@ -23,7 +23,7 @@ public class TeaDaoImpl implements TeaDao {
 	// cr�ation d 'tea en fonction d'une clé d'offre passée en paramètre cle_offre, statut non valide 
 	// acces en �criture
 		public Offre ajouterTeaRecupererOffre (Integer cleoffre ){
-			Offre offre=new Offre(null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+			Offre offre=new Offre(null, null, null, null, null, null, null, null, null, null, null, null, null, null,null);
 			try {
 				Connection connection = DataSourceProvider.getDataSource()
 						.getConnection();
@@ -46,7 +46,8 @@ public class TeaDaoImpl implements TeaDao {
 							results.getInt("cle_structure"),
 							results.getInt("offre_place"),
 							results.getString("structure_nom"),
-							results.getString("structure_president")
+							StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
+							StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
 							);
 			
 			System.out.println(results.getString("structure_nom"));

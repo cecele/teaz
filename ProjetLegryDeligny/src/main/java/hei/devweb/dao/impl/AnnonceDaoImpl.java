@@ -225,7 +225,8 @@ public void offre_placemoins (Integer cle_offre){
 						results.getInt("cle_structure"),
 						results.getInt("offre_place"),
 						results.getString("structure_nom"),
-						"Martin Deligny"
+						StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
+						StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
 						);
 				
 				offres.add(offre);	

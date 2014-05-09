@@ -143,7 +143,7 @@ public class EleveDaoImpl implements EleveDao {
 //-----------------------------------------------------------------------------------------------------------------
 //booléen permettant de savoir si un élève est président de structure pour l'année en cours
 //acc�s en lecture
-		public boolean president(String ideleve){
+		public static boolean president(String ideleve){
 			boolean res= false;
 			int rep= 0;
 			java.util.Date utildate = new Date();
@@ -175,7 +175,7 @@ public class EleveDaoImpl implements EleveDao {
 //récupération de la cle_structure d'un élève en fonction de son id
 //acc�s en lecture
 
-		public Integer getCleStructureById(String ideleve){
+		public static Integer getCleStructureById(String ideleve){
 			int res=0;
 			
 			Date date=new Date();
@@ -258,6 +258,8 @@ public class EleveDaoImpl implements EleveDao {
 							}
 			return eleve;	
 	}
+	
+	
 	//-----------------------------------------------------------------------------------------------------------------
 		//recherche d'�l�ve par nom retourne la liste des �l�ves dont le nom contient la recherche
 		//acc�s en lecture
@@ -577,7 +579,7 @@ public class EleveDaoImpl implements EleveDao {
 			//Calcul de la promotion de l'�l�ve : recuperation de classe en cours pour le calcul
 			//acc�s en lecture
 	
-	public String getPromotion(String ideleve){
+	public static String getPromotion(String ideleve){
 		String classeencours="";
 		int cleclasse=0;
 		
