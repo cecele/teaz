@@ -132,6 +132,12 @@ private static Manager instance;
 		return EleveDao.rechercheEleveByClasse(classe);
 	}
 
+	public void CreateStructure(String nom) {
+		System.out.println("dans méthode creerStructure");
+		StructureDao.CreateStructure(nom);
+		
+	}
+
 
 
 }

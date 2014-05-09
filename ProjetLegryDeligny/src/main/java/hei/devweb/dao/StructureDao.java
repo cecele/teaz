@@ -8,4 +8,6 @@ public interface StructureDao {
 
 	List<Structure> getStructure_OrdreNom();
 
+	void CreateStructure(String nom);
+
 }

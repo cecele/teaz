@@ -37,10 +37,10 @@ public class AjouterCommissionServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("id");
+		
 		String nom = request.getParameter("nom");
 
-		//Manager.getInstance().CreerStructure();
+		Manager.getInstance().CreateStructure(nom);
 			
 		
 		response.sendRedirect("administration");
