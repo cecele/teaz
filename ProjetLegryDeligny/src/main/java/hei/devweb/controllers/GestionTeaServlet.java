@@ -19,10 +19,7 @@ public class GestionTeaServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		HttpSession session = request.getSession();    
-		Eleve eleve = (Eleve) (session.getAttribute("sessionEleve"));
-		request.setAttribute("eleve",eleve);
+	
 		
 		List<Eleve> eleves = Manager.getInstance().getEleveTotal();
 		request.setAttribute("eleves",eleves);
@@ -30,5 +27,7 @@ public class GestionTeaServlet extends HttpServlet {
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/gestiontea.jsp");
 		view.forward(request, response);
 	}
+	
+	
 
 }

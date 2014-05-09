@@ -122,6 +122,16 @@ private static Manager instance;
 		return StructureDao.getStructure_OrdreNom();
 	}
 
+	public List<Eleve> rechercheEleveByNom(String nom) {
+		System.out.println("dans méthode rechercheEleveByNom");
+		return EleveDao.rechercheEleveByNom(nom);
+	}
+
+	public List<Eleve> rechercheEleveByClasse(String classe) {
+		System.out.println("dans méthode rechercheEleveByNom");
+		return EleveDao.rechercheEleveByClasse(classe);
+	}
+
 
 
 }

@@ -21,7 +21,11 @@ public class TeaServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		List<Tea> teas = Manager.getInstance().getTeaByEleve("10153");
+		HttpSession session = request.getSession();    
+		Eleve eleve = (Eleve) (session.getAttribute("sessionEleve"));
+		String matricule = eleve.getId_eleve();
+		
+		List<Tea> teas = Manager.getInstance().getTeaByEleve(matricule);
 		request.setAttribute("teas",teas);
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/tea.jsp");

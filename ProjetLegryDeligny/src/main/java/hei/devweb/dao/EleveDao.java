@@ -14,4 +14,8 @@ public interface EleveDao {
 
 	void eleveChgtProfil(String id, Integer i);
 
+	List<Eleve> rechercheEleveByNom(String nom);
+
+	List<Eleve> rechercheEleveByClasse(String classe);
+
 }

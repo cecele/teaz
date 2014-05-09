@@ -14,6 +14,7 @@
     <url-pattern>/validationannonces</url-pattern>
     <url-pattern>/validationtea</url-pattern>
     <url-pattern>/gestiontea</url-pattern>
+    <url-pattern>/detail</url-pattern>
   </filter-mapping>
   <filter>
     <filter-name>ResponsableFilter</filter-name>
@@ -31,6 +32,7 @@
   <filter-mapping>
     <filter-name>AdministrationFilter</filter-name>
     <url-pattern>/gestiontea</url-pattern>
+    <url-pattern>/detail</url-pattern>
   </filter-mapping>
   <filter>
     <filter-name>SuperAdminFilter</filter-name>
@@ -121,6 +123,14 @@
     <servlet-name>Recherche</servlet-name>
     <servlet-class>hei.devweb.controllers.RechercheServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Detail</servlet-name>
+    <servlet-class>hei.devweb.controllers.DetailServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Detail</servlet-name>
+    <url-pattern>/detail</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Recherche</servlet-name>
     <url-pattern>/recherche</url-pattern>

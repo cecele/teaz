@@ -225,11 +225,10 @@ public void offre_placemoins (Integer cle_offre){
 						results.getInt("cle_structure"),
 						results.getInt("offre_place"),
 						results.getString("structure_nom"),
-						results.getString("structure_president")
+						"Martin Deligny"
 						);
 				
 				offres.add(offre);	
-				System.out.println(results.getString("structure_nom"));
 			}
 			// Fermer la connexion
 			results.close();

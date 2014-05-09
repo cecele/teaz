@@ -35,7 +35,7 @@
 							<td><label for="classe" >Classe</label></td>
 							<td>
 								<select name="classe" id="classe" required >
-									<option value="tous">tous</option>
+									<option value="tous">Tous</option>
 									<option value="h1a">1A</option>
 									<option value="h1b">1B</option>
 									<option value="h1c">1C</option>
@@ -63,6 +63,7 @@
 									<option value="h48">h48</option>
 									<option value="h51">h51</option>
 									<option value="h52">h52</option>
+									<option value="h52">Autres</option>
 								</select>
 							</td>
 						</tr>
