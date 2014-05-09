@@ -78,10 +78,9 @@ public class TeaDaoImpl implements TeaDao {
 					// Utiliser la connexion
 					
 					PreparedStatement stmt2 = (PreparedStatement) connection2
-							.prepareStatement("INSERT INTO `tea`(`date_tea_realisee`,`nbheure_realisee`,`statut_valide`,`date_validation`,`cle_offre`,`id_eleve`) VALUES(?,?,0,?,?,?)");
+							.prepareStatement("INSERT INTO `tea`(`date_tea_realisee`,`nbheure_realisee`,`statut_valide`,`cle_offre`,`id_eleve`) VALUES(?,?,0,?,?)");
 							stmt2.setDate(1, (Date) offre. getDate_tea());
 							stmt2.setInt(2, nbtea);
-							stmt2.setDate(4, null); // par défaut
 							stmt2.setInt(5, offre.getCle_offre());
 							stmt2.setString(6, ideleve);
 							stmt2.executeUpdate();
