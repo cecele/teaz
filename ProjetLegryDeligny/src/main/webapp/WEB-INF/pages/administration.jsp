@@ -9,6 +9,7 @@
 			 charset=UTF-8">
 		<link rel="stylesheet" type="text/css" href="css/style.css"/>
 		<script type="text/javascript" src="js/menu.js"></script>
+		<script type="text/javascript" src="js/administration.js"></script>
         <title>Tea</title>
     </head>
     <body>
@@ -33,12 +34,13 @@
 							<th>Action</th>
 						</tr>
 					</thead>	
+					<tbody id="list">
 					<c:forEach var="respStruct" items="${respStruct}">
 					<tr>
 						<td>${respStruct.id_eleve}</td>
 						<td>${respStruct.eleve_nom}</td>
 						<td>${respStruct.eleve_prenom}</td>
-						<td><a href="gestionadministration?id=${respStruct.id_eleve}">Retirer</a></td>
+						<td><a href="gestionadministration?id=${respStruct.id_eleve}" class="suppr">Retirer</a></td>
 					</tr>
 					</c:forEach>
 					<tr>
@@ -47,6 +49,7 @@
 						<td><input type="text" name="prenom" id="prenom" required/></td>
 						<td><input type="submit" value="Ajouter"/></td>
 					</tr>
+					</tbody>
 				</table>
 				</form>
 				
@@ -61,12 +64,13 @@
 							<th>Action</th>
 						</tr>
 					</thead>	
+					<tbody id="list">
 					<c:forEach var="adminbde" items="${adminbde}">
 					<tr>
 						<td>${adminbde.id_eleve}</td>
 						<td>${adminbde.eleve_nom}</td>
 						<td>${adminbde.eleve_prenom}</td>
-						<td><a href="gestionadministration?id=${adminbde.id_eleve}">Retirer</a></td>
+						<td><a href="gestionadministration?id=${adminbde.id_eleve}" class="suppr">Retirer</a></td>
 					</tr>
 					</c:forEach>
 					<tr>
@@ -75,6 +79,7 @@
 						<td><input type="text" name="prenom" id="prenom" required/></td>
 						<td><input type="submit" value="Ajouter"/></td>
 					</tr>
+					</tbody>
 				</table>
 				</form>
 				
@@ -89,12 +94,13 @@
 							<th>Action</th>
 						</tr>
 					</thead>	
+					<tbody id="list">
 					<c:forEach var="admin" items="${admin}">
 					<tr>
 						<td>${admin.id_eleve}</td>
 						<td>${admin.eleve_nom}</td>
 						<td>${admin.eleve_prenom}</td>
-						<td><a href="gestionadministration?id=${admin.id_eleve}">Retirer</a></td>
+						<td><a href="gestionadministration?id=${admin.id_eleve}" class="suppr">Retirer</a></td>
 					</tr>
 					</c:forEach>
 					<tr>
@@ -103,6 +109,7 @@
 						<td><input type="text" name="prenom" id="prenom" required/></td>
 						<td><input type="submit" value="Ajouter"/></td>
 					</tr>
+					</tbody>
 				</table>
 				</form>
 				
@@ -116,13 +123,14 @@
 							<th>Prénom</th>
 							<th>Action</th>
 						</tr>
-					</thead>	
+					</thead>
+					<tbody id="list">	
 					<c:forEach var="superadmin" items="${superadmin}">
 					<tr>
 						<td>${superadmin.id_eleve}</td>
 						<td>${superadmin.eleve_nom}</td>
 						<td>${superadmin.eleve_prenom}</td>
-						<td><a href="gestionadministration?id=${superadmin.id_eleve}">Retirer</a></td>
+						<td><a href="gestionadministration?id=${superadmin.id_eleve}" class="suppr">Retirer</a></td>
 					</tr>
 					</c:forEach>
 					<tr>
@@ -131,6 +139,7 @@
 						<td><input type="text" name="prenom" id="prenom" required/></td>
 						<td><input type="submit" value="Ajouter"/></td>
 					</tr>
+					</tbody>
 				</table>
 				</form>
 				
@@ -146,11 +155,12 @@
 							<th>Action</th>
 						</tr>
 					</thead>	
+					<tbody id="list">
 					<c:forEach var="commissions" items="${commission}">
 					<tr>
 						<td>${commission.structure_nom}</td>
 						<td>${commission.structure_nom}</td>
-						<td><a href="supprimercommission?id=${commission.cle_structure}">Supprimer</a></td>
+						<td><a href="supprimercommission?id=${commission.cle_structure}" class="suppr">Supprimer</a></td>
 					</tr>
 					</c:forEach>
 					<tr>
@@ -158,6 +168,7 @@
 						<td><input type="text" name="id" id="id" required/></td>
 						<td><input type="submit" value="Ajouter"/></td>
 					</tr>
+					</tbody>
 				</table>
 				</form>
 			</article>
