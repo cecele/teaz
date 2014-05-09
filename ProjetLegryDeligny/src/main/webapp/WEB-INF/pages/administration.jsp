@@ -151,16 +151,16 @@
 					<thead>
 						<tr>
 							<th>Nom de la commission</th>
-							<th>Matricule Président</th>
+							<th>Président</th>
 							<th>Action</th>
 						</tr>
 					</thead>	
 					<tbody id="list">
-					<c:forEach var="commissions" items="${commission}">
+					<c:forEach var="commissions" items="${commissions}">
 					<tr>
-						<td>${commission.structure_nom}</td>
-						<td>${commission.structure_nom}</td>
-						<td><a href="supprimercommission?id=${commission.cle_structure}" class="suppr">Supprimer</a></td>
+						<td>${commissions.structure_nom}</td>
+						<td>${commissions.structure_president_prenom} ${commissions.structure_president_nom}</td>
+						<td><a href="supprimercommission?id=${commissions.cle_structure}" class="suppr">Supprimer</a></td>
 					</tr>
 					</c:forEach>
 					<tr>

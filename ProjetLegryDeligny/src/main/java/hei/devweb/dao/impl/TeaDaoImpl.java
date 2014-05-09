@@ -290,7 +290,7 @@ public class TeaDaoImpl implements TeaDao {
 			results.getInt("cle_structure"),
 			results.getInt("offre_place"),
 			results.getString("structure_nom"),
-			"Martin Deligny"
+			results.getString("structure_president")
 			);
 			
 				teas.add(tea);	

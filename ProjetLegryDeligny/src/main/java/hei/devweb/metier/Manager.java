@@ -7,10 +7,12 @@ import hei.devweb.dao.AnnonceDao;
 import hei.devweb.dao.EleveDao;
 import hei.devweb.dao.TeaDao;
 import hei.devweb.dao.StructureDao;
+import hei.devweb.dao.RechercheDao;
 import hei.devweb.dao.impl.AnnonceDaoImpl;
 import hei.devweb.dao.impl.EleveDaoImpl;
 import hei.devweb.dao.impl.TeaDaoImpl;
 import hei.devweb.dao.impl.StructureDaoImpl;
+import hei.devweb.dao.impl.RechercheDaoImpl;
 import hei.devweb.model.Offre;
 import hei.devweb.model.Eleve;
 import hei.devweb.model.Structure;
@@ -23,6 +25,7 @@ private static Manager instance;
 	private EleveDao EleveDao = new EleveDaoImpl();
 	private TeaDao TeaDao = new TeaDaoImpl();
 	private StructureDao StructureDao = new StructureDaoImpl();
+	private RechercheDao RechercheDao = new RechercheDaoImpl();
 
 	public static Manager getInstance() {
 		if (instance == null) {
@@ -122,20 +125,16 @@ private static Manager instance;
 		return StructureDao.getStructure_OrdreNom();
 	}
 
-	public List<Eleve> rechercheEleveByNom(String nom) {
-		System.out.println("dans méthode rechercheEleveByNom");
-		return EleveDao.rechercheEleveByNom(nom);
-	}
-
-	public List<Eleve> rechercheEleveByClasse(String classe) {
-		System.out.println("dans méthode rechercheEleveByNom");
-		return EleveDao.rechercheEleveByClasse(classe);
-	}
-
 	public void CreateStructure(String nom) {
 		System.out.println("dans méthode creerStructure");
 		StructureDao.CreateStructure(nom);
 		
+	}
+
+	public List<Eleve> rechercheByParameter(String matricule, String nom,
+			String prenom, String classe, String orderBy) {
+		System.out.println("dans méthode recherche");
+		return RechercheDao.rechercheByParameter(matricule,nom,prenom,classe,orderBy);
 	}
 
 

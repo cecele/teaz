@@ -2,9 +2,9 @@ package hei.devweb.controllers;
 
 import hei.devweb.metier.Manager;
 import hei.devweb.model.Eleve;
+import hei.devweb.model.Offre;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -42,19 +42,13 @@ public class RechercheServlet extends HttpServlet {
 		
 		String matricule = request.getParameter("matricule");
 		String nom = request.getParameter("nom");
+		String prenom = request.getParameter("prenom");
 		String classe = request.getParameter("classe");
+		String orderBy = "id_eleve ASC";
 		
-		List<Eleve> eleves = new ArrayList<Eleve>();
+		List<Eleve> eleves = Manager.getInstance().rechercheByParameter(matricule,nom,prenom,classe,orderBy);
 		
-		if(!matricule.equals(null)){
-			eleves.add(Manager.getInstance().getEleveById(matricule));
-		}
-		else if(!nom.equals(null)){
-			eleves = Manager.getInstance().rechercheEleveByNom(nom);
-		}
-		else{
-			eleves = Manager.getInstance().rechercheEleveByClasse(classe);
-		}
+		
 		request.setAttribute("eleves",eleves);
 		response.sendRedirect("gestiontea");
 	}

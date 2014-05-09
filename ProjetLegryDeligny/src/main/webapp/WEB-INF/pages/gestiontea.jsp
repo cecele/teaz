@@ -32,6 +32,10 @@
 							<td><input type="text" name="nom" id="nom"></td>
 						</tr>
 						<tr>
+							<td><label for="prenom" >Prénom</label></td>
+							<td><input type="text" name="prenom" id="prenom"></td>
+						</tr>
+						<tr>
 							<td><label for="classe" >Classe</label></td>
 							<td>
 								<select name="classe" id="classe" required >
