@@ -202,12 +202,12 @@ public void offre_placemoins (Integer cle_offre){
 //r�cup�ration des annonces  valide par ordres decroissant de dates sans structure
 //acc�s en lecture
 	
-	public List<Offre> listerOffre(){
+	public List<Offre> listerOffreByEleve(String ideleve){
 		List<Offre> offres = new ArrayList<Offre>();
 		try {
 			Connection connection = DataSourceProvider.getDataSource()
 					.getConnection();
-
+			
 			Statement stmt = connection.createStatement();
 			ResultSet results = stmt.executeQuery("SELECT * FROM offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE statut=1 ORDER BY date_tea DESC");
 			
@@ -241,6 +241,50 @@ public void offre_placemoins (Integer cle_offre){
 
 			return offres;
 		}
+	
+	//-----------------------------------------------------------------------------------------------------------------
+	//r�cup�ration des annonces  valide par ordres decroissant de dates sans structure
+	//acc�s en lecture
+		
+		public List<Offre> listerOffre(){
+			List<Offre> offres = new ArrayList<Offre>();
+			try {
+				Connection connection = DataSourceProvider.getDataSource()
+						.getConnection();
+
+				Statement stmt = connection.createStatement();
+				ResultSet results = stmt.executeQuery("SELECT * FROM offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE statut=1 ORDER BY date_tea DESC");
+				
+				while (results.next()) {
+					Offre offre =new Offre(results.getInt("cle_offre"),
+							results.getDate("date_depot"),
+							results.getDate("date_miseenligne"),
+							results.getDate("date_tea"),
+							results.getString("heure_debut"),
+							results.getString("heure_fin"),
+							results.getInt("statut"),
+							results.getString("offre_description"),
+							results.getString("eleve_mail"),
+							results.getString("offre_titre"),
+							results.getInt("cle_structure"),
+							results.getInt("offre_place"),
+							results.getString("structure_nom"),
+							StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
+							StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
+							);
+					
+					offres.add(offre);	
+				}
+				// Fermer la connexion
+				results.close();
+				stmt.close();
+				connection.close();
+				}catch (SQLException e) {
+					e.printStackTrace();
+				}
+
+				return offres;
+			}
 	//-----------------------------------------------------------------------------------------------------------------
 	//r�cup�ration des annonces non valide par ordres decroissant 
 	//acc�s en lecture
