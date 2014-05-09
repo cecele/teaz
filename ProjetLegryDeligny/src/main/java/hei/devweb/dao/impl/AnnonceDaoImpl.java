@@ -199,8 +199,8 @@ public void offre_placemoins (Integer cle_offre){
 //-----------------------------------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------------------------------
-//r�cup�ration des annonces  valide par ordres decroissant de dates sans structure
-//acc�s en lecture
+//r�cup�ration des annonces  valide par ordres decroissant de dates avec structure ou les offres auquels un élève a postulé n'apparait plus
+//acc�s en lecture NON FONCTIONNELLE
 	
 	public List<Offre> listerOffreByEleve(String ideleve){
 		List<Offre> offres = new ArrayList<Offre>();
@@ -208,8 +208,10 @@ public void offre_placemoins (Integer cle_offre){
 			Connection connection = DataSourceProvider.getDataSource()
 					.getConnection();
 			
-			Statement stmt = connection.createStatement();
-			ResultSet results = stmt.executeQuery("SELECT * FROM offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE statut=1 ORDER BY date_tea DESC");
+			
+			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM offre WHERE statut=1 ORDER BY date_tea DESC");
+			stmt.setString(1,ideleve);
+			ResultSet results = stmt.executeQuery();
 			
 			while (results.next()) {
 				Offre offre =new Offre(results.getInt("cle_offre"),
@@ -224,12 +226,12 @@ public void offre_placemoins (Integer cle_offre){
 						results.getString("offre_titre"),
 						results.getInt("cle_structure"),
 						results.getInt("offre_place"),
-						results.getString("structure_nom"),
+						StructureDaoImpl.getNomStructure(results.getInt("cle_structure")),
 						StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
 						StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
 						);
+				if(getPostulerOffre(results.getInt("cle_offre"), ideleve))offres.add(offre);	
 				
-				offres.add(offre);	
 			}
 			// Fermer la connexion
 			results.close();
@@ -241,7 +243,41 @@ public void offre_placemoins (Integer cle_offre){
 
 			return offres;
 		}
-	
+	//-----------------------------------------------------------------------------------------------------------------
+	//test si uen offre a été postulée
+	// acces en �criture
+			public Boolean getPostulerOffre(Integer cleoffre, String ideleve ){
+			
+				Boolean rep = false;
+				
+				try {
+	                Connection connection = DataSourceProvider.getDataSource()
+	                                .getConnection();
+	                
+	                PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT id_eleve FROM tea WHERE cle_offre = ? ");
+	                stmt.setInt(1,cleoffre);
+	                ResultSet results = stmt.executeQuery();
+
+	           while  (results.next()&& rep==false){
+	        	   
+	           
+	           String ideleveenbase= results.getString("id_eleve");
+	           if(ideleve==ideleveenbase) rep=true;
+	           }
+
+	                // Fermer la connexion
+	                results.close();
+	                stmt.close();
+	                connection.close();
+
+	        } catch (SQLException e) {
+	                e.printStackTrace();
+	        }
+				
+				
+				return rep;
+			}
+			
 	//-----------------------------------------------------------------------------------------------------------------
 	//r�cup�ration des annonces  valide par ordres decroissant de dates sans structure
 	//acc�s en lecture
@@ -256,6 +292,7 @@ public void offre_placemoins (Integer cle_offre){
 				ResultSet results = stmt.executeQuery("SELECT * FROM offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE statut=1 ORDER BY date_tea DESC");
 				
 				while (results.next()) {
+					
 					Offre offre =new Offre(results.getInt("cle_offre"),
 							results.getDate("date_depot"),
 							results.getDate("date_miseenligne"),
@@ -272,7 +309,7 @@ public void offre_placemoins (Integer cle_offre){
 							StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
 							StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
 							);
-					
+				
 					offres.add(offre);	
 				}
 				// Fermer la connexion
@@ -295,6 +332,8 @@ public void offre_placemoins (Integer cle_offre){
 			Connection connection = DataSourceProvider.getDataSource()
 					.getConnection();
 
+		
+			
 			Statement stmt = connection.createStatement();
 			ResultSet results = stmt.executeQuery("SELECT * FROM offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE statut=0 AND offre_place>0 ORDER BY date_tea DESC");
 			
