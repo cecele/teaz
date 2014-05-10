@@ -1,9 +1,11 @@
 package hei.devweb.controllers;
 
+import hei.devweb.metier.Manager;
 import hei.devweb.model.Eleve;
-import hei.devweb.model.Structure;
+import hei.devweb.model.Offre;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,16 +16,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class FaireTeaValiderServlet
+ * Servlet implementation class MesAnnoncesServlet
  */
-@WebServlet("/FaireTeaValiderServlet")
-public class FaireTeaValiderServlet extends HttpServlet {
+@WebServlet("/MesAnnoncesServlet")
+public class MesAnnoncesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FaireTeaValiderServlet() {
+    public MesAnnoncesServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,13 +38,15 @@ public class FaireTeaValiderServlet extends HttpServlet {
 		HttpSession session = request.getSession();    
 		Eleve eleve = (Eleve) (session.getAttribute("sessionEleve"));
 		String matricule = eleve.getId_eleve();
-		Integer cleStructure = eleve.getCle_structure();
+		String cleStructure;
 		String cleTea = request.getParameter("id");
 		
-		// Manager.getInstance().FaireValiderTeaParResponsableStructure(matricule,cleStructure,cleTea);
+		List<Offre> offres = Manager.getInstance().listerOffreByEleve(matricule);
+		request.setAttribute("offres",offres);
 		
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/fairetea.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/mesannonces.jsp");
 		view.forward(request, response);
+		
 	}
 
 	/**

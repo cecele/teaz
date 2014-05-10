@@ -138,6 +138,14 @@
     <servlet-name>AjouterCommission</servlet-name>
     <servlet-class>hei.devweb.controllers.AjouterCommissionServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>MesAnnonces</servlet-name>
+    <servlet-class>hei.devweb.controllers.MesAnnoncesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MesAnnonces</servlet-name>
+    <url-pattern>/mesannonces</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>AjouterCommission</servlet-name>
     <url-pattern>/ajoutercommission</url-pattern>

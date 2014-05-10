@@ -19,24 +19,24 @@
 	<!-- Corps -->
    		<section>
  
-			<h1>Valider les heures</h1>			
-			<c:if test="${empty teas}">
+			<h1>Mes Annonces</h1>			
+			<c:if test="${empty offres}">
 			<article>
-				<p>Aucune heure de tea à valider</p>
+				<p>Vous n'avez posté aucune annonce</p>
 			</article> 
 			</c:if>
-			<c:forEach var="teas" items="${teas}">
+			<c:forEach var="offres" items="${offres}">
 			<article>
 				
-					<table><tr><td><h2><fmt:formatDate value="${teas.date_tea}" pattern="d MMMM yyyy"/></h2></td><td class="center"><h2>${teas.offre_titre}</h2></td> <td class="right"><h2>${teas.heure_debut}H - ${teas.heure_fin}H</h2></td></tr></table>		
+					<table><tr><td><h2><fmt:formatDate value="${offres.date_tea}" pattern="d MMMM yyyy"/></h2></td><td class="center"><h2>${offres.offre_titre}</h2></td> <td class="right"><h2>${offres.heure_debut}H - ${offres.heure_fin}H</h2></td></tr></table>		
 					<hr/>
 					<p>
-					Eleve : ${teas.id_eleve}<br/>
+					Description : ${offres.offre_description}<br/>
+					Plus de renseignements : ${offres.eleve_mail}@hei.fr<br/>
 					<br/>
-					Association : ${teas.structure_nom}<br/>
-					Président : ${teas.structure_president_prenom} ${teas.structure_president_nom}<br/>
-					<br/>
-					<a href="fairetea?id=${teas.cle_offre }">Valider</a>
+					Association : ${offres.structure_nom}<br/>
+					Président : ${offres.structure_president_prenom} ${offres.structure_president_nom}<br/>
+					${offres.offre_place} places disponibles<br/>
 					</p>
 			</article>
 			</c:forEach>
