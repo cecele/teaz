@@ -326,7 +326,7 @@ try {
 			.getConnection();
 
 	
-	PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tea INNER JOIN offre ON tea.cle_offre=cle_offre WHERE cle_structure=? AND statut_valide=0 AND date_tea_realisee<?");
+	PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tea INNER JOIN offre ON tea.cle_offre=offre.cle_offre WHERE cle_structure=? AND statut_valide=0 AND date_tea_realisee<?");
 	stmt.setInt(1,clestructure);
 	stmt.setDate(2,sqlDate);
 	ResultSet results = stmt.executeQuery();
