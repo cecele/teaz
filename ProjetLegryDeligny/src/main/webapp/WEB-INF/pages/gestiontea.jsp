@@ -22,13 +22,42 @@
  						$("#classe").attr("disabled",true);
  						$("#classe").attr("style","background-color:gray;");
  						$("#classe").attr("value","tous");
+ 						$("form").attr("action","recherche?rech=1");
  				});
  				$("#nom").click(function(){
  						$("#matricule").attr("disabled",true);
 						$("#matricule").attr("style","background-color:gray;");
 						$("#matricule").attr("value","");
+						$("form").attr("action","recherche?rech=2");
  				});
+ 				$("#prenom").click(function(){
+						$("#matricule").attr("disabled",true);
+						$("#matricule").attr("style","background-color:gray;");
+						$("#matricule").attr("value","");
+						$("form").attr("action","recherche?rech=2");
+				});
+ 				$("#classe").click(function(){
+					$("#matricule").attr("disabled",true);
+					$("#matricule").attr("style","background-color:gray;");
+					$("#matricule").attr("value","");
+					$("form").attr("action","recherche?rech=2");
+				});
  			});
+ 			function init(){
+					$("#matricule").attr("disabled",false);
+					$("#matricule").attr("style","background-color:rgb(52,73,94);");
+					$("#matricule").value="";
+					$("#nom").attr("disabled",false);
+					$("#nom").attr("style","background-color:rgb(52,73,94);");
+					$("#nom").value="";
+					$("#prenom").attr("disabled",false);
+					$("#prenom").attr("style","background-color:rgb(52,73,94);");
+					$("#prenom").value="";
+					$("#classe").attr("disabled",false);
+					$("#classe").attr("style","background-color:rgb(52,73,94);");
+					$("#classe").value="Tous";
+					$("form").attr("action","recherche?rech=0");
+			}
  </script>
     </head>
     <body>
@@ -43,19 +72,19 @@
 	
 			<article>
 				<h2>Filtre</h2>
-				<form method="POST" action="recherche">
+				<form method="POST" class="form" name="form" action="recherche?rech=0">
 					<table>
 						<tr>
 							<td><label for="matricule" >Matricule</label></td>
-							<td><input type="text" name="matricule" id="matricule"></td>
+							<td><input type="text" name="matricule" id="matricule" value=""></input></td>
 						</tr>
 						<tr>
 							<td><label for="nom" >Nom</label></td>
-							<td><input type="text" name="nom" id="nom"></td>
+							<td><input type="text" name="nom" id="nom" value=""></input></td>
 						</tr>
 						<tr>
 							<td><label for="prenom" >Prénom</label></td>
-							<td><input type="text" name="prenom" id="prenom"></td>
+							<td><input type="text" name="prenom" id="prenom" value=""></input></td>
 						</tr>
 						<tr>
 							<td><label for="classe" >Classe</label></td>
@@ -95,7 +124,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2"><input type="submit" value="Rechercher"/></td>
+							<td colspan="2"><input type="submit" value="Rechercher"/><input type="button" onClick="init()" value="Réinitialiser"/></td>
 						</tr>
 					</table>
 				</form>	

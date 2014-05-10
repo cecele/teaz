@@ -34,7 +34,7 @@
 					Eleve : ${tea.id_eleve}<br/>
 					<br/>
 					Association : ${tea.structure_nom}<br/>
-					Président : ${tea.structure_president}<br/>
+					Président : ${tea.structure_president_prenom} ${tea.structure_president_nom}<br/>
 					<br/>
 					<a href="fairetea?id=${tea.cle_offre }">Valider</a>
 					</p>

@@ -40,20 +40,26 @@ public class RechercheServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		
 		String matricule = "";
 		String nom = "";
 		String prenom = "";
 		String classe = "";
 		String orderBy = "id_eleve";
+		classe = request.getParameter("classe");
 		
+		if(request.getParameter("rech").equals("1"))
+		{
 			matricule = request.getParameter("matricule");
-	
+			classe = "tous";
+		}
+		if(request.getParameter("rech").equals("2")){
 			nom = request.getParameter("nom");
 	
 			prenom = request.getParameter("prenom");
 		
 			classe = request.getParameter("classe");
-		
+		}
 		
 		
 		List<Eleve> eleves = Manager.getInstance().rechercheByParameter(matricule,nom,prenom,classe,orderBy);
