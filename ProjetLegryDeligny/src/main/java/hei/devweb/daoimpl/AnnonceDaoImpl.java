@@ -234,7 +234,7 @@ public void offre_placemoins (Integer cle_offre){
 						);
 				if(getPostulerOffre(results.getInt("cle_offre"), ideleve)==false)
 					{offres.add(offre);	
-				System.out.println("dans methode listeroffreByeleve numéro de l'offre :" +results.getInt("cle_offre")+ "resutat pour l'offre"+ getPostulerOffre(results.getInt("cle_offre"), ideleve));}
+				}
 			}
 			// Fermer la connexion
 			results.close();
@@ -264,11 +264,10 @@ public void offre_placemoins (Integer cle_offre){
 	           while  (results.next()&& rep==false){
 	        	   
 	        	  
-	        	   System.out.println("AVANT dans methode getpostuleroffre  rep="+rep);
+	        	   
 	           String ideleveenbase= results.getString("id_eleve");
-	           System.out.println("PENDANT dans methode getpostuleroffre " + ideleveenbase + "= " +  results.getString("id_eleve") );
-	           if(ideleve.equals(ideleveenbase)) {rep=true;
-	           System.out.println("APRES dans methode getpostuleroffre d'ou rep="+rep);
+	            if(ideleve.equals(ideleveenbase)) {rep=true;
+	          
 	           }
 	           }
 	                // Fermer la connexion

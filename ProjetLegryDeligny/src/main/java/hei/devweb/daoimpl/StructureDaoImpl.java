@@ -171,7 +171,7 @@ public class StructureDaoImpl implements StructureDao {
 		//-----------------------------------------------------------------------------------------------------------------
 		// recuperation du nom de la structure
 		// acces en lecture
-			public String getNomStructure(Integer clestructure){
+			public  String getNomStructure(Integer clestructure){
 							String res="";
 								try {
 									Connection connection = DataSourceProvider.getDataSource()
@@ -196,6 +196,31 @@ public class StructureDaoImpl implements StructureDao {
 								return res;
 								
 							}		
+			public static  String getNomStructureStatic(Integer clestructure){
+				String res="";
+					try {
+						Connection connection = DataSourceProvider.getDataSource()
+								.getConnection();
+
+						
+						
+						PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT structure_nom FROM structure WHERE cle_structure=? ");
+						stmt.setInt(1,clestructure);
+						ResultSet results = stmt.executeQuery();
+						results.next();
+						res= results.getString("structure_nom");
+						// Fermer la connexion
+						results.close();
+						stmt.close();
+						connection.close();
+						
+				}
+					catch (SQLException e) {
+										e.printStackTrace();
+									}
+					return res;
+					
+				}		
 	//-----------------------------------------------------------------------------------------------------------------
 	// recuperation des structures enregistr�es � hei par ordre alphabetique de nom de structure
 	// acces en lecture

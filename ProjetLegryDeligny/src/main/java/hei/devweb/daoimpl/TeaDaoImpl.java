@@ -46,7 +46,7 @@ public class TeaDaoImpl implements TeaDao {
 							results.getString("offre_titre"),
 							results.getInt("cle_structure"),
 							results.getInt("offre_place"),
-							results.getString("structure_nom"),
+							StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
 							StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
 							StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
 							);
@@ -234,7 +234,7 @@ public class TeaDaoImpl implements TeaDao {
 			results.getString("offre_titre"),
 			results.getInt("cle_structure"),
 			results.getInt("offre_place"),
-			results.getString("structure_nom"),
+			StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
 			StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
 			StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
 			);
@@ -291,7 +291,7 @@ public class TeaDaoImpl implements TeaDao {
 			results.getString("offre_titre"),
 			results.getInt("cle_structure"),
 			results.getInt("offre_place"),
-			results.getString("structure_nom"),
+			StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
 			StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
 			StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
 			);
@@ -351,7 +351,7 @@ try {
 	results.getString("offre_titre"),
 	results.getInt("cle_structure"),
 	results.getInt("offre_place"),
-	results.getString("structure_nom"),
+	StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
 	StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
 	StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
 	);
@@ -406,7 +406,7 @@ try {
 	results.getString("offre_titre"),
 	results.getInt("cle_structure"),
 	results.getInt("offre_place"),
-	results.getString("structure_nom"),
+	StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
 	StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
 	StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
 	);
@@ -461,7 +461,7 @@ try {
 	results.getString("offre_titre"),
 	results.getInt("cle_structure"),
 	results.getInt("offre_place"),
-	results.getString("structure_nom"),
+	StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
 	StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
 	StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
 	);
@@ -514,7 +514,7 @@ results.getString("eleve_mail"),
 results.getString("offre_titre"),
 results.getInt("cle_structure"),
 results.getInt("offre_place"),
-results.getString("structure_nom"),
+StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
 StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
 StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
 );
