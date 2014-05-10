@@ -40,7 +40,7 @@ public class AnnonceDaoImpl implements AnnonceDao {
 			    
 				// Utiliser la connexion
 				PreparedStatement stmt = (PreparedStatement) connection
-						.prepareStatement("INSERT INTO `offre`(`date_depot`,`date_tea`,`heure_debut`,`heure_fin`,`statut`,`offre_description`,`eleve_mail`,`offre_titre`,`offre_place`,`cle_structure`) VALUES(?,?,?,?,0,?,?,?,?,1)");
+						.prepareStatement("INSERT INTO `offre`(`date_depot`,`date_tea`,`heure_debut`,`heure_fin`,`statut`,`offre_description`,`eleve_mail`,`offre_titre`,`offre_place`,`cle_structure`) VALUES(?,?,?,?,0,?,?,?,?,?)");
 						stmt.setDate(1, sqlDateDepot);
 						stmt.setDate(2, sqlDateTea);
 						stmt.setString(3, offre.getHeure_debut());
@@ -49,6 +49,7 @@ public class AnnonceDaoImpl implements AnnonceDao {
 						stmt.setString(6, offre.getEleve_mail());
 						stmt.setString(7, offre.getOffre_titre());
 						stmt.setInt(8,offre.getOffre_place());
+						stmt.setInt(9, offre.getCle_structure());
 						stmt.executeUpdate();
 
 						// Fermer la connexion
