@@ -385,6 +385,53 @@ public void offre_placemoins (Integer cle_offre){
 
 			return offres;
 		}
+	
+	//-----------------------------------------------------------------------------------------------------------------
+	//r�cup�ration des annonces non valide par ordres decroissant 
+	//acc�s en lecture
+		
+	public List<Offre> listerOffreByStructure(Integer clestructure){
+		List<Offre> offres = new ArrayList<Offre>();
+		try {
+			Connection connection = DataSourceProvider.getDataSource()
+					.getConnection();
+
+		
+			
+			Statement stmt = connection.createStatement();
+			ResultSet results = stmt.executeQuery("SELECT * FROM offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE statut=0 AND offre_place>0 ORDER BY date_tea DESC");
+			
+			while (results.next()) {
+				Offre offre =new Offre(results.getInt("cle_offre"),
+						results.getDate("date_depot"),
+						results.getDate("date_miseenligne"),
+						results.getDate("date_tea"),
+						results.getString("heure_debut"),
+						results.getString("heure_fin"),
+						results.getInt("statut"),
+						results.getString("offre_description"),
+						results.getString("eleve_mail"),
+						results.getString("offre_titre"),
+						results.getInt("cle_structure"),
+						results.getInt("offre_place"),
+						results.getString("structure_nom"),
+						StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
+						StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
+						);
+				
+				offres.add(offre);	
+				System.out.println(results.getString("eleve_mail"));
+			}
+			// Fermer la connexion
+			results.close();
+			stmt.close();
+			connection.close();
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			return offres;
+		}
 	//-----------------------------------------------------------------------------------------------------------------
 	//r�cup�ration des noms et pr�sident de la structure pour une offre particuli�re. Dans le cas d'un professeur le pr�sident de la structure sera l'enseignant et une structure enseignant est cr�e
 	//acc�s en lecture
