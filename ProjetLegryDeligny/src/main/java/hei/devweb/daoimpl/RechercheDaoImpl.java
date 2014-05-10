@@ -29,7 +29,7 @@ if(orderBy==""){orderBy="eleve_nom";}
 		PreparedStatement stmt = null;
 
 		
-		// recherche effectuée par matricule uniquement : il doit être exact!
+		// tous les élèves
 		if(ideleve.equals("") && nom.equals("") && prenom.equals("") && classe.equals("Tous") ){
 		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve");
 		//stmt.setString(1,orderBy);
