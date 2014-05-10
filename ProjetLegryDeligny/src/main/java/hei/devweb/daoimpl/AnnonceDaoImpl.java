@@ -211,7 +211,7 @@ public void offre_placemoins (Integer cle_offre){
 					.getConnection();
 			
 			
-			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM offre WHERE statut=1 ORDER BY date_tea DESC");
+			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM offre WHERE statut=1 AND offre_place>0 ORDER BY date_tea DESC");
 			ResultSet results = stmt.executeQuery();
 			
 			while (results.next()) {
@@ -231,8 +231,9 @@ public void offre_placemoins (Integer cle_offre){
 						StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
 						StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
 						);
-				if(getPostulerOffre(results.getInt("cle_offre"), ideleve)==false)offres.add(offre);	
-				
+				if(getPostulerOffre(results.getInt("cle_offre"), ideleve)==false)
+					{offres.add(offre);	
+				System.out.println("dans methode listeroffreByeleve numéro de l'offre :" +results.getInt("cle_offre")+ "resutat pour l'offre"+ getPostulerOffre(results.getInt("cle_offre"), ideleve));}
 			}
 			// Fermer la connexion
 			results.close();
@@ -261,12 +262,14 @@ public void offre_placemoins (Integer cle_offre){
 	                
 	           while  (results.next()&& rep==false){
 	        	   
-	        	   System.out.println(results.getString("id_eleve"));
-	        	   System.out.println(rep);
+	        	  
+	        	   System.out.println("AVANT dans methode getpostuleroffre  rep="+rep);
 	           String ideleveenbase= results.getString("id_eleve");
-	           if(ideleve==ideleveenbase) rep=true;
+	           System.out.println("PENDANT dans methode getpostuleroffre " + ideleveenbase + "= " +  results.getString("id_eleve") );
+	           if(ideleve.equals(ideleveenbase)) {rep=true;
+	           System.out.println("APRES dans methode getpostuleroffre d'ou rep="+rep);
 	           }
-
+	           }
 	                // Fermer la connexion
 	                results.close();
 	                stmt.close();
