@@ -21,82 +21,97 @@ public class RechercheDaoImpl implements RechercheDao {
 public List<Eleve> rechercheByParameter(String ideleve, String nom, String prenom, String classe, String orderBy){
 List<Eleve> eleves = new ArrayList<Eleve>();
 
+
 if(orderBy==""){orderBy="eleve_nom";}
+
+System.out.println("entrée ds le try");
 
 	try {
 		Connection connection = DataSourceProvider.getDataSource()
 				.getConnection();
 		PreparedStatement stmt = null;
 
+		System.out.println("recherche par");
 		
 		// tous les élèves
-		if(ideleve.equals("") && nom.equals("") && prenom.equals("") && classe.equals("Tous") ){
+		if(ideleve.equals("") && nom.equals("") && prenom.equals("") && classe.equals("tous") ){
 		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve");
-		//stmt.setString(1,orderBy);
+		
+		 System.out.println("tous les élèves " +stmt);
 		}
 		
 		
 		// recherche effectuée par matricule uniquement : il doit être exact!
-		if(!ideleve.equals("") && nom.equals("") && prenom.equals("") && classe.equals("Tous") ){
+		if(!ideleve.equals("") && nom.equals("") && prenom.equals("") && classe.equals("tous") ){
 		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE id_eleve=? ORDER BY ?");
 		stmt.setString(1,ideleve);
-		stmt.setString(2,orderBy);}
+		stmt.setString(2,orderBy);
+		System.out.println("matricule " +stmt);
+		}
+		
 		
 		
 		// recherche par nom uniquement
-		if(ideleve.equals("") && !nom.equals("") && prenom.equals("") && classe.equals("Tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE eleve_nom LIKE `?%`ORDER BY ?");
+		if(ideleve.equals("") && !nom.equals("") && prenom.equals("") && classe.equals("tous") ){
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE eleve_nom LIKE ? ORDER BY ?");
 		stmt.setString(1,nom);
-		stmt.setString(2,orderBy);}
+		stmt.setString(2,orderBy);
+		 System.out.println("nom " +stmt);}
 		
 		
 		// recherche par prenom
-		if(ideleve.equals("") && nom.equals("") && !prenom.equals("") && classe.equals("Tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE eleve_prenom LIKE `?%`ORDER BY ?");
+		if(ideleve.equals("") && nom.equals("") && !prenom.equals("") && classe.equals("tous") ){
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE eleve_prenom LIKE ? ORDER BY ?");
 		stmt.setString(1,prenom);
 		stmt.setString(2,orderBy);
+		 System.out.println("prenom " +stmt);
 		}
 				
 		// recherche par classe
-		if(ideleve.equals("") && nom.equals("") && prenom.equals("") && !classe.equals("Tous")  ){
+		if(ideleve.equals("") && nom.equals("") && prenom.equals("") && !classe.equals("tous")  ){
 		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? ORDER BY ?");
 		stmt.setString(1,classe);
 		stmt.setString(2,orderBy);
+		 System.out.println("classe " +stmt);
 		}
 		
 		
 		// recherche par nom prenom
-		if(ideleve.equals("") && !nom.equals("") && !prenom.equals("") && classe.equals("Tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE eleve_nom LIKE `?%` AND eleve_prenom LIKE `?%`ORDER BY ?");
+		if(ideleve.equals("") && !nom.equals("") && !prenom.equals("") && classe.equals("tous") ){
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE eleve_nom LIKE ? AND eleve_prenom LIKE ? ORDER BY ?");
 		stmt.setString(1,nom);
 		stmt.setString(2,prenom);
 		stmt.setString(3,orderBy);
+		 System.out.println("nom prenom " +stmt);
 		}
 		
 		
 		// recherche par nom classe
-		if(ideleve.equals("") && !nom.equals("") && prenom.equals("") && !classe.equals("Tous") ){
+		if(ideleve.equals("") && !nom.equals("") && prenom.equals("") && !classe.equals("tous") ){
 		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_nom LIKE `?%`ORDER BY ?");
 		stmt.setString(1,classe);
 		stmt.setString(2,nom);
 		stmt.setString(3,orderBy);
+		 System.out.println("nom classe " +stmt);
 		}
 		
 		// recherche par prenom classe
-		if(ideleve.equals("") && nom.equals("") && !prenom.equals("") && !classe.equals("Tous") ){
+		if(ideleve.equals("") && nom.equals("") && !prenom.equals("") && !classe.equals("tous") ){
 		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_prenom LIKE `?%`ORDER BY ?");
 		stmt.setString(1,classe);
 		stmt.setString(2,prenom);
 		stmt.setString(3,orderBy);
+		 System.out.println("prenom classe " +stmt);
 		}
 				
 		// recherche par nom prenom et  classe
-		if(ideleve.equals("") && !nom.equals("") && !prenom.equals("") && !classe.equals("Tous") ){
+		if(ideleve.equals("") && !nom.equals("") && !prenom.equals("") && !classe.equals("tous") ){
 		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_nom LIKE `?%` AND eleve_prenom LIKE`?%`ORDER BY ?");
 		stmt.setString(1,classe);
 		stmt.setString(2,nom);
 		stmt.setString(3,prenom);
-		stmt.setString(4,orderBy);}
+		stmt.setString(4,orderBy);
+		 System.out.println("nom prenom classe " +stmt);}
 		
 		
 		ResultSet results = stmt.executeQuery();
@@ -115,7 +130,7 @@ if(orderBy==""){orderBy="eleve_nom";}
 					results.getDate("date_entree"),
 					results.getInt("cotisant"),
 					results.getInt("eleve_profil"),
-					results.getInt("eleve_profil"),
+					results.getInt("diplome"),
 					results.getString("motdepasse"),
 					EleveDaoImpl.getPromotion(results.getString("id_eleve")),
 					TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
@@ -123,20 +138,20 @@ if(orderBy==""){orderBy="eleve_nom";}
 					TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
 					null
 					);
-			
-			if(EleveDaoImpl.president(results.getString("id_eleve"))) eleve.setCle_structure(EleveDaoImpl.getCleStructureById(results.getString("id_eleve")));
+			System.out.println("AVANT " +results.getString("id_eleve"));
+			if(EleveDaoImpl.president(results.getString("id_eleve"))){ eleve.setCle_structure(EleveDaoImpl.getCleStructureById(results.getString("id_eleve")));}
 				
 						
-		
+			 System.out.println("APRES " +results.getString("id_eleve"));
 			eleves.add(eleve);	
-			
+		}
 		
 			// Fermer la connexion
 			results.close();
 			stmt.close();
 			connection.close();
 			
-	}
+	
 	}
 		catch (SQLException e) {
 							e.printStackTrace();
