@@ -95,7 +95,7 @@ private static Manager instance;
 	}
 	
 	public List<Tea> getTeaAValiderByStructure(Integer clestructure, Date datedujour) {
-		System.out.println("dans méthode listerTeaAFaire");
+		System.out.println("dans méthode getTeaAValiderByStructure");
 		return TeaDao.getTeaAValiderByStructure(clestructure,datedujour);
 	}
 

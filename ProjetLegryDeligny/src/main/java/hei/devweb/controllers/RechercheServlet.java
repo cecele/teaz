@@ -44,12 +44,16 @@ public class RechercheServlet extends HttpServlet {
 		String nom = "";
 		String prenom = "";
 		String classe = "";
-		
 		String orderBy = "id_eleve";
-		matricule = request.getParameter("matricule");
-		nom = request.getParameter("nom");
-		prenom = request.getParameter("prenom");
-		classe = request.getParameter("classe");
+		
+			matricule = request.getParameter("matricule");
+	
+			nom = request.getParameter("nom");
+	
+			prenom = request.getParameter("prenom");
+		
+			classe = request.getParameter("classe");
+		
 		
 		
 		List<Eleve> eleves = Manager.getInstance().rechercheByParameter(matricule,nom,prenom,classe,orderBy);

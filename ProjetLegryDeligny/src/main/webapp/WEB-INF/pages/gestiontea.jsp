@@ -13,10 +13,20 @@
         <script type="text/javascript">
  			$(document).ready(function(){
  				$("#matricule").click(function(){
-
- 					$("#nom").attr("disabled",true);
- 					$("#prenom").attr("disabled",true);
- 					$("#classe").attr("disabled",true);
+ 						$("#nom").attr("disabled",true);
+ 						$("#nom").attr("style","background-color:gray;");
+ 						$("#nom").attr("value","");
+ 						$("#prenom").attr("disabled",true);
+ 						$("#prenom").attr("style","background-color:gray;");
+ 						$("#prenom").attr("value","");
+ 						$("#classe").attr("disabled",true);
+ 						$("#classe").attr("style","background-color:gray;");
+ 						$("#classe").attr("value","tous");
+ 				});
+ 				$("#nom").click(function(){
+ 						$("#matricule").attr("disabled",true);
+						$("#matricule").attr("style","background-color:gray;");
+						$("#matricule").attr("value","");
  				});
  			});
  </script>
