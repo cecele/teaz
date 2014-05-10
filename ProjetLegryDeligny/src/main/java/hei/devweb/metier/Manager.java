@@ -164,6 +164,19 @@ private static Manager instance;
 		return StructureDao.getStructure_ElevePresident(ideleve);
 	}
 
+	public void teaValidationByStructure(Integer cleTea, Integer cleStructure,
+			String matricule) {
+		System.out.println("Dans méthode teaValidationByStructure");
+		TeaDao.teaValidationByStructure(cleTea,cleStructure,matricule);
+		
+	}
+
+	public void teaValidationByResponsable(Integer cletea) {
+		System.out.println("Dans méthode teaValidationByrESPONSABLE");
+		TeaDao.teaValidationByResponsable(cletea);
+		
+	}
+
 
 
 }

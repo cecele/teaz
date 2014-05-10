@@ -10,7 +10,6 @@ import java.util.List;
 import com.mysql.jdbc.PreparedStatement;
 
 import hei.devweb.dao.StructureDao;
-import hei.devweb.model.Eleve;
 import hei.devweb.model.Structure;
 
 public class StructureDaoImpl implements StructureDao {

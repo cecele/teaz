@@ -165,7 +165,7 @@ public class TeaDaoImpl implements TeaDao {
 			//mise au statut valide de l'annonce et donc modification de la date de mise en ligne ce processus est eff�ctu� par le reponsable TEA et provoque l'affichage de l'annonce dans la liste
 			//acces en �criture
 
-			public void teaValidationByStructure (Integer cletea, Integer clestructure, String ideleve){
+			public void teaValidationByStructure(Integer cletea, Integer clestructure, String ideleve){
 				
 				if(StructureDaoImpl.getPresidentIdById(clestructure).equals(ideleve)){
 								
@@ -766,17 +766,11 @@ return teas;
 						
 					return nbtotal;
 				}
-				
+				@Override
 				public List<Tea> listerTeaAValider() {
 					// TODO Auto-generated method stub
 					return null;
 				}
-				
-				
-				
-				
-				
-
-		
+			
 		
 }

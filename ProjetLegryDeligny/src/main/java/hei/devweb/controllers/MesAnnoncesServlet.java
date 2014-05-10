@@ -38,8 +38,6 @@ public class MesAnnoncesServlet extends HttpServlet {
 		HttpSession session = request.getSession();    
 		Eleve eleve = (Eleve) (session.getAttribute("sessionEleve"));
 		String matricule = eleve.getId_eleve();
-		String cleStructure;
-		String cleTea = request.getParameter("id");
 		
 		List<Offre> offres = Manager.getInstance().listerOffreByEleve(matricule);
 		request.setAttribute("offres",offres);
