@@ -35,7 +35,7 @@ public class StructureDaoImpl implements StructureDao {
 									.getConnection();
 
 							PreparedStatement stmt = (PreparedStatement) connection
-									.prepareStatement("INSERT INTO `presider`(`id_eleve`,`cle_structure`,`date_debut`,` date_fin`) VALUES(?,?,?,?) ");
+									.prepareStatement("INSERT INTO `presider`(`id_eleve`,`cle_structure`,`date_debut`,`date_fin`) VALUES(?,?,?,?) ");
 							stmt.setString(1,idelev);
 							stmt.setInt(2,clestructure);
 							stmt.setDate(3, sqlDatedebut);

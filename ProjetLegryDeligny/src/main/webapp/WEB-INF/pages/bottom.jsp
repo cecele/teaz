@@ -45,3 +45,4 @@
 		</form>				
 	</c:if>
 </aside>
+<p>Petit message stylé pour afficher notre pouvoir supérieur</p>

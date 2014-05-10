@@ -35,7 +35,7 @@ body
 a{
 	text-decoration: none;
 }
-a:visited
+#menu a:visited
 {
 	color:rgb(228,229,211);
 }

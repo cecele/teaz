@@ -154,7 +154,7 @@
 						<tr>
 							<th>Nom de la commission</th>
 							<th>Président</th>
-							<th colspan="2">Action</th>
+							<th>Action</th>
 						</tr>
 					</thead>	
 					<tbody id="list">
@@ -163,16 +163,16 @@
 						<td>${commissions.structure_nom}</td>
 						<td>${commissions.structure_president_prenom} ${commissions.structure_president_nom}</td>
 						<td><a href="modifiercommission?id=${commissions.cle_structure}" >Modifier Président</a></td>
-						<td><a href="supprimercommission?id=${commissions.cle_structure}" class="suppr">Supprimer</a></td>
+				
 					</tr>
 					</c:forEach>
 					<tr>
-						<th colspan="4" style="text-align:center;background-color:rgb(52,73,94);color:rgb(228,229,211)">Ajouter une commission</th>
+						<th colspan="3" style="text-align:center;background-color:rgb(52,73,94);color:rgb(228,229,211)">Ajouter une commission</th>
 					</tr>
 					<tr>
 						<td>Nom de la commission</td>
 						<td><input type="text" name="nom" id="nom" required/></td>
-						<td colspan="2"><input type="submit" value="Ajouter"/></td>
+						<td><input type="submit" value="Ajouter"/></td>
 					</tr>
 					</tbody>
 				</table>
