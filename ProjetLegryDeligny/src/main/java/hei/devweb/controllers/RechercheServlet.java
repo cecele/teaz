@@ -7,6 +7,7 @@ import hei.devweb.model.Offre;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,9 +49,9 @@ public class RechercheServlet extends HttpServlet {
 		
 		List<Eleve> eleves = Manager.getInstance().rechercheByParameter(matricule,nom,prenom,classe,orderBy);
 		
-		
 		request.setAttribute("eleves",eleves);
-		response.sendRedirect("gestiontea");
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/gestiontea.jsp");
+		view.forward(request, response);
 	}
 
 }

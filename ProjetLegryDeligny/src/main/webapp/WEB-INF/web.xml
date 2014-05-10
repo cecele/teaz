@@ -41,6 +41,7 @@
   <filter-mapping>
     <filter-name>SuperAdminFilter</filter-name>
     <url-pattern>/administration</url-pattern>
+    <url-pattern>/modifiercommission</url-pattern>
   </filter-mapping>
   <filter>
     <filter-name>BdeFilter</filter-name>
@@ -127,6 +128,14 @@
     <servlet-name>Detail</servlet-name>
     <servlet-class>hei.devweb.controllers.DetailServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ModifierCommission</servlet-name>
+    <servlet-class>hei.devweb.controllers.ModifierCommissionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifierCommission</servlet-name>
+    <url-pattern>/modifiercommission</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Detail</servlet-name>
     <url-pattern>/detail</url-pattern>

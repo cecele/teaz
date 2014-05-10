@@ -22,11 +22,14 @@
 }
 body
 {
-
 	background-color:rgb(52,73,94);
+	border : 0px solid transparent;
+	font-size:1em;
+	margin:0px 0px 0px 0px;
 	font-family:'corbertregular',Arial;
-	font-size:1em; 
-	margin:0px;
+	min-height : 100%;
+	padding : 0px 0px 0px 0px;
+	width: 100%;
 }
 
 a{
@@ -37,14 +40,17 @@ a:visited
 	color:rgb(228,229,211);
 }
 #ban{
+	
 	border-bottom:1px solid white;
 	height : 300px;
+	margin : 0px auto 0px auto;
 	background-image:url(../img/ban.png) ;
 }
 #menu, #menu ul
 {
+	
 	padding: 0;
-	margin : 0;
+	margin : 0px auto 0px auto;
 	list-style : none;
 	line-height : 35px;
 	text-align : center;
@@ -117,17 +123,39 @@ ul
 {
 	list-style : none;
 }
-
+#layout{
+	height:100%;
+	margin : 0px auto 0px auto;
+	min-height:100%;
+	width: 1280px;
+}
+aside, section, nav {
+	
+	display : inline-block;
+	height: 100%;
+	min-height: 100%;
+	vertical-align : top;
+}
 
 aside
 {	
-	font-size:1.2em; 
-	
-	margin-right:15px;
+	margin-left:10px;
+	width : 260px;
+	font-size:1em; 
 	color:rgb(228,229,211);
-	float : right;
-	width :250px;
 	background-color:rgb(52,73,94);
+}
+
+section{
+	background-color:rgb(228,229,211);
+	width : 960px;
+	padding : 20px;
+	margin : 0px auto 0px auto;
+}
+
+aside input{
+	padding:2px;
+	background:rgb(86,99,115);
 }
 aside h2{
 	font-family:'bebas_neueregular',Helvetica;
@@ -141,17 +169,10 @@ aside a:visited{
 	padding:2px;
 }
 aside li.menu:hover{
-	padding-left:20px;
+	padding-left:10px;
 	background-color:rgb(86,99,115);
 }
-section{
-	background-color:rgb(228,229,211);
-	width : 960px;
-	padding : 20px;
-	
-	margin : 15px;
-	margin-left:0px;
-}
+
 section a {
 	color:rgb(52,73,94);
 }

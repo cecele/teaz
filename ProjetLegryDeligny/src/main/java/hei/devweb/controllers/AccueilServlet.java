@@ -18,10 +18,6 @@ public class AccueilServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();    
-		Eleve eleve = (Eleve) (session.getAttribute("sessionEleve"));
-		request.setAttribute("eleve",eleve);
-		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/index.jsp");
 		view.forward(request, response);
 	}
