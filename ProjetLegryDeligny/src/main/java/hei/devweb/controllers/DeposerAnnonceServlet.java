@@ -36,6 +36,7 @@ public class DeposerAnnonceServlet extends HttpServlet {
 		String mail = request.getParameter("resp");
 		Integer nbPlaces = Integer.parseInt(request.getParameter("nbplaces"));
 		Date dateDepot = new Date();
+		String nomStructure = Manager.getInstance().getNomStructure(cle_structure);
 		
 		SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd");
 		
@@ -48,7 +49,7 @@ public class DeposerAnnonceServlet extends HttpServlet {
 		}
 		
 
-		Offre offre = new Offre(1,dateDepot,dateDepot, dateTea, heureDebut, heureFin, 0, description, mail, titre, cle_structure, nbPlaces, mail, nom_pres,prenom_pres);
+		Offre offre = new Offre(1,dateDepot,dateDepot, dateTea, heureDebut, heureFin, 0, description, mail, titre, cle_structure, nbPlaces, nomStructure, nom_pres,prenom_pres);
 		
 		//(modif c�line)  il faut que tu rajoute le nombre de place dispo !
 		// il faut aussi g�rer le fait qu'une offre ne peux pas �tre d�poser sans place dispo, par d�faut ds la BDD il y a une place dispo!

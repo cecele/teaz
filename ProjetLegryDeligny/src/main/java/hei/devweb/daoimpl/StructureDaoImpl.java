@@ -171,7 +171,7 @@ public class StructureDaoImpl implements StructureDao {
 		//-----------------------------------------------------------------------------------------------------------------
 		// recuperation du nom de la structure
 		// acces en lecture
-			public static String getNomStructure(Integer clestructure){
+			public String getNomStructure(Integer clestructure){
 							String res="";
 								try {
 									Connection connection = DataSourceProvider.getDataSource()

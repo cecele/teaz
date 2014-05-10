@@ -2,6 +2,7 @@ package hei.devweb.daoimpl;
 import hei.devweb.dao.AnnonceDao;
 
 
+import hei.devweb.metier.Manager;
 import hei.devweb.model.Offre;
 import hei.devweb.model.Structure;
 
@@ -226,7 +227,7 @@ public void offre_placemoins (Integer cle_offre){
 						results.getString("offre_titre"),
 						results.getInt("cle_structure"),
 						results.getInt("offre_place"),
-						StructureDaoImpl.getNomStructure(results.getInt("cle_structure")),
+						Manager.getInstance().getNomStructure(results.getInt("cle_structure")),
 						StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
 						StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
 						);

@@ -2,6 +2,7 @@ package hei.devweb.dao;
 
 import hei.devweb.model.Tea;
 
+import java.util.Date;
 import java.util.List;
 
 public interface TeaDao {
@@ -12,6 +13,8 @@ public interface TeaDao {
 
 	List<Tea> listerTeaAValider();
 
-	List<Tea> listerTeaAFaire();
+	List<Tea> getTeaAValiderByStructure(Integer clestructure, Date datedujour);
+
+	List<Tea> getTeaAValiderByRespTea();
 
 }

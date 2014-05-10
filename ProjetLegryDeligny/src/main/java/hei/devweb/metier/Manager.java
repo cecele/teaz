@@ -93,15 +93,10 @@ private static Manager instance;
 		System.out.println("Dans m�thode: GetEleveById");
 		return EleveDao.getEleveById(champId);
 	}
-
-	public List<Tea> listerTeaAValider() {
-		System.out.println("dans méthode listerTeaAValider");
-		return TeaDao.listerTeaAValider();
-	}
 	
-	public List<Tea> listerTeaAFaire() {
+	public List<Tea> getTeaAValiderByStructure(Integer clestructure, Date datedujour) {
 		System.out.println("dans méthode listerTeaAFaire");
-		return TeaDao.listerTeaAFaire();
+		return TeaDao.getTeaAValiderByStructure(clestructure,datedujour);
 	}
 
 	public List<Eleve> getEleveResponsables(int i) {
@@ -135,6 +130,16 @@ private static Manager instance;
 			String prenom, String classe, String orderBy) {
 		System.out.println("dans méthode recherche");
 		return RechercheDao.rechercheByParameter(matricule,nom,prenom,classe,orderBy);
+	}
+
+	public List<Tea> getTeaAValiderByRespTea() {
+		System.out.println("dans méthode listerTeaAValider");
+		return TeaDao.getTeaAValiderByRespTea();
+	}
+
+	public String getNomStructure(Integer cle_structure) {
+		System.out.println("dans méthode getNomStructure");
+		return StructureDao.getNomStructure(cle_structure);
 	}
 
 

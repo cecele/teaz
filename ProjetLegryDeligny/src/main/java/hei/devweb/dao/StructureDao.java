@@ -10,4 +10,7 @@ public interface StructureDao {
 
 	void CreateStructure(String nom);
 
+	String getNomStructure(Integer cle_structure);
+
+
 }
