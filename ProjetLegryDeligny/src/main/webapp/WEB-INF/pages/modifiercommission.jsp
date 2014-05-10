@@ -27,13 +27,10 @@
 					</header>
 					<form method="post" action="modifiercommission">             
 						  
-							                                    
-							<label for="nom">Matricule H</label>                 
-							<input id="id_eleve" name="id_eleve"  size="20" maxlength="60" />                 
-							<span class="erreur">${form.erreurs['id_eleve']}</span><br />                  
-							<label for="motdepasse">Mot de passe</label>                 
-							<input type="password" id="motdepasse" name="motdepasse" value="" size="20" maxlength="20" />                 
-							<span class="erreur">${form.erreurs['motdepasse']}</span><br />                  
+							                                                   
+							<input id="nomCommission" name="nomCommission"  size="20" maxlength="60" value="${structure.structure_nom }" onclick="if(this.value=='${structure.structure_nom }')this.value='';" /><br/>                                              
+							<input type="text" id="prenomPres" name="prenomPres" size="20" maxlength="20" value="${structure.structure_president_prenom }" onclick="if(this.value=='${structure.structure_president_prenom }')this.value='';" /><br/>     
+							<input type="text" id="nomPres" name="nomPres" size="20" maxlength="20" value="${structure.structure_president_nom }" onclick="if(this.value=='${structure.structure_president_nom }')this.value='';" /><br/>                        
 							<input type="submit" value="Connexion" class="sansLabel" /><br />                                   
 							               
 					</form>
