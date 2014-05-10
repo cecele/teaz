@@ -28,12 +28,14 @@ public class FaireTeaServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();    
 		Eleve eleve = (Eleve) (session.getAttribute("sessionEleve"));
-		int cleStructure = eleve.getCle_structure();
+		Integer cleStructure = null;
+		cleStructure = eleve.getCle_structure();
 		Date datedujour = new Date();
 		
-		List<Tea> teas = Manager.getInstance().getTeaAValiderByStructure(cleStructure,datedujour);
-		request.setAttribute("teas",teas);
-		
+		if(cleStructure != null){
+			List<Tea> teas = Manager.getInstance().getTeaAValiderByStructure(cleStructure,datedujour);
+			request.setAttribute("teas",teas);
+		}
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/fairetea.jsp");
 		view.forward(request, response);
 	}

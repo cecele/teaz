@@ -43,7 +43,7 @@
 					<hr/>
 					<p>
 					Demandeur : ${teas.structure_nom}<br/>
-					Président : ${teas.structure_president}<br/>
+					Président : ${teas.structure_president_prenom} ${teas.structure_president_nom}<br/>
 					<br/>
 					Evenement: ${teas.offre_titre}
 					</p>
