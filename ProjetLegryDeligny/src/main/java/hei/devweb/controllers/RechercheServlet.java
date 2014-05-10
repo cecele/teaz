@@ -40,12 +40,19 @@ public class RechercheServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		String matricule = null;
+		String nom = null;
+		String prenom = null;
+		String classe = null;
+		String orderBy = null;
 		
-		String matricule = request.getParameter("matricule");
-		String nom = request.getParameter("nom");
-		String prenom = request.getParameter("prenom");
-		String classe = request.getParameter("classe");
-		String orderBy = "id_eleve ASC";
+		if(!request.getParameter("matricule").equals(null) || !request.getParameter("matricule").equals("null")){
+			matricule = request.getParameter("matricule");
+		}
+		nom = request.getParameter("nom");
+		prenom = request.getParameter("prenom");
+		classe = request.getParameter("classe");
+		orderBy = "id_eleve ASC";
 		
 		List<Eleve> eleves = Manager.getInstance().rechercheByParameter(matricule,nom,prenom,classe,orderBy);
 		
