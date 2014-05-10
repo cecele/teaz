@@ -13,7 +13,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 
@@ -27,7 +29,15 @@ public class AnnonceDaoImpl implements AnnonceDao {
 // cr�ation d 'une annonce en statut non valid� pour mise en ligne et date_miseenligne null par d�faut
 // acces en �criture
 	public void ajouterAnnonce (Offre offre ){
-		if (offre.getDate_tea() != null || offre.getHeure_debut() != null || offre.getHeure_fin() != null  || offre.getEleve_mail() != null  || offre.getOffre_titre() != null){
+		GregorianCalendar calendar = new java.util.GregorianCalendar(); 
+		Date date=new Date();
+		calendar.setTime( date ); 
+		// Initialisé avec une instance de Date. 
+		calendar.add (Calendar.DATE, +1);
+		
+		if (offre.getDate_tea() != null && offre.getHeure_debut() != null && offre.getHeure_fin() != null  && offre.getEleve_mail() != null  && offre.getOffre_titre() != null && !date.before(offre.getDate_tea())){
+			
+			
 			try {
 				Connection connection = DataSourceProvider.getDataSource()
 						.getConnection();
@@ -232,7 +242,9 @@ public void offre_placemoins (Integer cle_offre){
 						StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
 						StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
 						);
-				if(getPostulerOffre(results.getInt("cle_offre"), ideleve)==false)
+				if(getPostulerOffre(results.getInt("cle_offre"), ideleve,results.getInt("cle_structure"))==false)
+					
+
 					{offres.add(offre);	
 				}
 			}
@@ -248,8 +260,8 @@ public void offre_placemoins (Integer cle_offre){
 		}
 	//-----------------------------------------------------------------------------------------------------------------
 	//test si uen offre a été postulée
-	// acces en �criture
-			public Boolean getPostulerOffre(Integer cleoffre, String ideleve ){
+	// acces en lecture
+			public Boolean getPostulerOffre(Integer cleoffre, String ideleve, Integer clestructure ){
 			
 				Boolean rep = false;
 				
@@ -262,13 +274,9 @@ public void offre_placemoins (Integer cle_offre){
 	                ResultSet results = stmt.executeQuery();
 	                
 	           while  (results.next()&& rep==false){
-	        	   
-	        	  
-	        	   
 	           String ideleveenbase= results.getString("id_eleve");
-	            if(ideleve.equals(ideleveenbase)) {rep=true;
-	          
-	           }
+	           
+	            if(ideleve.equals(ideleveenbase)) {rep=true; }
 	           }
 	                // Fermer la connexion
 	                results.close();
@@ -279,7 +287,11 @@ public void offre_placemoins (Integer cle_offre){
 	                e.printStackTrace();
 	        }
 				
+				// récupérer l'id de l'eleve responsable
+				String idEleveResponsable = StructureDaoImpl.getPresidentIdById(clestructure);
 				
+				// le comparer à celui en cours
+				if(ideleve.equals(idEleveResponsable)) rep=true;
 				return rep;
 			}
 			
