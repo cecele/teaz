@@ -160,9 +160,69 @@ public class TeaDaoImpl implements TeaDao {
 	// MODIFICATION ET MISE A JOUR
 	//-----------------------------------------------------------------------------------------------------------------
 	
-	//-----------------------------------------------------------------------------------------------------------------
-	//mise à jour de la tea en fonction de la clé de l'offre
-	//acc�s en lecture
+
+			//-----------------------------------------------------------------------------------------------------------------
+			//mise au statut valide de l'annonce et donc modification de la date de mise en ligne ce processus est eff�ctu� par le reponsable TEA et provoque l'affichage de l'annonce dans la liste
+			//acces en �criture
+
+			public void teaValidationByStructure (Integer cletea, Integer clestructure, String ideleve){
+				
+				if(StructureDaoImpl.getPresidentIdById(clestructure).equals(ideleve)){
+								
+				try {
+					Connection connection = DataSourceProvider.getDataSource()
+							.getConnection();
+					
+					java.util.Date utilDate = new java.util.Date();
+				    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+					PreparedStatement stmt = (PreparedStatement) connection
+							.prepareStatement("UPDATE tea SET statut_valide=1, date_validation=? WHERE cle_tea=? ");
+					stmt.setDate(1, sqlDate);
+					stmt.setInt(2,cletea);	
+					stmt.executeUpdate();
+					// Fermer la connexion
+
+					stmt.close();
+					connection.close();
+
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				}
+			}
+				
+			//-----------------------------------------------------------------------------------------------------------------
+			//mise au statut valide de l'annonce et donc modification de la date de mise en ligne ce processus est eff�ctu� par le reponsable TEA et provoque l'affichage de l'annonce dans la liste
+			//acces en �criture
+
+			public void teaValidationByResponsable(Integer cletea){
+				
+				
+								
+				try {
+					Connection connection = DataSourceProvider.getDataSource()
+							.getConnection();
+					
+					java.util.Date utilDate = new java.util.Date();
+				    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+					PreparedStatement stmt = (PreparedStatement) connection
+							.prepareStatement("UPDATE tea SET statut_valide=2, date_validation=? WHERE cle_tea=? ");
+					stmt.setDate(1, sqlDate);
+					stmt.setInt(2,cletea);	
+					stmt.executeUpdate();
+					// Fermer la connexion
+
+					stmt.close();
+					connection.close();
+
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				}
+			
+				
 			
 	//-----------------------------------------------------------------------------------------------------------------
 	// AFFICHAGE
@@ -236,7 +296,9 @@ public class TeaDaoImpl implements TeaDao {
 			results.getInt("offre_place"),
 			StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
 			StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-			StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
+			StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
+			EleveDaoImpl.getEleveNomById(results.getString("id_eleve")),
+			EleveDaoImpl.getElevePrenomById(results.getString("id_eleve"))
 			);
 			
 				teas.add(tea);	
@@ -293,7 +355,9 @@ public class TeaDaoImpl implements TeaDao {
 			results.getInt("offre_place"),
 			StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
 			StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-			StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
+			StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
+			EleveDaoImpl.getEleveNomById(results.getString("id_eleve")),
+			EleveDaoImpl.getElevePrenomById(results.getString("id_eleve"))
 			);
 			
 				teas.add(tea);	
@@ -353,7 +417,10 @@ try {
 	results.getInt("offre_place"),
 	StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
 	StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-	StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
+	StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
+	EleveDaoImpl.getEleveNomById(results.getString("id_eleve")),
+	EleveDaoImpl.getElevePrenomById(results.getString("id_eleve"))
+	
 	);
 		System.out.println("getTeaAValiderByStructure : requete " + results.getInt("cle_tea"));
 	
@@ -408,7 +475,9 @@ try {
 	results.getInt("offre_place"),
 	StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
 	StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-	StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
+	StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
+	EleveDaoImpl.getEleveNomById(results.getString("id_eleve")),
+	EleveDaoImpl.getElevePrenomById(results.getString("id_eleve"))
 	);
 
 	
@@ -463,7 +532,9 @@ try {
 	results.getInt("offre_place"),
 	StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
 	StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-	StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
+	StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
+	EleveDaoImpl.getEleveNomById(results.getString("id_eleve")),
+	EleveDaoImpl.getElevePrenomById(results.getString("id_eleve"))
 	);
 	
 		teas.add(tea);	
@@ -516,7 +587,9 @@ results.getInt("cle_structure"),
 results.getInt("offre_place"),
 StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
 StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
+StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
+EleveDaoImpl.getEleveNomById(results.getString("id_eleve")),
+EleveDaoImpl.getElevePrenomById(results.getString("id_eleve"))
 );
 
 	teas.add(tea);	

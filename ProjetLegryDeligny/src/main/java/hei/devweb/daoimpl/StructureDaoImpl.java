@@ -138,34 +138,7 @@ public class StructureDaoImpl implements StructureDao {
 						return res;
 						
 					}
-	//-----------------------------------------------------------------------------------------------------------------
-	// recuperation de l'id du président de la structure
-	// acces en lecture
-		public static String getPresidentIdById(Integer clestructure){
-						String res="";
-							try {
-								Connection connection = DataSourceProvider.getDataSource()
-										.getConnection();
-
-								
-								
-								PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT id_eleve FROM presider WHERE presider.cle_structure=? ");
-								stmt.setInt(1,clestructure);
-								ResultSet results = stmt.executeQuery();
-								results.next();
-								res= results.getString("id_eleve");
-								// Fermer la connexion
-								results.close();
-								stmt.close();
-								connection.close();
-								
-						}
-							catch (SQLException e) {
-												e.printStackTrace();
-											}
-							return res;
-							
-						}
+	
 	//-----------------------------------------------------------------------------------------------------------------
 	// recuperation du prenom du préseident en fonction de la cle_structure
 	// acces en lecture
@@ -194,6 +167,35 @@ public class StructureDaoImpl implements StructureDao {
 							return res;
 							
 						}
+		
+		//-----------------------------------------------------------------------------------------------------------------
+		// recuperation du prenom du préseident en fonction de la cle_structure
+		// acces en lecture
+		public static String getPresidentIdById(Integer clestructure){
+							String res="";
+								try {
+									Connection connection = DataSourceProvider.getDataSource()
+											.getConnection();
+
+									
+									
+									PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT id_eleve FROM presider WHERE presider.cle_structure=? ");
+									stmt.setInt(1,clestructure);
+									ResultSet results = stmt.executeQuery();
+									results.next();
+									res= results.getString("id_eleve");
+									// Fermer la connexion
+									results.close();
+									stmt.close();
+									connection.close();
+									
+							}
+								catch (SQLException e) {
+													e.printStackTrace();
+												}
+								return res;
+								
+							}
 		
 		//-----------------------------------------------------------------------------------------------------------------
 		// recuperation du nom de la structure

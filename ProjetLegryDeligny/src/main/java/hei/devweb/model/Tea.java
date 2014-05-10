@@ -25,13 +25,18 @@ Integer offre_place;
 String structure_nom;
 String structure_president_nom;
 String structure_president_prenom;
+String eleve_nom;
+String eleve_prenom;
+
+
 public Tea(Integer cle_tea, Date date_tea_realisee, Integer nbheure_realisee,
 		Integer statut_valide, Date date_validation, Integer cle_offre,
 		String id_eleve, Date date_depot, Date date_miseenligne, Date date_tea,
 		String heure_debut, String heure_fin, Integer statut,
 		String offre_description, String eleve_mail, String offre_titre,
 		Integer cle_structure, Integer offre_place, String structure_nom,
-		String structure_president_nom, String structure_president_prenom) {
+		String structure_president_nom, String structure_president_prenom,
+		String eleve_nom, String eleve_prenom) {
 	super();
 	this.cle_tea = cle_tea;
 	this.date_tea_realisee = date_tea_realisee;
@@ -54,6 +59,8 @@ public Tea(Integer cle_tea, Date date_tea_realisee, Integer nbheure_realisee,
 	this.structure_nom = structure_nom;
 	this.structure_president_nom = structure_president_nom;
 	this.structure_president_prenom = structure_president_prenom;
+	this.eleve_nom = eleve_nom;
+	this.eleve_prenom = eleve_prenom;
 }
 public Integer getCle_tea() {
 	return cle_tea;
@@ -181,7 +188,18 @@ public String getStructure_president_prenom() {
 public void setStructure_president_prenom(String structure_president_prenom) {
 	this.structure_president_prenom = structure_president_prenom;
 }
-
+public String getEleve_nom() {
+	return eleve_nom;
+}
+public void setEleve_nom(String eleve_nom) {
+	this.eleve_nom = eleve_nom;
+}
+public String getEleve_prenom() {
+	return eleve_prenom;
+}
+public void setEleve_prenom(String eleve_prenom) {
+	this.eleve_prenom = eleve_prenom;
+}
 
 
 }

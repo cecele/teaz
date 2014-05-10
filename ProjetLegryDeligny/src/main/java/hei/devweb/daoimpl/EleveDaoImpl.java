@@ -260,7 +260,69 @@ public class EleveDaoImpl implements EleveDao {
 			return eleve;	
 	}
 	
-	
+	//-----------------------------------------------------------------------------------------------------------------
+		//recuperation du nom d'un élève en fonctio nde son id
+		//acc�s en lecture
+		
+		public static String getEleveNomById(String ideleve){
+			 String nom ="";	
+			
+			try {
+				Connection connection = DataSourceProvider.getDataSource()
+						.getConnection();
+
+				
+				
+				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT eleve_nom FROM Eleve WHERE id_eleve=?");
+				stmt.setString(1,ideleve);
+				ResultSet results = stmt.executeQuery();
+				
+				results.next();
+				nom = results.getString("eleve_nom");
+				
+				// Fermer la connexion
+					results.close();
+					stmt.close();
+					connection.close();
+					
+			}
+				catch (SQLException e) {
+									e.printStackTrace();
+								}
+				return nom;	
+		}
+		
+		//-----------------------------------------------------------------------------------------------------------------
+				//recuperation du prenom d'un élève en fonctio nde son id
+				//acc�s en lecture
+				
+				public static String getElevePrenomById(String ideleve){
+					 String prenom ="";	
+					
+					try {
+						Connection connection = DataSourceProvider.getDataSource()
+								.getConnection();
+
+						
+						
+						PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT eleve_prenom FROM Eleve WHERE id_eleve=?");
+						stmt.setString(1,ideleve);
+						ResultSet results = stmt.executeQuery();
+						
+						results.next();
+						prenom = results.getString("eleve_prenom");
+						
+						// Fermer la connexion
+							results.close();
+							stmt.close();
+							connection.close();
+							
+					}
+						catch (SQLException e) {
+											e.printStackTrace();
+										}
+						return prenom;	
+				}
 	//-----------------------------------------------------------------------------------------------------------------
 		//recherche d'�l�ve par nom retourne la liste des �l�ves dont le nom contient la recherche
 		//acc�s en lecture
