@@ -45,7 +45,7 @@ public class RechercheServlet extends HttpServlet {
 		String prenom = "";
 		String classe = "";
 		
-		String orderBy = "id_eleve ASC";
+		String orderBy = "id_eleve";
 		matricule = request.getParameter("matricule");
 		nom = request.getParameter("nom");
 		prenom = request.getParameter("prenom");

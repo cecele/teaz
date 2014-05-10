@@ -68,7 +68,8 @@
 									<option value="h48">h48</option>
 									<option value="h51">h51</option>
 									<option value="h52">h52</option>
-									<option value="h52">Autres</option>
+									<option value="CES">Césure</option>
+									<option value="HCA">Hors Catégorie</option>
 								</select>
 							</td>
 						</tr>
