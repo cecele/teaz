@@ -12,5 +12,7 @@ public interface StructureDao {
 
 	String getNomStructure(Integer cle_structure);
 
+	Structure getStructureByCle(int id);
+
 
 }

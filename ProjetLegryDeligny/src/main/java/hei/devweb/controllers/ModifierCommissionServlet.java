@@ -1,6 +1,10 @@
 package hei.devweb.controllers;
 
+import hei.devweb.metier.Manager;
+import hei.devweb.model.Structure;
+
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,6 +33,10 @@ public class ModifierCommissionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		int id = Integer.parseInt(request.getParameter("id"));
+		Structure structure = Manager.getInstance().getStructureByCle(id);
+		request.setAttribute("structure",structure);
+		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/modifiercommission.jsp");
 		view.forward(request, response);
 	}
@@ -37,7 +45,6 @@ public class ModifierCommissionServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		
 		
 	}

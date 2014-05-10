@@ -147,6 +147,11 @@ private static Manager instance;
 		return AnnonceDao.listerOffreByEleve(matricule);
 	}
 
+	public Structure getStructureByCle(int id) {
+		// TODO Auto-generated method stub
+		return StructureDao.getStructureByCle(id);
+	}
+
 
 
 }
