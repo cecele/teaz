@@ -1,5 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <header id="ban">
+	<marquee align="center" height="300px" scrolldelay="10" scrollamount="3" onmouseout="this.start()" onmouseover="this.stop()">
+		<p>
+			<img src="img/bandeau1.png" alt="bandeau1" hspace="0"/>
+			<img src="img/bandeau2.png" alt="bandeau2" hspace="0"/>
+		</p>
+	</marquee>
 </header>
 <nav>
 	<ul id="menu">

@@ -5,6 +5,7 @@
 	<h2>Mon profil</h2>
 	<ul>
 		<li>${sessionScope.sessionEleve.eleve_prenom} ${sessionScope.sessionEleve.eleve_nom}</li>
+		<li>${sessionScope.structure.structure_nom }</li>
 		<li>Profil : <c:choose>
 		<c:when test="${sessionScope.sessionEleve.eleve_profil==0}" >Etudiant</c:when>
 		<c:when test="${sessionScope.sessionEleve.eleve_profil==1}" >Responsable</c:when>

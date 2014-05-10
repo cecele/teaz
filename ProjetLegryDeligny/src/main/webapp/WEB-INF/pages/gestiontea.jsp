@@ -7,8 +7,19 @@
   	<meta http-equiv="Content-Type" content="text/html;
 			 charset=UTF-8">
 		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
 		<script type="text/javascript" src="js/menu.js"></script>
         <title>Tea</title>
+        <script type="text/javascript">
+ 			$(document).ready(function(){
+ 				$("#matricule").click(function(){
+
+ 					$("#nom").attr("disabled",true);
+ 					$("#prenom").attr("disabled",true);
+ 					$("#classe").attr("disabled",true);
+ 				});
+ 			});
+ </script>
     </head>
     <body>
     <!-- Menu -->

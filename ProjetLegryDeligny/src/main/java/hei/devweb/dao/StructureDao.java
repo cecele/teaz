@@ -18,5 +18,7 @@ public interface StructureDao {
 	void StructureChangement(String ideleve, Integer idstruct, Date dateDebut,
 			Date dateFin);
 
+	Structure getStructure_ElevePresident(String ideleve);
+
 
 }

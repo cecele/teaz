@@ -1,13 +1,16 @@
 package hei.devweb.controllers;  
 
 import java.io.IOException;  
+
 import javax.servlet.ServletException; 
 import javax.servlet.http.HttpServlet; 
 import javax.servlet.http.HttpServletRequest; 
 import javax.servlet.http.HttpServletResponse; 
 import javax.servlet.http.HttpSession; 
 
+import hei.devweb.metier.Manager;
 import hei.devweb.model.Eleve; 
+import hei.devweb.model.Structure;
 import hei.devweb.forms.ConnexionForm; 
 
 public class ConnexionServlet extends HttpServlet {     
@@ -25,6 +28,7 @@ public class ConnexionServlet extends HttpServlet {
 		HttpSession session = request.getSession();    
 		Eleve eleve = (Eleve) (session.getAttribute("sessionEleve"));
 		request.setAttribute("eleve",eleve);
+		
 		
 		/* Affichage de la page de connexion */         
 		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );     
@@ -45,11 +49,14 @@ public class ConnexionServlet extends HttpServlet {
 		 * * Utilisateur à la session, sinon suppression du bean de la session.          
 		 * */         
 		if ( form.getErreurs().isEmpty() ) {             
-			session.setAttribute( ATT_SESSION_USER, eleve );         
+			session.setAttribute( ATT_SESSION_USER, eleve );
+			String ideleve = eleve.getId_eleve();
+			Structure structure = Manager.getInstance().getStructure_ElevePresident(ideleve);
+			session.setAttribute( "structure", structure );
 			} else {             
 				session.setAttribute( ATT_SESSION_USER, null );         
 				}          
-		/* Stockage du formulaire et du bean dans l'objet request */         
+		/* Stockage du formulaire et du bean dans l'objet request */  
 		request.setAttribute( ATT_FORM, form );         
 		request.setAttribute( ATT_USER, eleve );     
 		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );     

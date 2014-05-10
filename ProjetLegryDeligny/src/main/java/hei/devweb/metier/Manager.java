@@ -159,6 +159,11 @@ private static Manager instance;
 		
 	}
 
+	public Structure getStructure_ElevePresident(String ideleve) {
+		// TODO Auto-generated method stub
+		return StructureDao.getStructure_ElevePresident(ideleve);
+	}
+
 
 
 }
