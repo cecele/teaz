@@ -8,12 +8,14 @@
   	<meta http-equiv="Content-Type" content="text/html;
 			 charset=UTF-8">
 		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
 		<script type="text/javascript" src="js/menu.js"></script>
 		<script type="text/javascript" src="js/administration.js"></script>
         <title>Tea</title>
     </head>
     <body>
     <!-- Menu -->
+    <div id="layout">
 	<jsp:include page="menu.jsp" />
 	
 	<!-- Corps -->
@@ -152,7 +154,7 @@
 						<tr>
 							<th>Nom de la commission</th>
 							<th>Président</th>
-							<th>Action</th>
+							<th colspan="2">Action</th>
 						</tr>
 					</thead>	
 					<tbody id="list">
@@ -160,18 +162,21 @@
 					<tr>
 						<td>${commissions.structure_nom}</td>
 						<td>${commissions.structure_president_prenom} ${commissions.structure_president_nom}</td>
+						<td><a href="modifiercommission?id=${commissions.cle_structure}" >Modifier</a></td>
 						<td><a href="supprimercommission?id=${commissions.cle_structure}" class="suppr">Supprimer</a></td>
 					</tr>
 					</c:forEach>
 					<tr>
 						<td><input type="text" name="nom" id="nom" required/></td>
 						<td><input type="text" name="id" id="id" required/></td>
-						<td><input type="submit" value="Ajouter"/></td>
+						<td colspan="2"><input type="submit" value="Ajouter"/></td>
 					</tr>
 					</tbody>
 				</table>
 				</form>
 			</article>
 		</section>	
+		<jsp:include page="bottom.jsp" />
+	</div>
     </body>
 </html>

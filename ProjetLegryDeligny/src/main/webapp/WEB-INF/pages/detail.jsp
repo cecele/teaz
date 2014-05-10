@@ -13,6 +13,7 @@
     </head>
     <body>
     <!-- Menu -->
+    <div id="layout">
 	<jsp:include page="menu.jsp" />
 	
 	<!-- Corps -->
@@ -51,5 +52,7 @@
 			</c:forEach>
 			<input action="action" type="button" value="Retour" onclick="history.go(-1);"/>
 		</section>	
+		<jsp:include page="bottom.jsp" />
+	</div>
     </body>
 </html>

@@ -13,6 +13,7 @@
     </head>
     <body>
     <!-- Menu -->
+    <div id="layout">
 	<jsp:include page="menu.jsp" />
 	
 	<!-- Corps -->
@@ -40,5 +41,7 @@
 			</c:forEach>
 			
 		</section>	
+		<jsp:include page="bottom.jsp" />
+	</div>
     </body>
 </html>

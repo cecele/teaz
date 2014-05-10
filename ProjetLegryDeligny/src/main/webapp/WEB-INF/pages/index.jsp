@@ -12,6 +12,7 @@
     </head>
     <body>
     <!-- Menu -->
+    <div id="layout">
 	<jsp:include page="menu.jsp" />
 	
 	<!-- Corps -->
@@ -46,5 +47,7 @@
 			</article>
 			
 		</section>	
+		<jsp:include page="bottom.jsp" />
+	</div>	
     </body>
 </html>
