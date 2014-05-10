@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: 127.0.0.1
--- Généré le: Ven 09 Mai 2014 à 17:58
+-- Généré le: Dim 11 Mai 2014 à 00:01
 -- Version du serveur: 5.6.11-log
 -- Version de PHP: 5.4.14
 
@@ -42,6 +42,8 @@ INSERT INTO `appartenir` (`id_eleve`, `cle_classe`) VALUES
 ('13333', 3),
 ('10153', 4),
 ('11111', 4),
+('14444', 4),
+('15555', 6),
 ('13333', 7);
 
 -- --------------------------------------------------------
@@ -132,6 +134,7 @@ INSERT INTO `eleve` (`id_eleve`, `eleve_nom`, `eleve_prenom`, `date_naissance`, 
 ('12222', 'FANCHINI', 'THEO', '1900-12-12', 12, 'RUE DES EMMERDEURS', '59000', 'LILLE', 2012, NULL, 2, 0, 'motdepasse'),
 ('13333', 'BERNAERT', 'MARIN', '1993-01-01', 12, 'RUE DES OBSEDES', '59000', 'LILLE', 2012, NULL, 3, 0, 'motdepasse'),
 ('14444', 'PETIT', 'TOUT', '1992-12-12', 33, 'rue colbert', '59000', 'LILLE', 2013, NULL, 0, 0, 'motdepasse'),
+('15555', 'ROSSET', 'TIM', '1993-05-11', 11, 'RRUUUUUEEE', '59000', 'LILLE', 2011, NULL, 1, 0, 'motdepasse'),
 ('99999', 'SUPER', 'ADMIN', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, 0, 'motdepasse');
 
 -- --------------------------------------------------------
@@ -155,15 +158,17 @@ CREATE TABLE IF NOT EXISTS `offre` (
   `cle_structure` int(11) NOT NULL,
   PRIMARY KEY (`cle_offre`),
   KEY `FK_OFFRE_cle_structure` (`cle_structure`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Contenu de la table `offre`
 --
 
 INSERT INTO `offre` (`cle_offre`, `date_depot`, `date_miseenligne`, `date_tea`, `heure_debut`, `heure_fin`, `statut`, `offre_description`, `eleve_mail`, `offre_titre`, `offre_place`, `cle_structure`) VALUES
-(1, '2014-05-09', NULL, '2014-05-19', '12H00', '13H00', 0, 'DESCRIPTION CHIANTE', 'cc@hei.fr', 'TITRE INTERESSANT', 3, 2),
-(2, '2014-05-08', NULL, '2014-05-28', '08H00', '09H00', 0, 'DESCPRZFSDKFGN?sfgnGJBNsfnSFVBsdjfbSDB', 'mm@hei.fr', 'zdfqdfqfsDSdfgSFQSDFVSDFS', 2, 2);
+(1, '2014-05-09', '2014-05-10', '2014-05-19', '12', '13', 1, 'DESCRIPTION CHIANTE', 'cc@hei.fr', 'TITRE INTERESSANT', 0, 2),
+(2, '2014-05-08', NULL, '2014-05-28', '08', '09', 1, 'DESCPRZFSDKFGN?sfgnGJBNsfnSFVBsdjfbSDB', 'mm@hei.fr', 'zdfqdfqfsDSdfgSFQSDFVSDFS', 0, 2),
+(3, '2014-05-09', '2014-05-10', '2014-05-11', '08', '11', 1, 'SDFDFQSDF', 'FF@hei.fr', 'ttttttttt', 10, 1),
+(4, '2014-05-04', '2014-05-05', '2014-05-08', '08', '09', 1, 'DESCRIPT', 'MAIL@hei.fr', 'titre bde', 23, 3);
 
 -- --------------------------------------------------------
 
@@ -186,7 +191,8 @@ CREATE TABLE IF NOT EXISTS `presider` (
 
 INSERT INTO `presider` (`id_eleve`, `cle_structure`, `date_debut`, `date_fin`) VALUES
 ('12222', 2, '2014-05-01', '2015-06-15'),
-('13333', 1, '2014-05-01', '2015-06-15');
+('13333', 1, '2014-05-01', '2015-06-15'),
+('15555', 3, '2013-12-23', '2014-07-31');
 
 -- --------------------------------------------------------
 
@@ -198,7 +204,7 @@ CREATE TABLE IF NOT EXISTS `structure` (
   `cle_structure` int(11) NOT NULL AUTO_INCREMENT,
   `structure_nom` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`cle_structure`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `structure`
@@ -206,7 +212,8 @@ CREATE TABLE IF NOT EXISTS `structure` (
 
 INSERT INTO `structure` (`cle_structure`, `structure_nom`) VALUES
 (1, 'INTEGRALE-VP'),
-(2, 'DECLIC-président');
+(2, 'DECLIC-président'),
+(3, 'Integrale-Président');
 
 -- --------------------------------------------------------
 
@@ -225,14 +232,22 @@ CREATE TABLE IF NOT EXISTS `tea` (
   PRIMARY KEY (`cle_tea`),
   KEY `FK_TEA_cle_offre` (`cle_offre`),
   KEY `FK_TEA_id_eleve` (`id_eleve`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Contenu de la table `tea`
 --
 
 INSERT INTO `tea` (`cle_tea`, `date_tea_realisee`, `nbheure_realisee`, `statut_valide`, `date_validation`, `cle_offre`, `id_eleve`) VALUES
-(1, '2014-05-21', 2, 0, NULL, 1, '10153');
+(1, '2014-05-05', 2, 0, NULL, 1, '10153'),
+(2, '2014-05-19', 1, 0, NULL, 1, '11111'),
+(4, '2014-05-19', 1, 0, NULL, 1, '14444'),
+(5, '2014-05-08', 3, 0, NULL, 3, '14444'),
+(6, '2014-05-28', 1, 0, NULL, 2, '14444'),
+(7, '2014-05-28', 1, 0, NULL, 2, '11111'),
+(8, '2014-05-11', 3, 0, NULL, 3, '11111'),
+(9, '2014-05-05', 3, 0, NULL, 4, '15555'),
+(10, '2014-05-05', 2, 0, NULL, 4, '14444');
 
 --
 -- Contraintes pour les tables exportées
