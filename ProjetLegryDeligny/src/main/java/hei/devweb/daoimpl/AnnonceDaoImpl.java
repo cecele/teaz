@@ -211,7 +211,6 @@ public void offre_placemoins (Integer cle_offre){
 			
 			
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM offre WHERE statut=1 ORDER BY date_tea DESC");
-			stmt.setString(1,ideleve);
 			ResultSet results = stmt.executeQuery();
 			
 			while (results.next()) {

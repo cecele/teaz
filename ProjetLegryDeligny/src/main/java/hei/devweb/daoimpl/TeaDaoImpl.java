@@ -22,9 +22,10 @@ public class TeaDaoImpl implements TeaDao {
 	//-----------------------------------------------------------------------------------------------------------------
 	// cr�ation d 'tea en fonction d'une clé d'offre passée en paramètre cle_offre, statut non valide 
 	// acces en �criture
-		/*public Offre ajouterTeaRecupererOffre (Integer cleoffre ){
-			Offre offre=new Offre(null, null, null, null, null, null, null, null, null, null, null, null, null, null,null);
-			try {
+		public Offre ajouterTeaRecupererOffre (Integer cleoffre ){
+			Offre offre= null;
+					
+					try {
 				Connection connection = DataSourceProvider.getDataSource()
 						.getConnection();
 
@@ -32,7 +33,7 @@ public class TeaDaoImpl implements TeaDao {
 						.prepareStatement("SELECT * FROM offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE cle_offre=?");
 				stmt.setInt(1, cleoffre);
 				ResultSet results = stmt.executeQuery();
-				
+				results.next();
 				offre =new Offre(results.getInt("cle_offre"),
 							results.getDate("date_depot"),
 							results.getDate("date_miseenligne"),
@@ -62,49 +63,12 @@ public class TeaDaoImpl implements TeaDao {
 							}
 			return offre;
 			
-		}*/
+		}
 			public void ajouterTea ( Integer cleoffre ,String ideleve ){
-				Offre offre=new Offre(null, null, null, null, null, null, null, null, null, null, null, null, null, null,null);
-
-				try {
-					Connection connection = DataSourceProvider.getDataSource()
-							.getConnection();
-
-					PreparedStatement stmt = (PreparedStatement) connection
-							.prepareStatement("SELECT * FROM offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE cle_offre=?");
-					stmt.setInt(1, cleoffre);
-					ResultSet results = stmt.executeQuery();
 					
-					offre =new Offre(results.getInt("cle_offre"),
-								results.getDate("date_depot"),
-								results.getDate("date_miseenligne"),
-								results.getDate("date_tea"),
-								results.getString("heure_debut"),
-								results.getString("heure_fin"),
-								results.getInt("statut"),
-								results.getString("offre_description"),
-								results.getString("eleve_mail"),
-								results.getString("offre_titre"),
-								results.getInt("cle_structure"),
-								results.getInt("offre_place"),
-								results.getString("structure_nom"),
-								StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-								StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
-								);
-
-				
-				// Fermer la connexion
-				results.close();
-				stmt.close();
-				connection.close();
-				}
-				
-				catch (SQLException e) {
-									e.printStackTrace();
-								}		
-				
+			Offre offre=  ajouterTeaRecupererOffre (cleoffre);	
+			System.out.println(offre.getCle_offre());
 			try {
-					
 					int hdeb = Integer.parseInt(offre.getHeure_debut());
 					int hfin = Integer.parseInt(offre.getHeure_fin());
 					int nbtea = hfin - hdeb;
@@ -118,8 +82,8 @@ public class TeaDaoImpl implements TeaDao {
 							.prepareStatement("INSERT INTO `tea`(`date_tea_realisee`,`nbheure_realisee`,`statut_valide`,`cle_offre`,`id_eleve`) VALUES(?,?,0,?,?)");
 							stmt2.setDate(1, (Date) offre. getDate_tea());
 							stmt2.setInt(2, nbtea);
-							stmt2.setInt(5, offre.getCle_offre());
-							stmt2.setString(6, ideleve);
+							stmt2.setInt(3, offre.getCle_offre());
+							stmt2.setString(4, ideleve);
 							stmt2.executeUpdate();
 
 							// Fermer la connexion

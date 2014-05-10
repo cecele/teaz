@@ -21,7 +21,11 @@ public class AnnoncesServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		List<Offre> offres = Manager.getInstance().listerOffre();
+		HttpSession session = request.getSession();    
+		Eleve eleve = (Eleve) (session.getAttribute("sessionEleve"));
+		String matricule = eleve.getId_eleve();
+		
+		List<Offre> offres = Manager.getInstance().listerOffreByEleve(matricule);
 		request.setAttribute("offres",offres);
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/annonces.jsp");

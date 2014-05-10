@@ -11,6 +11,7 @@ import com.mysql.jdbc.PreparedStatement;
 
 import hei.devweb.dao.EleveDao;
 import hei.devweb.model.Eleve;
+import hei.devweb.model.Offre;
 
 public class EleveDaoImpl implements EleveDao {
 //-----------------------------------------------------------------------------------------------------------------
@@ -592,7 +593,7 @@ public class EleveDaoImpl implements EleveDao {
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT cle_classe FROM appartenir WHERE id_eleve=? ORDER BY cle_classe DESC LIMIT 1");
 			stmt.setString(1,ideleve);
 			ResultSet results = stmt.executeQuery();
-			
+			results.next();
 			cleclasse=results.getInt("cle_classe");
 			
 			// Fermer la connexion
@@ -679,6 +680,8 @@ public class EleveDaoImpl implements EleveDao {
 		
 		
 		return eleves;                         }
+
+	
 
 
 	

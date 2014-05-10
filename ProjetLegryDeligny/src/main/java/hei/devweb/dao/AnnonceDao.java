@@ -21,4 +21,6 @@ public interface AnnonceDao {
 
 	void annonce_miseHorsLigne(Integer id);
 
+	List<Offre> listerOffreByEleve(String matricule);
+
 }

@@ -142,6 +142,11 @@ private static Manager instance;
 		return StructureDao.getNomStructure(cle_structure);
 	}
 
+	public List<Offre> listerOffreByEleve(String matricule) {
+		System.out.println("Dans méthode listerOffreByEleve");
+		return AnnonceDao.listerOffreByEleve(matricule);
+	}
+
 
 
 }

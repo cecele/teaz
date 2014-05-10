@@ -1,6 +1,7 @@
 package hei.devweb.dao;
 
 import hei.devweb.model.Eleve;
+import hei.devweb.model.Offre;
 
 import java.util.List;
 
