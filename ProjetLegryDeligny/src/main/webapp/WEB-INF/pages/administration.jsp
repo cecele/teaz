@@ -167,8 +167,11 @@
 					</tr>
 					</c:forEach>
 					<tr>
+						<th colspan="4" style="text-align:center;background-color:rgb(52,73,94);color:rgb(228,229,211)">Ajouter une commission</th>
+					</tr>
+					<tr>
+						<td>Nom de la commission</td>
 						<td><input type="text" name="nom" id="nom" required/></td>
-						<td><input type="text" name="id" id="id" required/></td>
 						<td colspan="2"><input type="submit" value="Ajouter"/></td>
 					</tr>
 					</tbody>

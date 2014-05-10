@@ -64,7 +64,7 @@ public class DeposerAnnonceServlet extends HttpServlet {
 		SimpleDateFormat formatDateJour = new SimpleDateFormat("yyyy-MM-dd");
 		String dateformatee = formatDateJour.format(actuelle);
 
-		request.setAttribute("date",dateformatee);
+		request.setAttribute("dateformatee",dateformatee);
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/deposerannonce.jsp");
 		view.forward(request, response);

@@ -22,7 +22,7 @@
 	
 			<article id="accueil">
 					
-					<form method="post" action="modifiercommission?id=">             
+					<form method="post" action="modifiercommission?id=${structure.cle_structure}">             
 						    Matricule du nouveau président (sans le h)<br/>                                   
 							<input type="text" id="ideleve" name="ideleve"  size="20" maxlength="60" /><br/>     
 							Début de mandat<br/>                                         

@@ -148,8 +148,15 @@ private static Manager instance;
 	}
 
 	public Structure getStructureByCle(int id) {
-		// TODO Auto-generated method stub
+		System.out.println("Dans méthode GetStructureByCle");
 		return StructureDao.getStructureByCle(id);
+	}
+
+	public void StructureChangement(String ideleve, Integer idstruct,
+			Date dateDebut, Date dateFin) {
+		System.out.println("Dans méthode StructureChangement");
+		StructureDao.StructureChangement(ideleve,idstruct,dateDebut,dateFin);
+		
 	}
 
 

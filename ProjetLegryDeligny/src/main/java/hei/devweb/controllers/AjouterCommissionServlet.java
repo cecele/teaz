@@ -41,7 +41,7 @@ public class AjouterCommissionServlet extends HttpServlet {
 		String nom = request.getParameter("nom");
 
 		Manager.getInstance().CreateStructure(nom);
-			
+		System.out.println(nom);	
 		
 		response.sendRedirect("administration");
 	}
