@@ -314,15 +314,76 @@ public class TeaDaoImpl implements TeaDao {
 	//recupération des heures de TEA d'une structure en attente
 	//acc�s en lecture
 
-public List<Tea> getTeaByStructure(Integer clestructure){
+public List<Tea> getTeaAValiderByStructure(Integer clestructure){
+List<Tea> teas = new ArrayList<Tea>();
+
+
+java.util.Date utilDate = new Date();
+java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+try {
+	Connection connection = DataSourceProvider.getDataSource()
+			.getConnection();
+
+	
+	PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tea INNER JOIN offre ON tea.cle_offre=offre_cle_offre WHERE cle_structure=? AND statut_valide=0 AND date_tea_realisee<?");
+	stmt.setInt(1,clestructure);
+	stmt.setDate(2,sqlDate);
+	ResultSet results = stmt.executeQuery();
+	
+	while (results.next()) {
+		Tea tea =new Tea(
+	results.getInt("cle_tea"),
+	results.getDate("date_tea_realisee"),
+	results.getInt("nbheure_realisee"),
+	results.getInt("statut_valide"),
+	results.getDate("date_validation"),
+	results.getInt("cle_offre"),
+	results.getString("id_eleve"),
+	results.getDate("date_depot"),
+	results.getDate("date_miseenligne"),
+	results.getDate("date_tea"),
+	results.getString("heure_debut"),
+	results.getString("heure_fin"),
+	results.getInt("statut"),
+	results.getString("offre_description"),
+	results.getString("eleve_mail"),
+	results.getString("offre_titre"),
+	results.getInt("cle_structure"),
+	results.getInt("offre_place"),
+	results.getString("structure_nom"),
+	StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
+	StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
+	);
+
+	
+		teas.add(tea);	
+		
+	}
+		// Fermer la connexion
+		results.close();
+		stmt.close();
+		connection.close();
+		
+}
+	catch (SQLException e) {
+						e.printStackTrace();
+					}
+	return teas;	
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+//recupération des heures de TEA à valider par le resp TEA
+//acc�s en lecture
+public List<Tea> getTeaAValiderByRespTea(){
 List<Tea> teas = new ArrayList<Tea>();
 try {
 	Connection connection = DataSourceProvider.getDataSource()
 			.getConnection();
 
 	
-	PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tea INNER JOIN offre ON tea.cle_offre=offre_cle_offre WHERE cle_structure=? AND statut_valide=0");
-	stmt.setInt(1,clestructure);
+	PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tea WHERE statut_valide=1");
+	
 	ResultSet results = stmt.executeQuery();
 	
 	while (results.next()) {
