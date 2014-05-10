@@ -162,7 +162,7 @@
 					<tr>
 						<td>${commissions.structure_nom}</td>
 						<td>${commissions.structure_president_prenom} ${commissions.structure_president_nom}</td>
-						<td><a href="modifiercommission?id=${commissions.cle_structure}" >Modifier</a></td>
+						<td><a href="modifiercommission?id=${commissions.cle_structure}" >Modifier Président</a></td>
 						<td><a href="supprimercommission?id=${commissions.cle_structure}" class="suppr">Supprimer</a></td>
 					</tr>
 					</c:forEach>

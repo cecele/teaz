@@ -18,20 +18,18 @@
 	<!-- Corps -->
    		<section>
  
-			<h1>Modifier Commission</h1>			
+			<h1>Modifier ${structure.structure_nom }</h1>			
 	
 			<article id="accueil">
 					
-					<header>
-						<h2>Coucou</h2>
-					</header>
-					<form method="post" action="modifiercommission">             
-						  
-							                                                   
-							<input id="nomCommission" name="nomCommission"  size="20" maxlength="60" value="${structure.structure_nom }" onclick="if(this.value=='${structure.structure_nom }')this.value='';" /><br/>                                              
-							<input type="text" id="prenomPres" name="prenomPres" size="20" maxlength="20" value="${structure.structure_president_prenom }" onclick="if(this.value=='${structure.structure_president_prenom }')this.value='';" /><br/>     
-							<input type="text" id="nomPres" name="nomPres" size="20" maxlength="20" value="${structure.structure_president_nom }" onclick="if(this.value=='${structure.structure_president_nom }')this.value='';" /><br/>                        
-							<input type="submit" value="Connexion" class="sansLabel" /><br />                                   
+					<form method="post" action="modifiercommission?id=">             
+						    Matricule du nouveau président (sans le h)<br/>                                   
+							<input type="text" id="ideleve" name="ideleve"  size="20" maxlength="60" /><br/>     
+							Début de mandat<br/>                                         
+							<input type="date" id="debut" name="debut" /><br/> 
+							Fin de mandat<br/>    
+							<input type="date" id="fin" name="fin" /><br/>                        
+							<input type="submit" value="Modifier" class="sansLabel" /><br />                                   
 							               
 					</form>
 			</article>
