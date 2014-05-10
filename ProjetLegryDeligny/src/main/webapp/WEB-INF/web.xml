@@ -42,6 +42,8 @@
     <filter-name>SuperAdminFilter</filter-name>
     <url-pattern>/administration</url-pattern>
     <url-pattern>/modifiercommission</url-pattern>
+    <url-pattern>/ajoutercommission</url-pattern>
+    <url-pattern>/ajouterdroit</url-pattern>
   </filter-mapping>
   <filter>
     <filter-name>BdeFilter</filter-name>
