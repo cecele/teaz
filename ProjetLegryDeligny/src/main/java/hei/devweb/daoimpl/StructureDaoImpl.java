@@ -206,9 +206,8 @@ public class StructureDaoImpl implements StructureDao {
 			Structure structure = new Structure(
 			results.getInt("cle_structure"),
 			results.getString("structure_nom"),
-			getPresidentNomById(results.getInt("cle_structure")),
-			getPresidentPrenomById(results.getInt("cle_structure")));
-			
+			getPresidentPrenomById(results.getInt("cle_structure")),
+			getPresidentNomById(results.getInt("cle_structure")));
 			structures.add(structure);
 			}
 			
@@ -268,9 +267,9 @@ public class StructureDaoImpl implements StructureDao {
 						results.next();
 						structure = new Structure(
 						results.getInt("cle_structure"),
-						results.getString("structure_nom"),
-						getPresidentNomById(results.getInt("cle_structure")),
-						getPresidentPrenomById(results.getInt("cle_structure")));
+						results.getString("structure_nom"),						
+						getPresidentPrenomById(results.getInt("cle_structure")),
+						getPresidentNomById(results.getInt("cle_structure")));
 							
 							// Fermer la connexion
 							results.close();
