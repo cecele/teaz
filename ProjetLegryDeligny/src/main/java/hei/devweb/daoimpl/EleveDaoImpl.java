@@ -589,7 +589,7 @@ public class EleveDaoImpl implements EleveDao {
 					.getConnection();
 
 			
-			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT cle_classe FROM appartenir WHERE id_eleve=? ORDER BY cle_classe DESC LIMIT 1");
+			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT cle_classe FROM appartenir WHERE id_eleve=? ORDER BY cle_classe ASC LIMIT 1");
 			stmt.setString(1,ideleve);
 			ResultSet results = stmt.executeQuery();
 			results.next();
