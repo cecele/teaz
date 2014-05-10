@@ -1,4 +1,4 @@
-package hei.devweb.dao.impl;
+package hei.devweb.daoimpl;
 
 import hei.devweb.dao.RechercheDao;
 import hei.devweb.model.Eleve;
@@ -122,12 +122,13 @@ if(orderBy==null)orderBy="eleve_nom";
 		
 			eleves.add(eleve);	
 			
-		}
+		
 			// Fermer la connexion
 			results.close();
 			stmt.close();
 			connection.close();
 			
+	}
 	}
 		catch (SQLException e) {
 							e.printStackTrace();

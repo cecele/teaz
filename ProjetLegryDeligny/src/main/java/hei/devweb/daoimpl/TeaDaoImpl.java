@@ -1,4 +1,4 @@
-package hei.devweb.dao.impl;
+package hei.devweb.daoimpl;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -234,7 +234,8 @@ public class TeaDaoImpl implements TeaDao {
 			results.getInt("cle_structure"),
 			results.getInt("offre_place"),
 			results.getString("structure_nom"),
-			results.getString("structure_president")
+			StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
+			StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
 			);
 			
 				teas.add(tea);	
@@ -290,7 +291,8 @@ public class TeaDaoImpl implements TeaDao {
 			results.getInt("cle_structure"),
 			results.getInt("offre_place"),
 			results.getString("structure_nom"),
-			results.getString("structure_president")
+			StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
+			StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
 			);
 			
 				teas.add(tea);	
@@ -308,6 +310,62 @@ public class TeaDaoImpl implements TeaDao {
 			return teas;	
 	}
 	
+	//-----------------------------------------------------------------------------------------------------------------
+	//recupération des heures de TEA d'une structure en attente
+	//acc�s en lecture
+
+public List<Tea> getTeaByStructure(Integer clestructure){
+List<Tea> teas = new ArrayList<Tea>();
+try {
+	Connection connection = DataSourceProvider.getDataSource()
+			.getConnection();
+
+	
+	PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tea INNER JOIN offre ON tea.cle_offre=offre_cle_offre WHERE cle_structure=? AND statut_valide=0");
+	stmt.setInt(1,clestructure);
+	ResultSet results = stmt.executeQuery();
+	
+	while (results.next()) {
+		Tea tea =new Tea(
+	results.getInt("cle_tea"),
+	results.getDate("date_tea_realisee"),
+	results.getInt("nbheure_realisee"),
+	results.getInt("statut_valide"),
+	results.getDate("date_validation"),
+	results.getInt("cle_offre"),
+	results.getString("id_eleve"),
+	results.getDate("date_depot"),
+	results.getDate("date_miseenligne"),
+	results.getDate("date_tea"),
+	results.getString("heure_debut"),
+	results.getString("heure_fin"),
+	results.getInt("statut"),
+	results.getString("offre_description"),
+	results.getString("eleve_mail"),
+	results.getString("offre_titre"),
+	results.getInt("cle_structure"),
+	results.getInt("offre_place"),
+	results.getString("structure_nom"),
+	StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
+	StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
+	);
+
+	
+		teas.add(tea);	
+		
+	}
+		// Fermer la connexion
+		results.close();
+		stmt.close();
+		connection.close();
+		
+}
+	catch (SQLException e) {
+						e.printStackTrace();
+					}
+	return teas;	
+}
+
 	//-----------------------------------------------------------------------------------------------------------------
 	//recupération des heures de TEA valide d'un eleve en fonction son id
 	//acc�s en lecture
@@ -343,7 +401,8 @@ try {
 	results.getInt("cle_structure"),
 	results.getInt("offre_place"),
 	results.getString("structure_nom"),
-	results.getString("structure_president")
+	StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
+	StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
 	);
 	
 		teas.add(tea);	
@@ -395,7 +454,8 @@ results.getString("offre_titre"),
 results.getInt("cle_structure"),
 results.getInt("offre_place"),
 results.getString("structure_nom"),
-results.getString("structure_president")
+StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
+StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
 );
 
 	teas.add(tea);	
@@ -573,18 +633,18 @@ return teas;
 					return nbtotal;
 				}
 				
-				
 				public List<Tea> listerTeaAValider() {
-					
+					// TODO Auto-generated method stub
 					return null;
 				}
 				
 				public List<Tea> listerTeaAFaire() {
-					
+					// TODO Auto-generated method stub
 					return null;
 				}
+				
+				
 
-			
 		
 		
 }

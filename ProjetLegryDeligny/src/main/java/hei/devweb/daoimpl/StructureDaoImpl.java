@@ -1,9 +1,10 @@
-package hei.devweb.dao.impl;
+package hei.devweb.daoimpl;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.mysql.jdbc.PreparedStatement;
@@ -20,17 +21,25 @@ public class StructureDaoImpl implements StructureDao {
 		// creation de mandature pour une structure
 		// acces en ecriture
 					
-					public void StructureChangement (String idelev, Integer clestructure,String annee ){
+					public void StructureChangement (String idelev, Integer clestructure,Date datedebut, Date datefin ){
 						// creation de la mandature
+						
+						java.util.Date utilDate_debut = datedebut;
+					    java.sql.Date sqlDatedebut = new java.sql.Date(utilDate_debut.getTime());
+					    
+					    java.util.Date utilDate_fin = datefin;
+					    java.sql.Date sqlDatefin = new java.sql.Date(utilDate_fin.getTime()); 
+					    
 						try {
 							Connection connection = DataSourceProvider.getDataSource()
 									.getConnection();
 
 							PreparedStatement stmt = (PreparedStatement) connection
-									.prepareStatement("INSERT INTO `presider`(id_eleve`,`cle_structure`,`annee_appartenance`) VALUES(?,?,?) ");
+									.prepareStatement("INSERT INTO `presider`(id_eleve`,`cle_structure`,`date_debut`,` date_fin`) VALUES(?,?,?,?) ");
 							stmt.setString(1,idelev);
 							stmt.setInt(2,clestructure);
-							stmt.setString(3, annee);
+							stmt.setDate(3, sqlDatedebut);
+							stmt.setDate(4, sqlDatefin);
 							stmt.executeUpdate();
 							// Fermer la connexion
 
@@ -206,9 +215,8 @@ public class StructureDaoImpl implements StructureDao {
 			Structure structure = new Structure(
 			results.getInt("cle_structure"),
 			results.getString("structure_nom"),
-			getPresidentNomById(results.getInt("cle_structure")),
-			getPresidentPrenomById(results.getInt("cle_structure")));
-			
+			getPresidentPrenomById(results.getInt("cle_structure")),
+			getPresidentNomById(results.getInt("cle_structure")));
 			structures.add(structure);
 			}
 			
@@ -268,9 +276,9 @@ public class StructureDaoImpl implements StructureDao {
 						results.next();
 						structure = new Structure(
 						results.getInt("cle_structure"),
-						results.getString("structure_nom"),
-						getPresidentNomById(results.getInt("cle_structure")),
-						getPresidentPrenomById(results.getInt("cle_structure")));
+						results.getString("structure_nom"),						
+						getPresidentPrenomById(results.getInt("cle_structure")),
+						getPresidentNomById(results.getInt("cle_structure")));
 							
 							// Fermer la connexion
 							results.close();

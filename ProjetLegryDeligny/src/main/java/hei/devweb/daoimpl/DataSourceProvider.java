@@ -1,4 +1,4 @@
-package hei.devweb.dao.impl;
+package hei.devweb.daoimpl;
 
 import javax.sql.DataSource;
 

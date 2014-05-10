@@ -1,4 +1,4 @@
-package hei.devweb.dao.impl;
+package hei.devweb.daoimpl;
 import hei.devweb.dao.AnnonceDao;
 
 

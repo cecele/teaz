@@ -1,4 +1,4 @@
-package hei.devweb.dao.impl;
+package hei.devweb.daoimpl;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
