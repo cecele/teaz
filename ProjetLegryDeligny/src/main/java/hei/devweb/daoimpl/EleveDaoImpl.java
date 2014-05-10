@@ -579,9 +579,8 @@ public class EleveDaoImpl implements EleveDao {
 	//-----------------------------------------------------------------------------------------------------------------
 			//Calcul de la promotion de l'�l�ve : recuperation de classe en cours pour le calcul
 			//acc�s en lecture
-	
-	public static String getPromotion(String ideleve){
-		String classeencours="";
+	public static Integer getCleClasse(String ideleve){
+		
 		int cleclasse=0;
 		
 		// recuperation de la cl� classe la plus recente
@@ -605,22 +604,27 @@ public class EleveDaoImpl implements EleveDao {
 		catch (SQLException e) {
 							e.printStackTrace();
 						}
+		return cleclasse;
+	}
+	public static String getPromotion(String ideleve){
+		String classeencours="";
+		Integer cleclasse= getCleClasse(ideleve);
 		// recuperation de la classe en cours 
 		try {
-			Connection connection2 = DataSourceProvider.getDataSource()
+			Connection connection = DataSourceProvider.getDataSource()
 					.getConnection();
 
 			
-			PreparedStatement stmt2 = (PreparedStatement) connection2.prepareStatement("SELECT classe FROM classe WHERE cle_classe=?");
-			stmt2.setInt(1,cleclasse);
-			ResultSet results2 = stmt2.executeQuery();
-			
-			classeencours=results2.getString("classe");
+			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT classe FROM classe WHERE cle_classe=?");
+			stmt.setInt(1,cleclasse);
+			ResultSet results = stmt.executeQuery();
+			results.next();
+			classeencours=results.getString("classe");
 			
 			// Fermer la connexion
-			results2.close();
-			stmt2.close();
-			connection2.close();
+			results.close();
+			stmt.close();
+			connection.close();
 			
 			}
 		catch (SQLException e) {

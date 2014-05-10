@@ -63,7 +63,7 @@ public class StructureDaoImpl implements StructureDao {
 									.getConnection();
 
 							PreparedStatement stmt = (PreparedStatement) connection
-									.prepareStatement("INSERT INTO `structure`(structure_nom`) VALUES(?) ");
+									.prepareStatement("INSERT INTO `structure`(`structure_nom`) VALUES(?) ");
 							stmt.setString(1,nom);
 							stmt.executeUpdate();
 							// Fermer la connexion

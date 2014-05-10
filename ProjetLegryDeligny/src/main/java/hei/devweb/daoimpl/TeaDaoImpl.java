@@ -184,7 +184,7 @@ public class TeaDaoImpl implements TeaDao {
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT SUM(nbheure_realisee) as total FROM tea WHERE id_eleve=?");
 			stmt.setString(1,ideleve);
 			ResultSet results = stmt.executeQuery();
-			
+			results.next();
 			nbtotal=results.getInt("total");
 			
 			// Fermer la connexion
@@ -549,7 +549,7 @@ return teas;
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT SUM(nbheure_realisee) as total FROM tea WHERE statut_valide=0");
 			
 			ResultSet results = stmt.executeQuery();
-			
+			results.next();
 			nbtotal=results.getInt("total");
 			
 			// Fermer la connexion
@@ -581,7 +581,7 @@ return teas;
 				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT SUM(nbheure_realisee) as total FROM tea WHERE id_eleve=? AND statut_valide=1");
 				stmt.setString(1,ideleve);
 				ResultSet results = stmt.executeQuery();
-				
+				results.next();
 				nbtotal=results.getInt("total");
 				
 				// Fermer la connexion
@@ -613,7 +613,7 @@ return teas;
 				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT SUM(classe.nb_tea) as total FROM appartenir INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE appartenir.id_eleve=?");
 				stmt.setString(1,ideleve);
 				ResultSet results = stmt.executeQuery();
-				
+				results.next();
 				nbtotal=results.getInt("total");
 				
 				// Fermer la connexion
@@ -645,7 +645,7 @@ return teas;
 				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT SUM(nbheure_realisee) as total FROM tea WHERE id_eleve=?");
 				stmt.setString(1,ideleve);
 				ResultSet results = stmt.executeQuery();
-				
+				results.next();
 				nbtotal=results.getInt("total");
 				
 				// Fermer la connexion
@@ -677,7 +677,7 @@ return teas;
 						PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT COUNT(cle_tea) as total FROM tea WHERE statut_valide=0");
 
 						ResultSet results = stmt.executeQuery();
-						
+						results.next();
 						nbtotal=results.getInt("total");
 						
 						// Fermer la connexion

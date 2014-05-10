@@ -205,6 +205,7 @@ public void offre_placemoins (Integer cle_offre){
 	
 	public List<Offre> listerOffreByEleve(String ideleve){
 		List<Offre> offres = new ArrayList<Offre>();
+		
 		try {
 			Connection connection = DataSourceProvider.getDataSource()
 					.getConnection();
@@ -230,7 +231,7 @@ public void offre_placemoins (Integer cle_offre){
 						StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
 						StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
 						);
-				if(getPostulerOffre(results.getInt("cle_offre"), ideleve))offres.add(offre);	
+				if(getPostulerOffre(results.getInt("cle_offre"), ideleve)==false)offres.add(offre);	
 				
 			}
 			// Fermer la connexion
@@ -257,10 +258,11 @@ public void offre_placemoins (Integer cle_offre){
 	                PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT id_eleve FROM tea WHERE cle_offre = ? ");
 	                stmt.setInt(1,cleoffre);
 	                ResultSet results = stmt.executeQuery();
-
+	                
 	           while  (results.next()&& rep==false){
 	        	   
-	           
+	        	   System.out.println(results.getString("id_eleve"));
+	        	   System.out.println(rep);
 	           String ideleveenbase= results.getString("id_eleve");
 	           if(ideleve==ideleveenbase) rep=true;
 	           }
