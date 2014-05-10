@@ -355,7 +355,7 @@ try {
 	StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
 	StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
 	);
-
+		System.out.println("getTeaAValiderByStructure : requete " + results.getInt("cle_tea"));
 	
 		teas.add(tea);	
 		
