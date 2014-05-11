@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -76,7 +77,7 @@ public class DaoTestCaseAnnonceDaoImpl {
 		stmt.executeUpdate("INSERT INTO `eleve` (`id_eleve`, `eleve_nom`, `eleve_prenom`, `date_naissance`, `numrue`, `nomrue`, `codepostal`, `ville`, `date_entree`, `cotisant`, `eleve_profil`, `diplome`, `motdepasse`) VALUES ('11111', 'DELIGNY', 'MARTIN', '1991-03-11', 12, 'RUE DU PORT', '59000', 'LILLE', 2010, NULL, 1, 0, 'motdepasse')");
 		stmt.executeUpdate("INSERT INTO `structure` (`cle_structure`, `structure_nom`) VALUES (1, 'INTEGRALE-VP')");
 		stmt.executeUpdate("INSERT INTO `presider` (`id_eleve`, `cle_structure`, `date_debut`, `date_fin`) VALUES ('10153', 1, '2014-05-01', '2015-06-15')");
-		stmt.executeUpdate("INSERT INTO `offre` (`cle_offre`, `date_depot`, `date_miseenligne`, `date_tea`, `heure_debut`, `heure_fin`, `statut`, `offre_description`, `eleve_mail`, `offre_titre`, `offre_place`, `cle_structure`) VALUES (1, '2014-05-09', '2014-05-10', '2014-05-19', '12', '13', 0, 'DESCRIPTION CHIANTE', 'cc@hei.fr', 'TITRE INTERESSANT', 3, 1)");
+		stmt.executeUpdate("INSERT INTO `offre` (`cle_offre`, `date_depot`, `date_miseenligne`, `date_tea`, `heure_debut`, `heure_fin`, `statut`, `offre_description`, `eleve_mail`, `offre_titre`, `offre_place`, `cle_structure`) VALUES (1, '2014-05-09', '2014-05-10', '2014-05-19', '12', '13', 1, 'DESCRIPTION CHIANTE', 'cc@hei.fr', 'TITRE INTERESSANT', 3, 1)");
 		stmt.executeUpdate("INSERT INTO `tea` (`cle_tea`, `date_tea_realisee`, `nbheure_realisee`, `statut_valide`, `date_validation`, `cle_offre`, `id_eleve`) VALUES (1, '2014-05-05', 2, 0, NULL, 1, '11111')");		
 		stmt.executeUpdate("INSERT INTO `classe` (`cle_classe`, `classe`, `annee`, `nb_tea`) VALUES(1, 'H1A', '2014', NULL)");
 		stmt.executeUpdate("INSERT INTO `classe` (`cle_classe`, `classe`, `annee`, `nb_tea`) VALUES(2, 'H2B', '2014', 3)");
@@ -273,7 +274,57 @@ public class DaoTestCaseAnnonceDaoImpl {
 //			             stmt.close();
 //			             connection.close();
 //			     }
-			
 	
+	//------------------------------------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------------------------------------
+		
+    @Test
+    public void testlisterOffreByEleve() throws Exception {
+    	
+    	List<Offre> offres = new ArrayList<Offre>();
+    	String StringDatedepot = "2014-05-09";
+		 
+		 String StringDatetea = "2014-05-15";
+		 SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd");                                  
+		 Date datedepot = null; 
+		 Date datemiseenligne=null;
+		 Date datetea=null;
+		 
+		 try {                         
+		 datedepot = sdf.parse(StringDatedepot);      
+		
+		 datetea =sdf.parse(StringDatetea);
+		 } 
+		 catch (ParseException e) 
+		 {                         
+		 // TODO Auto-generated catch block                         
+		 e.printStackTrace();                 
+		 }
+           offres = daoAnnonce.listerOffreByEleve("10153");
+
+            Connection connection = DataSourceProvider.getDataSource()
+                            .getConnection();
+            Statement stmt = connection.createStatement();
+            
+            ResultSet results = stmt.executeQuery("SELECT * FROM `offre` WHERE NOT EXISTS (SELECT cle_offre FROM tea WHERE id_eleve=`10153` ");
+            Assert.assertTrue(results.next());
+            Assert.assertEquals((int) offres.get(0).getCle_offre(), 1);
+          Assert.assertEquals(offres.get(0).getDate_depot(), datedepot);
+          Assert.assertEquals(offres.get(0).getDate_miseenligne(),datemiseenligne);
+          Assert.assertEquals(offres.get(0).getDate_tea(), datetea);
+          Assert.assertEquals(offres.get(0).getHeure_debut(), "12");
+          Assert.assertEquals(offres.get(0).getHeure_fin(), "13");
+          Assert.assertEquals((int)offres.get(0).getStatut(), 0);
+          Assert.assertEquals(offres.get(0).getOffre_description(), "DESCRIPTION CHIANTE");
+          Assert.assertEquals(offres.get(0).getEleve_mail(), "cc@hei.fr");
+          Assert.assertEquals(offres.get(0).getOffre_titre(), "TITRE INTERESSANT");
+          Assert.assertEquals((int)offres.get(0).getOffre_place(), 3);
+          Assert.assertEquals((int)offres.get(0).getCle_structure(), 1);
+          
+            stmt.close();
+            connection.close();
+            
+    }
+
 }
 	

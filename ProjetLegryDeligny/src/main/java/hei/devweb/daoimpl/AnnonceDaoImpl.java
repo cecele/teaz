@@ -219,7 +219,7 @@ public void offre_placemoins (Integer cle_offre){
 
 //-----------------------------------------------------------------------------------------------------------------
 //r�cup�ration des annonces  valide par ordres decroissant de dates avec structure ou les offres auquels un élève a postulé n'apparait plus
-//acc�s en lecture NON FONCTIONNELLE
+//acc�s en lecture 
 	
 	public List<Offre> listerOffreByEleve(String ideleve){
 		List<Offre> offres = new ArrayList<Offre>();
