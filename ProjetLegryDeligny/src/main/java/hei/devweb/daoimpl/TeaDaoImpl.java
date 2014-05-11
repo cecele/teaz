@@ -81,7 +81,7 @@ public class TeaDaoImpl implements TeaDao {
 					// Utiliser la connexion
 					
 					PreparedStatement stmt2 = (PreparedStatement) connection2
-							.prepareStatement("INSERT INTO `tea`(`date_tea_realisee`,`nbheure_realisee`,`statut_valide`,`cle_offre`,`id_eleve`) VALUES(?,?,0,?,?)");
+							.prepareStatement("INSERT INTO `tea`(`date_tea_realisee`,`nbheure_realisee`,`statut_valide`,`cle_offre`,`id_eleve`) VALUES(?,0,?,?,?)");
 							stmt2.setDate(1, (Date) offre. getDate_tea());
 							stmt2.setInt(2, nbtea);
 							stmt2.setInt(3, offre.getCle_offre());
@@ -240,114 +240,200 @@ public class TeaDaoImpl implements TeaDao {
 	// AFFICHAGE LISTE
 	//-----------------------------------------------------------------------------------------------------------------
 	
-	//-----------------------------------------------------------------------------------------------------------------
-	//recuperation 
-	//acc�s en lecture
-		
-		public String getIdeleveByCleTea(Integer cletea){
-			String ideleve="";
-			
-			// recuperation de la cl� classe la plus recente
-			try {
-				Connection connection = DataSourceProvider.getDataSource()
-						.getConnection();
+			//-----------------------------------------------------------------------------------------------------------------
+			//recupération tea qui correspondent à une offre 
+			//acc�s en lecture
+			public List<Tea> getTeaByOffre(Integer cleoffre){
+				List<Tea> teas = new ArrayList<Tea>();
+				try {
+					Connection connection = DataSourceProvider.getDataSource()
+							.getConnection();
 
-				
-				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT id_eleve  FROM tea WHERE cle_tea=?");
-				stmt.setInt(1, cletea);
-				ResultSet results = stmt.executeQuery();
-				results.next();
-				ideleve=results.getString("id_eleve");
-				
-				// Fermer la connexion
-				results.close();
-				stmt.close();
-				connection.close();
-				
+					
+					PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tea  WHERE cle_offre=?");
+					stmt.setInt(1,cleoffre);
+					ResultSet results = stmt.executeQuery();
+					
+					while (results.next()) {
+						Tea tea =new Tea(
+					results.getInt("cle_tea"),
+					results.getDate("date_tea_realisee"),
+					results.getInt("nbheure_realisee"),
+					results.getInt("nbheure_validee"),
+					results.getInt("statut_valide"),
+					results.getDate("date_validation"),
+					results.getInt("cle_offre"),
+					results.getString("id_eleve"),
+					results.getDate("date_depot"),
+					results.getDate("date_miseenligne"),
+					results.getDate("date_tea"),
+					results.getString("heure_debut"),
+					results.getString("heure_fin"),
+					results.getInt("statut"),
+					results.getString("offre_description"),
+					results.getString("eleve_mail"),
+					results.getString("offre_titre"),
+					results.getInt("cle_structure"),
+					results.getInt("offre_place"),
+					StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
+					StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
+					StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
+					EleveDaoImpl.getEleveNomById(results.getString("id_eleve")),
+					EleveDaoImpl.getElevePrenomById(results.getString("id_eleve"))
+					);
+					
+						teas.add(tea);	
+						
+					}
+						// Fermer la connexion
+						results.close();
+						stmt.close();
+						connection.close();
+						
 				}
-			catch (SQLException e) {
-								e.printStackTrace();
-							}
-			
+					catch (SQLException e) {
+										e.printStackTrace();
+									}
 				
-			return ideleve;
-		}
-	//-----------------------------------------------------------------------------------------------------------------
-	//calcul du nombre d'heure de tea effectuée par un élève
-	//acc�s en lecture
-	
-	public int getNbHeureTeaRealisee(String ideleve){
-		int nbtotal=0;
-		
-		// recuperation de la cl� classe la plus recente
+				return teas;
+				
+			}
+			
+			//-----------------------------------------------------------------------------------------------------------------
+					//recupération des heures de TEA d'un eleve en fonction son id
+					//acc�s en lecture
+			
+			public List<Tea> getTeaByEleve(String ideleve){
+				List<Tea> teas = new ArrayList<Tea>();
+				try {
+					Connection connection = DataSourceProvider.getDataSource()
+							.getConnection();
+
+					
+					PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tea INNER JOIN offre ON tea.cle_offre=offre.cle_offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE id_eleve=?");
+					stmt.setString(1,ideleve);
+					ResultSet results = stmt.executeQuery();
+					
+					while (results.next()) {
+						Tea tea =new Tea(
+					results.getInt("cle_tea"),
+					results.getDate("date_tea_realisee"),
+					results.getInt("nbheure_realisee"),
+					results.getInt("nbheure_validee"),
+					results.getInt("statut_valide"),
+					results.getDate("date_validation"),
+					results.getInt("cle_offre"),
+					results.getString("id_eleve"),
+					results.getDate("date_depot"),
+					results.getDate("date_miseenligne"),
+					results.getDate("date_tea"),
+					results.getString("heure_debut"),
+					results.getString("heure_fin"),
+					results.getInt("statut"),
+					results.getString("offre_description"),
+					results.getString("eleve_mail"),
+					results.getString("offre_titre"),
+					results.getInt("cle_structure"),
+					results.getInt("offre_place"),
+					StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
+					StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
+					StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
+					EleveDaoImpl.getEleveNomById(results.getString("id_eleve")),
+					EleveDaoImpl.getElevePrenomById(results.getString("id_eleve"))
+					);
+					
+						teas.add(tea);	
+						
+					}
+						// Fermer la connexion
+						results.close();
+						stmt.close();
+						connection.close();
+						
+				}
+					catch (SQLException e) {
+										e.printStackTrace();
+									}
+					return teas;	
+			}
+			
+			//-----------------------------------------------------------------------------------------------------------------
+			//recupération des heures de TEA d'une structure en attente
+			//acc�s en lecture
+
+		public List<Tea> getTeaAValiderByStructure(Integer clestructure, java.util.Date datedujour){
+		List<Tea> teas = new ArrayList<Tea>();
+
+		java.util.Date utilDate = datedujour;
+		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
 		try {
 			Connection connection = DataSourceProvider.getDataSource()
 					.getConnection();
 
 			
-			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT SUM(nbheure_realisee) as total FROM tea WHERE id_eleve=?");
-			stmt.setString(1,ideleve);
+			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tea INNER JOIN offre ON tea.cle_offre=offre.cle_offre WHERE cle_structure=? AND statut_valide=0 AND date_tea_realisee<?");
+			stmt.setInt(1,clestructure);
+			stmt.setDate(2,sqlDate);
 			ResultSet results = stmt.executeQuery();
-			results.next();
-			nbtotal=results.getInt("total");
 			
-			// Fermer la connexion
-			results.close();
-			stmt.close();
-			connection.close();
+			while (results.next()) {
+				Tea tea =new Tea(
+			results.getInt("cle_tea"),
+			results.getDate("date_tea_realisee"),
+			results.getInt("nbheure_realisee"),
+			results.getInt("nbheure_validee"),
+			results.getInt("statut_valide"),
+			results.getDate("date_validation"),
+			results.getInt("cle_offre"),
+			results.getString("id_eleve"),
+			results.getDate("date_depot"),
+			results.getDate("date_miseenligne"),
+			results.getDate("date_tea"),
+			results.getString("heure_debut"),
+			results.getString("heure_fin"),
+			results.getInt("statut"),
+			results.getString("offre_description"),
+			results.getString("eleve_mail"),
+			results.getString("offre_titre"),
+			results.getInt("cle_structure"),
+			results.getInt("offre_place"),
+			StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
+			StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
+			StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
+			EleveDaoImpl.getEleveNomById(results.getString("id_eleve")),
+			EleveDaoImpl.getElevePrenomById(results.getString("id_eleve"))
 			
+			);
+				System.out.println("getTeaAValiderByStructure : requete " + results.getInt("cle_tea"));
+			
+				teas.add(tea);	
+				
 			}
-		catch (SQLException e) {
-							e.printStackTrace();
-						}
-		
-			
-		return nbtotal;
-	}
-	//-----------------------------------------------------------------------------------------------------------------
-		//calcul du nombre d'heure de tea effectuée par un élève
-		//acc�s en lecture
-		
-		public int getNbHeureTeaRealiseeByTea(Integer cletea){
-			int nbtotal=0;
-			
-			// recuperation de la cl� classe la plus recente
-			try {
-				Connection connection = DataSourceProvider.getDataSource()
-						.getConnection();
-
-				
-				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT nbheure_realisee  FROM tea WHERE cle_tea=?");
-				stmt.setInt(1,cletea);
-				ResultSet results = stmt.executeQuery();
-				results.next();
-				nbtotal=results.getInt("nbheure_realisee");
-				
 				// Fermer la connexion
 				results.close();
 				stmt.close();
 				connection.close();
 				
-				}
+		}
 			catch (SQLException e) {
 								e.printStackTrace();
 							}
-			
-				
-			return nbtotal;
+			return teas;	
 		}
-	//-----------------------------------------------------------------------------------------------------------------
-	//recupération tea qui correspondent à une offre 
-	//acc�s en lecture
-	public List<Tea> getTeaByOffre(Integer cleoffre){
+
+		//-----------------------------------------------------------------------------------------------------------------
+		//recupération des heures de TEA à valider par le resp TEA
+		//acc�s en lecture
+		public List<Tea> getTeaAValiderByRespTea(){
 		List<Tea> teas = new ArrayList<Tea>();
 		try {
 			Connection connection = DataSourceProvider.getDataSource()
 					.getConnection();
 
 			
-			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tea  WHERE cle_offre=?");
-			stmt.setInt(1,cleoffre);
+			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tea INNER JOIN offre ON tea.cle_offre=offre.cle_offre WHERE statut_valide=1");
+			
 			ResultSet results = stmt.executeQuery();
 			
 			while (results.next()) {
@@ -377,6 +463,7 @@ public class TeaDaoImpl implements TeaDao {
 			EleveDaoImpl.getEleveNomById(results.getString("id_eleve")),
 			EleveDaoImpl.getElevePrenomById(results.getString("id_eleve"))
 			);
+
 			
 				teas.add(tea);	
 				
@@ -390,23 +477,20 @@ public class TeaDaoImpl implements TeaDao {
 			catch (SQLException e) {
 								e.printStackTrace();
 							}
-		
-		return teas;
-		
-	}
-	
-	//-----------------------------------------------------------------------------------------------------------------
-			//recupération des heures de TEA d'un eleve en fonction son id
+			return teas;	
+		}
+
+			//-----------------------------------------------------------------------------------------------------------------
+			//recupération des heures de TEA valide d'un eleve en fonction son id
 			//acc�s en lecture
-	
-	public List<Tea> getTeaByEleve(String ideleve){
+		public List<Tea> getTeaValideByEleve(String ideleve){
 		List<Tea> teas = new ArrayList<Tea>();
 		try {
 			Connection connection = DataSourceProvider.getDataSource()
 					.getConnection();
 
 			
-			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tea INNER JOIN offre ON tea.cle_offre=offre.cle_offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE id_eleve=?");
+			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tea INNER JOIN offre ON tea.cle_offre=offre.cle_offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE id_eleve=?AND statut_valide=1");
 			stmt.setString(1,ideleve);
 			ResultSet results = stmt.executeQuery();
 			
@@ -451,245 +535,178 @@ public class TeaDaoImpl implements TeaDao {
 								e.printStackTrace();
 							}
 			return teas;	
-	}
+		}
+		//-----------------------------------------------------------------------------------------------------------------
+		//recupération des heures de TEA non-valide d'un eleve en fonction son id
+		//acc�s en lecture
+		public List<Tea> getTeaNonValideByEleve(String ideleve){
+		List<Tea> teas = new ArrayList<Tea>();
+		try {
+		Connection connection = DataSourceProvider.getDataSource()
+				.getConnection();
+
+
+		PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tea INNER JOIN offre ON tea.cle_offre=offre.cle_offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE id_eleve=?AND statut_valide=0");
+		stmt.setString(1,ideleve);
+		ResultSet results = stmt.executeQuery();
+
+		while (results.next()) {
+			Tea tea =new Tea(
+		results.getInt("cle_tea"),
+		results.getDate("date_tea_realisee"),
+		results.getInt("nbheure_realisee"),
+		results.getInt("nbheure_validee"),
+		results.getInt("statut_valide"),
+		results.getDate("date_validation"),
+		results.getInt("cle_offre"),
+		results.getString("id_eleve"),
+		results.getDate("date_depot"),
+		results.getDate("date_miseenligne"),
+		results.getDate("date_tea"),
+		results.getString("heure_debut"),
+		results.getString("heure_fin"),
+		results.getInt("statut"),
+		results.getString("offre_description"),
+		results.getString("eleve_mail"),
+		results.getString("offre_titre"),
+		results.getInt("cle_structure"),
+		results.getInt("offre_place"),
+		StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
+		StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
+		StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
+		EleveDaoImpl.getEleveNomById(results.getString("id_eleve")),
+		EleveDaoImpl.getElevePrenomById(results.getString("id_eleve"))
+		);
+
+			teas.add(tea);	
+			
+		}
+			// Fermer la connexion
+			results.close();
+			stmt.close();
+			connection.close();
+			
+		}
+		catch (SQLException e) {
+							e.printStackTrace();
+						}
+		return teas;	
+		}
+		
+		//-----------------------------------------------------------------------------------------------------------------
+		// AFFICHAGE DUN OBJET TEA
+		//-----------------------------------------------------------------------------------------------------------------
+				
+				
+		
+		//-----------------------------------------------------------------------------------------------------------------
+		// AFFICHAGE RETOUR D'UN PARAMETRE D'UNE TEA
+		//-----------------------------------------------------------------------------------------------------------------
+		//-----------------------------------------------------------------------------------------------------------------
+		//recuperation 
+		//acc�s en lecture
+			
+			public String getIdeleveByCleTea(Integer cletea){
+				String ideleve="";
+				
+				// recuperation de la cl� classe la plus recente
+				try {
+					Connection connection = DataSourceProvider.getDataSource()
+							.getConnection();
+
+					
+					PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT id_eleve  FROM tea WHERE cle_tea=?");
+					stmt.setInt(1, cletea);
+					ResultSet results = stmt.executeQuery();
+					results.next();
+					ideleve=results.getString("id_eleve");
+					
+					// Fermer la connexion
+					results.close();
+					stmt.close();
+					connection.close();
+					
+					}
+				catch (SQLException e) {
+									e.printStackTrace();
+								}
+				
+					
+				return ideleve;
+			}
+			//-----------------------------------------------------------------------------------------------------------------
+			//calcul du nombre d'heure de tea effectuée pour une TEA
+			//acc�s en lecture
+			
+			public int getNbHeureTeaRealiseeByTea(Integer cletea){
+				int nbtotal=0;
+				
+				// recuperation de la cl� classe la plus recente
+				try {
+					Connection connection = DataSourceProvider.getDataSource()
+							.getConnection();
+
+					
+					PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT nbheure_realisee  FROM tea WHERE cle_tea=?");
+					stmt.setInt(1,cletea);
+					ResultSet results = stmt.executeQuery();
+					results.next();
+					nbtotal=results.getInt("nbheure_realisee");
+					
+					// Fermer la connexion
+					results.close();
+					stmt.close();
+					connection.close();
+					
+					}
+				catch (SQLException e) {
+									e.printStackTrace();
+								}
+				
+					
+				return nbtotal;
+			}
+		
+		//-----------------------------------------------------------------------------------------------------------------
+		// AFFICHAGE CALCUL
+		//-----------------------------------------------------------------------------------------------------------------
+				
 	
 	//-----------------------------------------------------------------------------------------------------------------
-	//recupération des heures de TEA d'une structure en attente
+	//calcul du nombre d'heure de tea effectuée par un élève qq soit le statut de la TEA
 	//acc�s en lecture
-
-public List<Tea> getTeaAValiderByStructure(Integer clestructure, java.util.Date datedujour){
-List<Tea> teas = new ArrayList<Tea>();
-
-java.util.Date utilDate = datedujour;
-java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-
-try {
-	Connection connection = DataSourceProvider.getDataSource()
-			.getConnection();
-
 	
-	PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tea INNER JOIN offre ON tea.cle_offre=offre.cle_offre WHERE cle_structure=? AND statut_valide=0 AND date_tea_realisee<?");
-	stmt.setInt(1,clestructure);
-	stmt.setDate(2,sqlDate);
-	ResultSet results = stmt.executeQuery();
-	
-	while (results.next()) {
-		Tea tea =new Tea(
-	results.getInt("cle_tea"),
-	results.getDate("date_tea_realisee"),
-	results.getInt("nbheure_realisee"),
-	results.getInt("nbheure_validee"),
-	results.getInt("statut_valide"),
-	results.getDate("date_validation"),
-	results.getInt("cle_offre"),
-	results.getString("id_eleve"),
-	results.getDate("date_depot"),
-	results.getDate("date_miseenligne"),
-	results.getDate("date_tea"),
-	results.getString("heure_debut"),
-	results.getString("heure_fin"),
-	results.getInt("statut"),
-	results.getString("offre_description"),
-	results.getString("eleve_mail"),
-	results.getString("offre_titre"),
-	results.getInt("cle_structure"),
-	results.getInt("offre_place"),
-	StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
-	StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-	StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
-	EleveDaoImpl.getEleveNomById(results.getString("id_eleve")),
-	EleveDaoImpl.getElevePrenomById(results.getString("id_eleve"))
-	
-	);
-		System.out.println("getTeaAValiderByStructure : requete " + results.getInt("cle_tea"));
-	
-		teas.add(tea);	
+	public int getNbHeureTeaRealisee(String ideleve){
+		int nbtotal=0;
 		
+		// recuperation de la cl� classe la plus recente
+		try {
+			Connection connection = DataSourceProvider.getDataSource()
+					.getConnection();
+
+			
+			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT SUM(nbheure_realisee) as total FROM tea WHERE id_eleve=?");
+			stmt.setString(1,ideleve);
+			ResultSet results = stmt.executeQuery();
+			results.next();
+			nbtotal=results.getInt("total");
+			
+			// Fermer la connexion
+			results.close();
+			stmt.close();
+			connection.close();
+			
+			}
+		catch (SQLException e) {
+							e.printStackTrace();
+						}
+		
+			
+		return nbtotal;
 	}
-		// Fermer la connexion
-		results.close();
-		stmt.close();
-		connection.close();
-		
-}
-	catch (SQLException e) {
-						e.printStackTrace();
-					}
-	return teas;	
-}
-
+	
 //-----------------------------------------------------------------------------------------------------------------
-//recupération des heures de TEA à valider par le resp TEA
-//acc�s en lecture
-public List<Tea> getTeaAValiderByRespTea(){
-List<Tea> teas = new ArrayList<Tea>();
-try {
-	Connection connection = DataSourceProvider.getDataSource()
-			.getConnection();
-
-	
-	PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tea INNER JOIN offre ON tea.cle_offre=offre.cle_offre WHERE statut_valide=1");
-	
-	ResultSet results = stmt.executeQuery();
-	
-	while (results.next()) {
-		Tea tea =new Tea(
-	results.getInt("cle_tea"),
-	results.getDate("date_tea_realisee"),
-	results.getInt("nbheure_realisee"),
-	results.getInt("nbheure_validee"),
-	results.getInt("statut_valide"),
-	results.getDate("date_validation"),
-	results.getInt("cle_offre"),
-	results.getString("id_eleve"),
-	results.getDate("date_depot"),
-	results.getDate("date_miseenligne"),
-	results.getDate("date_tea"),
-	results.getString("heure_debut"),
-	results.getString("heure_fin"),
-	results.getInt("statut"),
-	results.getString("offre_description"),
-	results.getString("eleve_mail"),
-	results.getString("offre_titre"),
-	results.getInt("cle_structure"),
-	results.getInt("offre_place"),
-	StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
-	StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-	StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
-	EleveDaoImpl.getEleveNomById(results.getString("id_eleve")),
-	EleveDaoImpl.getElevePrenomById(results.getString("id_eleve"))
-	);
-
-	
-		teas.add(tea);	
-		
-	}
-		// Fermer la connexion
-		results.close();
-		stmt.close();
-		connection.close();
-		
-}
-	catch (SQLException e) {
-						e.printStackTrace();
-					}
-	return teas;	
-}
-
-	//-----------------------------------------------------------------------------------------------------------------
-	//recupération des heures de TEA valide d'un eleve en fonction son id
-	//acc�s en lecture
-public List<Tea> getTeaValideByEleve(String ideleve){
-List<Tea> teas = new ArrayList<Tea>();
-try {
-	Connection connection = DataSourceProvider.getDataSource()
-			.getConnection();
-
-	
-	PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tea INNER JOIN offre ON tea.cle_offre=offre.cle_offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE id_eleve=?AND statut_valide=1");
-	stmt.setString(1,ideleve);
-	ResultSet results = stmt.executeQuery();
-	
-	while (results.next()) {
-		Tea tea =new Tea(
-	results.getInt("cle_tea"),
-	results.getDate("date_tea_realisee"),
-	results.getInt("nbheure_realisee"),
-	results.getInt("nbheure_validee"),
-	results.getInt("statut_valide"),
-	results.getDate("date_validation"),
-	results.getInt("cle_offre"),
-	results.getString("id_eleve"),
-	results.getDate("date_depot"),
-	results.getDate("date_miseenligne"),
-	results.getDate("date_tea"),
-	results.getString("heure_debut"),
-	results.getString("heure_fin"),
-	results.getInt("statut"),
-	results.getString("offre_description"),
-	results.getString("eleve_mail"),
-	results.getString("offre_titre"),
-	results.getInt("cle_structure"),
-	results.getInt("offre_place"),
-	StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
-	StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-	StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
-	EleveDaoImpl.getEleveNomById(results.getString("id_eleve")),
-	EleveDaoImpl.getElevePrenomById(results.getString("id_eleve"))
-	);
-	
-		teas.add(tea);	
-		
-	}
-		// Fermer la connexion
-		results.close();
-		stmt.close();
-		connection.close();
-		
-}
-	catch (SQLException e) {
-						e.printStackTrace();
-					}
-	return teas;	
-}
-//-----------------------------------------------------------------------------------------------------------------
-//recupération des heures de TEA non-valide d'un eleve en fonction son id
-//acc�s en lecture
-public List<Tea> getTeaNonValideByEleve(String ideleve){
-List<Tea> teas = new ArrayList<Tea>();
-try {
-Connection connection = DataSourceProvider.getDataSource()
-		.getConnection();
-
-
-PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tea INNER JOIN offre ON tea.cle_offre=offre.cle_offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE id_eleve=?AND statut_valide=0");
-stmt.setString(1,ideleve);
-ResultSet results = stmt.executeQuery();
-
-while (results.next()) {
-	Tea tea =new Tea(
-results.getInt("cle_tea"),
-results.getDate("date_tea_realisee"),
-results.getInt("nbheure_realisee"),
-results.getInt("nbheure_validee"),
-results.getInt("statut_valide"),
-results.getDate("date_validation"),
-results.getInt("cle_offre"),
-results.getString("id_eleve"),
-results.getDate("date_depot"),
-results.getDate("date_miseenligne"),
-results.getDate("date_tea"),
-results.getString("heure_debut"),
-results.getString("heure_fin"),
-results.getInt("statut"),
-results.getString("offre_description"),
-results.getString("eleve_mail"),
-results.getString("offre_titre"),
-results.getInt("cle_structure"),
-results.getInt("offre_place"),
-StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
-StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
-EleveDaoImpl.getEleveNomById(results.getString("id_eleve")),
-EleveDaoImpl.getElevePrenomById(results.getString("id_eleve"))
-);
-
-	teas.add(tea);	
-	
-}
-	// Fermer la connexion
-	results.close();
-	stmt.close();
-	connection.close();
-	
-}
-catch (SQLException e) {
-					e.printStackTrace();
-				}
-return teas;	
-}
-//-----------------------------------------------------------------------------------------------------------------
-		//calcul du nombre d'heure de tea en attente 
+		//calcul du nombre d'heure de tea en attente (général)
 		//acc�s en lecture
 	
 	public int getNbHeureTeaEnAttente(){
@@ -785,7 +802,7 @@ return teas;
 			return nbtotal;
 		}
 		//-----------------------------------------------------------------------------------------------------------------
-		//calcul du nombre de tea dues pour un élève en fonction de son id
+		//calcul du nombre de teaEn attente pour un élève en fonction de son id
 		//acc�s en lecture
 		
 		public static int getNbHeureEnAttente(String ideleve){
@@ -893,16 +910,8 @@ return teas;
 					if(nbtotal<=0)return 0;	return nbtotal;
 					
 				}
-				@Override
-				public List<Tea> listerTeaAValider() {
-					// TODO Auto-generated method stub
-					return null;
-				}
 
-				//-----------------------------------------------------------------------------------------------------------------
-				// CALCUL
-				//-----------------------------------------------------------------------------------------------------------------
-
+			
 				
 
 		

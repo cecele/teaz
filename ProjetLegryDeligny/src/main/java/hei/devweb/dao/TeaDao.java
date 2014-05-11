@@ -11,7 +11,7 @@ public interface TeaDao {
 
 	List<Tea> getTeaByEleve(String string);
 
-	List<Tea> listerTeaAValider();
+
 
 	List<Tea> getTeaAValiderByStructure(Integer clestructure, Date datedujour);
 

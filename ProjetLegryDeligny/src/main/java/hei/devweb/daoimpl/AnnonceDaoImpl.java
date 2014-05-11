@@ -72,31 +72,7 @@ public class AnnonceDaoImpl implements AnnonceDao {
 						}
 					}
 		}
-//	//-----------------------------------------------------------------------------------------------------------------
-//	///suppression d'une offre non pourvue ou qui n'est plus n�cessaire (attention verification offre non pourvue)
-//	//acc�s en ecriture
-	//testJunit-----nonutilisé
-//public void deleteOffre(Integer cleoffre) {
-//	
-//	try {
-//		Connection connection = DataSourceProvider.getDataSource()
-//				.getConnection();
-//
-//		PreparedStatement stmt = (PreparedStatement) connection
-//				.prepareStatement("DELETE  FROM offre WHERE cle_offre=?");
-//		stmt.setInt(1,cleoffre);
-//		stmt.executeUpdate();
-//		// Fermer la connexion
-//
-//		stmt.close();
-//		connection.close();
-//
-//	} catch (SQLException e) {
-//		e.printStackTrace();
-//	}
-//	
 
-//}
 
 //-----------------------------------------------------------------------------------------------------------------
 //  MISE A JOUR
@@ -129,32 +105,10 @@ public void annonce_validation (Integer cle_offre,Date datedujour){
 	}
 }
 //-----------------------------------------------------------------------------------------------------------------
-//decrementation de l'offre
-//acces en ecriture -----ATTENTION---- VERIFIER QUE OFFRE_PLACE>0 avant de decrementer
-//test Junit
-public void offre_placemoins (Integer cle_offre){
-	try {
-		Connection connection = DataSourceProvider.getDataSource()
-				.getConnection();
-
-		PreparedStatement stmt = (PreparedStatement) connection
-				.prepareStatement("UPDATE offre SET offre_place=offre_place-1 WHERE cle_offre=?");
-		stmt.setInt(1,cle_offre);	
-		stmt.executeUpdate();
-		// Fermer la connexion
-
-		stmt.close();
-		connection.close();
-
-	} catch (SQLException e) {
-		e.printStackTrace();
-	}
-}
-	//-----------------------------------------------------------------------------------------------------------------
 	//mise � 0 du statut pour enlever l'affichage
 	//acces en ecriture--- a effectuer quand le nombre de place est � 0
 	// test junit ne fonctionne pas!
- 	
+	
 
 	public void AnnonceModification (Offre offre){
 		
@@ -212,62 +166,323 @@ public void offre_placemoins (Integer cle_offre){
 			e.printStackTrace();
 		}
 	}
-
-//-----------------------------------------------------------------------------------------------------------------
-		// AFFICHAGE
-//-----------------------------------------------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------------------------------------------
-//r�cup�ration des annonces  valide par ordres decroissant de dates avec structure ou les offres auquels un élève a postulé n'apparait plus
-//acc�s en lecture 
-	// test junit 
-	
-	public List<Offre> listerOffreByEleve(String ideleve){
-		List<Offre> offres = new ArrayList<Offre>();
-		
+	//-----------------------------------------------------------------------------------------------------------------
+	//decrementation de l'offre
+	//acces en ecriture -----ATTENTION---- VERIFIER QUE OFFRE_PLACE>0 avant de decrementer
+	//test Junit
+	public void offre_placemoins (Integer cle_offre){
 		try {
 			Connection connection = DataSourceProvider.getDataSource()
 					.getConnection();
-			
-			
-			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM offre WHERE statut=1 AND offre_place>0 ORDER BY date_tea DESC");
-			ResultSet results = stmt.executeQuery();
-			
-			while (results.next()) {
-				Offre offre =new Offre(results.getInt("cle_offre"),
-						results.getDate("date_depot"),
-						results.getDate("date_miseenligne"),
-						results.getDate("date_tea"),
-						results.getString("heure_debut"),
-						results.getString("heure_fin"),
-						results.getInt("statut"),
-						results.getString("offre_description"),
-						results.getString("eleve_mail"),
-						results.getString("offre_titre"),
-						results.getInt("cle_structure"),
-						results.getInt("offre_place"),
-						Manager.getInstance().getNomStructure(results.getInt("cle_structure")),
-						StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-						StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
-						TeaDaoImpl.getNbPlacePourvue(results.getInt("cle_offre"))
-						
-						);
-				if(getPostulerOffre(results.getInt("cle_offre"), ideleve,results.getInt("cle_structure"))==false)
-					
 
-					{offres.add(offre);	
-				}
-			}
+			PreparedStatement stmt = (PreparedStatement) connection
+					.prepareStatement("UPDATE offre SET offre_place=offre_place-1 WHERE cle_offre=? AND offre_place>0");
+			stmt.setInt(1,cle_offre);	
+			stmt.executeUpdate();
 			// Fermer la connexion
-			results.close();
+
 			stmt.close();
 			connection.close();
-			}catch (SQLException e) {
-				e.printStackTrace();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+		
+//-----------------------------------------------------------------------------------------------------------------
+	// AFFICHAGE LISTE
+//-----------------------------------------------------------------------------------------------------------------
+
+	//-----------------------------------------------------------------------------------------------------------------
+	//r�cup�ration des annonces  valide par ordres decroissant de dates avec structure ou les offres auquels un élève a postulé n'apparait plus
+	//acc�s en lecture 
+		// test junit 
+		
+		public List<Offre> listerOffreByEleve(String ideleve){
+			List<Offre> offres = new ArrayList<Offre>();
+			
+			try {
+				Connection connection = DataSourceProvider.getDataSource()
+						.getConnection();
+				
+				
+				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM offre WHERE statut=1 AND offre_place>0 ORDER BY date_tea DESC");
+				ResultSet results = stmt.executeQuery();
+				
+				while (results.next()) {
+					Offre offre =new Offre(results.getInt("cle_offre"),
+							results.getDate("date_depot"),
+							results.getDate("date_miseenligne"),
+							results.getDate("date_tea"),
+							results.getString("heure_debut"),
+							results.getString("heure_fin"),
+							results.getInt("statut"),
+							results.getString("offre_description"),
+							results.getString("eleve_mail"),
+							results.getString("offre_titre"),
+							results.getInt("cle_structure"),
+							results.getInt("offre_place"),
+							Manager.getInstance().getNomStructure(results.getInt("cle_structure")),
+							StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
+							StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
+							TeaDaoImpl.getNbPlacePourvue(results.getInt("cle_offre"))
+							
+							);
+					if(getPostulerOffre(results.getInt("cle_offre"), ideleve,results.getInt("cle_structure"))==false)
+						
+
+						{offres.add(offre);	
+					}
+				}
+				// Fermer la connexion
+				results.close();
+				stmt.close();
+				connection.close();
+				}catch (SQLException e) {
+					e.printStackTrace();
+				}
+
+				return offres;
+			}
+		//-----------------------------------------------------------------------------------------------------------------
+		//r�cup�ration des annonces  valide par ordres decroissant de dates sans structure
+		//acc�s en lecture
+		// test junit
+			
+			public List<Offre> listerOffre(){
+				List<Offre> offres = new ArrayList<Offre>();
+				try {
+					Connection connection = DataSourceProvider.getDataSource()
+							.getConnection();
+
+					Statement stmt = connection.createStatement();
+					ResultSet results = stmt.executeQuery("SELECT * FROM offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE statut=1 ORDER BY date_tea DESC");
+					
+					while (results.next()) {
+						
+						Offre offre =new Offre(results.getInt("cle_offre"),
+								results.getDate("date_depot"),
+								results.getDate("date_miseenligne"),
+								results.getDate("date_tea"),
+								results.getString("heure_debut"),
+								results.getString("heure_fin"),
+								results.getInt("statut"),
+								results.getString("offre_description"),
+								results.getString("eleve_mail"),
+								results.getString("offre_titre"),
+								results.getInt("cle_structure"),
+								results.getInt("offre_place"),
+								results.getString("structure_nom"),
+								StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
+								StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
+								TeaDaoImpl.getNbPlacePourvue(results.getInt("cle_offre"))
+								
+								);
+					
+						offres.add(offre);	
+					}
+					// Fermer la connexion
+					results.close();
+					stmt.close();
+					connection.close();
+					}catch (SQLException e) {
+						e.printStackTrace();
+					}
+
+					return offres;
+				}
+		//-----------------------------------------------------------------------------------------------------------------
+		//r�cup�ration des annonces non valide par ordres decroissant 
+		//acc�s en lecture
+		// test junit
+			
+		public List<Offre> listerOffreNonValide(){
+			List<Offre> offres = new ArrayList<Offre>();
+			try {
+				Connection connection = DataSourceProvider.getDataSource()
+						.getConnection();
+
+			
+				
+				Statement stmt = connection.createStatement();
+				ResultSet results = stmt.executeQuery("SELECT * FROM offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE statut=0 AND offre_place>0 ORDER BY date_tea DESC");
+				
+				while (results.next()) {
+					Offre offre =new Offre(results.getInt("cle_offre"),
+							results.getDate("date_depot"),
+							results.getDate("date_miseenligne"),
+							results.getDate("date_tea"),
+							results.getString("heure_debut"),
+							results.getString("heure_fin"),
+							results.getInt("statut"),
+							results.getString("offre_description"),
+							results.getString("eleve_mail"),
+							results.getString("offre_titre"),
+							results.getInt("cle_structure"),
+							results.getInt("offre_place"),
+							results.getString("structure_nom"),
+							StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
+							StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
+							TeaDaoImpl.getNbPlacePourvue(results.getInt("cle_offre"))
+							
+							);
+					
+					offres.add(offre);	
+					System.out.println(results.getString("eleve_mail"));
+				}
+				// Fermer la connexion
+				results.close();
+				stmt.close();
+				connection.close();
+				}catch (SQLException e) {
+					e.printStackTrace();
+				}
+
+				return offres;
+			}
+		
+		//-----------------------------------------------------------------------------------------------------------------
+		//r�cup�ration des annonces non valide par ordres decroissant 
+		//acc�s en lecture
+		//test junit
+			
+		public List<Offre> listerOffreByStructure(Integer clestructure){
+			List<Offre> offres = new ArrayList<Offre>();
+			
+				try {
+	                Connection connection = DataSourceProvider.getDataSource()
+	                                .getConnection();
+	                
+	                PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE offre.cle_structure=? ORDER BY date_tea DESC");
+				 stmt.setInt(1,clestructure);
+				 ResultSet results = stmt.executeQuery();
+				while (results.next()) {
+					Offre offre =new Offre(results.getInt("cle_offre"),
+							results.getDate("date_depot"),
+							results.getDate("date_miseenligne"),
+							results.getDate("date_tea"),
+							results.getString("heure_debut"),
+							results.getString("heure_fin"),
+							results.getInt("statut"),
+							results.getString("offre_description"),
+							results.getString("eleve_mail"),
+							results.getString("offre_titre"),
+							results.getInt("cle_structure"),
+							results.getInt("offre_place"),
+							results.getString("structure_nom"),
+							StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
+							StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
+							TeaDaoImpl.getNbPlacePourvue(results.getInt("cle_offre"))
+							);
+					
+					offres.add(offre);	
+					System.out.println(results.getString("eleve_mail"));
+				}
+				// Fermer la connexion
+				results.close();
+				stmt.close();
+				connection.close();
+				}catch (SQLException e) {
+					e.printStackTrace();
+				}
+
+				return offres;
 			}
 
-			return offres;
-		}
+//-----------------------------------------------------------------------------------------------------------------
+		// AFFICHAGE DUN OBJET offre
+//-----------------------------------------------------------------------------------------------------------------
+				
+		//-----------------------------------------------------------------------------------------------------------------
+				///retourne une offre en fontion de sa clé_offre
+				//acc�s en lecture
+				// test junit
+			
+			public Offre getOffreById(Integer cleoffre){
+				
+				Offre offre=null;
+				
+					try {
+		                Connection connection = DataSourceProvider.getDataSource()
+		                                .getConnection();
+		                
+		             PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE offre.cle_offre=? ");
+					 stmt.setInt(1,cleoffre);
+					 ResultSet results = stmt.executeQuery();
+					 results.next();
+					 offre =new Offre(results.getInt("cle_offre"),
+								results.getDate("date_depot"),
+								results.getDate("date_miseenligne"),
+								results.getDate("date_tea"),
+								results.getString("heure_debut"),
+								results.getString("heure_fin"),
+								results.getInt("statut"),
+								results.getString("offre_description"),
+								results.getString("eleve_mail"),
+								results.getString("offre_titre"),
+								results.getInt("cle_structure"),
+								results.getInt("offre_place"),
+								results.getString("structure_nom"),
+								StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
+								StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
+								TeaDaoImpl.getNbPlacePourvue(results.getInt("cle_offre"))
+								);
+						
+						
+						System.out.println(results.getString("eleve_mail"));
+					
+					// Fermer la connexion
+					results.close();
+					stmt.close();
+					connection.close();
+					}catch (SQLException e) {
+						e.printStackTrace();
+					}
+
+					return offre;
+				}
+			
+		
+//-----------------------------------------------------------------------------------------------------------------
+		// AFFICHAGE RETOUR D'UN PARAMETRE D'UNE offre
+//-----------------------------------------------------------------------------------------------------------------
+
+		//-----------------------------------------------------------------------------------------------------------------
+		///Nombre de places dispos pour une offre donnee
+		//acc�s en lecture
+		// test junit
+		
+		public int getNbPlaces(int idOffre) {
+	        
+	        int nbPlaces = 0;
+	        
+	        try {
+	                Connection connection = DataSourceProvider.getDataSource()
+	                                .getConnection();
+	                
+	                PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT offre_place FROM offre WHERE cle_offre = ? ");
+	                stmt.setInt(1,idOffre);
+	                ResultSet results = stmt.executeQuery();
+
+	            results.next();
+	            nbPlaces = results.getInt("offre_place");
+
+	                // Fermer la connexion
+	                results.close();
+	                stmt.close();
+	                connection.close();
+
+	        } catch (SQLException e) {
+	                e.printStackTrace();
+	        }
+	        return nbPlaces;
+	}		
+		
+//-----------------------------------------------------------------------------------------------------------------
+		// AFFICHAGE CALCUL
+//-----------------------------------------------------------------------------------------------------------------
+
+
 	//-----------------------------------------------------------------------------------------------------------------
 	//test si uen offre a été postulée
 	// acces en lecture
@@ -306,229 +521,8 @@ public void offre_placemoins (Integer cle_offre){
 				return rep;
 			}
 			
-	//-----------------------------------------------------------------------------------------------------------------
-	//r�cup�ration des annonces  valide par ordres decroissant de dates sans structure
-	//acc�s en lecture
-	// test junit
-		
-		public List<Offre> listerOffre(){
-			List<Offre> offres = new ArrayList<Offre>();
-			try {
-				Connection connection = DataSourceProvider.getDataSource()
-						.getConnection();
-
-				Statement stmt = connection.createStatement();
-				ResultSet results = stmt.executeQuery("SELECT * FROM offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE statut=1 ORDER BY date_tea DESC");
-				
-				while (results.next()) {
-					
-					Offre offre =new Offre(results.getInt("cle_offre"),
-							results.getDate("date_depot"),
-							results.getDate("date_miseenligne"),
-							results.getDate("date_tea"),
-							results.getString("heure_debut"),
-							results.getString("heure_fin"),
-							results.getInt("statut"),
-							results.getString("offre_description"),
-							results.getString("eleve_mail"),
-							results.getString("offre_titre"),
-							results.getInt("cle_structure"),
-							results.getInt("offre_place"),
-							results.getString("structure_nom"),
-							StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-							StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
-							TeaDaoImpl.getNbPlacePourvue(results.getInt("cle_offre"))
-							
-							);
-				
-					offres.add(offre);	
-				}
-				// Fermer la connexion
-				results.close();
-				stmt.close();
-				connection.close();
-				}catch (SQLException e) {
-					e.printStackTrace();
-				}
-
-				return offres;
-			}
-	//-----------------------------------------------------------------------------------------------------------------
-	//r�cup�ration des annonces non valide par ordres decroissant 
-	//acc�s en lecture
-	// test junit
-		
-	public List<Offre> listerOffreNonValide(){
-		List<Offre> offres = new ArrayList<Offre>();
-		try {
-			Connection connection = DataSourceProvider.getDataSource()
-					.getConnection();
-
-		
-			
-			Statement stmt = connection.createStatement();
-			ResultSet results = stmt.executeQuery("SELECT * FROM offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE statut=0 AND offre_place>0 ORDER BY date_tea DESC");
-			
-			while (results.next()) {
-				Offre offre =new Offre(results.getInt("cle_offre"),
-						results.getDate("date_depot"),
-						results.getDate("date_miseenligne"),
-						results.getDate("date_tea"),
-						results.getString("heure_debut"),
-						results.getString("heure_fin"),
-						results.getInt("statut"),
-						results.getString("offre_description"),
-						results.getString("eleve_mail"),
-						results.getString("offre_titre"),
-						results.getInt("cle_structure"),
-						results.getInt("offre_place"),
-						results.getString("structure_nom"),
-						StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-						StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
-						TeaDaoImpl.getNbPlacePourvue(results.getInt("cle_offre"))
-						
-						);
-				
-				offres.add(offre);	
-				System.out.println(results.getString("eleve_mail"));
-			}
-			// Fermer la connexion
-			results.close();
-			stmt.close();
-			connection.close();
-			}catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-			return offres;
-		}
 	
-	//-----------------------------------------------------------------------------------------------------------------
-	//r�cup�ration des annonces non valide par ordres decroissant 
-	//acc�s en lecture
-	//test junit
-		
-	public List<Offre> listerOffreByStructure(Integer clestructure){
-		List<Offre> offres = new ArrayList<Offre>();
-		
-			try {
-                Connection connection = DataSourceProvider.getDataSource()
-                                .getConnection();
-                
-                PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE offre.cle_structure=? ORDER BY date_tea DESC");
-			 stmt.setInt(1,clestructure);
-			 ResultSet results = stmt.executeQuery();
-			while (results.next()) {
-				Offre offre =new Offre(results.getInt("cle_offre"),
-						results.getDate("date_depot"),
-						results.getDate("date_miseenligne"),
-						results.getDate("date_tea"),
-						results.getString("heure_debut"),
-						results.getString("heure_fin"),
-						results.getInt("statut"),
-						results.getString("offre_description"),
-						results.getString("eleve_mail"),
-						results.getString("offre_titre"),
-						results.getInt("cle_structure"),
-						results.getInt("offre_place"),
-						results.getString("structure_nom"),
-						StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-						StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
-						TeaDaoImpl.getNbPlacePourvue(results.getInt("cle_offre"))
-						);
-				
-				offres.add(offre);	
-				System.out.println(results.getString("eleve_mail"));
-			}
-			// Fermer la connexion
-			results.close();
-			stmt.close();
-			connection.close();
-			}catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-			return offres;
-		}
-
-	//-----------------------------------------------------------------------------------------------------------------
-	///Nombre de places dispos pour une offre donnee
-	//acc�s en lecture
-	// test junit
 	
-	public int getNbPlaces(int idOffre) {
-        
-        int nbPlaces = 0;
-        
-        try {
-                Connection connection = DataSourceProvider.getDataSource()
-                                .getConnection();
-                
-                PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT offre_place FROM offre WHERE cle_offre = ? ");
-                stmt.setInt(1,idOffre);
-                ResultSet results = stmt.executeQuery();
-
-            results.next();
-            nbPlaces = results.getInt("offre_place");
-
-                // Fermer la connexion
-                results.close();
-                stmt.close();
-                connection.close();
-
-        } catch (SQLException e) {
-                e.printStackTrace();
-        }
-        return nbPlaces;
-}
-	//-----------------------------------------------------------------------------------------------------------------
-		///retourne une offre en fontion de sa clé_offre
-		//acc�s en lecture
-		// test junit
-	
-	public Offre getOffreById(Integer cleoffre){
-		
-		Offre offre=null;
-		
-			try {
-                Connection connection = DataSourceProvider.getDataSource()
-                                .getConnection();
-                
-             PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE offre.cle_offre=? ");
-			 stmt.setInt(1,cleoffre);
-			 ResultSet results = stmt.executeQuery();
-			 results.next();
-			 offre =new Offre(results.getInt("cle_offre"),
-						results.getDate("date_depot"),
-						results.getDate("date_miseenligne"),
-						results.getDate("date_tea"),
-						results.getString("heure_debut"),
-						results.getString("heure_fin"),
-						results.getInt("statut"),
-						results.getString("offre_description"),
-						results.getString("eleve_mail"),
-						results.getString("offre_titre"),
-						results.getInt("cle_structure"),
-						results.getInt("offre_place"),
-						results.getString("structure_nom"),
-						StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-						StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
-						TeaDaoImpl.getNbPlacePourvue(results.getInt("cle_offre"))
-						);
-				
-				
-				System.out.println(results.getString("eleve_mail"));
-			
-			// Fermer la connexion
-			results.close();
-			stmt.close();
-			connection.close();
-			}catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-			return offre;
-		}
 	
 	//-----------------------------------------------------------------------------------------------------------------
 	//calcul du nombre de tea en attente de validation
