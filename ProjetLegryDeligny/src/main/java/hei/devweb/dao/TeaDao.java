@@ -24,4 +24,6 @@ public interface TeaDao {
 
 	Integer getTeaEnAttente();
 
+	Integer getTeaDuesEnCours(String matricule);
+
 }

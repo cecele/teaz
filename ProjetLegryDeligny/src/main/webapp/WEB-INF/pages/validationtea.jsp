@@ -22,13 +22,12 @@
    		<section>
  
 			<h1>TEA en attente</h1>	
-			<c:if test="${empty teas}">		
-			<article>
-				<p>Rien à valider, bon boulot !</p>
-			</article> 
-			</c:if>
+			
 			<article class="valide">
 				<span class="message"></span>
+				<c:if test="${empty offres}">		
+					<p>Rien à valider, bon boulot !</p>
+				</c:if>
 			</article>
 			<c:forEach var="teas" items="${teas}">
 			<article>

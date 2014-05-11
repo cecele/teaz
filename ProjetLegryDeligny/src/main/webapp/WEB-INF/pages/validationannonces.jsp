@@ -22,13 +22,12 @@
    		<section>
  
 			<h1>Annonces</h1>	
-			<c:if test="${empty offres}">		
-			<article>
-				<p>Rien à valider, bon boulot !</p>
-			</article> 
-			</c:if>
+			
 			<article class="valide">
 				<span class="message"></span>
+				<c:if test="${empty offres}">		
+					<p>Rien à valider, bon boulot !</p>
+				</c:if>
 			</article>
 			<c:forEach var="offres" items="${offres}">
 			<article>

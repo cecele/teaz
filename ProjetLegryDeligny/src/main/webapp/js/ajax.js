@@ -30,7 +30,8 @@ $(document).ready(function(){
                     $.ajax({ 
                     	url:"validerannonce", type:"POST",data:{id:$(this).attr("data-id")}
                     });
-                    var nbOffre = $("#nbOffre").text();
+                    var nbOffre = 0;
+                    nbOffre = $("#nbOffre").text();
                     nbOffre--;
                     $("#nbOffre").text(nbOffre);
                     $(".message").text("Vous avez bien valide cette annonce");

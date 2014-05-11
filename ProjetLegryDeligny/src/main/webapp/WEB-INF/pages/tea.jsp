@@ -38,6 +38,7 @@
 							<th>A faire</th>
 							<th>Fait</th>
 							<th>En attente</th>
+							<th>Dues</th>
 						</tr>
 					</thead>	
 					<tr>
@@ -45,7 +46,7 @@
 						<td>${sessionScope.sessionEleve.teaAfaire == 0 ? 'A jour' : 'Pas à jour' }</td>
 						<td>${sessionScope.sessionEleve.teaAfaire}</td>
 						<td>${sessionScope.sessionEleve.teaFaite}</td>
-						<td>${sessionScope.sessionEleve.teaEnAttente}</td>
+						<td>${nbTeaDuesEnCours}</td>
 					</tr>
 				</table>
 			</article>

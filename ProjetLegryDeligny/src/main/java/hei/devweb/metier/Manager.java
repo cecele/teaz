@@ -203,6 +203,11 @@ private static Manager instance;
 		return AnnonceDao.getOffreEnAttente();
 	}
 
+	public Integer getTeaDuesEnCours(String matricule) {
+		// TODO Auto-generated method stub
+		return TeaDao.getTeaDuesEnCours(matricule);
+	}
+
 
 
 }
