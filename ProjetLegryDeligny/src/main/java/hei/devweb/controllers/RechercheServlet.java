@@ -82,7 +82,7 @@ public class RechercheServlet extends HttpServlet {
 		
 		
 		System.out.println("fonction recherche " + matricule+ " " +nom+ " " +prenom+ " " +classe+ " " +orderBy+ " " +diplome+ " " +encours+ " " +ajour+ " " +pasajour);
-		
+		System.out.println(request.getParameter("rech")); 
 		List<Eleve> eleves = Manager.getInstance().rechercheByParameter(matricule,nom,prenom,classe,orderBy,diplome,encours,ajour,pasajour);
 		
 		request.setAttribute("eleves",eleves);
