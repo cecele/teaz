@@ -48,6 +48,8 @@ public class RechercheServlet extends HttpServlet {
 		String orderBy = "id_eleve";
 		Boolean encours = false;
 		Boolean ajour = false;
+		Boolean pasajour = false;
+		Boolean diplome = false;
 		classe = request.getParameter("classe");
 		
 		if(request.getParameter("rech").equals("1"))
@@ -63,10 +65,14 @@ public class RechercheServlet extends HttpServlet {
 				encours = true;
 			if(request.getParameter("ajour").equals("true"))
 				ajour = true;
+			if(request.getParameter("pasajour").equals("true"))
+				pasajour = true;
+			if(request.getParameter("diplome").equals("true"))
+				diplome = true;
 		}
 		
 		
-		List<Eleve> eleves = Manager.getInstance().rechercheByParameter(matricule,nom,prenom,classe,orderBy,encours,ajour);
+		List<Eleve> eleves = Manager.getInstance().rechercheByParameter(matricule,nom,prenom,classe,orderBy,diplome,encours,ajour,pasajour);
 		
 		request.setAttribute("eleves",eleves);
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/gestioneleves.jsp");

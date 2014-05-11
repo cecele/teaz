@@ -25,7 +25,7 @@
 			<a href="${empty sessionScope.sessionEleve ? 'index' : 'tea'}">TEA</a>
 			<c:if test="${!empty sessionScope.sessionEleve}">
 			<ul>
-				<li><a href="tea">Mes TEA</a></li>
+				<li><a href="mestea">Mes TEA</a></li>
 				<li><a href="annonces">Annonces</a></li>
 				<c:if test="${sessionScope.sessionEleve.eleve_profil==1 || sessionScope.sessionEleve.eleve_profil==2|| sessionScope.sessionEleve.eleve_profil==4|| sessionScope.sessionEleve.eleve_profil==999}">
 					<li><a href="deposerannonce?id=0">Déposer une annonce</a></li>

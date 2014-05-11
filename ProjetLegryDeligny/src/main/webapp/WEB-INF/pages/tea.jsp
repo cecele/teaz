@@ -19,39 +19,36 @@
 	<!-- Corps -->
    		<section>
  
-			<h1>TEA</h1>	
-			<c:if test="${empty teas}">		
+			<h1>${sessionScope.sessionEleve.eleve_prenom} ${sessionScope.sessionEleve.eleve_nom}</h1>	
 			<article>
-				<p>Aucune heure de TEA réalisée...</p>
-			</article> 
-			</c:if>		
-			<c:forEach var="teas" items="${teas}">
-			
-			<article>
-					<table class="annonce">
-						<tr>
-							<td class="left">
-								<h2 class="${teas.statut_valide == 2 ? 'valide' : 'attente'}"><fmt:formatDate value="${teas.date_tea_realisee}" pattern="d MMMM yyyy"/></h2>
-							</td>
-							<td class="center">
-								<h2 class="${teas.statut_valide == 2 ? 'valide' : 'attente'}">${teas.statut_valide == 2 ? 'Validée' : 'En attente de validation'}</h2>
-							</td> 
-							<td class="right">
-								<h2 class="${teas.statut_valide == 2 ? 'valide' : 'attente'}">${teas.nbheure_realisee}H</h2>
-							</td>
-						</tr>
-					</table>
-					<hr/>
-					<p>
-					Demandeur : ${teas.structure_nom}<br/>
-					Président : ${teas.structure_president_prenom} ${teas.structure_president_nom}<br/>
-					<br/>
-					Evenement: ${teas.offre_titre}
-					</p>
+				<h2>Fiche</h2>
+				Matricule H${sessionScope.sessionEleve.id_eleve}<br/>
+				Date de naissance <fmt:formatDate value="${sessionScope.sessionEleve.date_naissance}" pattern="d MMMM yyyy"/><br/>
+				Adresse : ${sessionScope.sessionEleve.numrue} ${sessionScope.sessionEleve.nomrue},<br/>
+				${sessionScope.sessionEleve.codepostal} ${sessionScope.sessionEleve.ville}<br/>
+				${sessionScope.sessionEleve.cotisant == 1 ? 'Cotisant' : 'Non cotisant'}<br/>
+				${sessionScope.sessionEleve.diplome == 1 ? 'Diplomé' : 'Non Diplomé'}<br/>
+				
 			</article>
-			
-			</c:forEach>
-			
+			<article>
+				<table class="tableau">
+					<thead>
+						<tr>
+							<th colspan="2">Etat</th>
+							<th>A faire</th>
+							<th>Fait</th>
+							<th>En attente</th>
+						</tr>
+					</thead>	
+					<tr>
+						<td><img src="img/${sessionScope.sessionEleve.teaAfaire == 0 ? 'vert' : 'rouge' }.png" alt ="${eleves.teaAfaire == 0 ? 'vert' : 'rouge' }"/></td>
+						<td>${sessionScope.sessionEleve.teaAfaire == 0 ? 'A jour' : 'Pas à jour' }</td>
+						<td>${sessionScope.sessionEleve.teaAfaire}</td>
+						<td>${sessionScope.sessionEleve.teaFaite}</td>
+						<td>${sessionScope.sessionEleve.teaEnAttente}</td>
+					</tr>
+				</table>
+			</article>
 		</section>	
 		<jsp:include page="bottom.jsp" />
 	</div>

@@ -7,6 +7,7 @@
   <filter-mapping>
     <filter-name>EleveFilter</filter-name>
     <url-pattern>/tea</url-pattern>
+    <url-pattern>/mestea</url-pattern>
     <url-pattern>/annonces</url-pattern>
     <url-pattern>/deposerannonce</url-pattern>
     <url-pattern>/fairetea</url-pattern>
@@ -151,6 +152,14 @@
     <servlet-name>GestionEleves</servlet-name>
     <servlet-class>hei.devweb.controllers.GestionElevesServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>MesTea</servlet-name>
+    <servlet-class>hei.devweb.controllers.MesTeaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MesTea</servlet-name>
+    <url-pattern>/mestea</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>GestionEleves</servlet-name>
     <url-pattern>/gestioneleves</url-pattern>

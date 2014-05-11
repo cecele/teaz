@@ -28,6 +28,12 @@
  						$("#ajour").attr("disabled",true);
  						$("#ajour").attr("style","background-color:gray;");
  						$("#ajour").prop("checked",false);
+ 						$("#diplome").attr("disabled",true);
+ 						$("#diplome").attr("style","background-color:gray;");
+ 						$("#diplome").prop("checked",false);
+ 						$("#pasajour").attr("disabled",true);
+ 						$("#pasajour").attr("style","background-color:gray;");
+ 						$("#pasajour").prop("checked",false);
  						$("#classe").attr("value","tous");
  						$("form").attr("action","recherche?rech=1");
  				});
@@ -56,6 +62,18 @@
 					$("form").attr("action","recherche?rech=2");
 				});
  				$("#ajour").click(function(){
+					$("#matricule").attr("disabled",true);
+					$("#matricule").attr("style","background-color:gray;");
+					$("#matricule").attr("value","");
+					$("form").attr("action","recherche?rech=2");
+				});
+ 				$("#diplome").click(function(){
+					$("#matricule").attr("disabled",true);
+					$("#matricule").attr("style","background-color:gray;");
+					$("#matricule").attr("value","");
+					$("form").attr("action","recherche?rech=2");
+				});
+ 				$("#pasajour").click(function(){
 					$("#matricule").attr("disabled",true);
 					$("#matricule").attr("style","background-color:gray;");
 					$("#matricule").attr("value","");
@@ -116,8 +134,16 @@
 							<td><input type="checkbox" value="true" name="encours" id="encours"  checked/></td>
 						</tr>
 						<tr>
+							<td><label for="diplome" >Diplomé</label></td>
+							<td><input type="checkbox" value="true" name="diplome" id="diplome"  checked/></td>
+						</tr>
+						<tr>
+							<td><label for="pasajour" >Tea pas à jour</label></td>
+							<td><input type="checkbox" value="true" name="pasajour" id="pasajour"  checked/></td>
+						</tr>
+						<tr>
 							<td><label for="ajour" >TEA à jour</label></td>
-							<td><input type="checkbox" name="ajour" value="true" id="ajour" /></td>
+							<td><input type="checkbox" name="ajour" value="true" id="ajour" checked/></td>
 						</tr>
 						<tr>
 							<td><label for="classe" >Classe</label></td>
