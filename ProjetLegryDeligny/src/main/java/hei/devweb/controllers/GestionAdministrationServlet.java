@@ -33,17 +33,15 @@ public class GestionAdministrationServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-			String id  = request.getParameter("id");
-			Manager.getInstance().retirerDroits(id);
-			
-			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/administration.jsp");
-			view.forward(request, response);
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String id  = request.getParameter("id");
+		Manager.getInstance().retirerDroits(id);
 		
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/administration.jsp");
+		view.forward(request, response);
 
 	}
 

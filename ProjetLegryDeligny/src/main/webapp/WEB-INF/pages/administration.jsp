@@ -10,7 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css"/>
 		<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
 		<script type="text/javascript" src="js/menu.js"></script>
-		<script type="text/javascript" src="js/administration.js"></script>
+		<script type="text/javascript" src="js/ajax.js"></script>
         <title>Tea</title>
     </head>
     <body>
@@ -23,9 +23,12 @@
  
 			<h1>Panneau d'administration</h1>			
 			
-	
+			<article class="valide">
+				<span class="message"></span>
+			</article>
 			<article>
 				<h2>Groupe responsables de structure</h2>
+				
 				<form method="POST" action="ajouterdroit?act=1">
 				<table class="tableau">
 					<thead>
@@ -40,9 +43,11 @@
 					<c:forEach var="respStruct" items="${respStruct}">
 					<tr>
 						<td>${respStruct.id_eleve}</td>
-						<td>${respStruct.eleve_nom}</td>
-						<td>${respStruct.eleve_prenom}</td>
-						<td><a href="gestionadministration?id=${respStruct.id_eleve}" class="suppr">Retirer</a></td>
+						<td><span class="nom">${respStruct.eleve_nom}</span></td>
+						<td><span class="prenom">${respStruct.eleve_prenom}</span></td>
+						<td>
+							<span class="gestionadministration" data-id="${respStruct.id_eleve}"><input type="button" value="Retirer"/></span>
+						</td>
 					</tr>
 					</c:forEach>
 					<tr>
@@ -70,9 +75,11 @@
 					<c:forEach var="adminbde" items="${adminbde}">
 					<tr>
 						<td>${adminbde.id_eleve}</td>
-						<td>${adminbde.eleve_nom}</td>
-						<td>${adminbde.eleve_prenom}</td>
-						<td><a href="gestionadministration?id=${adminbde.id_eleve}" class="suppr">Retirer</a></td>
+						<td><span class="nom">${adminbde.eleve_nom}</span></td>
+						<td><span class="prenom">${adminbde.eleve_prenom}</span></td>
+						<td>
+							<span class="gestionadministration" data-id="${adminbde.id_eleve}"><input type="button" value="Retirer"/></span>
+						</td>
 					</tr>
 					</c:forEach>
 					<tr>
@@ -100,9 +107,11 @@
 					<c:forEach var="admin" items="${admin}">
 					<tr>
 						<td>${admin.id_eleve}</td>
-						<td>${admin.eleve_nom}</td>
-						<td>${admin.eleve_prenom}</td>
-						<td><a href="gestionadministration?id=${admin.id_eleve}" class="suppr">Retirer</a></td>
+						<td><span class="nom">${admin.eleve_nom}</span></td>
+						<td><span class="prenom">${admin.eleve_prenom}</span></td>
+						<td>
+							<span class="gestionadministration" data-id="${admin.id_eleve}"><input type="button" value="Retirer"/></span>
+						</td>
 					</tr>
 					</c:forEach>
 					<tr>
@@ -130,9 +139,11 @@
 					<c:forEach var="superadmin" items="${superadmin}">
 					<tr>
 						<td>${superadmin.id_eleve}</td>
-						<td>${superadmin.eleve_nom}</td>
-						<td>${superadmin.eleve_prenom}</td>
-						<td><a href="gestionadministration?id=${superadmin.id_eleve}" class="suppr">Retirer</a></td>
+						<td><span class="nom">${superadmin.eleve_nom}</span></td>
+						<td><span class="prenom">${superadmin.eleve_prenom}</span></td>
+						<td>
+							<span class="gestionadministration" data-id="${superadmin.id_eleve}"><input type="button" value="Retirer"/></span>
+						</td>
 					</tr>
 					</c:forEach>
 					<tr>

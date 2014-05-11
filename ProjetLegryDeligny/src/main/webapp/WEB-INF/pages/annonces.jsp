@@ -23,10 +23,13 @@
  
 			<h1>Annonces</h1>			
 			<c:if test="${empty offres}">
-			<article>
+			<article class="attente">
 				<p>Il n'y a pas d'offres disponibles actuellement</p>
-			</article> 
+			</article>
 			</c:if>
+			<article class="valide">
+				<span class="message"></span>
+			</article> 
 			<c:forEach var="offres" items="${offres}">
 			<article>
 				
@@ -38,7 +41,7 @@
 					<br/>
 					Association : ${offres.structure_nom}<br/>
 					Président : ${offres.structure_president_prenom} ${offres.structure_president_nom}<br/>
-					${offres.offre_place} place${offres.offre_place >= 2 ? 's' : '' } disponible${offres.offre_place >= 2 ? 's' : '' }<br/>
+					<span id="nbplaces">${offres.offre_place}</span> place<span class="plur">${offres.offre_place >= 2 ? 's' : '' }</span> disponible<span class="plur">${offres.offre_place >= 2 ? 's' : '' }</span><br/>
 					<span class="postuler" data-id="${offres.cle_offre}"><input type="button" value="Postuler"/></span>
 					</p>
 			</article>

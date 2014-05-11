@@ -8,7 +8,9 @@
   	<meta http-equiv="Content-Type" content="text/html;
 			 charset=UTF-8">
 		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
 		<script type="text/javascript" src="js/menu.js"></script>
+		<script type="text/javascript" src="js/ajax.js"></script>
         <title>Tea</title>
     </head>
     <body>
@@ -25,6 +27,9 @@
 				<p>Rien à valider, bon boulot !</p>
 			</article> 
 			</c:if>
+			<article class="valide">
+				<span class="message"></span>
+			</article>
 			<c:forEach var="teas" items="${teas}">
 			<article>
 				
@@ -37,7 +42,7 @@
 					<br/>
 					Association : ${teas.structure_nom}<br/>
 					Président : ${teas.structure_president_prenom} ${teas.structure_president_nom}<br/>
-					<a href="validertea?id=${teas.cle_tea }">Valider</a>
+					<span class="validertea" data-id="${teas.cle_tea }"><input type="button" value="Valider"/></span>
 					</p>
 			</article>
 			</c:forEach>
