@@ -219,6 +219,11 @@ private static Manager instance;
 		return TeaDao.getNbTeaAValiderByStructure(cle_structure,date);
 	}
 
+	public List<Tea> getTeaByOffre(Integer cleoffre) {
+		System.out.println("Dans Méthode getTeaByOffre");
+		return TeaDao.getTeaByOffre(cleoffre);
+	}
+
 
 
 }

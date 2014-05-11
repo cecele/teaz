@@ -28,4 +28,6 @@ public interface TeaDao {
 
 	Integer getNbTeaAValiderByStructure(Integer cle_structure, Date date);
 
+	List<Tea> getTeaByOffre(Integer cleoffre);
+
 }

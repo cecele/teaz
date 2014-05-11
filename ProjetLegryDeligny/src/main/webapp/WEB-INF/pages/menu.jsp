@@ -3,7 +3,7 @@
 <header id="ban">
 	<marquee align="center" height="300px" scrolldelay="10" scrollamount="20" onmouseout="this.start()" onmouseover="this.stop()">
 		<p>
-			<img src="img/bandeau4.png" alt="bandeau4" hspace="0"/>
+			<img src="img/ban1.jpg" alt="bandeau" hspace="0"/><img src="img/ban2.jpg" alt="bandeau" hspace="0"/><img src="img/ban3.jpg" alt="bandeau" hspace="0"/><img src="img/ban4.jpg" alt="bandeau" hspace="0"/>
 		</p>
 	</marquee>
 </header>
