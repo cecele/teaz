@@ -750,7 +750,7 @@ public class TeaDaoImpl implements TeaDao {
 						.getConnection();
 
 				
-				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT SUM(nbheure_validee) as total FROM tea WHERE id_eleve=? AND statut_valide=1");
+				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT SUM(nbheure_validee) as total FROM tea WHERE id_eleve=? AND statut_valide=2");
 				stmt.setString(1,ideleve);
 				ResultSet results = stmt.executeQuery();
 				results.next();
@@ -814,7 +814,7 @@ public class TeaDaoImpl implements TeaDao {
 						.getConnection();
 
 				
-				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT SUM(nbheure_realisee) as total FROM tea WHERE id_eleve=?");
+				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT SUM(nbheure_realisee) as total FROM tea WHERE id_eleve=? AND OR(statut_valide=1,statut_valide=0)");
 				stmt.setString(1,ideleve);
 				ResultSet results = stmt.executeQuery();
 				results.next();
