@@ -166,7 +166,7 @@ System.out.println("entrée ds le try");
 			if(diplome && results.getInt("diplome")==1  && etudiant==false && ajour==false && teadues>0 && retard )elevescas8.add(eleve);
 			if(diplome && results.getInt("diplome")==1  && etudiant==false && ajour && teadues==0 && retard==false )elevescas9.add(eleve);
 					
-			System.out.println("choix du cas " +elevescas1.get(i).getId_eleve());
+
 				
 		i=i+1;
 		

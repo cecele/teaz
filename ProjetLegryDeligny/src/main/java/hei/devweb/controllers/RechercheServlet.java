@@ -58,53 +58,30 @@ public class RechercheServlet extends HttpServlet {
 			matricule = request.getParameter("matricule");
 			classe = "tous";
 		}
+		
 		if(request.getParameter("rech").equals("2")){
 			
-			encours = false;
-			ajour = false;
-			pasajour = false;
-			diplome = false;
+			encours = request.getParameter("encours_id")!=null?false:true;
+			ajour =request.getParameter("ajour_id")!=null?false:true;
+			pasajour = request.getParameter("pasjour_id")!=null?false:true;
+			diplome = request.getParameter("diplome_id")!=null?false:true;
 			nom = request.getParameter("nom");
 			prenom = request.getParameter("prenom");
 			classe = request.getParameter("classe");
 			
 			
-//			String[] choix = request.getParameterValues("check");
-			
-//			if(choix != null){
-//			for(int i =0; i< choix.length; i++)
-//				{
-//				System.out.println(" AVANT checkbox encorus " + choix[i].contentEquals("encours") + " encours " + encours );
-//					
-//				encours=request.getParameter("encours")!=null;
-//					
-//				System.out.println(" PENDANT request.getParameter(encours)encours " + encours);	
-//				if( request.getParameter("encours")!=null){ encours = true;
-//						
-//						System.out.println(" Apres checkbox encorus " + request.getParameter("encours") + "encours " + encours );
-//					}
-//					
-//					else if(choix[i].equals("ajour")){
-//						ajour = true;
-//					}
-//					else if(choix[i].equals("pasajour")){
-//						pasajour = true;
-//					}
-//					else if(choix[i].equals("diplome")){
-//						diplome = true;
-//					}
-//				}
-//			}
-			System.out.println(request.getParameter("encours"));
-				
-			System.out.println(request.getParameter("ajour"));
-				
-			System.out.println(request.getParameter("pasajour"));
-			
-			System.out.println(request.getParameter("diplome"));
-			
-		}
+			}
+
+		System.out.println(request.getParameter("encours"));
 		
+		System.out.println(request.getParameter("ajour"));
+			
+		System.out.println(request.getParameter("pasajour"));
+		
+		System.out.println(request.getParameter("diplome"));
+		
+		
+		System.out.println("fonction recherche " + matricule+ " " +nom+ " " +prenom+ " " +classe+ " " +orderBy+ " " +diplome+ " " +encours+ " " +ajour+ " " +pasajour);
 		
 		List<Eleve> eleves = Manager.getInstance().rechercheByParameter(matricule,nom,prenom,classe,orderBy,diplome,encours,ajour,pasajour);
 		
@@ -112,5 +89,5 @@ public class RechercheServlet extends HttpServlet {
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/gestioneleves.jsp");
 		view.forward(request, response);
 	}
-
 }
+

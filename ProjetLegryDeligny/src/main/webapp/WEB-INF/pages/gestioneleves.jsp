@@ -135,23 +135,23 @@
 							<td><label for="prenom" >Prénom</label></td>
 							<td><input type="text" name="prenom" id="prenom" value=""></input></td>
 						</tr>
-						<tr>
-							<td><label for="encours" >En Cours</label></td>
-							<td><input type="checkbox" value="encours" name="echeck" id="encours"  checked/></td>
-						</tr>
-						<tr>
-							<td><label for="diplome" >Diplomé</label></td>
-							<td><input type="checkbox" value="diplome" name="check" id="diplome"  checked/></td>
-						</tr>
-						<tr>
-							<td><label for="pasajour" >Tea pas à jour</label></td>
-							<td><input type="checkbox" value="pasajour" name="check" id="pasajour"  checked/></td>
-						</tr>
-						<tr>
-							<td><label for="ajour" >TEA à jour</label></td>
-							<td><input type="checkbox" name="check" value="check" id="ajour" checked/></td>
-						</tr>
-						<tr>
+						
+ <tr>
+     <td><label for="encours" >En Cours</label></td>
+     <td><input type="checkbox" value="encours_value" name="encours_id" id="encours_id"  checked="checked"/></td>
+</tr>
+ <tr>
+     <td><label for="diplome" >Diplomé</label></td>
+     <td><input type="checkbox" value="diplome_value" name="diplome_id" id="diplome_id"  checked="checked"/></td>
+</tr>
+<tr>
+     <td><label for="pasajour" >Tea pas à jour</label></td>
+     <td><input type="checkbox" value="pasajour_value" name="pasajour_id" id="pasajour_id"  checked="checked"/></td>
+</tr>
+<tr>
+     <td><label for="ajour" >TEA à jour</label></td>
+     <td><input type="checkbox" name="ajour_id" value="ajour_value" id="ajour_id" checked="checked"/></td>
+</tr>
 							<td><label for="classe" >Classe</label></td>
 							<td>
 								<select name="classe" id="classe" required >
