@@ -40,8 +40,8 @@
 	<c:if test="${empty sessionScope.sessionEleve}">  
 		<form method="post" action="connexion">             			      
 			<h2>Connexion</h2>                                                   
-			<input id="id_eleve" name="id_eleve" value="Matricule" size="10" maxlength="5" onclick="if(this.value=='Matricule')this.value='';" /><br/>            
-			<input type="password" id="motdepasse" name="motdepasse" value="Mot de passe" size="10" onclick="if(this.value=='Mot de passe')this.value='';" maxlength="20" /><br/>                                  
+			<input id="id_eleve" name="id_eleve" value="Matricule" size="20" maxlength="5" onclick="if(this.value=='Matricule')this.value='';" /><br/>            
+			<input type="password" id="motdepasse" name="motdepasse" value="Mot de passe" size="20" onclick="if(this.value=='Mot de passe')this.value='';" maxlength="20" /><br/>                                  
 			<input type="submit" value="Connexion" class="sansLabel" /><br />                                    		      
 		</form>				
 	</c:if>
@@ -61,4 +61,4 @@ $(document).ready(function(){
 });
 </script>
 
-<p>Petit message stylé pour afficher notre pouvoir supérieur</p>
+<p id="footer">Petit message stylé pour afficher notre pouvoir supérieur</p>
