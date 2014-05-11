@@ -180,7 +180,7 @@ public class EleveDaoImpl implements EleveDao {
 						
 						if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
 							
-						eleves.add(eleve);	
+						if(eleve.getId_eleve()!="99999")eleves.add(eleve);	
 						
 					}
 						// Fermer la connexion
@@ -233,7 +233,7 @@ public class EleveDaoImpl implements EleveDao {
 							
 							if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
 								
-							eleves.add(eleve);	
+							if(eleve.getId_eleve()!="99999")eleves.add(eleve);	
 							
 						}
 							// Fermer la connexion
@@ -287,7 +287,7 @@ public class EleveDaoImpl implements EleveDao {
 							
 							if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
 								
-							if(RechercheDaoImpl.getTeaDuesEnCours(results.getString("id_eleve"))!=0)eleves.add(eleve);	
+							if(RechercheDaoImpl.getTeaDuesEnCours(results.getString("id_eleve"))!=0 && eleve.getId_eleve()!="99999")eleves.add(eleve);	
 							
 						}
 							// Fermer la connexion
@@ -340,7 +340,7 @@ public class EleveDaoImpl implements EleveDao {
 						
 						if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
 							
-						if(RechercheDaoImpl.getTeaDuesEnCours(results.getString("id_eleve"))==0)eleves.add(eleve);	
+						if(RechercheDaoImpl.getTeaDuesEnCours(results.getString("id_eleve"))==0 && eleve.getId_eleve()!="99999" )eleves.add(eleve);	
 						
 					}
 						// Fermer la connexion
@@ -403,6 +403,7 @@ public class EleveDaoImpl implements EleveDao {
 					results.close();
 					stmt.close();
 					connection.close();
+					if(eleve.getId_eleve()!="99999")eleve=null;
 					
 			}
 				catch (SQLException e) {
@@ -448,7 +449,7 @@ public class EleveDaoImpl implements EleveDao {
 					
 					if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
 						                                                         
-					eleves.add(eleve);                                                        
+					if(eleve.getId_eleve()!="99999")eleves.add(eleve);                                                        
 					}                                 
 				// Fermer la connexion                                
 				results.close();                                 
@@ -475,6 +476,7 @@ public class EleveDaoImpl implements EleveDao {
 
 				public static Integer getCleStructureById(String ideleve){
 					int res=0;
+					if(ideleve!="99999"){
 					
 					Date date=new Date();
 					java.util.Date utilDate_syst = date;
@@ -501,6 +503,7 @@ public class EleveDaoImpl implements EleveDao {
 					catch (SQLException e) {
 										e.printStackTrace();
 									}
+					}
 					return res;
 					
 				}
@@ -511,7 +514,7 @@ public class EleveDaoImpl implements EleveDao {
 				
 				public static String getEleveNomById(String ideleve){
 					 String nom ="";	
-					
+					 if(ideleve!="99999"){
 					try {
 						Connection connection = DataSourceProvider.getDataSource()
 								.getConnection();
@@ -534,6 +537,7 @@ public class EleveDaoImpl implements EleveDao {
 						catch (SQLException e) {
 											e.printStackTrace();
 										}
+					 }
 						return nom;	
 				}
 				
@@ -544,7 +548,7 @@ public class EleveDaoImpl implements EleveDao {
 						
 						public static String getElevePrenomById(String ideleve){
 							 String prenom ="";	
-							
+							 if(ideleve!="99999"){
 							try {
 								Connection connection = DataSourceProvider.getDataSource()
 										.getConnection();
@@ -567,6 +571,7 @@ public class EleveDaoImpl implements EleveDao {
 								catch (SQLException e) {
 													e.printStackTrace();
 												}
+							 }
 								return prenom;	
 						}
 						//-----------------------------------------------------------------------------------------------------------------
@@ -575,6 +580,7 @@ public class EleveDaoImpl implements EleveDao {
 						// junit non nécessaire, requete interne
 								public static boolean president(String ideleve){
 									boolean res= false;
+									if(ideleve!="99999"){
 									int rep= 0;
 									java.util.Date utildate = new Date();
 								    java.sql.Date sqlDate = new java.sql.Date(utildate.getTime());
@@ -597,6 +603,7 @@ public class EleveDaoImpl implements EleveDao {
 									catch (SQLException e) {
 														e.printStackTrace();
 													}
+									}
 									return res;
 									
 								}
@@ -616,7 +623,7 @@ public class EleveDaoImpl implements EleveDao {
 	public static Integer getCleClasse(String ideleve){
 		System.out.println("Dans la méthode getCleClasse, id eleve vaut:"+ideleve);
 		int cleclasse=0;
-		
+		if(ideleve!="99999"){
 		// recuperation de la cl� classe la plus recente
 		try {
 			Connection connection = DataSourceProvider.getDataSource()
@@ -638,10 +645,12 @@ public class EleveDaoImpl implements EleveDao {
 		catch (SQLException e) {
 							e.printStackTrace();
 						}
+		}
 		return cleclasse;
 	}
 	public static String getPromotion(String ideleve){
 		String classeencours="";
+		if(ideleve!="99999"){
 		Integer cleclasse= getCleClasse(ideleve);
 		// recuperation de la classe en cours 
 		try {
@@ -664,7 +673,7 @@ public class EleveDaoImpl implements EleveDao {
 		catch (SQLException e) {
 							e.printStackTrace();
 						}
-		
+		}
 			
 		return classeencours;
 	}
