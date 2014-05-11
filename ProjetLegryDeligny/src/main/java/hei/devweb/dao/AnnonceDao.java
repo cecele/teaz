@@ -25,4 +25,6 @@ public interface AnnonceDao {
 
 	List<Offre> listerOffreByStructure(Integer clestructure);
 
+	void AnnonceModification(Offre offre);
+
 }

@@ -153,6 +153,7 @@ public void offre_placemoins (Integer cle_offre){
 	//-----------------------------------------------------------------------------------------------------------------
 	//mise � 0 du statut pour enlever l'affichage
 	//acces en ecriture--- a effectuer quand le nombre de place est � 0
+	// test junit ne fonctionne pas!
  	
 
 	public void AnnonceModification (Offre offre){
@@ -168,7 +169,7 @@ public void offre_placemoins (Integer cle_offre){
 					.getConnection();
 
 			PreparedStatement stmt = (PreparedStatement) connection
-					.prepareStatement("UPDATE offre SET date_tea=?,heure_debut=?,heure_fin=?,statut=0,offre_descritpion=?,eleve_mail=?, offre_titre=?, offre_place=? WHERE cle_offre=? AND statut=0");
+					.prepareStatement("UPDATE offre SET date_tea=?,heure_debut=?,heure_fin=?,statut=0,offre_description=?,eleve_mail=?, offre_titre=?, offre_place=? WHERE cle_offre=? ");
 			stmt.setDate(1, sqlDateTea);
 			stmt.setString(2, offre.getHeure_debut());
 			stmt.setString(3, offre.getHeure_fin());
@@ -176,6 +177,7 @@ public void offre_placemoins (Integer cle_offre){
 			stmt.setString(5, offre.getEleve_mail());
 			stmt.setString(6, offre.getOffre_titre());
 			stmt.setInt(7,offre.getOffre_place());
+			stmt.setInt(8,offre.getCle_offre());
 			stmt.executeUpdate();
 			// Fermer la connexion
 

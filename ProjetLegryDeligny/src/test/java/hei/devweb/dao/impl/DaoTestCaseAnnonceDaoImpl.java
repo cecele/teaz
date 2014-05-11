@@ -35,12 +35,17 @@ import org.junit.Test;
 import com.mysql.jdbc.PreparedStatement;
 
 public class DaoTestCaseAnnonceDaoImpl {
+	
 	private EleveDao daoEleve = new EleveDaoImpl();
 	private AnnonceDao daoAnnonce= new AnnonceDaoImpl();
 	private ArticleDao daoArticle = new ArticleDaoImpl();
 	private RechercheDao daoRecherche= new RechercheDaoImpl();
 	private StructureDao daoStructure = new StructureDaoImpl();
 	private TeaDao daoTea = new TeaDaoImpl();
+	
+	
+	
+
 	
 	
 	@Before
@@ -67,19 +72,12 @@ public class DaoTestCaseAnnonceDaoImpl {
 		stmt.executeUpdate("DELETE FROM eleve");
 		
 
-		
-		stmt.executeUpdate("ALTER TABLE classe AUTO_INCREMENT = 0");
-		stmt.executeUpdate("ALTER TABLE structure AUTO_INCREMENT = 0");
-		stmt.executeUpdate("ALTER TABLE offre AUTO_INCREMENT = 0");
-		stmt.executeUpdate("ALTER TABLE tea AUTO_INCREMENT = 0");
-		
-
 		stmt.executeUpdate("INSERT INTO `eleve` (`id_eleve`, `eleve_nom`, `eleve_prenom`, `date_naissance`, `numrue`, `nomrue`, `codepostal`, `ville`, `date_entree`, `cotisant`, `eleve_profil`, `diplome`, `motdepasse`) VALUES ('10153', 'LEGRY', 'Céline', '1991-06-14', 59, 'rue des stations', '59000', 'Lille', 2009, 0, 0, 0, 'motdepasse')");
 		stmt.executeUpdate("INSERT INTO `eleve` (`id_eleve`, `eleve_nom`, `eleve_prenom`, `date_naissance`, `numrue`, `nomrue`, `codepostal`, `ville`, `date_entree`, `cotisant`, `eleve_profil`, `diplome`, `motdepasse`) VALUES ('11111', 'DELIGNY', 'MARTIN', '1991-03-11', 12, 'RUE DU PORT', '59000', 'LILLE', 2010, NULL, 1, 0, 'motdepasse')");
 		stmt.executeUpdate("INSERT INTO `structure` (`cle_structure`, `structure_nom`) VALUES (1, 'INTEGRALE-VP')");
 		stmt.executeUpdate("INSERT INTO `presider` (`id_eleve`, `cle_structure`, `date_debut`, `date_fin`) VALUES ('10153', 1, '2014-05-01', '2015-06-15')");
 		stmt.executeUpdate("INSERT INTO `offre` (`cle_offre`, `date_depot`, `date_miseenligne`, `date_tea`, `heure_debut`, `heure_fin`, `statut`, `offre_description`, `eleve_mail`, `offre_titre`, `offre_place`, `cle_structure`) VALUES (1, '2014-05-09', '2014-05-10', '2014-05-19', '12', '13', 0, 'DESCRIPTION CHIANTE', 'cc@hei.fr', 'TITRE INTERESSANT', 3, 1)");
-		stmt.executeUpdate("INSERT INTO `tea` (`cle_tea`, `date_tea_realisee`, `nbheure_realisee`, `statut_valide`, `date_validation`, `cle_offre`, `id_eleve`) VALUES (1, '2014-05-05', 2, 0, NULL, 1, '11111')");
+		stmt.executeUpdate("INSERT INTO `tea` (`cle_tea`, `date_tea_realisee`, `nbheure_realisee`, `statut_valide`, `date_validation`, `cle_offre`, `id_eleve`) VALUES (1, '2014-05-05', 2, 0, NULL, 1, '11111')");		
 		stmt.executeUpdate("INSERT INTO `classe` (`cle_classe`, `classe`, `annee`, `nb_tea`) VALUES(1, 'H1A', '2014', NULL)");
 		stmt.executeUpdate("INSERT INTO `classe` (`cle_classe`, `classe`, `annee`, `nb_tea`) VALUES(2, 'H2B', '2014', 3)");
 		stmt.executeUpdate("INSERT INTO `appartenir` (`id_eleve`, `cle_classe`) VALUES ('10153', 1)");
@@ -87,17 +85,7 @@ public class DaoTestCaseAnnonceDaoImpl {
 		stmt.close();
 		connection.close();
 	}
-	@After
-	public void remiseEnOrdre() throws Exception {
-		Connection connection = DataSourceProvider.getDataSource()
-				.getConnection();
-		Statement stmt = connection.createStatement();
-		
-		stmt.executeUpdate("ALTER TABLE classe AUTO_INCREMENT = 1");
-		stmt.executeUpdate("ALTER TABLE structure AUTO_INCREMENT = 1");
-		stmt.executeUpdate("ALTER TABLE offre AUTO_INCREMENT = 1");
-		stmt.executeUpdate("ALTER TABLE tea AUTO_INCREMENT = 1");
-	}
+
 //------------------------------------------------------------------------------------------------------------------------------	
 	//------------------------------------------------------------------------------------------------------------------------------
 	// test AnnonceDAOIMPL-------SELECT
@@ -106,12 +94,12 @@ public class DaoTestCaseAnnonceDaoImpl {
 
 	
 	//------------------------------------------------------------------------------------------------------------------------------
-	//	 @Test
+//		 @Test
 //     public void testajouterAnnonce () throws Exception {
 //		 
 //		 String StringDatedepot = "2014-05-09";
 //		 
-//		 String StringDatetea = "2014-05-11";
+//		 String StringDatetea = "2014-05-15";
 //		 SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd");                                  
 //		 Date datedepot = null; 
 //		 Date datemiseenligne=null;
@@ -127,14 +115,14 @@ public class DaoTestCaseAnnonceDaoImpl {
 //		 // TODO Auto-generated catch block                         
 //		 e.printStackTrace();                 
 //		 }
-//            Offre offre = new Offre(3,datedepot,datemiseenligne,datetea,"08", "11", 0, "description", "FF@hei.fr","titre", 1, 2,"INTEGRALE-VP", "LEGRY","Céline", 1);
+//            Offre offre = new Offre(2,datedepot,datemiseenligne,datetea,"08", "11", 0, "description", "FF@hei.fr","titre", 1, 2,"INTEGRALE-VP", "LEGRY","Céline", 1);
 //                    		
 //           daoAnnonce.ajouterAnnonce(offre);
 //
 //             Connection connection = DataSourceProvider.getDataSource()
 //                             .getConnection();
 //             Statement stmt = connection.createStatement();
-//             ResultSet results = stmt.executeQuery("SELECT * FROM `offre` WHERE `cle_offre`=1");
+//             ResultSet results = stmt.executeQuery("SELECT * FROM `offre` WHERE `cle_offre`=2");
 //             Assert.assertTrue(results.next());
 //             Assert.assertNotNull(results.getInt("cle_offre"));
 //             Assert.assertEquals(datedepot, results.getDate("date_depot"));
@@ -153,8 +141,8 @@ public class DaoTestCaseAnnonceDaoImpl {
 //             stmt.close();
 //             connection.close();
 //     }
-	
-	
+//	
+//	
 	//------------------------------------------------------------------------------------------------------------------------------
 //	@Test
 //    public void testdeleteOffre() throws Exception {
@@ -245,5 +233,47 @@ public class DaoTestCaseAnnonceDaoImpl {
 //		             connection.close();
 //		     }
 //		
+	//------------------------------------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------------------------------------
+//					 @Test
+//			     public void testAnnonceModification() throws Exception {
+//						 
+//						 String StringDatedepot = "2014-05-09";
+//						 
+//						 String StringDatetea = "2014-05-15";
+//						 SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd");                                  
+//						 Date datedepot = null; 
+//						 Date datemiseenligne=null;
+//						 Date datetea=null;
+//						 
+//						 try {                         
+//						 datedepot = sdf.parse(StringDatedepot);      
+//						
+//						 datetea =sdf.parse(StringDatetea);
+//						 } 
+//						 catch (ParseException e) 
+//						 {                         
+//						 // TODO Auto-generated catch block                         
+//						 e.printStackTrace();                 
+//						 }
+//				Offre offre1 = new Offre(1,datedepot,datemiseenligne,datetea,"12", "13", 0, "DESCRIPTION CHIANTE", "cc_le@hei.fr","TITRE INTERESSANT", 1, 3,"INTEGRALE-VP", "LEGRY","Céline", 0);
+//
+//			           daoAnnonce.AnnonceModification(offre1);
+//			
+//			           Connection connection = DataSourceProvider.getDataSource()
+//                             .getConnection();
+//             Statement stmt = connection.createStatement();
+//             ResultSet results = stmt.executeQuery("SELECT eleve_mail,cle_offre FROM `offre` WHERE `cle_offre`=1");
+//             Assert.assertTrue(results.next());
+//             Assert.assertEquals(1, results.getInt("cle_offre"));
+//             Assert.assertEquals("cc_le@hei.fr", results.getString("eleve_mail"));
+//            
+//			             
+//			             results.close();
+//			             stmt.close();
+//			             connection.close();
+//			     }
+			
+	
 }
 	
