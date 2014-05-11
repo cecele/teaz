@@ -68,25 +68,33 @@ public class RechercheServlet extends HttpServlet {
 			prenom = request.getParameter("prenom");
 			classe = request.getParameter("classe");
 			
-			String[] choix = request.getParameterValues("check");
 			
-			if(choix != null){
-			for(int i =0; i< choix.length; i++)
-				{
-					if(choix[i].equals("encours")){
-						encours = true;
-					}
-					else if(choix[i].equals("ajour")){
-						ajour = true;
-					}
-					else if(choix[i].equals("pasajour")){
-						pasajour = true;
-					}
-					else if(choix[i].equals("diplome")){
-						diplome = true;
-					}
-				}
-			}
+//			String[] choix = request.getParameterValues("check");
+			
+//			if(choix != null){
+//			for(int i =0; i< choix.length; i++)
+//				{
+//				System.out.println(" AVANT checkbox encorus " + choix[i].contentEquals("encours") + " encours " + encours );
+//					
+//				encours=request.getParameter("encours")!=null;
+//					
+//				System.out.println(" PENDANT request.getParameter(encours)encours " + encours);	
+//				if( request.getParameter("encours")!=null){ encours = true;
+//						
+//						System.out.println(" Apres checkbox encorus " + request.getParameter("encours") + "encours " + encours );
+//					}
+//					
+//					else if(choix[i].equals("ajour")){
+//						ajour = true;
+//					}
+//					else if(choix[i].equals("pasajour")){
+//						pasajour = true;
+//					}
+//					else if(choix[i].equals("diplome")){
+//						diplome = true;
+//					}
+//				}
+//			}
 			System.out.println(request.getParameter("encours"));
 				
 			System.out.println(request.getParameter("ajour"));

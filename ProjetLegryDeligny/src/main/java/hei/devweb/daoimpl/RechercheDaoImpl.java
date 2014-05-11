@@ -126,7 +126,7 @@ System.out.println("entrée ds le try");
 		
 		ResultSet results = stmt.executeQuery();
 			
-		int i=0;
+		int i=1;
 		while (results.next()) {
 			Eleve 		eleve = new Eleve(
 					results.getString("id_eleve"),
