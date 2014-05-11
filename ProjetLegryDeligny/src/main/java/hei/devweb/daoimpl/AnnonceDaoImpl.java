@@ -30,11 +30,8 @@ public class AnnonceDaoImpl implements AnnonceDao {
 // acces en �criture
 	//test Junit
 	public void ajouterAnnonce (Offre offre ){
-		GregorianCalendar calendar = new java.util.GregorianCalendar(); 
-		Date date=new Date();
-		calendar.setTime( date ); 
-		// Initialisé avec une instance de Date. 
-		calendar.add (Calendar.DATE, +1);
+		
+		Date date =new Date();
 		
 		if (offre.getDate_tea() != null && offre.getHeure_debut() != null && offre.getHeure_fin() != null  && offre.getEleve_mail() != null  && offre.getOffre_titre() != null && !date.before(offre.getDate_tea())){
 			

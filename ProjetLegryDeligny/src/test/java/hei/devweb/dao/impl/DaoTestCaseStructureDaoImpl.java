@@ -81,5 +81,37 @@ public class DaoTestCaseStructureDaoImpl {
 	// test StructureDaoImpl
 	//------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
-	
+//	 @Test
+//     public void testStructureChangement () throws Exception {
+//		 
+//		 	java.util.Date utilDate_debut = 2014-01-01;
+//		    java.sql.Date sqlDatedebut = new java.sql.Date(utilDate_debut.getTime());
+//		    
+//		    java.util.Date utilDate_fin = datefin;
+//		    java.sql.Date sqlDatefin = new java.sql.Date(utilDate_fin.getTime()); 
+//           daoStructure.StructureChangement(10153, 1, datetea, datetea);
+//
+//             Connection connection = DataSourceProvider.getDataSource()
+//                             .getConnection();
+//             Statement stmt = connection.createStatement();
+//             ResultSet results = stmt.executeQuery("SELECT * FROM `offre` WHERE `cle_offre`=2");
+//             Assert.assertTrue(results.next());
+//             Assert.assertNotNull(results.getInt("cle_offre"));
+//             Assert.assertEquals(offre.getDate_depot(), results.getDate("date_depot"));
+//             Assert.assertEquals(offre.getDate_miseenligne(),results.getDate("date_miseenligne"));
+//             Assert.assertEquals(offre.getDate_tea(), results.getDate("date_tea"));
+//             Assert.assertEquals(offre.getHeure_debut(), results.getString("heure_debut"));
+//             Assert.assertEquals(offre.getHeure_fin(), results.getString("heure_fin"));
+//             Assert.assertEquals((int)offre.getStatut(), results.getInt("statut"));
+//             Assert.assertEquals(offre.getOffre_description(), results.getString("offre_description"));
+//             Assert.assertEquals(offre.getEleve_mail(), results.getString("eleve_mail"));
+//             Assert.assertEquals(offre.getOffre_titre(), results.getString("offre_titre"));
+//             Assert.assertEquals((int)offre.getOffre_place(), results.getInt("offre_place"));
+//             Assert.assertEquals((int)offre.getCle_structure(), results.getInt("cle_structure"));
+//
+//             results.close();
+//             stmt.close();
+//             connection.close();
+//     }
+//	
 }
