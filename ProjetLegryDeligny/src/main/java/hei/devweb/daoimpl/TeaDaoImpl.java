@@ -205,10 +205,11 @@ public class TeaDaoImpl implements TeaDao {
 				int nbtea=getNbHeureTeaRealiseeByTea( cletea);
 				int nbteareel=0;
 				int nbteadues=getTeaDuesEnCours(getIdeleveByCleTea(cletea));
+				
 				if(nbteadues>nbtea){nbteareel=nbtea;}
 				else {if(nbteadues<nbtea){nbteareel=nbteadues;}
 					else{if(nbteadues==0){nbteareel=0;}}};
-				
+					
 				
 								
 				try {
@@ -217,12 +218,13 @@ public class TeaDaoImpl implements TeaDao {
 					
 					java.util.Date utilDate = new java.util.Date();
 				    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-
+					
+					
 					PreparedStatement stmt = (PreparedStatement) connection
 							.prepareStatement("UPDATE tea SET statut_valide=2, date_validation=?, nbheure_validee=? WHERE cle_tea=? ");
 					stmt.setDate(1, sqlDate);
-					stmt.setInt(2,cletea);
-					stmt.setInt(3, nbteareel);
+					stmt.setInt(3,cletea);
+					stmt.setInt(2, nbteareel);
 					stmt.executeUpdate();
 					// Fermer la connexion
 
