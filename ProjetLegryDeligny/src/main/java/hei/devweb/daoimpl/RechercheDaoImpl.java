@@ -199,7 +199,7 @@ System.out.println("entrée ds le try");
 	if(diplome && etudiant==false && ajour==false  && retard )elevesreturn=elevescas9;
 		
 	
-	return elevescas9;
+	return elevesreturn;
 }
 
 public int sizeReponse(List<Eleve> eleve){
