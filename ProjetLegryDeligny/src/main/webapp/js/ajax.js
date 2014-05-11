@@ -1,5 +1,9 @@
 $(document).ready(function(){
         
+	$(".valide").hide();
+	var nbTea = $("#nbTea").text();
+	if(nbTea == 0)
+		$(".valide").show();
 	
         $(".postuler").click(function(){
         
@@ -8,7 +12,7 @@ $(document).ready(function(){
             });
             $(".message").text("Vous avez bien postule a cette offre");
             $(this).parent().parent().remove();
-                        
+            $(".valide").show();            
                 
         });
         
@@ -20,7 +24,7 @@ $(document).ready(function(){
                     });
                     $(".message").text("Vous avez bien valide cette heure");
                     $(this).parent().parent().remove();
-                    
+                    $(".valide").show();
             
         });
         
@@ -33,9 +37,17 @@ $(document).ready(function(){
                     var nbOffre = 0;
                     nbOffre = $("#nbOffre").text();
                     nbOffre--;
-                    $("#nbOffre").text(nbOffre);
-                    $(".message").text("Vous avez bien valide cette annonce");
+                    if(nbOffre ==0){
+                   	 	$("#nbOffre").parent().remove();
+                   	 	$(".message").text("Il n'y a plus d'annonces a valider, bon boulot!");
+                    }
+                    else{
+                   	 	$("#nbOffre").text(nbOffre);
+                   	 	$(".message").text("Vous avez bien valide cette annonce");
+                    }
+              
                     $(this).parent().parent().remove();
+                    $(".valide").show();
             
         });	
         $(".validertea").click(function(){
@@ -46,9 +58,18 @@ $(document).ready(function(){
                      });
                      var nbTea = $("#nbTea").text();
                      nbTea--;
-                     $("#nbTea").text(nbTea);
-                     $(".message").text("Vous avez bien valide cette heure de TEA");
+                     if(nbTea ==0){
+                    	 $("#nbTea").parent().remove();
+                    	 $(".message").text("Il n'y a plus d'heures de TEA a valider, bon boulot!");
+                     }
+                     else{
+                    	 $("#nbTea").text(nbTea);
+                    	 $(".message").text("Vous avez bien valide cette heure de TEA");
+                     }
+                     
+                 
                      $(this).parent().parent().remove();
+                     $(".valide").show();
                 
             });		
         
@@ -63,6 +84,7 @@ $(document).ready(function(){
     			});
     			$(".message").text("Vous avez bien retire les droits");
     			$(this).parent().parent().remove();
+    			$(".valide").show();
     		}        
                 
         });
