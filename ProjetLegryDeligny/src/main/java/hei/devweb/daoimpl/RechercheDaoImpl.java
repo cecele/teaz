@@ -196,10 +196,6 @@ public int sizeReponse(List<Eleve> eleve){
 	return eleve.size();
 }
 
-public int sizeEleveAjour(List<Eleve> eleve){
-	eleve=EleveDaoImpl.getEleveAjour();
-	return eleve.size();
-} 
 
 
 }

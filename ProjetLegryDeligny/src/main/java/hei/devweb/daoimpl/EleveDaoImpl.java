@@ -545,18 +545,18 @@ public class EleveDaoImpl implements EleveDao {
 			return eleves;	
 	}
 	//-----------------------------------------------------------------------------------------------------------------
-			//récupération des élèves à jours
+			//r�cup�ration de la liste totale  des eleves de l'�cole
 			//acc�s en lecture
 			// test junit pas ok diplome?
 					
-		public static List<Eleve> getEleveAjour(){
+		public List<Eleve> getEleveEnCours(){
 			List<Eleve> eleves = new ArrayList<Eleve>();
 			try {
 				Connection connection = DataSourceProvider.getDataSource()
 						.getConnection();
 
 				
-				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve");
+				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE dilpome=0");
 				ResultSet results = stmt.executeQuery();
 				
 				while (results.next()) {
@@ -583,7 +583,7 @@ public class EleveDaoImpl implements EleveDao {
 					
 					if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
 						
-					if(TeaDaoImpl.getTeaDuesEnCours(results.getString("id_eleve"))==0)eleves.add(eleve);	
+					eleves.add(eleve);	
 					
 				}
 					// Fermer la connexion
@@ -597,6 +597,112 @@ public class EleveDaoImpl implements EleveDao {
 								}
 				return eleves;	
 		}
+	//-----------------------------------------------------------------------------------------------------------------
+			//récupération des diplome pas à jours
+			//acc�s en lecture
+			
+					
+		public static List<Eleve> getEleveDiplomePasAjours(){
+			List<Eleve> eleves = new ArrayList<Eleve>();
+			try {
+				Connection connection = DataSourceProvider.getDataSource()
+						.getConnection();
+
+				
+				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE diplome=1");
+				ResultSet results = stmt.executeQuery();
+				
+				while (results.next()) {
+					Eleve 		eleve = new Eleve(
+							results.getString("id_eleve"),
+							results.getString("eleve_nom"),
+							results.getString("eleve_prenom"),
+							results.getDate("date_naissance"),
+							results.getInt("numrue"),
+							results.getString("nomrue"),
+							results.getString("codepostal"),
+							results.getString("ville"),
+							results.getString("date_entree"),
+							results.getInt("cotisant"),
+							results.getInt("eleve_profil"),
+							results.getInt("eleve_profil"),
+							results.getString("motdepasse"),
+							getPromotion(results.getString("id_eleve")),
+							TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
+							TeaDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
+							TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
+							null
+							);
+					
+					if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
+						
+					if(TeaDaoImpl.getTeaDuesEnCours(results.getString("id_eleve"))!=0)eleves.add(eleve);	
+					
+				}
+					// Fermer la connexion
+					results.close();
+					stmt.close();
+					connection.close();
+					
+			}
+				catch (SQLException e) {
+									e.printStackTrace();
+								}
+				return eleves;	
+		}
+		//-----------------------------------------------------------------------------------------------------------------
+		//récupération des élèves à jours
+		//acc�s en lecture
+		
+				
+	public static List<Eleve> getEleveAjour(){
+		List<Eleve> eleves = new ArrayList<Eleve>();
+		try {
+			Connection connection = DataSourceProvider.getDataSource()
+					.getConnection();
+
+			
+			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve");
+			ResultSet results = stmt.executeQuery();
+			
+			while (results.next()) {
+				Eleve 		eleve = new Eleve(
+						results.getString("id_eleve"),
+						results.getString("eleve_nom"),
+						results.getString("eleve_prenom"),
+						results.getDate("date_naissance"),
+						results.getInt("numrue"),
+						results.getString("nomrue"),
+						results.getString("codepostal"),
+						results.getString("ville"),
+						results.getString("date_entree"),
+						results.getInt("cotisant"),
+						results.getInt("eleve_profil"),
+						results.getInt("eleve_profil"),
+						results.getString("motdepasse"),
+						getPromotion(results.getString("id_eleve")),
+						TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
+						TeaDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
+						TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
+						null
+						);
+				
+				if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
+					
+				if(TeaDaoImpl.getTeaDuesEnCours(results.getString("id_eleve"))==0)eleves.add(eleve);	
+				
+			}
+				// Fermer la connexion
+				results.close();
+				stmt.close();
+				connection.close();
+				
+		}
+			catch (SQLException e) {
+								e.printStackTrace();
+							}
+			return eleves;	
+	}
 	//-----------------------------------------------------------------------------------------------------------------
 //			//r�cup�ration de la liste totale  des eleves de l'�cole encore en activit� � l'�cole (non diplom�)
 //			//acc�s en lecture
@@ -811,8 +917,23 @@ public class EleveDaoImpl implements EleveDao {
 		return eleves;                         }
 
 	
+	public int sizeEleveAjourEncours(){
+		List<Eleve> eleve=EleveDaoImpl.getEleveAjour();
+		return eleve.size();
+	} 
 
-
+	public int sizeEleveEncours(){
+		List<Eleve> eleve=getEleveEnCours();
+		return eleve.size();
+	} 
 	
+	public int sizeDiplomePasAjour(){
+		List<Eleve> eleve=getEleveDiplomePasAjours();
+		return eleve.size();
+	} 
+	 public int sizeElevePasAJour(){
+		 return sizeEleveEncours()-sizeEleveEncours();
+	 }
+
 	
 }
