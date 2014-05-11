@@ -4,6 +4,8 @@
 		<p>
 			<img src="img/bandeau1.png" alt="bandeau1" hspace="0"/>
 			<img src="img/bandeau2.png" alt="bandeau2" hspace="0"/>
+			<img src="img/bandeau3.png" alt="bandeau3" hspace="0"/>
+			<img src="img/bandeau4.png" alt="bandeau4" hspace="0"/>
 		</p>
 	</marquee>
 </header>
