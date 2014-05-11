@@ -21,7 +21,7 @@
 			<h1>Nouvelle annonce</h1>			
 	
 			<article>
-			
+				${message}
 				<form method="post" action="deposerannonce?id=${offre.cle_offre}">
 				<table>
 					<tr>

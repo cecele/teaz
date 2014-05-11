@@ -38,6 +38,7 @@ public class DeposerAnnonceServlet extends HttpServlet {
 		Integer nbPlaces = Integer.parseInt(request.getParameter("nbplaces"));
 		Date dateDepot = new Date();
 		String nomStructure = Manager.getInstance().getNomStructure(cle_structure);
+		String message ="";
 		
 		SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd");
 		
@@ -48,19 +49,29 @@ public class DeposerAnnonceServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		if(dateTea.after(dateDepot)){
+			
+			Offre offre = new Offre(cle_offre,dateDepot,dateDepot, dateTea, heureDebut, heureFin, 0, description, mail, titre, cle_structure, nbPlaces, nomStructure, nom_pres,prenom_pres,0);
 		
-
-		Offre offre = new Offre(cle_offre,dateDepot,dateDepot, dateTea, heureDebut, heureFin, 0, description, mail, titre, cle_structure, nbPlaces, nomStructure, nom_pres,prenom_pres,0);
-		
-		if(cle_offre == 0){
-			Manager.getInstance().ajouterAnnonce(offre);
-			System.out.println("Création");
-			response.sendRedirect("mesannonces");
+			if(cle_offre == 0){ 
+				//Création offre
+				Manager.getInstance().ajouterAnnonce(offre);
+				System.out.println("Création");
+				response.sendRedirect("mesannonces");
+				message = "Offre créée correctement";
+			}
+			else{ 
+				// modification offre
+				Manager.getInstance().AnnonceModification(offre);
+				System.out.println("Update");
+				response.sendRedirect("mesannonces");
+				message = "Offre modifiée correctement";
+			}
 		}
 		else{
-			Manager.getInstance().AnnonceModification(offre);
-			System.out.println("Update");
-			response.sendRedirect("mesannonces");
+			message = "Il faut que la date de la TEA soit après la date d'aujourd'hui";
+			request.setAttribute("message",message);
+			response.sendRedirect("deposerannonce?id=-1");
 		}
 		
 	}
@@ -69,17 +80,22 @@ public class DeposerAnnonceServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		Integer cle_offre=Integer.parseInt(request.getParameter("id"));
+		String message ="";
 		
 		if(cle_offre != 0){ // édit d'une offre
 			Offre offre = Manager.getInstance().getOffreById(cle_offre);
 			request.setAttribute("offre",offre);
-			
+		}
+		else if(cle_offre == -1 ){
+			Offre offre = new Offre(0,null,null,null,"", "", 0,"","","",0,1,"","","",0);
+			request.setAttribute("offre",offre);
+			message = "Il faut que la date de la TEA soit après la date d'aujourd'hui";
 		}
 		else{ // création d'une offre
 			Offre offre = new Offre(0,null,null,null,"", "", 0,"","","",0,1,"","","",0);
 			request.setAttribute("offre",offre);
 		}
-		
+		request.setAttribute("message",message);
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/deposerannonce.jsp");
 		view.forward(request, response);
 	}

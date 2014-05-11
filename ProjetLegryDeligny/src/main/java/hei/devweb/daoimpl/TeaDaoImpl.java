@@ -252,7 +252,7 @@ public class TeaDaoImpl implements TeaDao {
 							.getConnection();
 
 					
-					PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tea INNER JOIN offre ON tea.cle_offre=offre.cle_offre  WHERE cle_offre=?");
+					PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tea INNER JOIN offre ON tea.cle_offre=offre.cle_offre  WHERE tea.cle_offre=?");
 					stmt.setInt(1,cleoffre);
 					ResultSet results = stmt.executeQuery();
 					

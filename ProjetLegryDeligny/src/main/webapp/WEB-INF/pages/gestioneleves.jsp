@@ -83,7 +83,7 @@
 					<table>
 						<tr>
 							<td><label for="matricule" >Matricule</label></td>
-							<td><input type="text" name="matricule" id="matricule" value=""></input></td>
+							<td><input type="text" name="matricule" placeholder="Matricule sans le H" id="matricule" value=""></input></td>
 						</tr>
 						<tr>
 							<td><label for="nom" >Nom</label></td>
