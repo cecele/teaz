@@ -484,7 +484,7 @@ public void offre_placemoins (Integer cle_offre){
 	//-----------------------------------------------------------------------------------------------------------------
 		///retourne une offre en fontion de sa clé_offre
 		//acc�s en lecture
-		// 
+		// test junit
 	
 	public Offre getOffreById(Integer cleoffre){
 		
