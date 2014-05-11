@@ -21,4 +21,9 @@ public interface EleveDao {
 
 	void CreateEleve(Eleve eleve);
 
+
+	
+
+	
+
 }

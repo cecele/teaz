@@ -329,168 +329,7 @@ public class EleveDaoImpl implements EleveDao {
 										}
 						return prenom;	
 				}
-//	//-----------------------------------------------------------------------------------------------------------------
-//		//recherche d'�l�ve par nom retourne la liste des �l�ves dont le nom contient la recherche
-//		//acc�s en lecture
-//				
-//	public List<Eleve> rechercheEleveByNom(String nom){
-//		List<Eleve> eleves = new ArrayList<Eleve>();
-//		try {
-//			Connection connection = DataSourceProvider.getDataSource()
-//					.getConnection();
-//
-//			
-//			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE Contains(structure_nom, ?)>0");
-//			stmt.setString(1,nom);
-//			ResultSet results = stmt.executeQuery();
-//			
-//			while (results.next()) {
-//				Eleve 		eleve = new Eleve(
-//						results.getString("id_eleve"),
-//						results.getString("eleve_nom"),
-//						results.getString("eleve_prenom"),
-//						results.getDate("date_naissance"),
-//						results.getInt("numrue"),
-//						results.getString("nomrue"),
-//						results.getString("codepostal"),
-//						results.getString("ville"),
-//						results.getString("date_entree"),
-//						results.getInt("cotisant"),
-//						results.getInt("eleve_profil"),
-//						results.getInt("eleve_profil"),
-//						results.getString("motdepasse"),
-//						getPromotion(results.getString("id_eleve")),
-//						TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
-//						TeaDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
-//						TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
-//						null
-//						);
-//				
-//				if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
-//					
-//							
-//			
-//				eleves.add(eleve);	
-//				
-//			}
-//				// Fermer la connexion
-//				results.close();
-//				stmt.close();
-//				connection.close();
-//				
-//		}
-//			catch (SQLException e) {
-//								e.printStackTrace();
-//							}
-//			return eleves;	
-//	}
-//	//-----------------------------------------------------------------------------------------------------------------
-//			//recherche d'�l�ve par classe retourne la liste des el�ves de cette classe quelque soit l'ann�e
-//			//acc�s en lecture
-//		public List<Eleve> rechercheEleveByClasse(String classe){
-//			List<Eleve> eleves = new ArrayList<Eleve>();
-//			try {
-//				Connection connection = DataSourceProvider.getDataSource()
-//						.getConnection();
-//
-//				
-//				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE classe=?");
-//				stmt.setString(1,classe);
-//				ResultSet results = stmt.executeQuery();
-//				
-//				
-//				results.next();
-//				
-//				Eleve 		eleve = new Eleve(
-//						results.getString("id_eleve"),
-//						results.getString("eleve_nom"),
-//						results.getString("eleve_prenom"),
-//						results.getDate("date_naissance"),
-//						results.getInt("numrue"),
-//						results.getString("nomrue"),
-//						results.getString("codepostal"),
-//						results.getString("ville"),
-//						results.getString("date_entree"),
-//						results.getInt("cotisant"),
-//						results.getInt("eleve_profil"),
-//						results.getInt("eleve_profil"),
-//						results.getString("motdepasse"),
-//						getPromotion(results.getString("id_eleve")),
-//						TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
-//						TeaDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
-//						TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
-//						null
-//						);
-//				
-//				if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
-//					
-//					eleves.add(eleve);	
-//					
-//				
-//					// Fermer la connexion
-//					results.close();
-//					stmt.close();
-//					connection.close();
-//					
-//			}
-//				catch (SQLException e) {
-//									e.printStackTrace();
-//								}
-//				return eleves;	
-//		}
-//		//-----------------------------------------------------------------------------------------------------------------
-//		//recherche d'�l�ve par classe et ann�e retourne la liste des el�ves de cette classe quelque soit l'ann�e
-//		//acc�s en lecture
-//	public List<Eleve> rechercheEleveByClasse(String classe, String annee){
-//		List<Eleve> eleves = new ArrayList<Eleve>();
-//		try {
-//			Connection connection = DataSourceProvider.getDataSource()
-//					.getConnection();
-//
-//			
-//			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE classe=? AND annee=?");
-//			stmt.setString(1,classe);
-//			stmt.setString(2, annee);
-//			ResultSet results = stmt.executeQuery();
-//			
-//			while (results.next()) {
-//				Eleve 		eleve = new Eleve(
-//						results.getString("id_eleve"),
-//						results.getString("eleve_nom"),
-//						results.getString("eleve_prenom"),
-//						results.getDate("date_naissance"),
-//						results.getInt("numrue"),
-//						results.getString("nomrue"),
-//						results.getString("codepostal"),
-//						results.getString("ville"),
-//						results.getString("date_entree"),
-//						results.getInt("cotisant"),
-//						results.getInt("eleve_profil"),
-//						results.getInt("eleve_profil"),
-//						results.getString("motdepasse"),
-//						getPromotion(results.getString("id_eleve")),
-//						TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
-//						TeaDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
-//						TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
-//						null
-//						);
-//				
-//				if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
-//					
-//				eleves.add(eleve);	
-//				
-//			}
-//				// Fermer la connexion
-//				results.close();
-//				stmt.close();
-//				connection.close();
-//				
-//		}
-//			catch (SQLException e) {
-//								e.printStackTrace();
-//							}
-//			return eleves;	
-//	}
+
 	//-----------------------------------------------------------------------------------------------------------------
 		//r�cup�ration de la liste totale  des eleves de l'�cole
 		//acc�s en lecture
@@ -547,7 +386,7 @@ public class EleveDaoImpl implements EleveDao {
 	//-----------------------------------------------------------------------------------------------------------------
 			//r�cup�ration de la liste totale  des eleves de l'�cole
 			//acc�s en lecture
-			// test junit pas ok diplome?
+			//test junit 
 					
 		public List<Eleve> getEleveEnCours(){
 			List<Eleve> eleves = new ArrayList<Eleve>();
@@ -556,7 +395,7 @@ public class EleveDaoImpl implements EleveDao {
 						.getConnection();
 
 				
-				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE dilpome=0");
+				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE diplome=0");
 				ResultSet results = stmt.executeQuery();
 				
 				while (results.next()) {
@@ -600,9 +439,10 @@ public class EleveDaoImpl implements EleveDao {
 	//-----------------------------------------------------------------------------------------------------------------
 			//récupération des diplome pas à jours
 			//acc�s en lecture
+		// test junit
 			
 					
-		public static List<Eleve> getEleveDiplomePasAjours(){
+		public List<Eleve> getEleveDiplomePasAjours(){
 			List<Eleve> eleves = new ArrayList<Eleve>();
 			try {
 				Connection connection = DataSourceProvider.getDataSource()
@@ -703,109 +543,7 @@ public class EleveDaoImpl implements EleveDao {
 							}
 			return eleves;	
 	}
-	//-----------------------------------------------------------------------------------------------------------------
-//			//r�cup�ration de la liste totale  des eleves de l'�cole encore en activit� � l'�cole (non diplom�)
-//			//acc�s en lecture
-//		public List<Eleve> getEleveTotalEnCours(){
-//			List<Eleve> eleves = new ArrayList<Eleve>();
-//			try {
-//				Connection connection = DataSourceProvider.getDataSource()
-//						.getConnection();
-//
-//				
-//				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE dilpome=0");
-//				ResultSet results = stmt.executeQuery();
-//				
-//				while (results.next()) {
-//					Eleve 		eleve = new Eleve(
-//							results.getString("id_eleve"),
-//							results.getString("eleve_nom"),
-//							results.getString("eleve_prenom"),
-//							results.getDate("date_naissance"),
-//							results.getInt("numrue"),
-//							results.getString("nomrue"),
-//							results.getString("codepostal"),
-//							results.getString("ville"),
-//							results.getString("date_entree"),
-//							results.getInt("cotisant"),
-//							results.getInt("eleve_profil"),
-//							results.getInt("eleve_profil"),
-//							results.getString("motdepasse"),
-//							getPromotion(results.getString("id_eleve")),
-//							TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
-//							TeaDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
-//							TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
-//							null
-//							);
-//					
-//					if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
-//						
-//				
-//					eleves.add(eleve);	
-//					
-//				}
-//					// Fermer la connexion
-//					results.close();
-//					stmt.close();
-//					connection.close();
-//					
-//			}
-//				catch (SQLException e) {
-//									e.printStackTrace();
-//								}
-//				return eleves;	
-//		}
-		//-----------------------------------------------------------------------------------------------------------------
-//		//r�cup�ration de la liste totale  des eleves de l'�cole sorti de l'�cole ( diplom�)
-//		//acc�s en lecture
-//	public List<Eleve> getEleveTotalDiplome(){
-//		List<Eleve> eleves = new ArrayList<Eleve>();
-//		try {
-//			Connection connection = DataSourceProvider.getDataSource()
-//					.getConnection();
-//
-//			
-//			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE dilpome=1");
-//			ResultSet results = stmt.executeQuery();
-//			
-//			while (results.next()) {
-//				Eleve 		eleve = new Eleve(
-//						results.getString("id_eleve"),
-//						results.getString("eleve_nom"),
-//						results.getString("eleve_prenom"),
-//						results.getDate("date_naissance"),
-//						results.getInt("numrue"),
-//						results.getString("nomrue"),
-//						results.getString("codepostal"),
-//						results.getString("ville"),
-//						results.getString("date_entree"),
-//						results.getInt("cotisant"),
-//						results.getInt("eleve_profil"),
-//						results.getInt("eleve_profil"),
-//						results.getString("motdepasse"),
-//						getPromotion(results.getString("id_eleve")),
-//						TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
-//						TeaDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
-//						TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
-//						null
-//						);
-//				
-//				if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
-//					
-//				eleves.add(eleve);	
-//				
-//			}
-//				// Fermer la connexion
-//				results.close();
-//				stmt.close();
-//				connection.close();
-//				
-//		}
-//			catch (SQLException e) {
-//								e.printStackTrace();
-//							}
-//			return eleves;	
-//	}
+	
 	//-----------------------------------------------------------------------------------------------------------------
 			//Calcul de la promotion de l'�l�ve : recuperation de classe en cours pour le calcul
 			//acc�s en lecture
