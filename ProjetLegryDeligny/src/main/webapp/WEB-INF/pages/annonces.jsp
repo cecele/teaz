@@ -8,7 +8,9 @@
   	<meta http-equiv="Content-Type" content="text/html;
 			 charset=UTF-8">
 		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
 		<script type="text/javascript" src="js/menu.js"></script>
+		<script type="text/javascript" src="js/ajax.js"></script>
         <title>Tea</title>
     </head>
     <body>
@@ -37,7 +39,7 @@
 					Association : ${offres.structure_nom}<br/>
 					Président : ${offres.structure_president_prenom} ${offres.structure_president_nom}<br/>
 					${offres.offre_place} place${offres.offre_place >= 2 ? 's' : '' } disponible${offres.offre_place >= 2 ? 's' : '' }<br/>
-					<a href="postuler?id=${offres.cle_offre}">Postuler</a>
+					<span class="postuler" data-id="${offres.cle_offre}"><input type="button" value="Postuler"/></span>
 					</p>
 			</article>
 			</c:forEach>

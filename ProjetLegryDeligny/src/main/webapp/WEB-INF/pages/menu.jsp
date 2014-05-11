@@ -28,7 +28,7 @@
 				<li><a href="tea">Mes TEA</a></li>
 				<li><a href="annonces">Annonces</a></li>
 				<c:if test="${sessionScope.sessionEleve.eleve_profil==1 || sessionScope.sessionEleve.eleve_profil==2|| sessionScope.sessionEleve.eleve_profil==4|| sessionScope.sessionEleve.eleve_profil==999}">
-					<li><a href="deposerannonce">Déposer une annonce</a></li>
+					<li><a href="deposerannonce?id=0">Déposer une annonce</a></li>
 					<li><a href="mesannonces">Mes annonces</a></li>
 					<li><a href="fairetea">Valider les heures</a></li>
 				</c:if>

@@ -19,13 +19,20 @@ public class PostulerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		
+	}
+	
+	public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
 		HttpSession session = request.getSession();    
 		Eleve eleve = (Eleve) (session.getAttribute("sessionEleve"));
 		String matricule = eleve.getId_eleve();
 		
-		Integer id  = Integer.parseInt(request.getParameter("id"));
-		
+		Integer id = Integer.parseInt(request.getParameter("id"));
+		System.out.println("id");
 		int nbPlaces = Manager.getInstance().getNbPlaces(id);
+		
 		if(nbPlaces > 1)
 		{
 			Manager.getInstance().ajouterTea(id,matricule);
@@ -40,11 +47,6 @@ public class PostulerServlet extends HttpServlet {
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/tea.jsp");
 		view.forward(request, response);
-	}
-	
-	public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-		
-	
 	}
 
 }
