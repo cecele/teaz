@@ -28,7 +28,10 @@ public class ValiderAnnonceServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		HttpSession session = request.getSession();    
+		Integer nbOffreEnAttente = (Integer) (session.getAttribute("nbOffreEnAttente"));
+		nbOffreEnAttente --;
+		session.setAttribute( "nbOffreEnAttente", nbOffreEnAttente );
 		Integer id  = Integer.parseInt(request.getParameter("id"));
 		Date date = new Date();
 		Manager.getInstance().annonce_validation(id,date);

@@ -46,4 +46,19 @@
 		</form>				
 	</c:if>
 </aside>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".validerannonce").click(function(){
+	    var nbOffre = $("#nbOffre").text();
+	    --nbOffre;
+	    $("#nbOffre").text(nbOffre);
+	});	
+	$(".validertea").click(function(){
+    	var nbTea = $("#nbTea").text();
+     	--nbTea;
+     	$("#nbTea").text(nbTea);
+	});		
+});
+</script>
+
 <p>Petit message stylé pour afficher notre pouvoir supérieur</p>

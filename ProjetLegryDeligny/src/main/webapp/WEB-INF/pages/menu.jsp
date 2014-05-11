@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <header id="ban">
 	<marquee align="center" height="300px" scrolldelay="10" scrollamount="20" onmouseout="this.start()" onmouseover="this.stop()">
 		<p>
