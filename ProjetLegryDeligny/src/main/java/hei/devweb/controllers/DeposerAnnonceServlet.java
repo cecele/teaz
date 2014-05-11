@@ -28,7 +28,7 @@ public class DeposerAnnonceServlet extends HttpServlet {
 		Integer cle_structure = eleve.getCle_structure();
 		String nom_pres = eleve.getEleve_nom();
 		String prenom_pres = eleve.getEleve_prenom();
-		
+		Integer cle_offre=Integer.parseInt(request.getParameter("id"));
 		String description = request.getParameter("description");
 		String StringDateTea = request.getParameter("date");
 		String heureDebut = request.getParameter("hdebut");
@@ -50,13 +50,19 @@ public class DeposerAnnonceServlet extends HttpServlet {
 		}
 		
 
-		Offre offre = new Offre(1,dateDepot,dateDepot, dateTea, heureDebut, heureFin, 0, description, mail, titre, cle_structure, nbPlaces, nomStructure, nom_pres,prenom_pres,0);
+		Offre offre = new Offre(cle_offre,dateDepot,dateDepot, dateTea, heureDebut, heureFin, 0, description, mail, titre, cle_structure, nbPlaces, nomStructure, nom_pres,prenom_pres,0);
 		
-		//(modif c�line)  il faut que tu rajoute le nombre de place dispo !
-		// il faut aussi g�rer le fait qu'une offre ne peux pas �tre d�poser sans place dispo, par d�faut ds la BDD il y a une place dispo!
-	
-		Manager.getInstance().ajouterAnnonce(offre);
-		response.sendRedirect("annonces");
+		if(cle_offre == 0){
+			Manager.getInstance().ajouterAnnonce(offre);
+			System.out.println("Création");
+			response.sendRedirect("annonces");
+		}
+		else{
+			Manager.getInstance().AnnonceModification(offre);
+			System.out.println("Update");
+			response.sendRedirect("mesannonces");
+		}
+		
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -64,9 +70,10 @@ public class DeposerAnnonceServlet extends HttpServlet {
 		
 		Integer cle_offre=Integer.parseInt(request.getParameter("id"));
 		
-		/*Offre offre = Manager.getInstance().listerOffreByEleve(matricule);
-		request.setAttribute("offre",offre);*/
-		
+		if(cle_offre != 0){
+			Offre offre = Manager.getInstance().getOffreById(cle_offre);
+			request.setAttribute("offre",offre);
+		}
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/deposerannonce.jsp");
 		view.forward(request, response);
 	}

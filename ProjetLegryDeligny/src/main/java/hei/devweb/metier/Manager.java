@@ -182,6 +182,17 @@ private static Manager instance;
 		return AnnonceDao.listerOffreByStructure(clestructure);
 	}
 
+	public void AnnonceModification(Offre offre) {
+		System.out.println("Dans méthode annonceModification");
+		AnnonceDao.AnnonceModification(offre);
+		
+	}
+
+	public Offre getOffreById(Integer cle_offre) {
+		System.out.println("Dans méthode getOffreById");
+		return AnnonceDao.getOffreById(cle_offre);
+	}
+
 
 
 }

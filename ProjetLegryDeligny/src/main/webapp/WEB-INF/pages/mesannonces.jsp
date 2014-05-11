@@ -39,9 +39,9 @@
 					${offres.offre_place} places disponibles<br/>
 					</p>
 					<c:if test="${offres.statut==0}">
-						<form action="deposerannonce?id=${offres.cle_offre }">
-							<input type="submit" value="modifier"/>
-						</form>
+						<a href="deposerannonce?id=${offres.cle_offre}">
+							<input type="submit" value="Modifier"/>
+						</a>
 					</c:if>
 			</article>
 			</c:forEach>

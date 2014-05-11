@@ -22,6 +22,12 @@
  						$("#prenom").attr("value","");
  						$("#classe").attr("disabled",true);
  						$("#classe").attr("style","background-color:gray;");
+ 						$("#encours").attr("disabled",true);
+ 						$("#encours").attr("style","background-color:gray;");
+ 						$("#encours").prop("checked",false);
+ 						$("#ajour").attr("disabled",true);
+ 						$("#ajour").attr("style","background-color:gray;");
+ 						$("#ajour").prop("checked",false);
  						$("#classe").attr("value","tous");
  						$("form").attr("action","recherche?rech=1");
  				});
@@ -43,6 +49,18 @@
 					$("#matricule").attr("value","");
 					$("form").attr("action","recherche?rech=2");
 				});
+ 				$("#encours").click(function(){
+					$("#matricule").attr("disabled",true);
+					$("#matricule").attr("style","background-color:gray;");
+					$("#matricule").attr("value","");
+					$("form").attr("action","recherche?rech=2");
+				});
+ 				$("#ajour").click(function(){
+					$("#matricule").attr("disabled",true);
+					$("#matricule").attr("style","background-color:gray;");
+					$("#matricule").attr("value","");
+					$("form").attr("action","recherche?rech=2");
+				});
  			});
  			function init(){
 					$("#matricule").attr("disabled",false);
@@ -57,6 +75,12 @@
 					$("#classe").attr("disabled",false);
 					$("#classe").attr("style","background-color:rgb(52,73,94);");
 					$("#classe").value="Tous";
+					$("#encours").attr("disabled",false);
+					$("#encours").attr("style","background-color:rgb(52,73,94);");
+					$("#encours").prop('checked', true);
+					$("#ajour").attr("disabled",false);
+					$("#ajour").attr("style","background-color:rgb(52,73,94);");
+					$("#ajour").prop('checked',false);
 					$("form").attr("action","recherche?rech=0");
 			}
  </script>
@@ -86,6 +110,14 @@
 						<tr>
 							<td><label for="prenom" >Prénom</label></td>
 							<td><input type="text" name="prenom" id="prenom" value=""></input></td>
+						</tr>
+						<tr>
+							<td><label for="encours" >En Cours</label></td>
+							<td><input type="checkbox" value="true" name="encours" id="encours"  checked/></td>
+						</tr>
+						<tr>
+							<td><label for="ajour" >TEA à jour</label></td>
+							<td><input type="checkbox" name="ajour" value="true" id="ajour" /></td>
 						</tr>
 						<tr>
 							<td><label for="classe" >Classe</label></td>
