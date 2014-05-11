@@ -57,9 +57,10 @@
 							</table>            
 					</form>
 				</c:if>  
-				<p>
-					
-				</p>	
+				<c:if test="${!empty sessionScope.sessionEleve}">
+					<h2>Bienvenue !</h2>
+					<p>Bonjour et bienvenue sur le portail de gestion des Teas, ${sessionScope.sessionEleve.eleve_prenom } ${sessionScope.sessionEleve.eleve_nom }.</p>
+				</c:if>
 			</article>
 			
 		</section>	

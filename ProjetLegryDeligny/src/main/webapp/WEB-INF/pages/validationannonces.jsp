@@ -21,7 +21,7 @@
 	<!-- Corps -->
    		<section>
  
-			<h1>Annonces</h1>	
+			<h1>Annonces en attente</h1>	
 			
 			<article class="valide">
 				<span class="message"></span>
@@ -32,7 +32,7 @@
 			<c:forEach var="offres" items="${offres}">
 			<article>
 				
-					<table class="annonce"><tr><td class="left"><h2><fmt:formatDate value="${offres.date_tea}" pattern="d MMMM yyyy"/></h2></td><td class="center"><h2>${offres.offre_titre}</h2></td> <td class="right"><h2>${offres.heure_debut} - ${offres.heure_fin}</h2></td></tr></table>		
+					<table class="annonce"><tr><td class="left"><h2><fmt:formatDate value="${offres.date_tea}" pattern="d MMMM yyyy"/></h2></td><td class="center"><h2>${offres.offre_titre}</h2></td> <td class="right"><h2>${offres.heure_debut}H - ${offres.heure_fin}H</h2></td></tr></table>		
 					<hr/>
 					<p>
 					Description : ${offres.offre_description}<br/>

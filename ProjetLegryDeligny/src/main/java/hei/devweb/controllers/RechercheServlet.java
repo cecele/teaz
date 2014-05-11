@@ -5,6 +5,7 @@ import hei.devweb.model.Eleve;
 import hei.devweb.model.Offre;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -59,18 +60,41 @@ public class RechercheServlet extends HttpServlet {
 		}
 		if(request.getParameter("rech").equals("2")){
 			
+			encours = false;
+			ajour = false;
+			pasajour = false;
+			diplome = false;
 			nom = request.getParameter("nom");
 			prenom = request.getParameter("prenom");
 			classe = request.getParameter("classe");
+			
+			String[] choix = request.getParameterValues("check");
+			
+			if(choix != null){
+			for(int i =0; i< choix.length; i++)
+				{
+					if(choix[i].equals("encours")){
+						encours = true;
+					}
+					else if(choix[i].equals("ajour")){
+						ajour = true;
+					}
+					else if(choix[i].equals("pasajour")){
+						pasajour = true;
+					}
+					else if(choix[i].equals("diplome")){
+						diplome = true;
+					}
+				}
+			}
 			System.out.println(request.getParameter("encours"));
-			if(!request.getParameter("encours").equals("true"))
-				encours = false;
-			if(!request.getParameter("ajour").equals("true"))
-				ajour = false;
-			if(!request.getParameter("pasajour").equals("true"))
-				pasajour = false;
-			if(!request.getParameter("diplome").equals("true"))
-				diplome = false;
+				
+			System.out.println(request.getParameter("ajour"));
+				
+			System.out.println(request.getParameter("pasajour"));
+			
+			System.out.println(request.getParameter("diplome"));
+			
 		}
 		
 		

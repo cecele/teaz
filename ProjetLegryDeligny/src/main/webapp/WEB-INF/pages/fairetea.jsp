@@ -21,14 +21,11 @@
 	<!-- Corps -->
    		<section>
  
-			<h1>Valider les heures</h1>			
-			<c:if test="${empty teas}">
-			<article >
-				<p>Aucune heure de tea à valider</p>
-			</article>
-
-			</c:if>
-			<article class="valide">
+			<h1>Valider les heures</h1>	
+			<article class="valide">		
+				<c:if test="${empty teas}">
+					<p>Aucune heure de tea à valider</p>
+				</c:if>
 				<span class="message"></span>
 			</article>
 			<c:forEach var="teas" items="${teas}">

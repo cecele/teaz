@@ -137,19 +137,19 @@
 						</tr>
 						<tr>
 							<td><label for="encours" >En Cours</label></td>
-							<td><input type="checkbox" value="true" name="encours" id="encours"  checked/></td>
+							<td><input type="checkbox" value="encours" name="echeck" id="encours"  checked/></td>
 						</tr>
 						<tr>
 							<td><label for="diplome" >Diplomé</label></td>
-							<td><input type="checkbox" value="true" name="diplome" id="diplome"  checked/></td>
+							<td><input type="checkbox" value="diplome" name="check" id="diplome"  checked/></td>
 						</tr>
 						<tr>
 							<td><label for="pasajour" >Tea pas à jour</label></td>
-							<td><input type="checkbox" value="true" name="pasajour" id="pasajour"  checked/></td>
+							<td><input type="checkbox" value="pasajour" name="check" id="pasajour"  checked/></td>
 						</tr>
 						<tr>
 							<td><label for="ajour" >TEA à jour</label></td>
-							<td><input type="checkbox" name="ajour" value="true" id="ajour" checked/></td>
+							<td><input type="checkbox" name="check" value="check" id="ajour" checked/></td>
 						</tr>
 						<tr>
 							<td><label for="classe" >Classe</label></td>
