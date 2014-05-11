@@ -44,7 +44,7 @@ System.out.println("entrée ds le try");
 		
 		// tous les élèves
 		if(ideleve.equals("") && nom.equals("") && prenom.equals("") && classe.equals("tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve");
 		
 		 System.out.println("tous les élèves " +stmt);
 		}
@@ -52,7 +52,7 @@ System.out.println("entrée ds le try");
 
 		// recherche effectuée par matricule uniquement : il doit être exact!
 		if(!ideleve.equals("") && nom.equals("") && prenom.equals("") && classe.equals("tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE id_eleve=? ORDER BY ?");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve WHERE id_eleve=? ORDER BY ?");
 		stmt.setString(1,ideleve);
 		stmt.setString(2,orderBy);
 		System.out.println("matricule " +stmt);
@@ -62,7 +62,7 @@ System.out.println("entrée ds le try");
 		
 		// recherche par nom uniquement
 		if(ideleve.equals("") && !nom.equals("") && prenom.equals("") && classe.equals("tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE eleve_nom LIKE ? ORDER BY ?");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve WHERE eleve_nom LIKE ? ORDER BY ?");
 		stmt.setString(1,nom);
 		stmt.setString(2,orderBy);
 		 System.out.println("nom " +stmt);}
@@ -70,7 +70,7 @@ System.out.println("entrée ds le try");
 		
 		// recherche par prenom
 		if(ideleve.equals("") && nom.equals("") && !prenom.equals("") && classe.equals("tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE eleve_prenom LIKE ? ORDER BY ?");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve WHERE eleve_prenom LIKE ? ORDER BY ?");
 		stmt.setString(1,prenom);
 		stmt.setString(2,orderBy);
 		 System.out.println("prenom " +stmt);
@@ -78,7 +78,7 @@ System.out.println("entrée ds le try");
 				
 		// recherche par classe
 		if(ideleve.equals("") && nom.equals("") && prenom.equals("") && !classe.equals("tous")  ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? ORDER BY ?");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? ORDER BY ?");
 		stmt.setString(1,classe);
 		stmt.setString(2,orderBy);
 		 System.out.println("classe " +stmt);
@@ -87,7 +87,7 @@ System.out.println("entrée ds le try");
 		
 		// recherche par nom prenom
 		if(ideleve.equals("") && !nom.equals("") && !prenom.equals("") && classe.equals("tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE eleve_nom LIKE ? AND eleve_prenom LIKE ? ORDER BY ?");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve WHERE eleve_nom LIKE ? AND eleve_prenom LIKE ? ORDER BY ?");
 		stmt.setString(1,nom);
 		stmt.setString(2,prenom);
 		stmt.setString(3,orderBy);
@@ -97,7 +97,7 @@ System.out.println("entrée ds le try");
 		
 		// recherche par nom classe
 		if(ideleve.equals("") && !nom.equals("") && prenom.equals("") && !classe.equals("tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_nom LIKE `?%`ORDER BY ?");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_nom LIKE ?ORDER BY ?");
 		stmt.setString(1,classe);
 		stmt.setString(2,nom);
 		stmt.setString(3,orderBy);
@@ -106,7 +106,7 @@ System.out.println("entrée ds le try");
 		
 		// recherche par prenom classe
 		if(ideleve.equals("") && nom.equals("") && !prenom.equals("") && !classe.equals("tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_prenom LIKE `?%`ORDER BY ?");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_prenom LIKE ?ORDER BY ?");
 		stmt.setString(1,classe);
 		stmt.setString(2,prenom);
 		stmt.setString(3,orderBy);
@@ -115,17 +115,18 @@ System.out.println("entrée ds le try");
 				
 		// recherche par nom prenom et  classe
 		if(ideleve.equals("") && !nom.equals("") && !prenom.equals("") && !classe.equals("tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_nom LIKE `?%` AND eleve_prenom LIKE`?%`ORDER BY ?");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_nom LIKE ? AND eleve_prenom LIKE ? ORDER BY ?");
 		stmt.setString(1,classe);
 		stmt.setString(2,nom);
 		stmt.setString(3,prenom);
 		stmt.setString(4,orderBy);
+		
 		 System.out.println("nom prenom classe " +stmt);}
 		
 		
 		ResultSet results = stmt.executeQuery();
 			
-		
+		int i=0;
 		while (results.next()) {
 			Eleve 		eleve = new Eleve(
 					results.getString("id_eleve"),
@@ -151,6 +152,7 @@ System.out.println("entrée ds le try");
 			int teadues=getTeaDuesEnCours(results.getString("id_eleve"));
 			if(EleveDaoImpl.president(results.getString("id_eleve"))){ eleve.setCle_structure(EleveDaoImpl.getCleStructureById(results.getString("id_eleve")));}
 			System.out.println("choix du cas " +results.getString("id_eleve")+ " "+ diplome+  " " + etudiant+ " " + " " + ajour+ " " + retard);
+			
 			if(diplome && etudiant && ajour && retard)elevescas1.add(eleve);
 			if(diplome && etudiant && ajour==false && teadues>0 && retard)elevescas2.add(eleve);
 			if(diplome && etudiant && ajour && teadues==0 && retard==false)elevescas3.add(eleve);
@@ -164,17 +166,18 @@ System.out.println("entrée ds le try");
 			if(diplome && results.getInt("diplome")==1  && etudiant==false && ajour==false && teadues>0 && retard )elevescas8.add(eleve);
 			if(diplome && results.getInt("diplome")==1  && etudiant==false && ajour && teadues==0 && retard==false )elevescas9.add(eleve);
 					
-			
+			System.out.println("choix du cas " +elevescas1.get(i).getId_eleve());
 				
+		i=i+1;
 		
-		
-			// Fermer la connexion
-			results.close();
-			stmt.close();
-			connection.close();
-			
-	
+
 	}
+		// Fermer la connexion
+		results.close();
+		stmt.close();
+		connection.close();
+		
+
 	}
 		catch (SQLException e) {
 							e.printStackTrace();
@@ -190,7 +193,7 @@ System.out.println("entrée ds le try");
 	if(diplome==false && etudiant && ajour && retard==false )elevesreturn=elevescas7;
 	if(diplome && etudiant==false && ajour && retard )elevesreturn=elevescas8;
 	if(diplome && etudiant==false && ajour==false  && retard )elevesreturn=elevescas9;
-		
+	
 	
 	return elevesreturn;
 }

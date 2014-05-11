@@ -58,11 +58,11 @@ public class RechercheServlet extends HttpServlet {
 			classe = "tous";
 		}
 		if(request.getParameter("rech").equals("2")){
-			System.out.println("Dans la recherche générale");
+			
 			nom = request.getParameter("nom");
 			prenom = request.getParameter("prenom");
 			classe = request.getParameter("classe");
-			
+			System.out.println(request.getParameter("encours"));
 			if(!request.getParameter("encours").equals("true"))
 				encours = false;
 			if(!request.getParameter("ajour").equals("true"))
