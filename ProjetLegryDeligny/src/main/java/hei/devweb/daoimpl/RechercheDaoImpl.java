@@ -48,18 +48,8 @@ System.out.println("entrée ds le try");
 		
 		 System.out.println("tous les élèves " +stmt);
 		}
-		// tous les élèves diplomé
-				if(ideleve.equals("") && nom.equals("") && prenom.equals("") && classe.equals("tous") ){
-				stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE dilpome=1");
-				
-				 System.out.println("tous les élèves diplomés " +stmt);
-				}
-		// tous les élèves diplomé
-				if(ideleve.equals("") && nom.equals("") && prenom.equals("") && classe.equals("tous") ){
-				stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE dilpome=1");
-				
-				 System.out.println("tous les élèves diplomés à jours " +stmt);
-				}
+
+
 		// recherche effectuée par matricule uniquement : il doit être exact!
 		if(!ideleve.equals("") && nom.equals("") && prenom.equals("") && classe.equals("tous") ){
 		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE id_eleve=? ORDER BY ?");
