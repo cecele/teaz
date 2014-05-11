@@ -55,7 +55,7 @@ public class DeposerAnnonceServlet extends HttpServlet {
 		if(cle_offre == 0){
 			Manager.getInstance().ajouterAnnonce(offre);
 			System.out.println("Création");
-			response.sendRedirect("annonces");
+			response.sendRedirect("mesannonces");
 		}
 		else{
 			Manager.getInstance().AnnonceModification(offre);
@@ -70,10 +70,16 @@ public class DeposerAnnonceServlet extends HttpServlet {
 		
 		Integer cle_offre=Integer.parseInt(request.getParameter("id"));
 		
-		if(cle_offre != 0){
+		if(cle_offre != 0){ // édit d'une offre
 			Offre offre = Manager.getInstance().getOffreById(cle_offre);
 			request.setAttribute("offre",offre);
+			
 		}
+		else{ // création d'une offre
+			Offre offre = new Offre(0,null,null,null,"", "", 0,"","","",0,1,"","","",0);
+			request.setAttribute("offre",offre);
+		}
+		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/deposerannonce.jsp");
 		view.forward(request, response);
 	}

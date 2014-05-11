@@ -33,7 +33,7 @@ public class AnnonceDaoImpl implements AnnonceDao {
 		
 		Date date =new Date();
 		
-		if (offre.getDate_tea() != null && offre.getHeure_debut() != null && offre.getHeure_fin() != null  && offre.getEleve_mail() != null  && offre.getOffre_titre() != null && !date.before(offre.getDate_tea())){
+		if (offre.getDate_tea() != null && offre.getHeure_debut() != null && offre.getHeure_fin() != null  && offre.getEleve_mail() != null  && offre.getOffre_titre() != null ){
 			
 			
 			try {

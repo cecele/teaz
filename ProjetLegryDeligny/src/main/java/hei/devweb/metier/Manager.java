@@ -208,6 +208,11 @@ private static Manager instance;
 		return TeaDao.getTeaDuesEnCours(matricule);
 	}
 
+	public Integer getCleByNom(String nom) {
+		// TODO Auto-generated method stub
+		return StructureDao.getCleByNom(nom);
+	}
+
 
 
 }
