@@ -112,11 +112,17 @@ html>body #menu li ul ul
 	left:auto;
 	min-height:0;
 }
-#centre{
-	text-align:center;
+.left{
+	text-align:left;
+	width:200px;
 }
-#right{
+.center{
+	text-align:center;
+	width:530px;
+}
+.right{
 	text-align:right;
+	width:200px;
 }
 
 ul
@@ -189,12 +195,14 @@ section h1{
 	font-family:'bebas_neueregular',Helvetica;
 }
 
-table{
-	width:940px;
+.tableau, .annonce{
+	width:930px;
 	margin: 5px;
+	
+}
+.tableau{
 	text-align:left;
 }
-
 
 .tableau tr:nth-child(even){
 	background-color:rgb(228,229,211);

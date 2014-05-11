@@ -28,7 +28,7 @@
 			<c:forEach var="offres" items="${offres}">
 			<article>
 				
-					<table><tr><td><h2><fmt:formatDate value="${offres.date_tea}" pattern="d MMMM yyyy"/></h2></td><td class="center"><h2>${offres.offre_titre} ${offres.statut==0 ? '(En attente de validation)' : '(En ligne)'  }</h2></td> <td class="right"><h2>${offres.heure_debut}H - ${offres.heure_fin}H</h2></td></tr></table>		
+					<table class="annonce"><tr><td class="left"><h2><fmt:formatDate value="${offres.date_tea}" pattern="d MMMM yyyy"/></h2></td><td class="center"><h2>${offres.offre_titre} ${offres.statut==0 ? '(En attente de validation)' : '(En ligne)'  }</h2></td> <td class="right"><h2>${offres.heure_debut}H - ${offres.heure_fin}H</h2></td></tr></table>		
 					<hr/>
 					<p>
 					Description : ${offres.offre_description}<br/>
@@ -38,6 +38,11 @@
 					Président : ${offres.structure_president_prenom} ${offres.structure_president_nom}<br/>
 					${offres.offre_place} places disponibles<br/>
 					</p>
+					<c:if test="${offres.statut==0}">
+						<form action="deposerannonce?id=${offres.cle_offre }">
+							<input type="submit" value="modifier"/>
+						</form>
+					</c:if>
 			</article>
 			</c:forEach>
 			
