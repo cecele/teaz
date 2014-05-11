@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class GestionTeaServlet extends HttpServlet {
+public class GestionElevesServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -24,7 +24,7 @@ public class GestionTeaServlet extends HttpServlet {
 		List<Eleve> eleves = Manager.getInstance().getEleveTotal();
 		request.setAttribute("eleves",eleves);
 		
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/gestiontea.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/gestioneleves.jsp");
 		view.forward(request, response);
 	}
 	

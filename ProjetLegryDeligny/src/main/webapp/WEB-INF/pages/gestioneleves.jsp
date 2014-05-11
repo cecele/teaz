@@ -68,7 +68,7 @@
 	<!-- Corps -->
    		<section>
  
-			<h1>Gestion TEA</h1>			
+			<h1>Gestion des élèves</h1>			
 	
 			<article>
 				<h2>Filtre</h2>

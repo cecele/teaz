@@ -36,7 +36,7 @@
 					Association : ${teas.structure_nom}<br/>
 					Président : ${teas.structure_president_prenom} ${teas.structure_president_nom}<br/>
 					<br/>
-					<a href="fairetea?id=${teas.cle_offre }">Valider</a>
+					<a href="faireteavalider?id=${teas.cle_tea }">Valider</a>
 					</p>
 			</article>
 			</c:forEach>

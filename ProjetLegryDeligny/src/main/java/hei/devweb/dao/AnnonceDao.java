@@ -23,4 +23,6 @@ public interface AnnonceDao {
 
 	List<Offre> listerOffreByEleve(String matricule);
 
+	List<Offre> listerOffreByStructure(Integer clestructure);
+
 }

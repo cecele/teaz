@@ -65,7 +65,7 @@ public class RechercheServlet extends HttpServlet {
 		List<Eleve> eleves = Manager.getInstance().rechercheByParameter(matricule,nom,prenom,classe,orderBy);
 		
 		request.setAttribute("eleves",eleves);
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/gestiontea.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/gestioneleves.jsp");
 		view.forward(request, response);
 	}
 

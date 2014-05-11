@@ -30,7 +30,7 @@
 		<li class="menu"><a href="validationtea">TEA en attente</a></li>
 	</c:if>	
 	<c:if test="${sessionScope.sessionEleve.eleve_profil==2|| sessionScope.sessionEleve.eleve_profil==3|| sessionScope.sessionEleve.eleve_profil==4|| sessionScope.sessionEleve.eleve_profil==999}">
-		<li class="menu"><a href="gestiontea">Gestion des TEA</a></li>
+		<li class="menu"><a href="gestioneleves">Gestion des élèves</a></li>
 	</c:if>
 	</ul>
 	<ul>

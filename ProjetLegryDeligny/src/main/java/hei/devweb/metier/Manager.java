@@ -133,7 +133,7 @@ private static Manager instance;
 	}
 
 	public List<Tea> getTeaAValiderByRespTea() {
-		System.out.println("dans méthode listerTeaAValider");
+		System.out.println("dans méthode getTeaAValiderByRespTea");
 		return TeaDao.getTeaAValiderByRespTea();
 	}
 
@@ -175,6 +175,11 @@ private static Manager instance;
 		System.out.println("Dans méthode teaValidationByrESPONSABLE");
 		TeaDao.teaValidationByResponsable(cletea);
 		
+	}
+
+	public List<Offre> listerOffreByStructure(Integer clestructure) {
+		System.out.println("Dans méthode listerOffreByStructure");
+		return AnnonceDao.listerOffreByStructure(clestructure);
 	}
 
 

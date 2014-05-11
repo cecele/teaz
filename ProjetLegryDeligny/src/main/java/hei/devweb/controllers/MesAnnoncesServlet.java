@@ -37,9 +37,9 @@ public class MesAnnoncesServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();    
 		Eleve eleve = (Eleve) (session.getAttribute("sessionEleve"));
-		String matricule = eleve.getId_eleve();
+		Integer clestructure = eleve.getCle_structure();
 		
-		List<Offre> offres = Manager.getInstance().listerOffreByEleve(matricule);
+		List<Offre> offres = Manager.getInstance().listerOffreByStructure(clestructure);
 		request.setAttribute("offres",offres);
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/mesannonces.jsp");

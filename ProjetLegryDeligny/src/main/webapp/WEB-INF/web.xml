@@ -32,6 +32,7 @@
   <filter-mapping>
     <filter-name>AdministrationFilter</filter-name>
     <url-pattern>/gestiontea</url-pattern>
+    <url-pattern>/gestioneleves</url-pattern>
     <url-pattern>/detail</url-pattern>
   </filter-mapping>
   <filter>
@@ -142,6 +143,22 @@
     <servlet-name>MesAnnonces</servlet-name>
     <servlet-class>hei.devweb.controllers.MesAnnoncesServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ValiderTea</servlet-name>
+    <servlet-class>hei.devweb.controllers.ValiderTeaServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GestionEleves</servlet-name>
+    <servlet-class>hei.devweb.controllers.GestionElevesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GestionEleves</servlet-name>
+    <url-pattern>/gestioneleves</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ValiderTea</servlet-name>
+    <url-pattern>/validertea</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>MesAnnonces</servlet-name>
     <url-pattern>/mesannonces</url-pattern>

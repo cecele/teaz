@@ -35,7 +35,7 @@
 					Matricule de l'élève : ${teas.id_eleve }<br/>
 					<br/>
 					Association : ${teas.structure_nom}<br/>
-					Président : ${teas.structure_president}<br/>
+					Président : ${teas.structure_president_prenom} ${teas.structure_president_nom}<br/>
 					<a href="validertea?id=${teas.cle_tea }">Valider</a>
 					</p>
 			</article>

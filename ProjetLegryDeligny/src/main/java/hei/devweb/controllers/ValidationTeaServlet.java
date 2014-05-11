@@ -24,6 +24,7 @@ public class ValidationTeaServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		List<Tea> teas = Manager.getInstance().getTeaAValiderByRespTea();
 		request.setAttribute("teas",teas);
 		
