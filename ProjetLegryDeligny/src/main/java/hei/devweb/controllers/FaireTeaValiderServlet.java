@@ -1,5 +1,6 @@
 package hei.devweb.controllers;
 
+import hei.devweb.metier.Manager;
 import hei.devweb.model.Eleve;
 import hei.devweb.model.Structure;
 
@@ -37,9 +38,9 @@ public class FaireTeaValiderServlet extends HttpServlet {
 		Eleve eleve = (Eleve) (session.getAttribute("sessionEleve"));
 		String matricule = eleve.getId_eleve();
 		Integer cleStructure = eleve.getCle_structure();
-		String cleTea = request.getParameter("id");
+		Integer cleTea = Integer.parseInt(request.getParameter("id"));
 		
-		// Manager.getInstance().FaireValiderTeaParResponsableStructure(matricule,cleStructure,cleTea);
+		Manager.getInstance().teaValidationByStructure(cleTea, cleStructure,matricule);
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/fairetea.jsp");
 		view.forward(request, response);

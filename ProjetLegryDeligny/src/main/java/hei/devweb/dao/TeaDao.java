@@ -17,4 +17,9 @@ public interface TeaDao {
 
 	List<Tea> getTeaAValiderByRespTea();
 
+	void teaValidationByStructure(Integer cleTea, Integer cleStructure,
+			String matricule);
+
+	void teaValidationByResponsable(Integer cletea);
+
 }
