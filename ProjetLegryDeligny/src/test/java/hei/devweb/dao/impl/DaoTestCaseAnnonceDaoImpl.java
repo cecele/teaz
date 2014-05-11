@@ -34,7 +34,7 @@ import org.junit.Test;
 
 import com.mysql.jdbc.PreparedStatement;
 
-public class DaoTestCaseEleve {
+public class DaoTestCaseAnnonceDaoImpl {
 	private EleveDao daoEleve = new EleveDaoImpl();
 	private AnnonceDao daoAnnonce= new AnnonceDaoImpl();
 	private ArticleDao daoArticle = new ArticleDaoImpl();
@@ -78,7 +78,7 @@ public class DaoTestCaseEleve {
 		stmt.executeUpdate("INSERT INTO `eleve` (`id_eleve`, `eleve_nom`, `eleve_prenom`, `date_naissance`, `numrue`, `nomrue`, `codepostal`, `ville`, `date_entree`, `cotisant`, `eleve_profil`, `diplome`, `motdepasse`) VALUES ('11111', 'DELIGNY', 'MARTIN', '1991-03-11', 12, 'RUE DU PORT', '59000', 'LILLE', 2010, NULL, 1, 0, 'motdepasse')");
 		stmt.executeUpdate("INSERT INTO `structure` (`cle_structure`, `structure_nom`) VALUES (1, 'INTEGRALE-VP')");
 		stmt.executeUpdate("INSERT INTO `presider` (`id_eleve`, `cle_structure`, `date_debut`, `date_fin`) VALUES ('10153', 1, '2014-05-01', '2015-06-15')");
-		stmt.executeUpdate("INSERT INTO `offre` (`cle_offre`, `date_depot`, `date_miseenligne`, `date_tea`, `heure_debut`, `heure_fin`, `statut`, `offre_description`, `eleve_mail`, `offre_titre`, `offre_place`, `cle_structure`) VALUES (1, '2014-05-09', '2014-05-10', '2014-05-19', '12', '13', 1, 'DESCRIPTION CHIANTE', 'cc@hei.fr', 'TITRE INTERESSANT', 3, 1)");
+		stmt.executeUpdate("INSERT INTO `offre` (`cle_offre`, `date_depot`, `date_miseenligne`, `date_tea`, `heure_debut`, `heure_fin`, `statut`, `offre_description`, `eleve_mail`, `offre_titre`, `offre_place`, `cle_structure`) VALUES (1, '2014-05-09', '2014-05-10', '2014-05-19', '12', '13', 0, 'DESCRIPTION CHIANTE', 'cc@hei.fr', 'TITRE INTERESSANT', 3, 1)");
 		stmt.executeUpdate("INSERT INTO `tea` (`cle_tea`, `date_tea_realisee`, `nbheure_realisee`, `statut_valide`, `date_validation`, `cle_offre`, `id_eleve`) VALUES (1, '2014-05-05', 2, 0, NULL, 1, '11111')");
 		stmt.executeUpdate("INSERT INTO `classe` (`cle_classe`, `classe`, `annee`, `nb_tea`) VALUES(1, 'H1A', '2014', NULL)");
 		stmt.executeUpdate("INSERT INTO `classe` (`cle_classe`, `classe`, `annee`, `nb_tea`) VALUES(2, 'H2B', '2014', 3)");
@@ -98,10 +98,15 @@ public class DaoTestCaseEleve {
 		stmt.executeUpdate("ALTER TABLE offre AUTO_INCREMENT = 1");
 		stmt.executeUpdate("ALTER TABLE tea AUTO_INCREMENT = 1");
 	}
-	
+//------------------------------------------------------------------------------------------------------------------------------	
+	//------------------------------------------------------------------------------------------------------------------------------
 	// test AnnonceDAOIMPL-------SELECT
+	//------------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
+
 	
-//	 @Test
+	//------------------------------------------------------------------------------------------------------------------------------
+	//	 @Test
 //     public void testajouterAnnonce () throws Exception {
 //		 
 //		 String StringDatedepot = "2014-05-09";
@@ -150,5 +155,95 @@ public class DaoTestCaseEleve {
 //     }
 	
 	
+	//------------------------------------------------------------------------------------------------------------------------------
+//	@Test
+//    public void testdeleteOffre() throws Exception {
+//		 daoAnnonce.deleteOffre(2);
+//
+//            Connection connection = DataSourceProvider.getDataSource()
+//                            .getConnection();
+//            Statement stmt = connection.createStatement();
+//            ResultSet results = stmt.executeQuery("SELECT * FROM `offre` WHERE `cle_offre`=5");
+//            Assert.assertFalse(results.next());
+//            results.close();
+//            stmt.close();
+//            connection.close();
+//    }
+//
+//	
+	//------------------------------------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------------------------------------
+//			 @Test
+//	     public void testannonce_validation() throws Exception {
+//			 
+//				 java.util.Date utilDate = new Date();
+//				                     		
+//	           daoAnnonce.annonce_validation(1,utilDate);
+//	
+//	             Connection connection = DataSourceProvider.getDataSource()
+//	                             .getConnection();
+//	             Statement stmt = connection.createStatement();
+//	             ResultSet results = stmt.executeQuery("SELECT statut FROM `offre` WHERE `cle_offre`=1");
+//	             Assert.assertTrue(results.next());
+//	             Assert.assertEquals(1, results.getInt("statut"));
+//	             
+//	             results.close();
+//	             stmt.close();
+//	             connection.close();
+//	     }
+//	
+	//------------------------------------------------------------------------------------------------------------------------------
+		//------------------------------------------------------------------------------------------------------------------------------
+//				 @Test
+//		     public void testoffre_placemoins() throws Exception {
+//					 
+//					 
+//					 Connection connection2 = DataSourceProvider.getDataSource()
+//                             .getConnection();
+//             Statement stmt2 = connection2.createStatement();
+//             ResultSet results2 = stmt2.executeQuery("SELECT offre_place FROM `offre` WHERE `cle_offre`=1");
+//             results2.next();
+//            int nbplace= results2.getInt("offre_place");
+//             
+//             results2.close();
+//             stmt2.close();
+//             connection2.close();
+//     
+//					 
+//					                     		
+//		           daoAnnonce.offre_placemoins(1);
+//		
+//		             Connection connection = DataSourceProvider.getDataSource()
+//		                             .getConnection();
+//		             Statement stmt = connection.createStatement();
+//		             ResultSet results = stmt.executeQuery("SELECT offre_place FROM `offre` WHERE `cle_offre`=1");
+//		             Assert.assertTrue(results.next());
+//		             Assert.assertNotEquals(nbplace, results.getInt("offre_place"));
+//		             
+//		             results.close();
+//		             stmt.close();
+//		             connection.close();
+//		     }
+//		
+	//------------------------------------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------------------------------------
+//				 @Test
+//		     public void testannonce_miseHorsLigne() throws Exception {
+//				 
+//					
+//		           daoAnnonce.annonce_miseHorsLigne(1);
+//		
+//		             Connection connection = DataSourceProvider.getDataSource()
+//		                             .getConnection();
+//		             Statement stmt = connection.createStatement();
+//		             ResultSet results = stmt.executeQuery("SELECT statut FROM `offre` WHERE `cle_offre`=1");
+//		             Assert.assertTrue(results.next());
+//		             Assert.assertEquals(0, results.getInt("statut"));
+//		             
+//		             results.close();
+//		             stmt.close();
+//		             connection.close();
+//		     }
+//		
 }
 	

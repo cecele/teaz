@@ -28,6 +28,7 @@ public class AnnonceDaoImpl implements AnnonceDao {
 //-----------------------------------------------------------------------------------------------------------------
 // cr�ation d 'une annonce en statut non valid� pour mise en ligne et date_miseenligne null par d�faut
 // acces en �criture
+	//test Junit
 	public void ajouterAnnonce (Offre offre ){
 		GregorianCalendar calendar = new java.util.GregorianCalendar(); 
 		Date date=new Date();
@@ -71,30 +72,31 @@ public class AnnonceDaoImpl implements AnnonceDao {
 						}
 					}
 		}
-	//-----------------------------------------------------------------------------------------------------------------
-	///suppression d'une offre non pourvue ou qui n'est plus n�cessaire (attention verification offre non pourvue)
-	//acc�s en ecriture
-public void deleteOffre(Integer cleoffre) {
-	
-	try {
-		Connection connection = DataSourceProvider.getDataSource()
-				.getConnection();
+//	//-----------------------------------------------------------------------------------------------------------------
+//	///suppression d'une offre non pourvue ou qui n'est plus n�cessaire (attention verification offre non pourvue)
+//	//acc�s en ecriture
+	//testJunit-----nonutilisé
+//public void deleteOffre(Integer cleoffre) {
+//	
+//	try {
+//		Connection connection = DataSourceProvider.getDataSource()
+//				.getConnection();
+//
+//		PreparedStatement stmt = (PreparedStatement) connection
+//				.prepareStatement("DELETE  FROM offre WHERE cle_offre=?");
+//		stmt.setInt(1,cleoffre);
+//		stmt.executeUpdate();
+//		// Fermer la connexion
+//
+//		stmt.close();
+//		connection.close();
+//
+//	} catch (SQLException e) {
+//		e.printStackTrace();
+//	}
+//	
 
-		PreparedStatement stmt = (PreparedStatement) connection
-				.prepareStatement("DELETE  FROM offre WHERE cle_offre=?");
-		stmt.setInt(1,cleoffre);
-		stmt.executeUpdate();
-		// Fermer la connexion
-
-		stmt.close();
-		connection.close();
-
-	} catch (SQLException e) {
-		e.printStackTrace();
-	}
-	
-
-}
+//}
 
 //-----------------------------------------------------------------------------------------------------------------
 //  MISE A JOUR
@@ -102,6 +104,7 @@ public void deleteOffre(Integer cleoffre) {
 //-----------------------------------------------------------------------------------------------------------------
 //mise au statut valide de l'annonce et donc modification de la date de mise en ligne ce processus est eff�ctu� par le reponsable TEA et provoque l'affichage de l'annonce dans la liste
 //acces en �criture
+	//test Junit
 
 public void annonce_validation (Integer cle_offre,Date datedujour){
 	try {
@@ -128,7 +131,7 @@ public void annonce_validation (Integer cle_offre,Date datedujour){
 //-----------------------------------------------------------------------------------------------------------------
 //decrementation de l'offre
 //acces en ecriture -----ATTENTION---- VERIFIER QUE OFFRE_PLACE>0 avant de decrementer
-
+//test Junit
 public void offre_placemoins (Integer cle_offre){
 	try {
 		Connection connection = DataSourceProvider.getDataSource()
@@ -150,22 +153,22 @@ public void offre_placemoins (Integer cle_offre){
 	//-----------------------------------------------------------------------------------------------------------------
 	//mise � 0 du statut pour enlever l'affichage
 	//acces en ecriture--- a effectuer quand le nombre de place est � 0
+ 	
 
-
-	public void annonce_miseHorsLigne (Offre offre){
+	public void AnnonceModification (Offre offre){
 		
 		java.util.Date utilDate_depot = offre.getDate_depot();
 	    java.sql.Date sqlDateDepot = new java.sql.Date(utilDate_depot.getTime());
 	    
 		java.util.Date utilDate_tea = offre.getDate_tea();
 	    java.sql.Date sqlDateTea = new java.sql.Date(utilDate_tea.getTime());
-	    
+	    if( TeaDaoImpl.getNbPlacePourvue(offre.getCle_offre())==0){
 		try {
 			Connection connection = DataSourceProvider.getDataSource()
 					.getConnection();
 
 			PreparedStatement stmt = (PreparedStatement) connection
-					.prepareStatement("UPDATE offre SET date_tea=?,heure_debut=?,heure_fin=?,statut=0,offre_descritpion=?,eleve_mail=?, offre_titre=?, offre_place=? WHERE cle_offre=?");
+					.prepareStatement("UPDATE offre SET date_tea=?,heure_debut=?,heure_fin=?,statut=0,offre_descritpion=?,eleve_mail=?, offre_titre=?, offre_place=? WHERE cle_offre=? AND statut=0");
 			stmt.setDate(1, sqlDateTea);
 			stmt.setString(2, offre.getHeure_debut());
 			stmt.setString(3, offre.getHeure_fin());
@@ -182,12 +185,14 @@ public void offre_placemoins (Integer cle_offre){
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	    }
 	}
 	//-----------------------------------------------------------------------------------------------------------------
 		//modification de l'offre par le propriétaire de l'offre
 		//acces en ecriture--- 
+		// Test Junit
 	
-	public void AnnonceModification (Integer cle_offre){
+	public void  annonce_miseHorsLigne(Integer cle_offre){
 		try {
 			Connection connection = DataSourceProvider.getDataSource()
 					.getConnection();
@@ -501,11 +506,7 @@ public void offre_placemoins (Integer cle_offre){
         }
         return nbPlaces;
 }
-	@Override
-	public void annonce_miseHorsLigne(Integer id) {
-		// TODO Auto-generated method stub
-		
-	}
+
 	
 	
 	
