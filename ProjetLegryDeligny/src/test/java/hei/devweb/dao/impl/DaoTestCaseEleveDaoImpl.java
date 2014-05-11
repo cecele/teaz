@@ -232,7 +232,7 @@ while (results.next()){
 	Assert.assertEquals(eleves.get(i).getDate_entree(), results.getString("date_entree"));
 	Assert.assertEquals((int)eleves.get(i).getCotisant(), results.getInt("cotisant"));
 	Assert.assertEquals((int)eleves.get(i).getEleve_profil(), results.getInt("eleve_profil"));
-	//Assert.assertEquals((int)eleves.get(i).getDiplome(), results.getInt("diplome"));
+	Assert.assertEquals((int)eleves.get(i).getDiplome(), results.getInt("diplome"));
 	Assert.assertEquals(eleves.get(i).getMotdepasse(), results.getString("motdepasse"));
 	
 	i=i+1;
