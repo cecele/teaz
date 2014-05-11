@@ -48,9 +48,10 @@ public class TeaDaoImpl implements TeaDao {
 							results.getInt("offre_place"),
 							StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
 							StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-							StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
+							StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
+							TeaDaoImpl.getNbPlacePourvue(results.getInt("cle_offre"))
+							
 							);
-
 			
 			// Fermer la connexion
 			results.close();
@@ -748,7 +749,7 @@ return teas;
 
 						
 						PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT COUNT(cle_tea) as total FROM tea WHERE statut_valide=0");
-
+						
 						ResultSet results = stmt.executeQuery();
 						results.next();
 						nbtotal=results.getInt("total");
@@ -767,13 +768,46 @@ return teas;
 					return nbtotal;
 				}
 				
+
+				//-----------------------------------------------------------------------------------------------------------------
+				//calcul du nombre de personne ayant postuler à une offre en fonction de la clé de l'offre
+				//acc�s en lecture
+				
+				public static int getNbPlacePourvue(Integer cleoffre){
+					int nbtotal=0;
+					
+					
+					try {
+						Connection connection = DataSourceProvider.getDataSource()
+								.getConnection();
+
+						
+						PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT COUNT(cle_tea) as total FROM tea WHERE cle_offre=?");
+						stmt.setInt(1,cleoffre);
+						ResultSet results = stmt.executeQuery();
+						results.next();
+						nbtotal=results.getInt("total");
+						
+						// Fermer la connexion
+						results.close();
+						stmt.close();
+						connection.close();
+						
+						}
+					catch (SQLException e) {
+										e.printStackTrace();
+									}
+					
+						
+					return nbtotal;
+				}
+				@Override
 				public List<Tea> listerTeaAValider() {
 					// TODO Auto-generated method stub
 					return null;
 				}
 				
-				
-				
+
 				
 				
 

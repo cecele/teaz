@@ -20,6 +20,8 @@ public class Offre{
 	String structure_nom;
 	String structure_president_nom;
 	String structure_president_prenom;
+	Integer place_pourvue;
+	
 	
 	
 	public Offre(Integer cle_offre, Date date_depot, Date date_miseenligne,
@@ -27,7 +29,7 @@ public class Offre{
 			Integer statut, String offre_description, String eleve_mail,
 			String offre_titre, Integer cle_structure, Integer offre_place,
 			String structure_nom, String structure_president_nom,
-			String structure_president_prenom) {
+			String structure_president_prenom, Integer place_pourvue) {
 		super();
 		this.cle_offre = cle_offre;
 		this.date_depot = date_depot;
@@ -44,6 +46,7 @@ public class Offre{
 		this.structure_nom = structure_nom;
 		this.structure_president_nom = structure_president_nom;
 		this.structure_president_prenom = structure_president_prenom;
+		this.place_pourvue = place_pourvue;
 	}
 	public Integer getCle_offre() {
 		return cle_offre;
@@ -135,6 +138,12 @@ public class Offre{
 	public void setStructure_president_prenom(String structure_president_prenom) {
 		this.structure_president_prenom = structure_president_prenom;
 	}
+	public Integer getPlace_pourvue() {
+		return place_pourvue;
+	}
+	public void setPlace_pourvue(Integer place_pourvue) {
+		this.place_pourvue = place_pourvue;
+	}
+
 }
-	
 	
