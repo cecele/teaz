@@ -198,6 +198,11 @@ private static Manager instance;
 		return TeaDao.getTeaEnAttente();
 	}
 
+	public Integer getOffreEnAttente() {
+		// TODO Auto-generated method stub
+		return AnnonceDao.getOffreEnAttente();
+	}
+
 
 
 }

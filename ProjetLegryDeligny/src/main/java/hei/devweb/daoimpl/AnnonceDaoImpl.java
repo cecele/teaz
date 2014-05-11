@@ -530,7 +530,38 @@ public void offre_placemoins (Integer cle_offre){
 			return offre;
 		}
 	
+	//-----------------------------------------------------------------------------------------------------------------
+	//calcul du nombre de tea en attente de validation
+	//acc�s en lecture
+	
+	public Integer getOffreEnAttente(){
+		int nbtotal=0;
+		
+		
+		try {
+			Connection connection = DataSourceProvider.getDataSource()
+					.getConnection();
 
+			
+			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT COUNT(cle_offre) as total FROM offre WHERE statut=0");
+			
+			ResultSet results = stmt.executeQuery();
+			results.next();
+			nbtotal=results.getInt("total");
+			
+			// Fermer la connexion
+			results.close();
+			stmt.close();
+			connection.close();
+			
+			}
+		catch (SQLException e) {
+							e.printStackTrace();
+						}
+		
+			
+		return nbtotal;
+	}
 }
 
 

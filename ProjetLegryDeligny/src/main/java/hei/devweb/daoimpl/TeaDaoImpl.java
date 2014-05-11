@@ -829,7 +829,7 @@ return teas;
 								.getConnection();
 
 						
-						PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT COUNT(cle_tea) as total FROM tea WHERE statut_valide=0");
+						PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT COUNT(cle_tea) as total FROM tea WHERE statut_valide=1");
 						
 						ResultSet results = stmt.executeQuery();
 						results.next();

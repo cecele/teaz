@@ -30,6 +30,9 @@ $(document).ready(function(){
                     $.ajax({ 
                     	url:"validerannonce", type:"POST",data:{id:$(this).attr("data-id")}
                     });
+                    var nbOffre = $("#nbOffre").text();
+                    nbOffre--;
+                    $("#nbOffre").text(nbOffre);
                     $(".message").text("Vous avez bien valide cette annonce");
                     $(this).parent().parent().remove();
             
@@ -40,6 +43,9 @@ $(document).ready(function(){
                      $.ajax({ 
                         	url:"validertea", type:"POST",data:{id:$(this).attr("data-id")}
                      });
+                     var nbTea = $("#nbTea").text();
+                     nbTea--;
+                     $("#nbTea").text(nbTea);
                      $(".message").text("Vous avez bien valide cette heure de TEA");
                      $(this).parent().parent().remove();
                 

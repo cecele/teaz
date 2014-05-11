@@ -29,4 +29,6 @@ public interface AnnonceDao {
 
 	Offre getOffreById(Integer cleoffre);
 
+	Integer getOffreEnAttente();
+
 }

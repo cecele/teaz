@@ -52,12 +52,20 @@ public class ConnexionServlet extends HttpServlet {
 			session.setAttribute( ATT_SESSION_USER, eleve );
 			String ideleve = eleve.getId_eleve();
 			Structure structure = Manager.getInstance().getStructure_ElevePresident(ideleve);
-			Integer nbTeaEnAttente = Manager.getInstance().getTeaEnAttente();
+			
 			session.setAttribute( "structure", structure );
-			session.setAttribute( "nbTeaEnAttente", nbTeaEnAttente );
-			} else {             
-				session.setAttribute( ATT_SESSION_USER, null );         
-				}          
+			
+			//if(eleve.getEleve_profil() == 2 || eleve.getEleve_profil() == 4){
+				Integer nbTeaEnAttente = Manager.getInstance().getTeaEnAttente();
+				Integer nbOffreEnAttente = Manager.getInstance().getOffreEnAttente();
+				
+				session.setAttribute( "nbTeaEnAttente", nbTeaEnAttente );
+				session.setAttribute( "nbOffreEnAttente", nbOffreEnAttente );
+			//}
+		} 
+		else {             
+			session.setAttribute( ATT_SESSION_USER, null );         
+		}          
 		/* Stockage du formulaire et du bean dans l'objet request */  
 		request.setAttribute( ATT_FORM, form );         
 		request.setAttribute( ATT_USER, eleve );     
