@@ -74,6 +74,7 @@ public class TeaDaoImpl implements TeaDao {
 					int hfin = Integer.parseInt(offre.getHeure_fin());
 					int nbtea = hfin - hdeb;
 					
+						
 					Connection connection2 = DataSourceProvider.getDataSource()
 							.getConnection();
 									    
@@ -169,6 +170,7 @@ public class TeaDaoImpl implements TeaDao {
 			public void teaValidationByStructure(Integer cletea, Integer clestructure, String ideleve){
 				
 				if(StructureDaoImpl.getPresidentIdById(clestructure).equals(ideleve)){
+				
 								
 				try {
 					Connection connection = DataSourceProvider.getDataSource()
@@ -179,6 +181,7 @@ public class TeaDaoImpl implements TeaDao {
 
 					PreparedStatement stmt = (PreparedStatement) connection
 							.prepareStatement("UPDATE tea SET statut_valide=1, date_validation=? WHERE cle_tea=? ");
+							
 					stmt.setDate(1, sqlDate);
 					stmt.setInt(2,cletea);	
 					stmt.executeUpdate();
@@ -192,12 +195,19 @@ public class TeaDaoImpl implements TeaDao {
 				}
 				}
 			}
-				
+			
 			//-----------------------------------------------------------------------------------------------------------------
 			//mise au statut valide de l'annonce et donc modification de la date de mise en ligne ce processus est eff�ctu� par le reponsable TEA et provoque l'affichage de l'annonce dans la liste
 			//acces en �criture
 
 			public void teaValidationByResponsable(Integer cletea){
+				
+				int nbtea=getNbHeureTeaRealiseeByTea( cletea);
+				int nbteareel=0;
+				int nbteadues=getTeaDuesEnCours(getIdeleveByCleTea(cletea));
+				if(nbteadues>nbtea){nbteareel=nbtea;}
+				else {if(nbteadues<nbtea){nbteareel=nbteadues;}
+					else{if(nbteadues==0){nbteareel=0;}}};
 				
 				
 								
@@ -209,9 +219,10 @@ public class TeaDaoImpl implements TeaDao {
 				    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 
 					PreparedStatement stmt = (PreparedStatement) connection
-							.prepareStatement("UPDATE tea SET statut_valide=2, date_validation=? WHERE cle_tea=? ");
+							.prepareStatement("UPDATE tea SET statut_valide=2, date_validation=?, nbheure_validee=? WHERE cle_tea=? ");
 					stmt.setDate(1, sqlDate);
-					stmt.setInt(2,cletea);	
+					stmt.setInt(2,cletea);
+					stmt.setInt(3, nbteareel);
 					stmt.executeUpdate();
 					// Fermer la connexion
 
@@ -229,6 +240,38 @@ public class TeaDaoImpl implements TeaDao {
 	// AFFICHAGE
 	//-----------------------------------------------------------------------------------------------------------------
 	
+	//-----------------------------------------------------------------------------------------------------------------
+	//recuperation 
+	//acc�s en lecture
+		
+		public String getIdeleveByCleTea(Integer cletea){
+			String ideleve="";
+			
+			// recuperation de la cl� classe la plus recente
+			try {
+				Connection connection = DataSourceProvider.getDataSource()
+						.getConnection();
+
+				
+				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT id_eleve  FROM tea WHERE cle_tea=?");
+				stmt.setInt(1, cletea);
+				ResultSet results = stmt.executeQuery();
+				results.next();
+				ideleve=results.getString("id_eleve");
+				
+				// Fermer la connexion
+				results.close();
+				stmt.close();
+				connection.close();
+				
+				}
+			catch (SQLException e) {
+								e.printStackTrace();
+							}
+			
+				
+			return ideleve;
+		}
 	//-----------------------------------------------------------------------------------------------------------------
 	//calcul du nombre d'heure de tea effectuée par un élève
 	//acc�s en lecture
@@ -262,6 +305,38 @@ public class TeaDaoImpl implements TeaDao {
 		return nbtotal;
 	}
 	//-----------------------------------------------------------------------------------------------------------------
+		//calcul du nombre d'heure de tea effectuée par un élève
+		//acc�s en lecture
+		
+		public int getNbHeureTeaRealiseeByTea(Integer cletea){
+			int nbtotal=0;
+			
+			// recuperation de la cl� classe la plus recente
+			try {
+				Connection connection = DataSourceProvider.getDataSource()
+						.getConnection();
+
+				
+				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT nbheure_realisee  FROM tea WHERE cle_tea=?");
+				stmt.setInt(1,cletea);
+				ResultSet results = stmt.executeQuery();
+				results.next();
+				nbtotal=results.getInt("nbheure_realisee");
+				
+				// Fermer la connexion
+				results.close();
+				stmt.close();
+				connection.close();
+				
+				}
+			catch (SQLException e) {
+								e.printStackTrace();
+							}
+			
+				
+			return nbtotal;
+		}
+	//-----------------------------------------------------------------------------------------------------------------
 	//recupération tea qui correspondent à une offre 
 	//acc�s en lecture
 	public List<Tea> getTeaByOffre(Integer cleoffre){
@@ -280,6 +355,7 @@ public class TeaDaoImpl implements TeaDao {
 			results.getInt("cle_tea"),
 			results.getDate("date_tea_realisee"),
 			results.getInt("nbheure_realisee"),
+			results.getInt("nbheure_validee"),
 			results.getInt("statut_valide"),
 			results.getDate("date_validation"),
 			results.getInt("cle_offre"),
@@ -339,6 +415,7 @@ public class TeaDaoImpl implements TeaDao {
 			results.getInt("cle_tea"),
 			results.getDate("date_tea_realisee"),
 			results.getInt("nbheure_realisee"),
+			results.getInt("nbheure_validee"),
 			results.getInt("statut_valide"),
 			results.getDate("date_validation"),
 			results.getInt("cle_offre"),
@@ -401,6 +478,7 @@ try {
 	results.getInt("cle_tea"),
 	results.getDate("date_tea_realisee"),
 	results.getInt("nbheure_realisee"),
+	results.getInt("nbheure_validee"),
 	results.getInt("statut_valide"),
 	results.getDate("date_validation"),
 	results.getInt("cle_offre"),
@@ -459,6 +537,7 @@ try {
 	results.getInt("cle_tea"),
 	results.getDate("date_tea_realisee"),
 	results.getInt("nbheure_realisee"),
+	results.getInt("nbheure_validee"),
 	results.getInt("statut_valide"),
 	results.getDate("date_validation"),
 	results.getInt("cle_offre"),
@@ -516,6 +595,7 @@ try {
 	results.getInt("cle_tea"),
 	results.getDate("date_tea_realisee"),
 	results.getInt("nbheure_realisee"),
+	results.getInt("nbheure_validee"),
 	results.getInt("statut_valide"),
 	results.getDate("date_validation"),
 	results.getInt("cle_offre"),
@@ -571,6 +651,7 @@ while (results.next()) {
 results.getInt("cle_tea"),
 results.getDate("date_tea_realisee"),
 results.getInt("nbheure_realisee"),
+results.getInt("nbheure_validee"),
 results.getInt("statut_valide"),
 results.getDate("date_validation"),
 results.getInt("cle_offre"),
@@ -652,7 +733,7 @@ return teas;
 						.getConnection();
 
 				
-				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT SUM(nbheure_realisee) as total FROM tea WHERE id_eleve=? AND statut_valide=1");
+				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT SUM(nbheure_validee) as total FROM tea WHERE id_eleve=? AND statut_valide=1");
 				stmt.setString(1,ideleve);
 				ResultSet results = stmt.executeQuery();
 				results.next();
@@ -802,12 +883,23 @@ return teas;
 					return nbtotal;
 				}
 
+				//-----------------------------------------------------------------------------------------------------------------
+				//calcul du nombre d'heure de TEA dues en cours
+				//acc�s en lecture
+				
+				public static int getTeaDuesEnCours(String ideleve){
+					int nbtotal=0;
+					nbtotal=TeaDaoImpl.getNbHeureDues(ideleve)-TeaDaoImpl.getNbHeureTeaValide(ideleve);
+					if(nbtotal<=0)return 0;	return nbtotal;
+					
+				}
+				@Override
 				public List<Tea> listerTeaAValider() {
 					// TODO Auto-generated method stub
 					return null;
 				}
 
-				
+	
 
 				
 

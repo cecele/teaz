@@ -7,6 +7,7 @@ public class Tea {
 Integer cle_tea;
 Date date_tea_realisee;
 Integer nbheure_realisee;
+Integer nbheure_validee;
 Integer statut_valide;
 Date date_validation;
 Integer cle_offre;
@@ -30,17 +31,19 @@ String eleve_prenom;
 
 
 public Tea(Integer cle_tea, Date date_tea_realisee, Integer nbheure_realisee,
-		Integer statut_valide, Date date_validation, Integer cle_offre,
-		String id_eleve, Date date_depot, Date date_miseenligne, Date date_tea,
-		String heure_debut, String heure_fin, Integer statut,
-		String offre_description, String eleve_mail, String offre_titre,
-		Integer cle_structure, Integer offre_place, String structure_nom,
+		Integer nbheure_validee, Integer statut_valide, Date date_validation,
+		Integer cle_offre, String id_eleve, Date date_depot,
+		Date date_miseenligne, Date date_tea, String heure_debut,
+		String heure_fin, Integer statut, String offre_description,
+		String eleve_mail, String offre_titre, Integer cle_structure,
+		Integer offre_place, String structure_nom,
 		String structure_president_nom, String structure_president_prenom,
 		String eleve_nom, String eleve_prenom) {
 	super();
 	this.cle_tea = cle_tea;
 	this.date_tea_realisee = date_tea_realisee;
 	this.nbheure_realisee = nbheure_realisee;
+	this.nbheure_validee = nbheure_validee;
 	this.statut_valide = statut_valide;
 	this.date_validation = date_validation;
 	this.cle_offre = cle_offre;
@@ -79,6 +82,12 @@ public Integer getNbheure_realisee() {
 }
 public void setNbheure_realisee(Integer nbheure_realisee) {
 	this.nbheure_realisee = nbheure_realisee;
+}
+public Integer getNbheure_validee() {
+	return nbheure_validee;
+}
+public void setNbheure_validee(Integer nbheure_validee) {
+	this.nbheure_validee = nbheure_validee;
 }
 public Integer getStatut_valide() {
 	return statut_valide;

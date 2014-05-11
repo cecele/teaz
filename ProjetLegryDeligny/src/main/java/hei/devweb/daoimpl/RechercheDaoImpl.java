@@ -19,9 +19,17 @@ public class RechercheDaoImpl implements RechercheDao {
 	//effectuer une recherche par paramètre d'élève (4 choix possibles, mettre null lorsque le paramètre n'est pas pris en compte!)
 	//acc�s en lecture
 
-public List<Eleve> rechercheByParameter(String ideleve, String nom, String prenom, String classe, String orderBy){
-List<Eleve> eleves = new ArrayList<Eleve>();
-
+public List<Eleve> rechercheByParameter(String ideleve, String nom, String prenom, String classe, String orderBy, Boolean diplome, Boolean etudiant, Boolean ajour, Boolean retard){
+List<Eleve> elevescas1 = new ArrayList<Eleve>();
+List<Eleve> elevescas2 = new ArrayList<Eleve>();
+List<Eleve> elevescas3 = new ArrayList<Eleve>();
+List<Eleve> elevescas4 = new ArrayList<Eleve>();
+List<Eleve> elevescas5 = new ArrayList<Eleve>();
+List<Eleve> elevescas6 = new ArrayList<Eleve>();
+List<Eleve> elevescas7 = new ArrayList<Eleve>();
+List<Eleve> elevescas8 = new ArrayList<Eleve>();
+List<Eleve> elevescas9 = new ArrayList<Eleve>();
+List<Eleve> elevesreturn = new ArrayList<Eleve>();
 
 if(orderBy==""){orderBy="eleve_nom";}
 
@@ -40,8 +48,18 @@ System.out.println("entrée ds le try");
 		
 		 System.out.println("tous les élèves " +stmt);
 		}
-		
-		
+		// tous les élèves diplomé
+				if(ideleve.equals("") && nom.equals("") && prenom.equals("") && classe.equals("tous") ){
+				stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE dilpome=1");
+				
+				 System.out.println("tous les élèves diplomés " +stmt);
+				}
+		// tous les élèves diplomé
+				if(ideleve.equals("") && nom.equals("") && prenom.equals("") && classe.equals("tous") ){
+				stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE dilpome=1");
+				
+				 System.out.println("tous les élèves diplomés à jours " +stmt);
+				}
 		// recherche effectuée par matricule uniquement : il doit être exact!
 		if(!ideleve.equals("") && nom.equals("") && prenom.equals("") && classe.equals("tous") ){
 		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM Eleve WHERE id_eleve=? ORDER BY ?");
@@ -135,16 +153,28 @@ System.out.println("entrée ds le try");
 					results.getString("motdepasse"),
 					EleveDaoImpl.getPromotion(results.getString("id_eleve")),
 					TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
-					TeaDaoImpl.getNbHeureDues(results.getString("id_eleve"))-TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
+					TeaDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
 					TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
 					null
 					);
-			System.out.println("AVANT " +results.getString("id_eleve"));
+			int teadues=TeaDaoImpl.getTeaDuesEnCours(results.getString("id_eleve"));
 			if(EleveDaoImpl.president(results.getString("id_eleve"))){ eleve.setCle_structure(EleveDaoImpl.getCleStructureById(results.getString("id_eleve")));}
+			
+			if(diplome && etudiant && ajour && retard)elevescas1.add(eleve);
+			if(diplome && etudiant && ajour==false && teadues>0 && retard)elevescas2.add(eleve);
+			if(diplome && etudiant && ajour && teadues==0 && retard==false)elevescas3.add(eleve);
+			
+			
+			if(diplome==false && results.getInt("diplome")==0  && etudiant && ajour && retard )elevescas4.add(eleve);
+			if(diplome==false && results.getInt("diplome")==0  && etudiant && ajour==false && teadues>0 && retard )elevescas5.add(eleve);
+			if(diplome==false && results.getInt("diplome")==0  && etudiant && ajour && teadues==0 && retard==false )elevescas6.add(eleve);
+			
+			if(diplome && results.getInt("diplome")==1  && etudiant==false && ajour && retard )elevescas7.add(eleve);
+			if(diplome && results.getInt("diplome")==1  && etudiant==false && ajour==false && teadues>0 && retard )elevescas8.add(eleve);
+			if(diplome && results.getInt("diplome")==1  && etudiant==false && ajour && teadues==0 && retard==false )elevescas9.add(eleve);
+					
+			
 				
-						
-			 System.out.println("APRES " +results.getString("id_eleve"));
-			eleves.add(eleve);	
 		}
 		
 			// Fermer la connexion
@@ -157,8 +187,30 @@ System.out.println("entrée ds le try");
 		catch (SQLException e) {
 							e.printStackTrace();
 }
-
-return eleves;
+	
+	if(diplome && etudiant && ajour && retard)elevesreturn=elevescas1;
+	if(diplome && etudiant && ajour==false && retard)elevesreturn=elevescas2;
+	if(diplome && etudiant && ajour && retard==false)elevesreturn=elevescas3;
+	if(diplome==false && etudiant && ajour && retard )elevesreturn=elevescas4;
+	if(diplome==false && etudiant && ajour==false && retard )elevesreturn=elevescas5;
+	if(diplome==false && etudiant && ajour && retard==false )elevesreturn=elevescas6;
+	if(diplome==false && etudiant && ajour && retard==false )elevesreturn=elevescas7;
+	if(diplome && etudiant==false && ajour && retard )elevesreturn=elevescas8;
+	if(diplome && etudiant==false && ajour==false  && retard )elevesreturn=elevescas9;
+		
+	
+	return elevescas9;
 }
 
+public int sizeReponse(List<Eleve> eleve){
+	return eleve.size();
 }
+
+public int sizeEleveAjour(List<Eleve> eleve){
+	eleve=EleveDaoImpl.getEleveAjour();
+	return eleve.size();
+} 
+
+
+}
+
