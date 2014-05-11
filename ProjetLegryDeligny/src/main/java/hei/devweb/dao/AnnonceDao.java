@@ -27,4 +27,6 @@ public interface AnnonceDao {
 
 	void AnnonceModification(Offre offre);
 
+	Offre getOffreById(Integer cleoffre);
+
 }

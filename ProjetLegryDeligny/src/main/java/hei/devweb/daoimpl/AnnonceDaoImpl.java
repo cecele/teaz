@@ -481,9 +481,54 @@ public void offre_placemoins (Integer cle_offre){
         }
         return nbPlaces;
 }
+	//-----------------------------------------------------------------------------------------------------------------
+		///retourne une offre en fontion de sa clé_offre
+		//acc�s en lecture
+		// 
+	
+	public Offre getOffreById(Integer cleoffre){
+		
+		Offre offre=null;
+		
+			try {
+                Connection connection = DataSourceProvider.getDataSource()
+                                .getConnection();
+                
+             PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE offre.cle_offre=? ");
+			 stmt.setInt(1,cleoffre);
+			 ResultSet results = stmt.executeQuery();
+			 results.next();
+			 offre =new Offre(results.getInt("cle_offre"),
+						results.getDate("date_depot"),
+						results.getDate("date_miseenligne"),
+						results.getDate("date_tea"),
+						results.getString("heure_debut"),
+						results.getString("heure_fin"),
+						results.getInt("statut"),
+						results.getString("offre_description"),
+						results.getString("eleve_mail"),
+						results.getString("offre_titre"),
+						results.getInt("cle_structure"),
+						results.getInt("offre_place"),
+						results.getString("structure_nom"),
+						StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
+						StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
+						TeaDaoImpl.getNbPlacePourvue(results.getInt("cle_offre"))
+						);
+				
+				
+				System.out.println(results.getString("eleve_mail"));
+			
+			// Fermer la connexion
+			results.close();
+			stmt.close();
+			connection.close();
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
 
-	
-	
+			return offre;
+		}
 	
 
 }
