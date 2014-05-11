@@ -54,9 +54,6 @@ public class DaoTestCaseEleveDaoImpl {
 		stmt.executeUpdate("DELETE FROM classe");
 	
 				
-		
-		
-		
 		stmt.executeUpdate("DELETE FROM offre");
 		
 		
