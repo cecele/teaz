@@ -2,6 +2,7 @@ package hei.devweb.daoimpl;
 
 import hei.devweb.dao.RechercheDao;
 import hei.devweb.model.Eleve;
+import hei.devweb.model.Structure;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -158,6 +159,39 @@ System.out.println("entrée ds le try");
 }
 
 return eleves;
+}
+//-----------------------------------------------------------------------------------------------------------------
+//r�cup�ration des noms et pr�sident de la structure pour une offre particuli�re. Dans le cas d'un professeur le pr�sident de la structure sera l'enseignant et une structure enseignant est cr�e
+//acc�s en lecture
+public Structure getStructure(Integer cle_offre){
+	Structure structure = new Structure(null,null,null,null);
+	try {
+		Connection connection = DataSourceProvider.getDataSource()
+				.getConnection();
+
+		
+		PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT structure_nom,structure_president FROM structure INNER JOIN offre ON structure.cle_offre=offre.cle_offre  WHERE cle_offre=?");
+		stmt.setInt(1,cle_offre);
+		ResultSet results = stmt.executeQuery();
+		
+		results.next();
+		structure = new Structure(
+		results.getInt("cle_structure"),
+		results.getString("structure_nom"),
+		StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
+		StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
+			);
+			
+			// Fermer la connexion
+			results.close();
+			stmt.close();
+			connection.close();
+			
+	}
+		catch (SQLException e) {
+							e.printStackTrace();
+						}
+		return structure;	
 }
 
 }

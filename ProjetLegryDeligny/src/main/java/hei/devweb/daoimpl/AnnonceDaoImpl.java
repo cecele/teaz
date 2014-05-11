@@ -220,6 +220,7 @@ public void offre_placemoins (Integer cle_offre){
 //-----------------------------------------------------------------------------------------------------------------
 //r�cup�ration des annonces  valide par ordres decroissant de dates avec structure ou les offres auquels un élève a postulé n'apparait plus
 //acc�s en lecture 
+	// test junit 
 	
 	public List<Offre> listerOffreByEleve(String ideleve){
 		List<Offre> offres = new ArrayList<Offre>();
@@ -270,6 +271,7 @@ public void offre_placemoins (Integer cle_offre){
 	//-----------------------------------------------------------------------------------------------------------------
 	//test si uen offre a été postulée
 	// acces en lecture
+	//test junit non requis car non utilisé ds la dao!
 			public Boolean getPostulerOffre(Integer cleoffre, String ideleve, Integer clestructure ){
 			
 				Boolean rep = false;
@@ -307,6 +309,7 @@ public void offre_placemoins (Integer cle_offre){
 	//-----------------------------------------------------------------------------------------------------------------
 	//r�cup�ration des annonces  valide par ordres decroissant de dates sans structure
 	//acc�s en lecture
+	// test junit
 		
 		public List<Offre> listerOffre(){
 			List<Offre> offres = new ArrayList<Offre>();
@@ -353,6 +356,7 @@ public void offre_placemoins (Integer cle_offre){
 	//-----------------------------------------------------------------------------------------------------------------
 	//r�cup�ration des annonces non valide par ordres decroissant 
 	//acc�s en lecture
+	// test junit
 		
 	public List<Offre> listerOffreNonValide(){
 		List<Offre> offres = new ArrayList<Offre>();
@@ -402,6 +406,7 @@ public void offre_placemoins (Integer cle_offre){
 	//-----------------------------------------------------------------------------------------------------------------
 	//r�cup�ration des annonces non valide par ordres decroissant 
 	//acc�s en lecture
+	//test junit
 		
 	public List<Offre> listerOffreByStructure(Integer clestructure){
 		List<Offre> offres = new ArrayList<Offre>();
@@ -445,43 +450,11 @@ public void offre_placemoins (Integer cle_offre){
 
 			return offres;
 		}
-	//-----------------------------------------------------------------------------------------------------------------
-	//r�cup�ration des noms et pr�sident de la structure pour une offre particuli�re. Dans le cas d'un professeur le pr�sident de la structure sera l'enseignant et une structure enseignant est cr�e
-	//acc�s en lecture
-	public Structure getStructure(Integer cle_offre){
-		Structure structure = new Structure(null,null,null,null);
-		try {
-			Connection connection = DataSourceProvider.getDataSource()
-					.getConnection();
-
-			
-			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT structure_nom,structure_president FROM structure INNER JOIN offre ON structure.cle_offre=offre.cle_offre  WHERE cle_offre=?");
-			stmt.setInt(1,cle_offre);
-			ResultSet results = stmt.executeQuery();
-			
-			results.next();
-			structure = new Structure(
-			results.getInt("cle_structure"),
-			results.getString("structure_nom"),
-			StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-			StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
-				);
-				
-				// Fermer la connexion
-				results.close();
-				stmt.close();
-				connection.close();
-				
-		}
-			catch (SQLException e) {
-								e.printStackTrace();
-							}
-			return structure;	
-	}
 
 	//-----------------------------------------------------------------------------------------------------------------
 	///Nombre de places dispos pour une offre donnee
 	//acc�s en lecture
+	// test junit
 	
 	public int getNbPlaces(int idOffre) {
         
