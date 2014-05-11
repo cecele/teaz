@@ -9,13 +9,23 @@
     <url-pattern>/tea</url-pattern>
     <url-pattern>/mestea</url-pattern>
     <url-pattern>/annonces</url-pattern>
+    <url-pattern>/mesannonces</url-pattern>
     <url-pattern>/deposerannonce</url-pattern>
     <url-pattern>/fairetea</url-pattern>
+    <url-pattern>/faireteavalider</url-pattern>
     <url-pattern>/administration</url-pattern>
     <url-pattern>/validationannonces</url-pattern>
+    <url-pattern>/validerannonce</url-pattern>
     <url-pattern>/validationtea</url-pattern>
-    <url-pattern>/gestiontea</url-pattern>
+    <url-pattern>/validertea</url-pattern>
+    <url-pattern>/gestioneleves</url-pattern>
     <url-pattern>/detail</url-pattern>
+    <url-pattern>/postuler</url-pattern>
+    <url-pattern>/deconnexion</url-pattern>
+    <url-pattern>/gestionadministration</url-pattern>
+    <url-pattern>/ajouterdroit</url-pattern>
+    <url-pattern>/modifiercommission</url-pattern> 
+    <url-pattern>/ajoutercommission</url-pattern>
   </filter-mapping>
   <filter>
     <filter-name>ResponsableFilter</filter-name>
@@ -24,7 +34,9 @@
   <filter-mapping>
     <filter-name>ResponsableFilter</filter-name>
     <url-pattern>/deposerannonce</url-pattern>
+    <url-pattern>/mesannonces</url-pattern>
     <url-pattern>/fairetea</url-pattern>
+    <url-pattern>/faireteavalider</url-pattern>
   </filter-mapping>
   <filter>
     <filter-name>AdministrationFilter</filter-name>
@@ -32,7 +44,6 @@
   </filter>
   <filter-mapping>
     <filter-name>AdministrationFilter</filter-name>
-    <url-pattern>/gestiontea</url-pattern>
     <url-pattern>/gestioneleves</url-pattern>
     <url-pattern>/detail</url-pattern>
   </filter-mapping>
@@ -42,6 +53,10 @@
   </filter>
   <filter-mapping>
     <filter-name>SuperAdminFilter</filter-name>
+    <url-pattern>/modifiercommission</url-pattern> 
+    <url-pattern>/ajoutercommission</url-pattern>
+    <url-pattern>/ajouterdroit</url-pattern>
+    <url-pattern>/gestionadministration</url-pattern>
     <url-pattern>/administration</url-pattern>
     <url-pattern>/modifiercommission</url-pattern>
     <url-pattern>/ajoutercommission</url-pattern>
@@ -54,7 +69,9 @@
   <filter-mapping>
     <filter-name>BdeFilter</filter-name>
     <url-pattern>/validationannonces</url-pattern>
+    <url-pattern>/validerannonce</url-pattern>
     <url-pattern>/validationtea</url-pattern>
+    <url-pattern>/validertea</url-pattern>
   </filter-mapping>
   <servlet>
     <servlet-name>Accueil</servlet-name>
@@ -71,10 +88,6 @@
   <servlet>
     <servlet-name>DeposerAnnonce</servlet-name>
     <servlet-class>hei.devweb.controllers.DeposerAnnonceServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>GestionTea</servlet-name>
-    <servlet-class>hei.devweb.controllers.GestionTeaServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>Administration</servlet-name>
@@ -235,10 +248,6 @@
   <servlet-mapping>
     <servlet-name>Administration</servlet-name>
     <url-pattern>/administration</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>GestionTea</servlet-name>
-    <url-pattern>/gestiontea</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>DeposerAnnonce</servlet-name>

@@ -43,7 +43,7 @@ public class AjouterCommissionServlet extends HttpServlet {
 		Manager.getInstance().CreateStructure(nom);
 		System.out.println(nom);	
 		
-		response.sendRedirect("administration");
+		response.sendRedirect("administration"); // changer pour rediriger vers la page de modification de commission
 	}
 
 }

@@ -36,7 +36,7 @@
 					<br/>
 					Association : ${offres.structure_nom}<br/>
 					Président : ${offres.structure_president_prenom} ${offres.structure_president_nom}<br/>
-					${offres.offre_place} places disponibles<br/>
+					${offres.offre_place} place${offres.offre_place >= 2 ? 's' : '' } disponible${offres.offre_place >= 2 ? 's' : '' }<br/>
 					</p>
 					<c:if test="${offres.statut==0}">
 						<a href="deposerannonce?id=${offres.cle_offre}">

@@ -153,7 +153,7 @@ aside
 }
 
 section{
-	background-color:rgb(228,229,211);
+	background-color:rgb(207,208,191);
 	width : 960px;
 	padding : 20px;
 	margin : 0px auto 0px auto;
@@ -190,9 +190,14 @@ article{
 	margin-bottom:10px;
 }
 
-section h1{
+h1{
 	color:rgb(234,75,54);
 	font-family:'bebas_neueregular',Helvetica;
+	font-size:50px;
+}
+article h2{
+	font-family:'bebas_neueregular',Helvetica;
+	font-size:30px;
 }
 
 .tableau, .annonce{

@@ -52,7 +52,9 @@ public class ConnexionServlet extends HttpServlet {
 			session.setAttribute( ATT_SESSION_USER, eleve );
 			String ideleve = eleve.getId_eleve();
 			Structure structure = Manager.getInstance().getStructure_ElevePresident(ideleve);
+			Integer nbTeaEnAttente = Manager.getInstance().getTeaEnAttente();
 			session.setAttribute( "structure", structure );
+			session.setAttribute( "nbTeaEnAttente", nbTeaEnAttente );
 			} else {             
 				session.setAttribute( ATT_SESSION_USER, null );         
 				}          

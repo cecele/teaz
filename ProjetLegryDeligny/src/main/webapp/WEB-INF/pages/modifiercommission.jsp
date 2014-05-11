@@ -7,7 +7,9 @@
   	<meta http-equiv="Content-Type" content="text/html;
 			 charset=UTF-8">
 		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
 		<script type="text/javascript" src="js/menu.js"></script>
+		<script type="text/javascript" src="js/ajax.js"></script>
         <title>Tea</title>
     </head>
     <body>
@@ -22,16 +24,15 @@
 	
 			<article id="accueil">
 					
-					<form method="post" action="modifiercommission?id=${structure.cle_structure}">             
+					           
 						    Matricule du nouveau président (sans le h)<br/>                                   
 							<input type="text" id="ideleve" name="ideleve"  size="20" maxlength="60" /><br/>     
 							Début de mandat<br/>                                         
 							<input type="date" id="debut" name="debut" /><br/> 
 							Fin de mandat<br/>    
 							<input type="date" id="fin" name="fin" /><br/>                        
-							<input type="submit" value="Modifier" class="sansLabel" /><br />                                   
-							               
-					</form>
+							<span class="modifiercommission" data-id="${structure.cle_structure}"><input type="submit" value="Modifier" class="sansLabel" /></span><br />                                   
+					
 			</article>
 			
 		</section>	

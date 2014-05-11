@@ -127,9 +127,9 @@ private static Manager instance;
 	}
 
 	public List<Eleve> rechercheByParameter(String matricule, String nom,
-			String prenom, String classe, String orderBy) {
+			String prenom, String classe, String orderBy, Boolean diplome, Boolean encours, Boolean ajour, Boolean pasajour) {
 		System.out.println("dans méthode recherche");
-		return RechercheDao.rechercheByParameter(matricule,nom,prenom,classe,orderBy);
+		return RechercheDao.rechercheByParameter(matricule,nom,prenom,classe,orderBy, diplome, encours, ajour, pasajour);
 	}
 
 	public List<Tea> getTeaAValiderByRespTea() {
@@ -191,6 +191,11 @@ private static Manager instance;
 	public Offre getOffreById(Integer cle_offre) {
 		System.out.println("Dans méthode getOffreById");
 		return AnnonceDao.getOffreById(cle_offre);
+	}
+
+	public Integer getTeaEnAttente() {
+		// TODO Auto-generated method stub
+		return TeaDao.getTeaEnAttente();
 	}
 
 

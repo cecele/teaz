@@ -820,7 +820,7 @@ return teas;
 				//calcul du nombre de tea en attente de validation
 				//acc�s en lecture
 				
-				public int getTeaEnAttente(){
+				public Integer getTeaEnAttente(){
 					int nbtotal=0;
 					
 					
