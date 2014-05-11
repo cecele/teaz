@@ -137,7 +137,34 @@ public class StructureDaoImpl implements StructureDao {
 						return res;
 						
 					}
-	
+	//-----------------------------------------------------------------------------------------------------------------
+	// recuperation du de la clé structure en fonction du niom de la structure
+	// acces en lecture
+		public  Integer getCleByNom(String structurenom){
+						int res=0;
+							try {
+								Connection connection = DataSourceProvider.getDataSource()
+										.getConnection();
+
+								
+								
+								PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT cle_structure FROM structure WHERE cle_structure=? ");
+								stmt.setString(1,structurenom);
+								ResultSet results = stmt.executeQuery();
+								results.next();
+								res= results.getInt("cle_structure");
+								// Fermer la connexion
+								results.close();
+								stmt.close();
+								connection.close();
+								
+						}
+							catch (SQLException e) {
+												e.printStackTrace();
+											}
+							return res;
+							
+						}
 	//-----------------------------------------------------------------------------------------------------------------
 	// recuperation du prenom du préseident en fonction de la cle_structure
 	// acces en lecture
