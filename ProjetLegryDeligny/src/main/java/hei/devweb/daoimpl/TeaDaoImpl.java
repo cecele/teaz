@@ -450,7 +450,7 @@ try {
 			.getConnection();
 
 	
-	PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tea WHERE statut_valide=1");
+	PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tea INNER JOIN offre ON tea.cle_offre=tea.cle_offre WHERE statut_valide=1");
 	
 	ResultSet results = stmt.executeQuery();
 	
