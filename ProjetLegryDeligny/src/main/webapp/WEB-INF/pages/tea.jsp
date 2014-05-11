@@ -28,7 +28,19 @@
 			<c:forEach var="teas" items="${teas}">
 			
 			<article>
-					<table><tr><td><h2 class="${teas.statut_valide == 2 ? 'valide' : 'attente'}"><fmt:formatDate value="${teas.date_tea_realisee}" pattern="d MMMM yyyy"/></h2></td><td class="center"><h2 class="${teas.statut_valide == 2 ? 'valide' : 'attente'}">${teas.statut_valide == 2 ? 'Validée' : 'En attente de validation'}</h2></td> <td class="right"><h2 class="${teas.statut_valide == 2 ? 'valide' : 'attente'}">${teas.nbheure_realisee}H</h2></td></tr></table>
+					<table class="annonce">
+						<tr>
+							<td class="left">
+								<h2 class="${teas.statut_valide == 2 ? 'valide' : 'attente'}"><fmt:formatDate value="${teas.date_tea_realisee}" pattern="d MMMM yyyy"/></h2>
+							</td>
+							<td class="center">
+								<h2 class="${teas.statut_valide == 2 ? 'valide' : 'attente'}">${teas.statut_valide == 2 ? 'Validée' : 'En attente de validation'}</h2>
+							</td> 
+							<td class="right">
+								<h2 class="${teas.statut_valide == 2 ? 'valide' : 'attente'}">${teas.nbheure_realisee}H</h2>
+							</td>
+						</tr>
+					</table>
 					<hr/>
 					<p>
 					Demandeur : ${teas.structure_nom}<br/>

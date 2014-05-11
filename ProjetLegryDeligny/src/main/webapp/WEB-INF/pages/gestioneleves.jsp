@@ -124,7 +124,8 @@
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2"><input type="submit" value="Rechercher"/><input type="button" onClick="init()" value="Réinitialiser"/></td>
+							<td></td>
+							<td><input type="submit" value="Rechercher"/><input type="button" onClick="init()" value="Réinitialiser"/></td>
 						</tr>
 					</table>
 				</form>	

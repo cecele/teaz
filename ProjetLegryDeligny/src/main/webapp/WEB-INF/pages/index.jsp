@@ -21,29 +21,45 @@
 			<h1>Accueil</h1>			
 	
 			<article id="accueil">
-					
+				<c:if test="${empty sessionScope.sessionEleve}"> 
 					<header>
-						<h2>Coucou</h2>
+						<h2>Connexion</h2>
 					</header>
-					<form method="post" action="connexion">             
-						<fieldset>     
-							<c:if test="${empty sessionScope.sessionEleve}">            
-							<legend>Connexion</legend>                 
-							<p>Vous pouvez vous connecter via ce formulaire.</p>                  
-							<label for="nom">Matricule H</label>                 
-							<input id="id_eleve" name="id_eleve"  size="20" maxlength="60" />                 
-							<span class="erreur">${form.erreurs['id_eleve']}</span><br />                  
-							<label for="motdepasse">Mot de passe</label>                 
-							<input type="password" id="motdepasse" name="motdepasse" value="" size="20" maxlength="20" />                 
-							<span class="erreur">${form.erreurs['motdepasse']}</span><br />                  
-							<input type="submit" value="Connexion" class="sansLabel" /><br />                                  
-							<p class="${empty form.erreurs ? 'succes' : 'erreur'}">${form.resultat}</p>  
-							</c:if>
-							<c:if test="${!empty sessionScope.sessionEleve}">                                         
-								<p class="succes">Vous êtes connecté(e) avec l'id : ${sessionScope.sessionEleve.id_eleve}</p>                 
-							</c:if>           
-						</fieldset>         
+					<form method="post" action="connexion">                 
+							<table>
+								<tr>                  
+									<td>          
+										<label for="nom">Matricule H</label>   
+									</td>  
+									<td>            
+										<input id="id_eleve" name="id_eleve"  size="20" maxlength="60" />                 
+										<span class="attente">${form.erreurs['id_eleve']}</span>
+									</td>
+								</tr>
+								<tr>       
+									<td>          
+										<label for="motdepasse">Mot de passe</label>   
+									</td>
+									<td>	              
+										<input type="password" id="motdepasse" name="motdepasse" value="" size="20" maxlength="20" />                 
+										<span class="attente">${form.erreurs['motdepasse']}</span>
+									</td>
+								<tr>	 
+									<td colspan="2">                 
+										<input type="submit" value="Connexion" class="sansLabel" />
+									</td>	
+								</tr>   
+								<tr>        
+									<td colspan="2">                      
+										<p class="${empty form.erreurs ? 'valide' : 'attente'}">${form.resultat}</p> 
+									</td>
+								</tr> 
+							</table>            
 					</form>
+				</c:if>  
+				<p>
+					
+				</p>	
 			</article>
 			
 		</section>	

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -60,11 +61,11 @@ public class DeposerAnnonceServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Date actuelle = new Date();
-		SimpleDateFormat formatDateJour = new SimpleDateFormat("yyyy-MM-dd");
-		String dateformatee = formatDateJour.format(actuelle);
-
-		request.setAttribute("dateformatee",dateformatee);
+		
+		Integer cle_offre=Integer.parseInt(request.getParameter("id"));
+		
+		/*Offre offre = Manager.getInstance().listerOffreByEleve(matricule);
+		request.setAttribute("offre",offre);*/
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/deposerannonce.jsp");
 		view.forward(request, response);

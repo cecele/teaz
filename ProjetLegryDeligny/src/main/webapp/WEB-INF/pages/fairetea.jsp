@@ -28,10 +28,11 @@
 			<c:forEach var="teas" items="${teas}">
 			<article>
 				
-					<table><tr><td><h2><fmt:formatDate value="${teas.date_tea}" pattern="d MMMM yyyy"/></h2></td><td class="center"><h2>${teas.offre_titre}</h2></td> <td class="right"><h2>${teas.heure_debut}H - ${teas.heure_fin}H</h2></td></tr></table>		
+					<table class="annonce"><tr><td class="left"><h2><fmt:formatDate value="${teas.date_tea}" pattern="d MMMM yyyy"/></h2></td><td class="center"><h2>${teas.offre_titre}</h2></td> <td class="right"><h2>${teas.heure_debut}H - ${teas.heure_fin}H</h2></td></tr></table>		
 					<hr/>
 					<p>
-					Eleve : ${teas.id_eleve}<br/>
+					Eleve : ${teas.eleve_prenom} ${teas.eleve_nom} <br/>
+					Matricule : ${teas.id_eleve}<br/>
 					<br/>
 					Association : ${teas.structure_nom}<br/>
 					Président : ${teas.structure_president_prenom} ${teas.structure_president_nom}<br/>

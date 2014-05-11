@@ -28,7 +28,7 @@
 			<c:forEach var="offres" items="${offres}">
 			<article>
 				
-					<table><tr><td><h2><fmt:formatDate value="${offres.date_tea}" pattern="d MMMM yyyy"/></h2></td><td class="center"><h2>${offres.offre_titre}</h2></td> <td class="right"><h2>${offres.heure_debut}H - ${offres.heure_fin}H</h2></td></tr></table>		
+					<table class="annonce"><tr><td class="left"><h2><fmt:formatDate value="${offres.date_tea}" pattern="d MMMM yyyy"/></h2></td><td class="center"><h2>${offres.offre_titre}</h2></td> <td class="right"><h2>${offres.heure_debut}H - ${offres.heure_fin}H</h2></td></tr></table>		
 					<hr/>
 					<p>
 					Description : ${offres.offre_description}<br/>
@@ -36,7 +36,7 @@
 					<br/>
 					Association : ${offres.structure_nom}<br/>
 					Président : ${offres.structure_president_prenom} ${offres.structure_president_nom}<br/>
-					${offres.offre_place} places disponibles<br/>
+					${offres.offre_place} place${offres.offre_place >= 2 ? 's' : '' } disponible${offres.offre_place >= 2 ? 's' : '' }<br/>
 					<a href="postuler?id=${offres.cle_offre}">Postuler</a>
 					</p>
 			</article>
