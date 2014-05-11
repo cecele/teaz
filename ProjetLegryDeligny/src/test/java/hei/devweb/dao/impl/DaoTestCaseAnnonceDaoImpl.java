@@ -37,13 +37,9 @@
 //
 //public class DaoTestCaseAnnonceDaoImpl {
 //	
-//	private EleveDao daoEleve = new EleveDaoImpl();
+
 //	private AnnonceDao daoAnnonce= new AnnonceDaoImpl();
-//	private ArticleDao daoArticle = new ArticleDaoImpl();
-//	private RechercheDao daoRecherche= new RechercheDaoImpl();
-//	private StructureDao daoStructure = new StructureDaoImpl();
-//	private TeaDao daoTea = new TeaDaoImpl();
-//	
+
 //	
 //	
 //
@@ -129,7 +125,7 @@
 //             ResultSet results = stmt.executeQuery("SELECT * FROM `offre` WHERE `cle_offre`=2");
 //             Assert.assertTrue(results.next());
 //             Assert.assertNotNull(results.getInt("cle_offre"));
-//             Assert.assertEquals(datedepot, results.getDate("date_depot"));
+//             Assert.assertEquals(offre.get, results.getDate("date_depot"));
 //             Assert.assertEquals(datemiseenligne,results.getDate("date_miseenligne"));
 //             Assert.assertEquals(datetea, results.getDate("date_tea"));
 //             Assert.assertEquals("08", results.getString("heure_debut"));
@@ -440,6 +436,4 @@
 //        stmt.close();
 //        connection.close();
 //}
-//
 //}
-//	

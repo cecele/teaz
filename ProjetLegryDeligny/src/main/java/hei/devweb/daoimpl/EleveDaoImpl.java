@@ -20,6 +20,7 @@ public class EleveDaoImpl implements EleveDao {
 	//-----------------------------------------------------------------------------------------------------------------
 	//création d'un élève
 	//acc�s en ecriture (update)
+	//test junit
 	
 
 	public void CreateEleve(Eleve eleve){
@@ -30,9 +31,7 @@ public class EleveDaoImpl implements EleveDao {
 				java.util.Date utilDate_naissance = eleve.getDate_naissance();
 			    java.sql.Date sqlDateNaissance = new java.sql.Date(utilDate_naissance.getTime());
 			    
-				java.util.Date utilDate_entree = eleve.getDate_entree();
-			    java.sql.Date sqlDateEntree = new java.sql.Date(utilDate_entree.getTime());
-			    
+				
 			    
 				// Utiliser la connexion
 				PreparedStatement stmt = (PreparedStatement) connection
@@ -45,7 +44,7 @@ public class EleveDaoImpl implements EleveDao {
 						stmt.setString(6, eleve.getNomrue());
 						stmt.setString(7, eleve.getCodepostal());
 						stmt.setString(8, eleve.getVille());
-						stmt.setDate(9, sqlDateEntree);
+						stmt.setString(9, eleve.getDate_entree());
 											
 						stmt.executeUpdate();
 
@@ -236,7 +235,7 @@ public class EleveDaoImpl implements EleveDao {
 			results.getString("nomrue"),
 			results.getString("codepostal"),
 			results.getString("ville"),
-			results.getDate("date_entree"),
+			results.getString("date_entree"),
 			results.getInt("cotisant"),
 			results.getInt("eleve_profil"),
 			results.getInt("eleve_profil"),
@@ -347,7 +346,7 @@ public class EleveDaoImpl implements EleveDao {
 						results.getString("nomrue"),
 						results.getString("codepostal"),
 						results.getString("ville"),
-						results.getDate("date_entree"),
+						results.getString("date_entree"),
 						results.getInt("cotisant"),
 						results.getInt("eleve_profil"),
 						results.getInt("eleve_profil"),
@@ -403,7 +402,7 @@ public class EleveDaoImpl implements EleveDao {
 						results.getString("nomrue"),
 						results.getString("codepostal"),
 						results.getString("ville"),
-						results.getDate("date_entree"),
+						results.getString("date_entree"),
 						results.getInt("cotisant"),
 						results.getInt("eleve_profil"),
 						results.getInt("eleve_profil"),
@@ -456,7 +455,7 @@ public class EleveDaoImpl implements EleveDao {
 						results.getString("nomrue"),
 						results.getString("codepostal"),
 						results.getString("ville"),
-						results.getDate("date_entree"),
+						results.getString("date_entree"),
 						results.getInt("cotisant"),
 						results.getInt("eleve_profil"),
 						results.getInt("eleve_profil"),
@@ -507,7 +506,7 @@ public class EleveDaoImpl implements EleveDao {
 						results.getString("nomrue"),
 						results.getString("codepostal"),
 						results.getString("ville"),
-						results.getDate("date_entree"),
+						results.getString("date_entree"),
 						results.getInt("cotisant"),
 						results.getInt("eleve_profil"),
 						results.getInt("eleve_profil"),
@@ -558,7 +557,7 @@ public class EleveDaoImpl implements EleveDao {
 							results.getString("nomrue"),
 							results.getString("codepostal"),
 							results.getString("ville"),
-							results.getDate("date_entree"),
+							results.getString("date_entree"),
 							results.getInt("cotisant"),
 							results.getInt("eleve_profil"),
 							results.getInt("eleve_profil"),
@@ -610,7 +609,7 @@ public class EleveDaoImpl implements EleveDao {
 						results.getString("nomrue"),
 						results.getString("codepostal"),
 						results.getString("ville"),
-						results.getDate("date_entree"),
+						results.getString("date_entree"),
 						results.getInt("cotisant"),
 						results.getInt("eleve_profil"),
 						results.getInt("eleve_profil"),
@@ -719,7 +718,7 @@ public class EleveDaoImpl implements EleveDao {
 						results.getString("nomrue"),                         
 						results.getString("codepostal"),                        
 						results.getString("ville"),                         
-						results.getDate("date_entree"),                         
+						results.getString("date_entree"),                        
 						results.getInt("cotisant"),                         
 						results.getInt("eleve_profil"),                         
 						results.getInt("diplome"),                         

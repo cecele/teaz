@@ -128,7 +128,7 @@ System.out.println("entrée ds le try");
 					results.getString("nomrue"),
 					results.getString("codepostal"),
 					results.getString("ville"),
-					results.getDate("date_entree"),
+					results.getString("date_entree"),
 					results.getInt("cotisant"),
 					results.getInt("eleve_profil"),
 					results.getInt("diplome"),

@@ -13,7 +13,7 @@ public class Eleve{
 	String nomrue;
 	String codepostal;
 	String ville;
-	Date date_entree;
+	String date_entree;
 	Integer cotisant;
 	Integer eleve_profil;
 	Integer diplome;
@@ -25,10 +25,9 @@ public class Eleve{
 	Integer cle_structure;
 	
 	
-	
 	public Eleve(String id_eleve, String eleve_nom, String eleve_prenom,
 			Date date_naissance, Integer numrue, String nomrue,
-			String codepostal, String ville, Date date_entree,
+			String codepostal, String ville, String date_entree,
 			Integer cotisant, Integer eleve_profil, Integer diplome,
 			String motdepasse, String classe, Integer teaFaite,
 			Integer teaAfaire, Integer teaEnAttente, Integer cle_structure) {
@@ -100,10 +99,10 @@ public class Eleve{
 	public void setVille(String ville) {
 		this.ville = ville;
 	}
-	public Date getDate_entree() {
+	public String getDate_entree() {
 		return date_entree;
 	}
-	public void setDate_entree(Date date_entree) {
+	public void setDate_entree(String date_entree) {
 		this.date_entree = date_entree;
 	}
 	public Integer getCotisant() {
@@ -160,8 +159,6 @@ public class Eleve{
 	public void setCle_structure(Integer cle_structure) {
 		this.cle_structure = cle_structure;
 	}
-
 	
-
-
-}
+	
+	}

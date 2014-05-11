@@ -19,4 +19,6 @@ public interface EleveDao {
 
 	List<Eleve> rechercheEleveByClasse(String classe);
 
+	void CreateEleve(Eleve eleve);
+
 }
