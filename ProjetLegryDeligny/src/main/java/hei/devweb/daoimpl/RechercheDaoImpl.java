@@ -33,7 +33,7 @@ List<Eleve> elevesreturn = new ArrayList<Eleve>();
 
 if(orderBy==""){orderBy="eleve_nom";}
 
-System.out.println("entrée ds le try");
+System.out.println("entrée ds le try parametre ideleve= " +ideleve+ " nom="+nom+" prenom "+ prenom+" classe"+ orderBy+ " diplome "+diplome+ " etudiant"+ " ajour" + ajour+ " retard " +retard );
 
 	try {
 		Connection connection = DataSourceProvider.getDataSource()
