@@ -403,7 +403,7 @@ public void offre_placemoins (Integer cle_offre){
                 Connection connection = DataSourceProvider.getDataSource()
                                 .getConnection();
                 
-                PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE cle_structure=? ORDER BY date_tea DESC");
+                PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE offre.cle_structure=? ORDER BY date_tea DESC");
 			 stmt.setInt(1,clestructure);
 			 ResultSet results = stmt.executeQuery();
 			while (results.next()) {

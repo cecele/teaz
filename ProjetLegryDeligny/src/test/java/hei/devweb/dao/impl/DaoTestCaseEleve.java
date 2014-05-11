@@ -57,7 +57,10 @@ public class DaoTestCaseEleve {
 		stmt.executeUpdate("DELETE FROM offre");
 		stmt.executeUpdate("DELETE FROM tea");
 		
-		stmt.executeUpdate("ALTER TABLE student AUTO_INCREMENT = 0");
+		stmt.executeUpdate("ALTER TABLE classe AUTO_INCREMENT = 0");
+		stmt.executeUpdate("ALTER TABLE structure AUTO_INCREMENT = 0");
+		stmt.executeUpdate("ALTER TABLE offre AUTO_INCREMENT = 0");
+		stmt.executeUpdate("ALTER TABLE tea AUTO_INCREMENT = 0");
 		
 		
 		stmt.executeUpdate("INSERT INTO `eleve` (`id_eleve`, `eleve_nom`, `eleve_prenom`, `date_naissance`, `numrue`, `nomrue`, `codepostal`, `ville`, `date_entree`, `cotisant`, `eleve_profil`, `diplome`, `motdepasse`) VALUES ('10153', 'LEGRY', 'Céline', '1991-06-14', 59, 'rue des stations', '59000', 'Lille', 2009, 0, 0, 0, 'motdepasse')");
