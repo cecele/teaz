@@ -398,15 +398,14 @@ public void offre_placemoins (Integer cle_offre){
 		
 	public List<Offre> listerOffreByStructure(Integer clestructure){
 		List<Offre> offres = new ArrayList<Offre>();
-		try {
-			Connection connection = DataSourceProvider.getDataSource()
-					.getConnection();
-
 		
-			
-			Statement stmt = connection.createStatement();
-			ResultSet results = stmt.executeQuery("SELECT * FROM offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure ORDER BY date_tea DESC");
-			
+			try {
+                Connection connection = DataSourceProvider.getDataSource()
+                                .getConnection();
+                
+                PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM offre INNER JOIN structure ON offre.cle_structure=structure.cle_structure WHERE cle_structure=? ORDER BY date_tea DESC");
+			 stmt.setInt(1,clestructure);
+			 ResultSet results = stmt.executeQuery();
 			while (results.next()) {
 				Offre offre =new Offre(results.getInt("cle_offre"),
 						results.getDate("date_depot"),
