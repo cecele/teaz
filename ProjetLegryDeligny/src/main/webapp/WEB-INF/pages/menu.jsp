@@ -23,7 +23,7 @@
 			</ul>
 		</li>
 		<li>
-			<a href="${empty sessionScope.sessionEleve ? 'index' : 'tea'}">TEA</a>
+			<a href="${empty sessionScope.sessionEleve ? 'index' : 'tea'}">TEA <c:if test="${sessionScope.nbTeaAValiderByStructure >0 && !empty sessionScope.sessionEleve}"><span class="attente">(<span id="nbH">${sessionScope.nbTeaAValiderByStructure}</span>)</span></c:if></a>
 			<c:if test="${!empty sessionScope.sessionEleve}">
 			<ul>
 				<li><a href="mestea">Mes TEA</a></li>
@@ -31,7 +31,7 @@
 				<c:if test="${sessionScope.sessionEleve.eleve_profil==1 || sessionScope.sessionEleve.eleve_profil==2|| sessionScope.sessionEleve.eleve_profil==4|| sessionScope.sessionEleve.eleve_profil==999}">
 					<li><a href="deposerannonce?id=0">Déposer une annonce</a></li>
 					<li><a href="mesannonces">Mes annonces</a></li>
-					<li><a href="fairetea">Valider les heures</a></li>
+					<li><a href="fairetea">Valider les heures <c:if test="${sessionScope.nbTeaAValiderByStructure >0 && !empty sessionScope.sessionEleve }"><span class="attente">(<span id="nbH2">${sessionScope.nbTeaAValiderByStructure}</span>)</span></c:if></a></li>
 				</c:if>
 			</ul>
 			</c:if>

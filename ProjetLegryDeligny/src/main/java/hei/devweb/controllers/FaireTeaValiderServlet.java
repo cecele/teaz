@@ -42,6 +42,11 @@ public class FaireTeaValiderServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();    
+		Integer nbTeaAFaire = (Integer) (session.getAttribute("nbTeaAValiderByStructure"));
+		nbTeaAFaire --;
+		session.setAttribute( "nbTeaAValiderByStructure", nbTeaAFaire );
+		
+   
 		Eleve eleve = (Eleve) (session.getAttribute("sessionEleve"));
 		String matricule = eleve.getId_eleve();
 		Integer cleStructure = eleve.getCle_structure();

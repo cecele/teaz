@@ -42,6 +42,16 @@ public class ValiderTeaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Integer cletea = Integer.parseInt(request.getParameter("id"));
 		
+		HttpSession session = request.getSession(); 
+		
+		Integer nbTeaAFaire = (Integer) (session.getAttribute("nbTeaAValiderByStructure"));
+		nbTeaAFaire ++;
+		Integer nbTeaEnAttente = (Integer) (session.getAttribute("nbTeaEnAttente"));
+		nbTeaEnAttente --;
+		
+		session.setAttribute( "nbTeaEnAttente", nbTeaEnAttente );
+		session.setAttribute( "nbTeaAValiderByStructure", nbTeaAFaire );
+		
 		Manager.getInstance().teaValidationByResponsable(cletea);
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/validationtea.jsp");

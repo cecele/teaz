@@ -865,6 +865,42 @@ public class TeaDaoImpl implements TeaDao {
 						
 					return nbtotal;
 				}
+				
+				//-----------------------------------------------------------------------------------------------------------------
+				//recupération des heures de TEA d'une structure en attente
+				//acc�s en lecture
+
+			public Integer getNbTeaAValiderByStructure(Integer clestructure, java.util.Date datedujour){
+				Integer nbtotal=0;
+
+			java.util.Date utilDate = datedujour;
+			java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+			try {
+				Connection connection = DataSourceProvider.getDataSource()
+						.getConnection();
+
+				
+				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT COUNT(cle_tea) as total FROM tea INNER JOIN offre ON tea.cle_offre=offre.cle_offre WHERE cle_structure=? AND statut_valide=0 AND date_tea_realisee<?");
+				stmt.setInt(1,clestructure);
+				stmt.setDate(2,sqlDate);
+				ResultSet results = stmt.executeQuery();
+				results.next();
+				nbtotal=results.getInt("total");
+				
+				// Fermer la connexion
+				results.close();
+				stmt.close();
+				connection.close();
+				
+				}
+			catch (SQLException e) {
+								e.printStackTrace();
+							}
+			
+				
+			return nbtotal;
+			}
 			
 
 				//-----------------------------------------------------------------------------------------------------------------

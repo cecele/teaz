@@ -1,6 +1,7 @@
 package hei.devweb.controllers;  
 
 import java.io.IOException;  
+import java.util.Date;
 
 import javax.servlet.ServletException; 
 import javax.servlet.http.HttpServlet; 
@@ -58,9 +59,11 @@ public class ConnexionServlet extends HttpServlet {
 			//if(eleve.getEleve_profil() == 2 || eleve.getEleve_profil() == 4){
 				Integer nbTeaEnAttente = Manager.getInstance().getTeaEnAttente();
 				Integer nbOffreEnAttente = Manager.getInstance().getOffreEnAttente();
-				
+				Date date = new Date();
+				Integer nbTeaAValiderByStructure = Manager.getInstance().getNbTeaAValiderByStructure(eleve.getCle_structure(),date);
 				session.setAttribute( "nbTeaEnAttente", nbTeaEnAttente );
 				session.setAttribute( "nbOffreEnAttente", nbOffreEnAttente );
+				session.setAttribute( "nbTeaAValiderByStructure" , nbTeaAValiderByStructure);
 			//}
 		} 
 		else {             

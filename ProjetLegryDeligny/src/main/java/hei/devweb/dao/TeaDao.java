@@ -26,4 +26,6 @@ public interface TeaDao {
 
 	Integer getTeaDuesEnCours(String matricule);
 
+	Integer getNbTeaAValiderByStructure(Integer cle_structure, Date date);
+
 }

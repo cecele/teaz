@@ -22,7 +22,21 @@ $(document).ready(function(){
                     $.ajax({ 
                     	url:"faireteavalider", type:"POST",data:{id:$(this).attr("data-id")}
                     });
-                    $(".message").text("Vous avez bien valide cette heure");
+                    var nbH = 0;
+                    nbH = $("#nbH").text();
+                    nbH--;
+              
+                    
+                    if(nbH ==0){
+                   	 	$("#nbH").parent().remove();
+                   	 	$("#nbH2").parent().remove();
+                   	 	$(".message").text("Il n'y a plus d'heures a valider, bon boulot!");
+                    }
+                    else{
+                   	 	$("#nbH").text(nbH);
+                   	 	$("#nbH2").text(nbH);
+                   	 	$(".message").text("Vous avez bien valide cette heure");
+                    }
                     $(this).parent().parent().remove();
                     $(".valide").show();
             

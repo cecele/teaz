@@ -172,7 +172,8 @@ private static Manager instance;
 	}
 
 	public void teaValidationByResponsable(Integer cletea) {
-		System.out.println("Dans méthode teaValidationByrESPONSABLE");
+		System.out.println("Dans méthode teaValidationByResonsable");
+		System.out.println(cletea);
 		TeaDao.teaValidationByResponsable(cletea);
 		
 	}
@@ -211,6 +212,11 @@ private static Manager instance;
 	public Integer getCleByNom(String nom) {
 		// TODO Auto-generated method stub
 		return StructureDao.getCleByNom(nom);
+	}
+
+	public Integer getNbTeaAValiderByStructure(Integer cle_structure, Date date) {
+		// TODO Auto-generated method stub
+		return TeaDao.getNbTeaAValiderByStructure(cle_structure,date);
 	}
 
 
