@@ -43,14 +43,11 @@ public class ValiderTeaServlet extends HttpServlet {
 		Integer cletea = Integer.parseInt(request.getParameter("id"));
 		
 		HttpSession session = request.getSession(); 
-		
-		Integer nbTeaAFaire = (Integer) (session.getAttribute("nbTeaAValiderByStructure"));
-		nbTeaAFaire ++;
+
 		Integer nbTeaEnAttente = (Integer) (session.getAttribute("nbTeaEnAttente"));
 		nbTeaEnAttente --;
 		
 		session.setAttribute( "nbTeaEnAttente", nbTeaEnAttente );
-		session.setAttribute( "nbTeaAValiderByStructure", nbTeaAFaire );
 		
 		Manager.getInstance().teaValidationByResponsable(cletea);
 		

@@ -45,7 +45,9 @@ public class FaireTeaValiderServlet extends HttpServlet {
 		Integer nbTeaAFaire = (Integer) (session.getAttribute("nbTeaAValiderByStructure"));
 		nbTeaAFaire --;
 		session.setAttribute( "nbTeaAValiderByStructure", nbTeaAFaire );
-		
+		Integer nbTeaEnAttente = (Integer) (session.getAttribute("nbTeaEnAttente"));
+		nbTeaEnAttente ++;
+		session.setAttribute( "nbTeaEnAttente", nbTeaEnAttente );
    
 		Eleve eleve = (Eleve) (session.getAttribute("sessionEleve"));
 		String matricule = eleve.getId_eleve();

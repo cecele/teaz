@@ -53,6 +53,8 @@ public class RechercheServlet extends HttpServlet {
 		Boolean diplome = true;
 		classe = request.getParameter("classe");
 		
+		System.out.println(request.getParameter("rech"));
+		
 		if(request.getParameter("rech").equals("1"))
 		{
 			matricule = request.getParameter("matricule");
