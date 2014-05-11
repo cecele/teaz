@@ -143,17 +143,17 @@ System.out.println("entrée ds le try");
 					results.getString("motdepasse"),
 					EleveDaoImpl.getPromotion(results.getString("id_eleve")),
 					TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
-					TeaDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
+					getTeaDuesEnCours(results.getString("id_eleve")),
 					TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
 					null
 					);
-			int teadues=TeaDaoImpl.getTeaDuesEnCours(results.getString("id_eleve"));
+			int teadues=getTeaDuesEnCours(results.getString("id_eleve"));
 			if(EleveDaoImpl.president(results.getString("id_eleve"))){ eleve.setCle_structure(EleveDaoImpl.getCleStructureById(results.getString("id_eleve")));}
-			
+			System.out.println("choix du cas " +results.getString("id_eleve")+ " "+ diplome+  " " + etudiant+ " " + " " + ajour+ " " + retard);
 			if(diplome && etudiant && ajour && retard)elevescas1.add(eleve);
 			if(diplome && etudiant && ajour==false && teadues>0 && retard)elevescas2.add(eleve);
 			if(diplome && etudiant && ajour && teadues==0 && retard==false)elevescas3.add(eleve);
-			
+		
 			
 			if(diplome==false && results.getInt("diplome")==0  && etudiant && ajour && retard )elevescas4.add(eleve);
 			if(diplome==false && results.getInt("diplome")==0  && etudiant && ajour==false && teadues>0 && retard )elevescas5.add(eleve);
@@ -165,7 +165,7 @@ System.out.println("entrée ds le try");
 					
 			
 				
-		}
+		
 		
 			// Fermer la connexion
 			results.close();
@@ -174,9 +174,11 @@ System.out.println("entrée ds le try");
 			
 	
 	}
+	}
 		catch (SQLException e) {
 							e.printStackTrace();
 }
+	System.out.println("choix du cas " + diplome+  " " + etudiant+ " " + " " + ajour+ " " + retard);
 	
 	if(diplome && etudiant && ajour && retard)elevesreturn=elevescas1;
 	if(diplome && etudiant && ajour==false && retard)elevesreturn=elevescas2;
@@ -196,7 +198,12 @@ public int sizeReponse(List<Eleve> eleve){
 	return eleve.size();
 }
 
-
+public static  Integer getTeaDuesEnCours(String ideleve){
+	int nbtotal=0;
+	nbtotal=TeaDaoImpl.getNbHeureDues(ideleve)-TeaDaoImpl.getNbHeureTeaValide(ideleve);
+	if(nbtotal<=0)return 0;	return nbtotal;
+	
+}
 
 }
 

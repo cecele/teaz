@@ -237,7 +237,7 @@ public class TeaDaoImpl implements TeaDao {
 				
 			
 	//-----------------------------------------------------------------------------------------------------------------
-	// AFFICHAGE
+	// AFFICHAGE LISTE
 	//-----------------------------------------------------------------------------------------------------------------
 	
 	//-----------------------------------------------------------------------------------------------------------------
@@ -887,7 +887,7 @@ return teas;
 				//calcul du nombre d'heure de TEA dues en cours
 				//acc�s en lecture
 				
-				public static int getTeaDuesEnCours(String ideleve){
+				public  Integer getTeaDuesEnCours(String ideleve){
 					int nbtotal=0;
 					nbtotal=TeaDaoImpl.getNbHeureDues(ideleve)-TeaDaoImpl.getNbHeureTeaValide(ideleve);
 					if(nbtotal<=0)return 0;	return nbtotal;
@@ -899,7 +899,9 @@ return teas;
 					return null;
 				}
 
-	
+				//-----------------------------------------------------------------------------------------------------------------
+				// CALCUL
+				//-----------------------------------------------------------------------------------------------------------------
 
 				
 

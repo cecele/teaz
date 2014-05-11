@@ -247,7 +247,7 @@ public class EleveDaoImpl implements EleveDao {
 			results.getString("motdepasse"),
 			getPromotion(results.getString("id_eleve")),
 			TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
-			TeaDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
+			RechercheDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
 			TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
 			null
 			);
@@ -362,7 +362,7 @@ public class EleveDaoImpl implements EleveDao {
 						results.getString("motdepasse"),
 						getPromotion(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
-						TeaDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
+						RechercheDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
 						null
 						);
@@ -415,7 +415,7 @@ public class EleveDaoImpl implements EleveDao {
 							results.getString("motdepasse"),
 							getPromotion(results.getString("id_eleve")),
 							TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
-							TeaDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
+							RechercheDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
 							TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
 							null
 							);
@@ -469,14 +469,14 @@ public class EleveDaoImpl implements EleveDao {
 							results.getString("motdepasse"),
 							getPromotion(results.getString("id_eleve")),
 							TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
-							TeaDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
+							RechercheDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
 							TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
 							null
 							);
 					
 					if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
 						
-					if(TeaDaoImpl.getTeaDuesEnCours(results.getString("id_eleve"))!=0)eleves.add(eleve);	
+					if(RechercheDaoImpl.getTeaDuesEnCours(results.getString("id_eleve"))!=0)eleves.add(eleve);	
 					
 				}
 					// Fermer la connexion
@@ -522,14 +522,14 @@ public class EleveDaoImpl implements EleveDao {
 						results.getString("motdepasse"),
 						getPromotion(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
-						TeaDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
+						RechercheDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
 						null
 						);
 				
 				if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
 					
-				if(TeaDaoImpl.getTeaDuesEnCours(results.getString("id_eleve"))==0)eleves.add(eleve);	
+				if(RechercheDaoImpl.getTeaDuesEnCours(results.getString("id_eleve"))==0)eleves.add(eleve);	
 				
 			}
 				// Fermer la connexion
@@ -633,7 +633,7 @@ public class EleveDaoImpl implements EleveDao {
 						results.getString("motdepasse"),                         
 						getPromotion(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
-						TeaDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
+						RechercheDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
 						TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
 						null
 						);
