@@ -109,14 +109,14 @@ private AnnonceDao daoAnnonce= new AnnonceDaoImpl();
 		 // TODO Auto-generated catch block                         
 		 e.printStackTrace();                 
 		 }
-            Offre offre = new Offre(3,datedepot,datemiseenligne,datetea,"08", "11", 0, "description", "FF@hei.fr","titre", 1, 2,"INTEGRALE-VP", "LEGRY","Céline", 1);
+            Offre offre = new Offre(2,datedepot,datemiseenligne,datetea,"08", "11", 0, "description", "FF@hei.fr","titre", 1, 2,"INTEGRALE-VP", "LEGRY","Céline", 1);
                     		
            daoAnnonce.ajouterAnnonce(offre);
 
              Connection connection = DataSourceProvider.getDataSource()
                              .getConnection();
              Statement stmt = connection.createStatement();
-             ResultSet results = stmt.executeQuery("SELECT * FROM `offre` WHERE `cle_offre`=3");
+             ResultSet results = stmt.executeQuery("SELECT * FROM `offre` WHERE `cle_offre`=2");
              Assert.assertTrue(results.next());
              Assert.assertNotNull(results.getInt("cle_offre"));
              Assert.assertEquals(offre.getDate_depot(), results.getDate("date_depot"));
