@@ -49,7 +49,7 @@ public class DeposerAnnonceServlet extends HttpServlet {
 		}
 		
 
-		Offre offre = new Offre(1,dateDepot,dateDepot, dateTea, heureDebut, heureFin, 0, description, mail, titre, cle_structure, nbPlaces, nomStructure, nom_pres,prenom_pres);
+		Offre offre = new Offre(1,dateDepot,dateDepot, dateTea, heureDebut, heureFin, 0, description, mail, titre, cle_structure, nbPlaces, nomStructure, nom_pres,prenom_pres,0);
 		
 		//(modif c�line)  il faut que tu rajoute le nombre de place dispo !
 		// il faut aussi g�rer le fait qu'une offre ne peux pas �tre d�poser sans place dispo, par d�faut ds la BDD il y a une place dispo!
