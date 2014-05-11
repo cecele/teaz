@@ -46,10 +46,10 @@ public class RechercheServlet extends HttpServlet {
 		String prenom = "";
 		String classe = "";
 		String orderBy = "id_eleve";
-		Boolean encours = false;
-		Boolean ajour = false;
-		Boolean pasajour = false;
-		Boolean diplome = false;
+		Boolean encours = true;
+		Boolean ajour = true;
+		Boolean pasajour = true;
+		Boolean diplome = true;
 		classe = request.getParameter("classe");
 		
 		if(request.getParameter("rech").equals("1"))
@@ -63,14 +63,14 @@ public class RechercheServlet extends HttpServlet {
 			prenom = request.getParameter("prenom");
 			classe = request.getParameter("classe");
 			
-			if(request.getParameter("encours").equals("true"))
-				encours = true;
-			if(request.getParameter("ajour").equals("true"))
-				ajour = true;
-			if(request.getParameter("pasajour").equals("true"))
-				pasajour = true;
-			if(request.getParameter("diplome").equals("true"))
-				diplome = true;
+			if(!request.getParameter("encours").equals("true"))
+				encours = false;
+			if(!request.getParameter("ajour").equals("true"))
+				ajour = false;
+			if(!request.getParameter("pasajour").equals("true"))
+				pasajour = false;
+			if(!request.getParameter("diplome").equals("true"))
+				diplome = false;
 		}
 		
 		

@@ -147,6 +147,7 @@ System.out.println("entrée ds le try");
 					TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
 					null
 					);
+			System.out.println("eleve " +eleve.getEleve_nom());
 			int teadues=getTeaDuesEnCours(results.getString("id_eleve"));
 			if(EleveDaoImpl.president(results.getString("id_eleve"))){ eleve.setCle_structure(EleveDaoImpl.getCleStructureById(results.getString("id_eleve")));}
 			System.out.println("choix du cas " +results.getString("id_eleve")+ " "+ diplome+  " " + etudiant+ " " + " " + ajour+ " " + retard);

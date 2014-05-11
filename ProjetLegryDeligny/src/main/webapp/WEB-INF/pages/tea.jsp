@@ -26,7 +26,6 @@
 				Date de naissance <fmt:formatDate value="${sessionScope.sessionEleve.date_naissance}" pattern="d MMMM yyyy"/><br/>
 				Adresse : ${sessionScope.sessionEleve.numrue} ${sessionScope.sessionEleve.nomrue},<br/>
 				${sessionScope.sessionEleve.codepostal} ${sessionScope.sessionEleve.ville}<br/>
-				${sessionScope.sessionEleve.cotisant == 1 ? 'Cotisant' : 'Non cotisant'}<br/>
 				${sessionScope.sessionEleve.diplome == 1 ? 'Diplomé' : 'Non Diplomé'}<br/>
 				
 			</article>

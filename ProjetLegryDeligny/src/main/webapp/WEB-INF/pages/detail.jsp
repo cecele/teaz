@@ -26,7 +26,7 @@
 				Date de naissance <fmt:formatDate value="${eleve.date_naissance}" pattern="d MMMM yyyy"/><br/>
 				Adresse : ${eleve.numrue} ${eleve.nomrue},<br/>
 				${eleve.codepostal} ${eleve.ville}<br/>
-				Date d'entrée : <fmt:formatDate value="${eleve.date_entree}" pattern="yyyy"/><br/>
+				<!--  Date d'entrée : <fmt:formatDate value="${eleve.date_entree}" pattern="yyyy"/><br/> -->
 				${eleve.cotisant == 1 ? 'Cotisant' : 'Non cotisant'}<br/>
 				${eleve.diplome == 1 ? 'Diplomé' : 'Non Diplomé'}<br/>
 				
