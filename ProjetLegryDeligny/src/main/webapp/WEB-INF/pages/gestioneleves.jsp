@@ -98,7 +98,13 @@
 					$("#encours").prop('checked', true);
 					$("#ajour").attr("disabled",false);
 					$("#ajour").attr("style","background-color:rgb(52,73,94);");
-					$("#ajour").prop('checked',false);
+					$("#ajour").prop('checked',true);
+					$("#pasajour").attr("disabled",false);
+					$("#pasajour").attr("style","background-color:rgb(52,73,94);");
+					$("#pasajour").prop('checked',true);
+					$("#diplome").attr("disabled",false);
+					$("#diplome").attr("style","background-color:rgb(52,73,94);");
+					$("#diplome").prop('checked',true);
 					$("form").attr("action","recherche?rech=0");
 			}
  </script>
