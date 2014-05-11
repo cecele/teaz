@@ -403,7 +403,7 @@ public class EleveDaoImpl implements EleveDao {
 					results.close();
 					stmt.close();
 					connection.close();
-					if(eleve.getId_eleve()!="99999")eleve=null;
+					if(eleve.getId_eleve().equals("99999"))eleve=null;
 					
 			}
 				catch (SQLException e) {
