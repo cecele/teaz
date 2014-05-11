@@ -614,7 +614,7 @@ public class EleveDaoImpl implements EleveDao {
 			//acc�s en lecture
 			//test junit non nécessaire requete interne
 	public static Integer getCleClasse(String ideleve){
-		
+		System.out.println("Dans la méthode getCleClasse, id eleve vaut:"+ideleve);
 		int cleclasse=0;
 		
 		// recuperation de la cl� classe la plus recente

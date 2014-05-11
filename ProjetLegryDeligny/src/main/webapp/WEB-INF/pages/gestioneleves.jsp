@@ -13,7 +13,8 @@
         <title>Tea</title>
         <script type="text/javascript">
  			$(document).ready(function(){
- 				$("#encours_id").click(function(){
+ 				
+ 			$("#encours_id").click(function(){
                     $("#matricule").attr("disabled",true);
                     $("#matricule").attr("style","background-color:gray;");
                     $("#matricule").attr("value","");
@@ -63,7 +64,7 @@
 					$("#diplome").attr("style","background-color:rgb(52,73,94);");
 					$("#diplome").prop('checked',true);
 					$("form").attr("action","recherche?rech=0");
-			}
+			}});
  </script>
     </head>
     <body>
