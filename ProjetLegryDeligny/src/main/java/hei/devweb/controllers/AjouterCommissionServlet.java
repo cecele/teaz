@@ -42,8 +42,9 @@ public class AjouterCommissionServlet extends HttpServlet {
 
 		Manager.getInstance().CreateStructure(nom);
 		System.out.println(nom);	
+		String cle_structure = String.valueOf(Manager.getInstance().getCleByNom(nom));
 		
-		response.sendRedirect("administration"); // changer pour rediriger vers la page de modification de commission
+		response.sendRedirect("modificationcommission?id="+cle_structure); 
 	}
 
 }
