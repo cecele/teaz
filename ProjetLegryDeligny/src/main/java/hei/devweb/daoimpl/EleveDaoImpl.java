@@ -13,16 +13,23 @@ import hei.devweb.dao.EleveDao;
 import hei.devweb.metier.Manager;
 import hei.devweb.model.Eleve;
 import hei.devweb.model.Offre;
-
+/**
+ * <b> La Classe EleveDaoImpl gère l'ensemble des classes permettant l'accès à la BDD afin de modifier les Eleves qui sont injectés en masse dans la BDD </b>
+ * @author Celine
+ */
 public class EleveDaoImpl implements EleveDao {
-//-----------------------------------------------------------------------------------------------------------------
-	// AJOUT/SUPPRESION
-//-----------------------------------------------------------------------------------------------------------------
-	//-----------------------------------------------------------------------------------------------------------------
-	//création d'un élève
-	//acc�s en ecriture (update)
-	//test junit
-	
+	/**
+	 * Permet d'ajouter un élève (normalement n'a pas d'utilité ici)
+	 * @param Eleve
+	 * 					Objet Eleve contenant toutes informations relatives à ce dernier
+	 * @param cleoffre
+	 * 					cle de l'objet offre faisant référence à l'annonce que l'utilisateur a posté
+	 * @param ideleve 
+	 * 					matricule sans le h permettant d'identifier l'élève
+	 * @param clestructure
+	 * 					cle primaire de la table structure permettant d'identifier la structure
+	 * @return Booleen retournant true si un élève a deja postulé, false sinon
+	 */
 
 	public void CreateEleve(Eleve eleve){
 		if (eleve.getId_eleve() !=null || eleve.getEleve_nom() !=null ||eleve.getEleve_prenom() !=null ||eleve.getDate_naissance() !=null ||eleve.getNumrue()!=null ||eleve.getNomrue() !=null ||eleve.getCodepostal() !=null || eleve.getVille()!=null ||eleve.getDate_entree() !=null ){

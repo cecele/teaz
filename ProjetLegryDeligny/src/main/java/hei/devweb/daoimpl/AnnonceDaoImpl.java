@@ -18,19 +18,24 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-
+/**
+ * <b> La Classe AnnonceDaoImpl gère l'ensemble des classes permettant l'accès à la BDD afin de modifier les annonces (autrement appelées offres dans la BDD).</b>
+ * 
+ * @author Celine
+ */
 public class AnnonceDaoImpl implements AnnonceDao {
 	
-//-----------------------------------------------------------------------------------------------------------------
-// AJOUT/SUPPRESION
-//-----------------------------------------------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------------------------------------------
-// cr�ation d 'une annonce en statut non valid� pour mise en ligne et date_miseenligne null par d�faut
-// acces en �criture
-	//test Junit
+/**
+ * L'ajout d'une annonce se fait lorsqu'un responsable de destructure la dépose sur le site via un formulaire
+ * @param offre 
+ * 					objet offre crée grâce au remplissage du formulaire
+ * 
+ * @see  DeposerAnnonceServlet 
+ * 
+ * 
+ */
 	public void ajouterAnnonce (Offre offre ){
-		
+	
 		Date date =new Date();
 		
 		if (offre.getDate_tea() != null && offre.getHeure_debut() != null && offre.getHeure_fin() != null  && offre.getEleve_mail() != null  && offre.getOffre_titre() != null ){
@@ -70,15 +75,15 @@ public class AnnonceDaoImpl implements AnnonceDao {
 					}
 		}
 
-
-//-----------------------------------------------------------------------------------------------------------------
-//  MISE A JOUR
-//-----------------------------------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------------------------------
-//mise au statut valide de l'annonce et donc modification de la date de mise en ligne ce processus est eff�ctu� par le reponsable TEA et provoque l'affichage de l'annonce dans la liste
-//acces en �criture
-	//test Junit
-
+	/**
+	 * Validation de l'offre par le responsable TEA afin qu'elle soit visible par les autres utilisateurs
+	 * @param cle_offre 
+	 * 					cle de l'objet offre faisant référence à l'annonce que l'utilisateur a posté
+	 *@param datedujour 
+	 *					paramètre indiquant la date du jour
+	 * 
+	 * 
+	 */
 public void annonce_validation (Integer cle_offre,Date datedujour){
 	try {
 		Connection connection = DataSourceProvider.getDataSource()
@@ -101,10 +106,12 @@ public void annonce_validation (Integer cle_offre,Date datedujour){
 		e.printStackTrace();
 	}
 }
-//-----------------------------------------------------------------------------------------------------------------
-	//mise � 0 du statut pour enlever l'affichage
-	//acces en ecriture--- a effectuer quand le nombre de place est � 0
-	// test junit ne fonctionne pas!
+/**
+ * Mise à jour d'une offre lorsque l'utilisateur estime nécessaire de modifier les informations qu'il a saisi
+ * @param offre 
+ * 					objet Offre contentant l'ensemble des informations (les anciennes et celles modifiées)
+ * 
+ */
 	
 
 	public void AnnonceModification (Offre offre){
@@ -140,10 +147,12 @@ public void annonce_validation (Integer cle_offre,Date datedujour){
 		}
 	    }
 	}
-	//-----------------------------------------------------------------------------------------------------------------
-		//modification de l'offre par le propriétaire de l'offre
-		//acces en ecriture--- 
-		// Test Junit
+	/**
+	 * Mise hors ligne d'une annonce cad passage de son statut à 0
+	 * @param cle_offre 
+	 * 					cle de l'objet offre faisant référence à l'annonce que l'utilisateur a posté
+	 * 
+	 */
 	
 	public void  annonce_miseHorsLigne(Integer cle_offre){
 		try {
@@ -163,10 +172,12 @@ public void annonce_validation (Integer cle_offre,Date datedujour){
 			e.printStackTrace();
 		}
 	}
-	//-----------------------------------------------------------------------------------------------------------------
-	//decrementation de l'offre
-	//acces en ecriture -----ATTENTION---- VERIFIER QUE OFFRE_PLACE>0 avant de decrementer
-	//test Junit
+	/**
+	 * Decrementation du champs offre_place cad du nombre de place disponible pour les utilisateurs
+	 * @param cle_offre 
+	 * 					cle de l'objet offre faisant référence à l'annonce que l'utilisateur a posté
+	 * 
+	 */
 	public void offre_placemoins (Integer cle_offre){
 		try {
 			Connection connection = DataSourceProvider.getDataSource()
@@ -186,14 +197,13 @@ public void annonce_validation (Integer cle_offre,Date datedujour){
 		}
 	}
 		
-//-----------------------------------------------------------------------------------------------------------------
-	// AFFICHAGE LISTE
-//-----------------------------------------------------------------------------------------------------------------
-
-	//-----------------------------------------------------------------------------------------------------------------
-	//r�cup�ration des annonces  valide par ordres decroissant de dates avec structure ou les offres auquels un élève a postulé n'apparait plus
-	//acc�s en lecture 
-		// test junit 
+	/**
+	 * Retourne la liste des offres que l'utilisateurs peut visualiser
+	 * @param ideleve 
+	 * 					matricule sans le h permettant d'identifier l'élève
+	 * @return La liste des offres dont l'élève n'est pas à l'origine et auquelles i ln'a pas postulé, classées par ordre de date de la plus urgente à la moins urgente
+	 * 
+	 */
 		
 		public List<Offre> listerOffreByEleve(String ideleve){
 			List<Offre> offres = new ArrayList<Offre>();
@@ -240,12 +250,12 @@ public void annonce_validation (Integer cle_offre,Date datedujour){
 				}
 
 				return offres;
-			}
-		//-----------------------------------------------------------------------------------------------------------------
-		//r�cup�ration des annonces  valide par ordres decroissant de dates sans structure
-		//acc�s en lecture
-		// test junit
-			
+		}
+				/**
+				 * Retourne l'ensemble des offres
+				 * @return L'ensemble des offres disponibles (quelque soit leurs statuts)
+				 * 
+				 */
 			public List<Offre> listerOffre(){
 				List<Offre> offres = new ArrayList<Offre>();
 				try {
@@ -289,10 +299,11 @@ public void annonce_validation (Integer cle_offre,Date datedujour){
 
 					return offres;
 				}
-		//-----------------------------------------------------------------------------------------------------------------
-		//r�cup�ration des annonces non valide par ordres decroissant 
-		//acc�s en lecture
-		// test junit
+			/**
+			 * Retourne la liste des offres non valide c'est à dire qui dont le statut=0
+			 * @return La liste des offres dont le statut est égal à 0 c'est à dire non valide (car non validées par le responsable TEA ou à problème)
+			 * 
+			 */
 			
 		public List<Offre> listerOffreNonValide(){
 			List<Offre> offres = new ArrayList<Offre>();
@@ -340,10 +351,12 @@ public void annonce_validation (Integer cle_offre,Date datedujour){
 				return offres;
 			}
 		
-		//-----------------------------------------------------------------------------------------------------------------
-		//r�cup�ration des annonces non valide par ordres decroissant 
-		//acc�s en lecture
-		//test junit
+		/**
+		 * Retourne la liste des offres générées par une seule et même structure
+		 * @param clestructure
+		 * 					cle primaire de la table structure permettant d'identifier la structure
+		 * @return La liste des offres rattachées à uen seule et même structure afin de lui en permettre l'administration
+		 */
 			
 		public List<Offre> listerOffreByStructure(Integer clestructure){
 			List<Offre> offres = new ArrayList<Offre>();
@@ -390,14 +403,12 @@ public void annonce_validation (Integer cle_offre,Date datedujour){
 				return offres;
 			}
 
-//-----------------------------------------------------------------------------------------------------------------
-		// AFFICHAGE DUN OBJET offre
-//-----------------------------------------------------------------------------------------------------------------
-				
-		//-----------------------------------------------------------------------------------------------------------------
-				///retourne une offre en fontion de sa clé_offre
-				//acc�s en lecture
-				// test junit
+		/**
+		 * Récupère une Offre 
+		 * @param cleoffre
+		 * 					cle de l'objet offre faisant référence à l'annonce que l'utilisateur a posté
+		 * @return L'objet Offre contenant les informations de l'annonce recherchée
+		 */
 			
 			public Offre getOffreById(Integer cleoffre){
 				
@@ -446,14 +457,12 @@ public void annonce_validation (Integer cle_offre,Date datedujour){
 				}
 			
 		
-//-----------------------------------------------------------------------------------------------------------------
-		// AFFICHAGE RETOUR D'UN PARAMETRE D'UNE offre
-//-----------------------------------------------------------------------------------------------------------------
-
-		//-----------------------------------------------------------------------------------------------------------------
-		///Nombre de places dispos pour une offre donnee
-		//acc�s en lecture
-		// test junit
+			/**
+			 * Rècupere le nombre de place disponible pour une offre
+			 * @param idOffre
+			 * 					cle de l'objet offre faisant référence à l'annonce que l'utilisateur a posté
+			 * @return Le nombre de place disponible pour une offre donnée
+			 */
 		
 		public int getNbPlaces(int idOffre) {
 	        
@@ -481,15 +490,16 @@ public void annonce_validation (Integer cle_offre,Date datedujour){
 	        return nbPlaces;
 	}		
 		
-//-----------------------------------------------------------------------------------------------------------------
-		// AFFICHAGE CALCUL
-//-----------------------------------------------------------------------------------------------------------------
-
-
-	//-----------------------------------------------------------------------------------------------------------------
-	//test si uen offre a été postulée
-	// acces en lecture
-
+		/**
+		 * Retourne vrai ou faux afin de savoir si un élève a déjà postulé à une offre
+		 * @param cleoffre
+		 * 					cle de l'objet offre faisant référence à l'annonce que l'utilisateur a posté
+		 * @param ideleve 
+		 * 					matricule sans le h permettant d'identifier l'élève
+		 * @param clestructure
+		 * 					cle primaire de la table structure permettant d'identifier la structure
+		 * @return Booleen retournant true si un élève a deja postulé, false sinon
+		 */
 			public Boolean getPostulerOffre(Integer cleoffre, String ideleve, Integer clestructure ){
 			
 				Boolean rep = false;
@@ -526,10 +536,11 @@ public void annonce_validation (Integer cle_offre,Date datedujour){
 			
 	
 	
-	
-	//-----------------------------------------------------------------------------------------------------------------
-	//calcul du nombre de tea en attente de validation
-	//acc�s en lecture
+			/**
+			 * Retourne le nombre d'offre en attente
+			
+			 * @return retourne le nombre d'offre en attente de validation par le responsable tea
+			 */
 	
 	public Integer getOffreEnAttente(){
 		int nbtotal=0;

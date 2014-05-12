@@ -290,13 +290,37 @@ private static Manager instance;
 	}
 
 	public Integer sizeReponse(List<Eleve> eleves) {
-		// TODO Auto-generated method stub
+		System.out.println("Dans Méthode sizeReponses");
 		return RechercheDao.sizeReponse(eleves);
 	}
 
 	public List<Tea> getTeaByStructure(Integer clestructure) {
-		// TODO Auto-generated method stub
+		System.out.println("Dans Méthode  getTeaByStructure");
 		return TeaDao.getTeaByStructure(clestructure);
+	}
+	
+	
+	public List<Tea> getTeaValideByEleve(String string){
+		System.out.println("Dans Méthode getTeaValideByEleve");
+		return TeaDao.getTeaValideByEleve(string);
+		
+	}
+	
+	public List<Tea> getTeaNonValideByEleve(String string){
+		System.out.println("Dans Méthode getTeaNonValideByEleve");
+		return TeaDao.getTeaNonValideByEleve(string);
+		
+	}
+	
+	public String getIdeleveByCleTea(Integer cletea){
+		System.out.println("Dans Méthode getIdeleveByCleTea(Integer cletea)");
+		return TeaDao.getIdeleveByCleTea(cletea);
+		
+	}
+	public Integer getNbHeureTeaRealiseeByTea(Integer cletea){
+		System.out.println("Dans Méthode getNbHeureTeaRealiseeByTea");
+		return TeaDao.getNbHeureTeaRealiseeByTea(cletea);
+		
 	}
 }
 

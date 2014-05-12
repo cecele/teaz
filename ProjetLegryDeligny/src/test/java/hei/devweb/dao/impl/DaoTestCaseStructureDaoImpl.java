@@ -12,8 +12,10 @@ import hei.devweb.daoimpl.EleveDaoImpl;
 import hei.devweb.daoimpl.RechercheDaoImpl;
 import hei.devweb.daoimpl.StructureDaoImpl;
 import hei.devweb.daoimpl.TeaDaoImpl;
+import hei.devweb.metier.Manager;
 import hei.devweb.model.Eleve;
 import hei.devweb.model.Offre;
+import hei.devweb.model.Structure;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -151,6 +153,123 @@ try { dateFin = sdf.parse(StringDateFin); } catch (ParseException e) { e.printSt
 	        stmt.close();
 	        connection.close();
 	}
+	//------------------------------------------------------------------------------------------------------------------------------
+		 @Test
+	public void testgetCleByNom () throws Exception {
+			 
+			int cle =daoStructure.getCleByNom("INTEGRALE-VP");
+
+	        Connection connection = DataSourceProvider.getDataSource()
+	                        .getConnection();
+	        Statement stmt = connection.createStatement();
+	        ResultSet results = stmt.executeQuery("SELECT cle_structure FROM structure WHERE structure_nom='INTEGRALE-VP' ");
+	        Assert.assertTrue(results.next());
+	        Assert.assertEquals(cle, results.getInt("cle_structure"));
+
+	        results.close();
+	        stmt.close();
+	        connection.close();
+	}
+		//------------------------------------------------------------------------------------------------------------------------------
+		 @Test
+	public void testgetPresidentPrenomById () throws Exception {
+			 
+			String prez =daoStructure.getPresidentPrenomById(1);
+
+	        Connection connection = DataSourceProvider.getDataSource()
+	                        .getConnection();
+	        Statement stmt = connection.createStatement();
+	        ResultSet results = stmt.executeQuery("SELECT eleve_prenom FROM eleve INNER JOIN presider ON eleve.id_eleve=presider.id_eleve WHERE presider.cle_structure=1 ");
+	        Assert.assertTrue(results.next());
+	        Assert.assertEquals(prez, results.getString("eleve_prenom"));
+
+	        results.close();
+	        stmt.close();
+	        connection.close();
+	}	
+		//------------------------------------------------------------------------------------------------------------------------------
+		 @Test
+	public void testgetPresidentIdById () throws Exception {
+			 
+			String prez =daoStructure.getPresidentIdById(1);
+
+	        Connection connection = DataSourceProvider.getDataSource()
+	                        .getConnection();
+	        Statement stmt = connection.createStatement();
+	        ResultSet results = stmt.executeQuery("SELECT id_eleve FROM presider WHERE presider.cle_structure=1 ");
+	        Assert.assertTrue(results.next());
+	        Assert.assertEquals(prez, results.getString("id_eleve"));
+
+	        results.close();
+	        stmt.close();
+	        connection.close();
+	}	
+		//------------------------------------------------------------------------------------------------------------------------------
+		 @Test
+	public void testgetNomStructure () throws Exception {
+			 
+			String prez =daoStructure.getNomStructure(1);
+
+	        Connection connection = DataSourceProvider.getDataSource()
+	                        .getConnection();
+	        Statement stmt = connection.createStatement();
+	        ResultSet results = stmt.executeQuery("SELECT structure_nom FROM structure WHERE cle_structure=1 ");
+	        Assert.assertTrue(results.next());
+	        Assert.assertEquals(prez,results.getString("structure_nom"));
+
+	        results.close();
+	        stmt.close();
+	        connection.close();
+	}	
+		//------------------------------------------------------------------------------------------------------------------------------
+		 @Test
+	public void testgetStructure_OrdreNom() throws Exception {
+			List<Structure> structures = new ArrayList<Structure>();
+		structures= daoStructure.getStructure_OrdreNom();
 		
 		
+		Connection connection = DataSourceProvider.getDataSource()
+                .getConnection();
+Statement stmt = connection.createStatement();
+
+	ResultSet results = stmt.executeQuery("SELECT * FROM structure ORDER BY structure_nom ASC");
+	int i=0;
+while (results.next()){
+	Assert.assertEquals((int)structures.get(i).getCle_structure(), results.getInt("cle_structure"));
+	Assert.assertEquals(structures.get(i).getStructure_nom() , results.getString("structure_nom"));
+	Assert.assertEquals(structures.get(i).getStructure_president_nom(), Manager.getInstance().getPresidentNomById(results.getInt("cle_structure")));
+	Assert.assertEquals(structures.get(i).getStructure_president_prenom(), Manager.getInstance().getPresidentPrenomById(results.getInt("cle_structure")));
+	
+	i=i+1;
+}
+results.close();
+stmt.close();
+connection.close();
+}
+		 
+
+	//------------------------------------------------------------------------------------------------------------------------------
+		 @Test
+	public void testgetStructure_ElevePresident() throws Exception {
+			 
+			Structure structure= daoStructure.getStructure_ElevePresident("11111");
+		
+		
+		Connection connection = DataSourceProvider.getDataSource()
+                .getConnection();
+Statement stmt = connection.createStatement();
+
+	ResultSet results = stmt.executeQuery("SELECT * FROM structure WHERE cle_structure=1");
+	
+	Assert.assertTrue(results.next());
+	Assert.assertEquals((int)structure.getCle_structure(), results.getInt("cle_structure"));
+	Assert.assertEquals(structure.getStructure_nom() , results.getString("structure_nom"));
+	Assert.assertEquals(structure.getStructure_president_nom(), Manager.getInstance().getPresidentNomById(results.getInt("cle_structure")));
+	Assert.assertEquals(structure.getStructure_president_prenom(), Manager.getInstance().getPresidentPrenomById(results.getInt("cle_structure")));
+
+
+results.close();
+stmt.close();
+connection.close();
+}
 }

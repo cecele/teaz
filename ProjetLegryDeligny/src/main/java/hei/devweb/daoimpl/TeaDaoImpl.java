@@ -102,64 +102,64 @@ public class TeaDaoImpl implements TeaDao {
 						}
 			
 			
-	//-----------------------------------------------------------------------------------------------------------------
-	// Suppresion d'une tea  
-	// acces en �criture
-			public Boolean getStatutTea (Integer cleoffre ){
-			
-				Boolean rep = false;
-				
-				try {
-	                Connection connection = DataSourceProvider.getDataSource()
-	                                .getConnection();
-	                
-	                PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT statut_valide FROM tea WHERE cle_offre = ? ");
-	                stmt.setInt(1,cleoffre);
-	                ResultSet results = stmt.executeQuery();
-
-	            results.next();
-	           Integer statutvalide= results.getInt("statut_valide");
-	           if (statutvalide == 1) rep=true;
-
-	                // Fermer la connexion
-	                results.close();
-	                stmt.close();
-	                connection.close();
-
-	        } catch (SQLException e) {
-	                e.printStackTrace();
-	        }
-				
-				
-				return rep;
-			}
-			
-			
-			public Boolean DeleteTea (Integer cleoffre){
-				Boolean rep= getStatutTea(cleoffre);
-				
-				if (rep=false){
-					try {
-						Connection connection = DataSourceProvider.getDataSource()
-								.getConnection();
-
-						PreparedStatement stmt = (PreparedStatement) connection
-								.prepareStatement("DELETE  FROM tea WHERE cle_offre=?");
-						stmt.setInt(1,cleoffre);
-						stmt.executeUpdate();
-						// Fermer la connexion
-
-						stmt.close();
-						connection.close();
-
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
-				
-				return rep;
-			}
-			
+//	//-----------------------------------------------------------------------------------------------------------------
+//	// statut d'une tea
+//	// acces en �criture
+//			public Boolean getStatutTea (Integer cleoffre ){
+//			
+//				Boolean rep = false;
+//				
+//				try {
+//	                Connection connection = DataSourceProvider.getDataSource()
+//	                                .getConnection();
+//	                
+//	                PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT statut_valide FROM tea WHERE cle_offre = ? ");
+//	                stmt.setInt(1,cleoffre);
+//	                ResultSet results = stmt.executeQuery();
+//
+//	            results.next();
+//	           Integer statutvalide= results.getInt("statut_valide");
+//	           if (statutvalide == 1) rep=true;
+//
+//	                // Fermer la connexion
+//	                results.close();
+//	                stmt.close();
+//	                connection.close();
+//
+//	        } catch (SQLException e) {
+//	                e.printStackTrace();
+//	        }
+//				
+//				
+//				return rep;
+//			}
+//			
+//			
+//			public Boolean DeleteTea (Integer cleoffre){
+//				Boolean rep= getStatutTea(cleoffre);
+//				
+//				if (rep=false){
+//					try {
+//						Connection connection = DataSourceProvider.getDataSource()
+//								.getConnection();
+//
+//						PreparedStatement stmt = (PreparedStatement) connection
+//								.prepareStatement("DELETE  FROM tea WHERE cle_offre=?");
+//						stmt.setInt(1,cleoffre);
+//						stmt.executeUpdate();
+//						// Fermer la connexion
+//
+//						stmt.close();
+//						connection.close();
+//
+//					} catch (SQLException e) {
+//						e.printStackTrace();
+//					}
+//				}
+//				
+//				return rep;
+//			}
+//			
 	//-----------------------------------------------------------------------------------------------------------------
 	// MODIFICATION ET MISE A JOUR
 	//-----------------------------------------------------------------------------------------------------------------
@@ -656,10 +656,7 @@ public class TeaDaoImpl implements TeaDao {
 		return teas;	
 		}
 		
-		//-----------------------------------------------------------------------------------------------------------------
-		// AFFICHAGE DUN OBJET TEA
-		//-----------------------------------------------------------------------------------------------------------------
-				
+		
 				
 		
 		//-----------------------------------------------------------------------------------------------------------------
@@ -701,7 +698,7 @@ public class TeaDaoImpl implements TeaDao {
 			//calcul du nombre d'heure de tea effectuée pour une TEA
 			//acc�s en lecture
 			
-			public int getNbHeureTeaRealiseeByTea(Integer cletea){
+			public Integer getNbHeureTeaRealiseeByTea(Integer cletea){
 				int nbtotal=0;
 				
 				// recuperation de la cl� classe la plus recente
@@ -739,7 +736,7 @@ public class TeaDaoImpl implements TeaDao {
 	//calcul du nombre d'heure de tea effectuée par un élève qq soit le statut de la TEA
 	//acc�s en lecture
 	
-	public int getNbHeureTeaRealisee(String ideleve){
+	public Integer getNbHeureTeaRealisee(String ideleve){
 		int nbtotal=0;
 		
 		// recuperation de la cl� classe la plus recente
