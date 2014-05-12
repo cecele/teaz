@@ -68,7 +68,7 @@ public class EleveDaoImpl implements EleveDao {
 		//acc�s en ecriture (update)
 		//test junit
 		public void eleveChgtProfil (String ideleve, Integer profil){
-			if(Manager.getInstance().getEleveById(ideleve).getEleve_profil()< profil){
+			
 			try {
 				Connection connection = DataSourceProvider.getDataSource()
 						.getConnection();
@@ -86,7 +86,7 @@ public class EleveDaoImpl implements EleveDao {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			}
+	
 			}
 		
 	//-----------------------------------------------------------------------------------------------------------------

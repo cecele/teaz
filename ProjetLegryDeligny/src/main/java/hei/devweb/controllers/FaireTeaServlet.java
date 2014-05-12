@@ -25,6 +25,9 @@ public class FaireTeaServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();    
 		Eleve eleve = (Eleve) (session.getAttribute("sessionEleve"));
@@ -40,6 +43,9 @@ public class FaireTeaServlet extends HttpServlet {
 		view.forward(request, response);
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}

@@ -14,12 +14,23 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class AjouterDroit
  */
+/**
+ * @author Projet
+ *
+ */
+/**
+ * @author Projet
+ *
+ */
 @WebServlet("/AjouterDroit")
 public class AjouterDroitServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
+     */
+    /**
+     * 
      */
     public AjouterDroitServlet() {
         super();
@@ -29,12 +40,18 @@ public class AjouterDroitServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("matricule");

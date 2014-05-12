@@ -18,12 +18,19 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class DetailServlet
  */
+/**
+ * @author Projet
+ *
+ */
 @WebServlet("/DetailServlet")
 public class DetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
+     */
+    /**
+     * 
      */
     public DetailServlet() {
         super();
@@ -32,6 +39,9 @@ public class DetailServlet extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
@@ -49,6 +59,9 @@ public class DetailServlet extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub

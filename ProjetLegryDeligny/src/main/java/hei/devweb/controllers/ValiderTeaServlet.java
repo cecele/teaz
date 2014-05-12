@@ -16,6 +16,10 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class ValiderTeaServlet
  */
+/**
+ * @author Projet
+ *
+ */
 @WebServlet("/ValiderTeaServlet")
 public class ValiderTeaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,6 +35,9 @@ public class ValiderTeaServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		
@@ -38,6 +45,9 @@ public class ValiderTeaServlet extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Integer cletea = Integer.parseInt(request.getParameter("id"));

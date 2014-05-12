@@ -18,12 +18,19 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class ValidationAnnoncesServlet
  */
+/**
+ * @author Projet
+ *
+ */
 @WebServlet("/ValidationAnnoncesServlet")
 public class ValidationAnnoncesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
+     */
+    /**
+     * 
      */
     public ValidationAnnoncesServlet() {
         super();
@@ -32,6 +39,9 @@ public class ValidationAnnoncesServlet extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Offre> offres = Manager.getInstance().listerOffreNonValide();
@@ -43,6 +53,9 @@ public class ValidationAnnoncesServlet extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
