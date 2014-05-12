@@ -254,9 +254,9 @@ public class EleveDaoImpl implements EleveDao {
 						return eleves;	
 				}
 			//-----------------------------------------------------------------------------------------------------------------
-					//récupération des diplome pas à jours
-					//acc�s en lecture
-				// test junit
+			//récupération des diplome pas à jours
+			//acc�s en lecture
+			// test junit
 					
 							
 				public List<Eleve> getEleveDiplomePasAjours(){

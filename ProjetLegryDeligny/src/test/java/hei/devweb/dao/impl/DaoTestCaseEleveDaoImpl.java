@@ -12,6 +12,7 @@ import hei.devweb.daoimpl.EleveDaoImpl;
 import hei.devweb.daoimpl.RechercheDaoImpl;
 import hei.devweb.daoimpl.StructureDaoImpl;
 import hei.devweb.daoimpl.TeaDaoImpl;
+import hei.devweb.metier.Manager;
 import hei.devweb.model.Eleve;
 import hei.devweb.model.Offre;
 
@@ -188,6 +189,44 @@ public void testCreateEleve () throws Exception {
 	        stmt.close();
 	        connection.close();
 	}
+			//------------------------------------------------------------------------------------------------------------------------------
+		 @Test
+	public void testgetEleveNomById () throws Exception {
+			
+			
+		String nomeleve =daoEleve.getEleveNomById("10153");
+
+	        Connection connection = DataSourceProvider.getDataSource()
+	                        .getConnection();
+	        Statement stmt = connection.createStatement();
+	        ResultSet results = stmt.executeQuery("SELECT eleve_nom FROM Eleve WHERE id_eleve='10153'");
+	        
+	        Assert.assertTrue(results.next());
+	        Assert.assertEquals(nomeleve, results.getString("eleve_nom"));
+
+	        results.close();
+	        stmt.close();
+	        connection.close();
+	}
+		//------------------------------------------------------------------------------------------------------------------------------
+		 @Test
+	public void testgetElevePrenomById () throws Exception {
+			
+			
+		String nomeleve =daoEleve.getElevePrenomById("10153");
+
+	        Connection connection = DataSourceProvider.getDataSource()
+	                        .getConnection();
+	        Statement stmt = connection.createStatement();
+	        ResultSet results = stmt.executeQuery("SELECT eleve_prenom FROM Eleve WHERE id_eleve='10153'");
+	        
+	        Assert.assertTrue(results.next());
+	        Assert.assertEquals(nomeleve, results.getString("eleve_prenom"));
+
+	        results.close();
+	        stmt.close();
+	        connection.close();
+	}
 		//------------------------------------------------------------------------------------------------------------------------------
 		 @Test
 	public void testgetEleveById () throws Exception {
@@ -276,6 +315,75 @@ while (results.next()){
 	Assert.assertEquals((int)eleves.get(i).getEleve_profil(), results.getInt("eleve_profil"));
 	Assert.assertEquals((int)eleves.get(i).getDiplome(), results.getInt("diplome"));
 	Assert.assertEquals(eleves.get(i).getMotdepasse(), results.getString("motdepasse"));
+	
+	i=i+1;
+}
+results.close();
+stmt.close();
+connection.close();
+}
+		//------------------------------------------------------------------------------------------------------------------------------
+		 @Test
+	public void testgetEleveDiplomePasAjours() throws Exception {
+		List<Eleve> eleves = new ArrayList<Eleve>();
+		eleves= daoEleve.getEleveDiplomePasAjours();
+		
+		
+		Connection connection = DataSourceProvider.getDataSource()
+                .getConnection();
+Statement stmt = connection.createStatement();
+
+ResultSet results = stmt.executeQuery("SELECT * FROM Eleve WHERE diplome=1");
+int i=0;
+while (results.next()){
+	Assert.assertEquals(eleves.get(i).getEleve_nom(), results.getString("eleve_nom"));
+	Assert.assertEquals(eleves.get(i).getEleve_prenom(),results.getString("eleve_prenom"));
+	Assert.assertEquals(eleves.get(i).getDate_naissance(), results.getDate("date_naissance"));
+	Assert.assertEquals((int)eleves.get(i).getNumrue(), results.getInt("numrue"));
+	Assert.assertEquals(eleves.get(i).getNomrue(), results.getString("nomrue"));
+	Assert.assertEquals(eleves.get(i).getCodepostal(), results.getString("codepostal"));
+	Assert.assertEquals(eleves.get(i).getVille(), results.getString("ville"));
+	Assert.assertEquals(eleves.get(i).getDate_entree(), results.getString("date_entree"));
+	Assert.assertEquals((int)eleves.get(i).getCotisant(), results.getInt("cotisant"));
+	Assert.assertEquals((int)eleves.get(i).getEleve_profil(), results.getInt("eleve_profil"));
+	Assert.assertEquals((int)eleves.get(i).getDiplome(), results.getInt("diplome"));
+	Assert.assertEquals(eleves.get(i).getMotdepasse(), results.getString("motdepasse"));
+	
+	i=i+1;
+}
+results.close();
+stmt.close();
+connection.close();
+}
+
+		
+		//------------------------------------------------------------------------------------------------------------------------------
+		 @Test
+	public void testgetEleveAjour() throws Exception {
+			 List<Eleve> eleves = new ArrayList<Eleve>();
+		eleves= daoEleve.getEleveAjour() ;
+		
+		
+		Connection connection = DataSourceProvider.getDataSource()
+                .getConnection();
+Statement stmt = connection.createStatement();
+
+ResultSet results = stmt.executeQuery("SELECT * FROM Eleve ");
+int i=0;
+while (results.next()){
+	if(Manager.getInstance().getTeaDuesEnCours(results.getString("id_eleve"))==0 && !results.getString("id_eleve").equals("99999")){
+	Assert.assertEquals(eleves.get(i).getEleve_nom(), results.getString("eleve_nom"));
+	Assert.assertEquals(eleves.get(i).getEleve_prenom(),results.getString("eleve_prenom"));
+	Assert.assertEquals(eleves.get(i).getDate_naissance(), results.getDate("date_naissance"));
+	Assert.assertEquals((int)eleves.get(i).getNumrue(), results.getInt("numrue"));
+	Assert.assertEquals(eleves.get(i).getNomrue(), results.getString("nomrue"));
+	Assert.assertEquals(eleves.get(i).getCodepostal(), results.getString("codepostal"));
+	Assert.assertEquals(eleves.get(i).getVille(), results.getString("ville"));
+	Assert.assertEquals(eleves.get(i).getDate_entree(), results.getString("date_entree"));
+	Assert.assertEquals((int)eleves.get(i).getCotisant(), results.getInt("cotisant"));
+	Assert.assertEquals((int)eleves.get(i).getEleve_profil(), results.getInt("eleve_profil"));
+	Assert.assertEquals((int)eleves.get(i).getDiplome(), results.getInt("diplome"));
+	Assert.assertEquals(eleves.get(i).getMotdepasse(), results.getString("motdepasse"));}
 	
 	i=i+1;
 }
