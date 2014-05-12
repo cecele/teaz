@@ -38,25 +38,25 @@ String eleve_prenom;
  * @param nbheure_realisee : le nombre d'heures proposées
  * @param nbheure_validee : le nombre d'heures validées pour cette TEA
  * @param statut_valide : le statut de la TEA (O si en attente, 1 si validée par le resp de structure, 2 si validée définitivement
- * @param date_validation
- * @param cle_offre
- * @param id_eleve
- * @param date_depot
- * @param date_miseenligne
- * @param date_tea
- * @param heure_debut
- * @param heure_fin
- * @param statut
- * @param offre_description
- * @param eleve_mail
- * @param offre_titre
- * @param cle_structure
- * @param offre_place
- * @param structure_nom
- * @param structure_president_nom
- * @param structure_president_prenom
- * @param eleve_nom
- * @param eleve_prenom
+ * @param date_validation : date de validation de la TEA
+ * @param cle_offre : la clé de l'offre qui correspond à la TEA
+ * @param id_eleve : l'id de l'élève qui a fait cette TEA
+ * @param date_depot : la date de dépot de l'offre qui correspond à cette tea
+ * @param date_miseenligne : la date de mise en ligne de l'offre qui correspond à cette tea
+ * @param date_tea : la date de la tea
+ * @param heure_debut : l'heure de début
+ * @param heure_fin : l'heure de fin
+ * @param statut : le statut de l'offre qui correspond à la tea 
+ * @param offre_description : la description de l'offre qui correspond à la tea
+ * @param eleve_mail : le mail du responsable de l'offre qui correspond à la tea
+ * @param offre_titre : le titre de l'offre qui correspond à la te
+ * @param cle_structure : la clé de la structure qui correspond à la tea
+ * @param offre_place : le nombre de places de l'offre qui correspond à la tea
+ * @param structure_nom : le nom de la structure qui correspond à la tea
+ * @param structure_president_nom : le nom du président qui correspond à la tea
+ * @param structure_president_prenom : le prénom du president qui correspond à la tea
+ * @param eleve_nom : le nom de l'élève qui a fait la tea
+ * @param eleve_prenom : le prénom de l'élève qui a fait la tea
  */
 public Tea(Integer cle_tea, Date date_tea_realisee, Integer nbheure_realisee,
 		Integer nbheure_validee, Integer statut_valide, Date date_validation,
