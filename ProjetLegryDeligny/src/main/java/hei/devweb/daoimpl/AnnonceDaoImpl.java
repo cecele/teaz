@@ -489,7 +489,7 @@ public void annonce_validation (Integer cle_offre,Date datedujour){
 	//-----------------------------------------------------------------------------------------------------------------
 	//test si uen offre a été postulée
 	// acces en lecture
-	//test junit non requis car non utilisé ds la dao!
+
 			public Boolean getPostulerOffre(Integer cleoffre, String ideleve, Integer clestructure ){
 			
 				Boolean rep = false;
@@ -559,6 +559,11 @@ public void annonce_validation (Integer cle_offre,Date datedujour){
 			
 		return nbtotal;
 	}
+
+
+
+
+
 }
 
 

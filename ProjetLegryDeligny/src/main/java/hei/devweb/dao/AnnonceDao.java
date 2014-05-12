@@ -31,4 +31,6 @@ public interface AnnonceDao {
 
 	Integer getOffreEnAttente();
 
+	
+	Boolean getPostulerOffre(Integer cleoffre, String ideleve, Integer clestructure );
 }

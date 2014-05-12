@@ -137,21 +137,6 @@ private AnnonceDao daoAnnonce= new AnnonceDaoImpl();
      }
 	
 	
-	//------------------------------------------------------------------------------------------------------------------------------
-//	@Test
-//    public void testdeleteOffre() throws Exception {
-//		 daoAnnonce.deleteOffre(2);
-//
-//            Connection connection = DataSourceProvider.getDataSource()
-//                            .getConnection();
-//            Statement stmt = connection.createStatement();
-//            ResultSet results = stmt.executeQuery("SELECT * FROM `offre` WHERE `cle_offre`=5");
-//            Assert.assertFalse(results.next());
-//            results.close();
-//            stmt.close();
-//            connection.close();
-//    }
-
 	
 	//------------------------------------------------------------------------------------------------------------------------------
 			 @Test
@@ -223,6 +208,25 @@ private AnnonceDao daoAnnonce= new AnnonceDaoImpl();
 		             stmt.close();
 		             connection.close();
 		     }
+	
+	//------------------------------------------------------------------------------------------------------------------------------
+				 @Test
+		     public void testgetPostulerOffre( ) throws Exception {
+				 
+					
+		           daoAnnonce.getPostulerOffre(1, "11111", 1 );
+		
+		             Connection connection = DataSourceProvider.getDataSource()
+		                             .getConnection();
+		             Statement stmt = connection.createStatement();
+		             ResultSet results = stmt.executeQuery("SELECT statut FROM `offre` WHERE `cle_offre`=1");
+		             Assert.assertTrue(results.next());
+		             Assert.assertEquals(0, results.getInt("statut"));
+		             
+		             results.close();
+		             stmt.close();
+		             connection.close();
+		     }
 		
 	//------------------------------------------------------------------------------------------------------------------------------
 					 @Test
@@ -253,9 +257,8 @@ private AnnonceDao daoAnnonce= new AnnonceDaoImpl();
 			           Connection connection = DataSourceProvider.getDataSource()
                              .getConnection();
              Statement stmt = connection.createStatement();
-             ResultSet results = stmt.executeQuery("SELECT eleve_mail,cle_offre FROM `offre` WHERE `cle_offre`=1");
+             ResultSet results = stmt.executeQuery("SELECT eleve_mail FROM `offre` WHERE `cle_offre`=1");
              Assert.assertTrue(results.next());
-             Assert.assertEquals(1, results.getInt("cle_offre"));
              Assert.assertEquals("cc_le@hei.fr", results.getString("eleve_mail"));
             
 			             
@@ -264,6 +267,10 @@ private AnnonceDao daoAnnonce= new AnnonceDaoImpl();
 			             connection.close();
 			     }
 	
+					 
+					 
+					 
+					 
 	//------------------------------------------------------------------------------------------------------------------------------
 			
 	    @Test
