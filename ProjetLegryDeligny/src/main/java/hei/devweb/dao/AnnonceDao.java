@@ -5,6 +5,14 @@ import hei.devweb.model.Offre;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Interface qui permet de faire le lien entre le manager des méthodes et la daoImpl des annonces.
+ * 
+ * Elle permet d'utiliser des résultats de requetes de base de données qui concernent les annonces avec les servlets.
+ * 
+ * @author Projet
+ *
+ */
 public interface AnnonceDao {
 
 	List<Offre> listerOffre();

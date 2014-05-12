@@ -14,8 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class AjouterCommissionServlet
- */
-/**
+ * 
+ * Elle permet de gérer l'ajout d'une nouvelle commission.<br/>
+ * Un formulaire arrive sur cette servlet avec le nom de la nouvelle commission comme paramètre.<br/>
+ * La servlet appelle une méthode de création de structure qui prend le nom en paramètre et qui génère un id en auto incrémentation.<br/>
+ * Elle récupère ensuite cet id via un méthode qui prend comme paramètre le nom de la commission nouvellement créée, et redirige via la page de modification avec comme paramètre l'id de la structure<br/>
+ *
  * @author Projet
  *
  */
@@ -48,7 +52,11 @@ public class AjouterCommissionServlet extends HttpServlet {
 	}
 
 	/**
+	 * 
+	 * 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * 
+	 * 
 	 */
 	/* (non-Javadoc)
 	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)

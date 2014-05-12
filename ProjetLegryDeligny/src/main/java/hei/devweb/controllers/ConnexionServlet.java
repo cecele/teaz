@@ -15,6 +15,12 @@ import hei.devweb.model.Structure;
 import hei.devweb.forms.ConnexionForm; 
 
 /**
+ * Servlet de connexion.
+ * 
+ * Elle récupère les informations rentrées dans un formulaire de connexion, puis va chercher l'elève correspondant au matricule donnée dans la BDD, et compare les mots de passe.
+ * Si le mot de passe est correct, elle crée une session correspondant à l'élève avec des données supplémentaires comme le nombre d'annonces en attente de validation, le nombres d'heures à valider ...
+ * 
+ * 
  * @author Projet
  *
  */

@@ -15,6 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * MesTeaServlet
+ * 
+ * Récupère le profil de l'élève via la session, puis liste ses heures de TEA pour qu'il sache ou elles en sont
+ *
  * @author Projet
  *
  */

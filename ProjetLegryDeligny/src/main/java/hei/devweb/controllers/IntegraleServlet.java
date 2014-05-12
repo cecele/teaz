@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * Integrale Servlet
+ * 
+ * Récupère un numéro de page en paramètre, et redirige vers les pages de l'intégrale correspondantes ensuite
+ * 
  * @author Projet
  *
  */

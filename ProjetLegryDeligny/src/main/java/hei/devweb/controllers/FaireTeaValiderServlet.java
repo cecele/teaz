@@ -42,6 +42,10 @@ public class FaireTeaValiderServlet extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * 
+	 * Premiere validation d'une heure de TEA, par le responsable de structure.
+	 * Par soucis de sécurité, on récupère la clé structure ainsi que le matricule de l'élève (contenus en session),
+	 * afin que seul l'élève qui a déposé l'annonce puisse valider l'heure.
 	 */
 	/* (non-Javadoc)
 	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)

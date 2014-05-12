@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * Servlet deconnexion
+ * 
+ * Elle détruit la session active et redirige vers la page d'accueil
+ * 
  * @author Projet
  *
  */

@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * @author Projet
- *
+ * <b>Servlet d'accueil du site.</b>
+ * <p>
+ * Elle permet d'afficher la page d'accueil aux utilisateurs</p> * 
+ * 
  */
 public class AccueilServlet extends HttpServlet {
 

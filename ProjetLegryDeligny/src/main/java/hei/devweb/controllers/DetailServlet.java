@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class DetailServlet
+ * 
+ * Affichage des détails d'un élève donné en fonction de son ID
  */
 /**
  * @author Projet
@@ -45,11 +47,11 @@ public class DetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
-		String id = request.getParameter("id");
-		List<Tea> teas = Manager.getInstance().getTeaByEleve(id);
+		String id = request.getParameter("id"); // récupération de l'id de l'élève
+		List<Tea> teas = Manager.getInstance().getTeaByEleve(id); // Liste des heures de tea de l'élève
 		request.setAttribute("teas",teas);
 		
-		Eleve eleve = Manager.getInstance().getEleveById(id);
+		Eleve eleve = Manager.getInstance().getEleveById(id); // informations de l'élève donné
 		request.setAttribute("eleve",eleve);
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/detail.jsp");

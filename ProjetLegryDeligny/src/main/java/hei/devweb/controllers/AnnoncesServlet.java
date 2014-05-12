@@ -15,6 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * Servlet Annonces
+ * 
+ * Elle récupère les annonces validées par le responsable TEA dont la date n'est pas encore passée.
+ * Elle récupère le matricule de l'élève connecté via sa session, et appelle la méthode listerOffreByEleve avec ce matricule en paramètre pour ne pas afficher les annonces postées par l'utilisateur lui meme.
+ * 
  * @author Projet
  *
  */

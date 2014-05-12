@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 
 /**
+ * Affiche au responsable TEA les heures de TEA déjà validées par les responsables de structure mais pas encore validés définivement
+ * 
  * @author Projet
  *
  */

@@ -17,6 +17,8 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class TeaServlet
+ * 
+ * La TeaServlet est un tableau de bord de l'élève, qui lui permet de voir ou en sont ses heures de TEA, ainsi que le nombre d'heures qui lui reste à faire.
  */
 /**
  * @author Projet

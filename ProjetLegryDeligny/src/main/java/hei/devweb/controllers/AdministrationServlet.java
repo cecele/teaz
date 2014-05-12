@@ -16,6 +16,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * <b>Page d'administration</b>
+ * 
+ * <p>Elle permet de lister les différents groupes par niveau d'accès au site:</p>
+ * <ul>
+ * <li>Les responsables de commission (profil 1). Ils peuvent poster des annonces et valider la premiere partie d'une heure de TEA</li>
+ * <li>Les responsables du BDE (profil2). C'est le profil du responsable TEA. Il peut valider les annonces postées et valider définitivement une offre de TEA. Il peut aussi consulter la liste des élèves, faire une recherche et afficher les détail d'un élève</li>
+ * <li>Les responsables de l'administration (profil2). Le profil permet de faire une recherche dans la BDD pour consulter les heures de tea faites pare les élèves</li>
+ * <li>Le super admin (profil3). Il peut accéder à tout le site pour effectuer la maintenance nécessaire</li>
+ * 
  * @author Projet
  *
  */

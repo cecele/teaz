@@ -21,6 +21,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class MesAnnoncesServlet
+ * 
+ * Affiche les annonces postées par l'utilisateur, ainsi que les personnes ayant postulé à ces offres. 
+ * Récupération de la clé structure contenue en session, puis listing des offres, qu'elles soient validées ou non
  */
 /**
  * @author Projet

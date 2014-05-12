@@ -15,6 +15,13 @@ import javax.servlet.http.HttpSession;
 
 
 /**
+ * Postuler Servlet
+ * 
+ * Elle permet de faire postuler un élève à une offre.
+ * Si le nombre de places disponibles est supérieur à 1, on ajoute la TEA au profil de l'élève afin qu'il ne puisse plus postuler,
+ * puis on retire une place disponible à l'offre.
+ * Sinon, si le nombre de places disponibles est égal à 1, en met l'annonce hors ligne en plus de la rajouter à l'élève, sans oublier de retirer une place disponible à l'offre
+ * 
  * @author Projet
  *
  */

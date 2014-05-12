@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class GestionAdministrationServlet
+ * 
+ * Retrait des droits d'un élève. On récupère le matricule de l'élève en paramètre et on modifie ses droits pour qu'ils soient comme un élève classique.
  */
 /**
  * @author Projet
@@ -25,6 +27,8 @@ public class GestionAdministrationServlet extends HttpServlet {
        
     /**
      * @see HttpServlet#HttpServlet()
+     * 
+     * 
      */
     /**
      * 

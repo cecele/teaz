@@ -13,14 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class AjouterDroit
- */
-/**
- * @author Projet
+ * 
+ * La servlet AjouterDroit permet de gérer les droits des utilisateurs sur le panneau d'administration.
  *
- */
-/**
- * @author Projet
+ * Elle récupère en paramètre le matricule, le nom et le prénom rentrés dans un formulaire, ainsi que le statut à donner à l'élève concerné via une variable secrète "act"<br/> 
+ * Elle compare ensuite le nom et le prénom rentrés avec ceux renvoyés par la base de donnée pour le matricule envoyé.<br/>
+ * Si les prénoms et noms sont correct, elle appelle la méthode ajouterDroits qui prend le matricule de l'élève et son futur statut comme paramètre pour lui donner les droits<br/>
  *
+ * 
+ * @author Projet
  */
 @WebServlet("/AjouterDroit")
 public class AjouterDroitServlet extends HttpServlet {

@@ -17,6 +17,17 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class RechercheServlet
+ * 
+ * Elle permet d'orienter les requetes à faire par la méthode de recherche.
+ * Elle renvoie les paramètres donnés par l'utilisateur. Il existe deux formes de recherches :
+ * <ul><li>Par matricule<li>
+ * <li>Par un autre critère</li>
+ * </ul>
+ * 
+ * SI c'est par matricule, on définit par défaut qu'on cherche un matricule, les autres champs étants vides.
+ * Si c'est un autre critère, on laisse le matricule nul et on appelle la méthode de recherche avec les critères.
+ * 
+ * Puis on liste les résultats et on donne le nombre de résultats.
  */
 @WebServlet("/RechercheServlet")
 public class RechercheServlet extends HttpServlet {

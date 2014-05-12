@@ -20,6 +20,14 @@ import javax.servlet.http.HttpSession;
 public class FaireTeaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+    /**
+     *  Servlet FaireTea
+     *  
+     *  Elle permet d'afficher les heures de tea en attente de première validation pour une structure donnée,
+     *  seulement si la date de la TEA est dépassée. Cela évite la validation de TEA avant même que l'évènement n'ait eu lieu
+     *  
+     *  
+     */
     public FaireTeaServlet() {
         super();
         // TODO Auto-generated constructor stub
@@ -29,13 +37,13 @@ public class FaireTeaServlet extends HttpServlet {
 	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();    
+		HttpSession session = request.getSession();    //recup de la session
 		Eleve eleve = (Eleve) (session.getAttribute("sessionEleve"));
 		Integer cleStructure = null;
 		cleStructure = eleve.getCle_structure();
 		Date datedujour = new Date();
 		
-		if(cleStructure != null){
+		if(cleStructure != null){ // La clé structure est nulle pour les utilisateurs classiques
 			List<Tea> teas = Manager.getInstance().getTeaAValiderByStructure(cleStructure,datedujour);
 			request.setAttribute("teas",teas);
 		}
@@ -43,6 +51,7 @@ public class FaireTeaServlet extends HttpServlet {
 		view.forward(request, response);
 	}
 
+	
 	/* (non-Javadoc)
 	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */

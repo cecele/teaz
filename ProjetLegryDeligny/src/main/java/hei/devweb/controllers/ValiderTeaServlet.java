@@ -15,6 +15,8 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ValiderTeaServlet
+ * 
+ * Valide une ou plusieurs heures de TEA par le responsable TEA pour un élève donné
  */
 /**
  * @author Projet

@@ -17,6 +17,8 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ValidationAnnoncesServlet
+ * 
+ * Elle liste les annonces en attente pour le responsable TEA, afin qu'il puisse les valider
  */
 /**
  * @author Projet

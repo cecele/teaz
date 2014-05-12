@@ -18,6 +18,10 @@ import javax.servlet.http.HttpSession;
 
 
 /**
+ * ValiderAnnonce
+ * 
+ * Elle permet de valider une annonce par le responsable TEA
+ * 
  * @author Projet
  *
  */

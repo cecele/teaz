@@ -19,6 +19,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class ModifierCommissionServlet
+ * 
+ * Elle permet de modifier une structure existante afin de changer son président.
+ * En modifiant le président de la structure, il faut aussi lui ajouter un mandat, c'est à dire une date de début et une date de fin.
+ * 
  */
 /**
  * @author Projet
@@ -43,14 +47,11 @@ public class ModifierCommissionServlet extends HttpServlet {
 	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		System.out.println("dans DoGet");
+	
 		
 		int id = Integer.parseInt(request.getParameter("id"));
 		Structure structure = Manager.getInstance().getStructureByCle(id);
 		request.setAttribute("structure",structure);
-		
-		System.out.println("cle structure dans servlet modifiercommission :" +id);
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/modifiercommission.jsp");
 		view.forward(request, response); 
@@ -63,12 +64,10 @@ public class ModifierCommissionServlet extends HttpServlet {
 	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("dans DoPost");
 		
 		Integer idstruct = Integer.parseInt(request.getParameter("id"));
 		String idAncienPresident = Manager.getInstance().getPresidentIdById(idstruct);
 
-		System.out.println("cle structure dans servlet modification servlet :" +idstruct);
 		
 		String ideleve = request.getParameter("ideleve");
 		String StringDateDebut = request.getParameter("debut");

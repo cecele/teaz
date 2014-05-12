@@ -14,6 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * Gestion Eleve :
+ * 
+ * Affiche la liste des élèves et calcule le nombre de résultats
+ * 
  * @author Projet
  *
  */
