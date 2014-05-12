@@ -1,6 +1,7 @@
 package hei.devweb.dao;
 
 import hei.devweb.model.Structure;
+import hei.devweb.model.Tea;
 
 import java.util.Date;
 import java.util.List;
@@ -27,6 +28,8 @@ public interface StructureDao {
 	String getPresidentNomById(Integer clestructure);
 	
 	String getPresidentPrenomById(Integer clestructure);
+
+	
 
 	
 

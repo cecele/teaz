@@ -32,6 +32,13 @@
 							<input type="submit" value="Modifier"/>
 						</a>
 					</c:if>
+					<c:if test="${offres.cle_offre == teas.cle_offre}">
+						<hr/>
+						Participants :
+						<c:forEach var="teas" items="${teas}">
+							${teas.eleve_prenom } ${teas.eleve_nom }
+						</c:forEach>
+					</c:if>
 			</article>
 			</c:forEach>
 			

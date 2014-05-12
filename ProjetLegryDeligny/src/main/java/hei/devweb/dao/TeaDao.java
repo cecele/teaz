@@ -37,6 +37,8 @@ public interface TeaDao {
 	Integer getNbHeureTeaValide(String ideleve);
 	
 	Integer getNbHeureDues(String ideleve);
+
+	List<Tea> getTeaByStructure(Integer clestructure);
 	
 	
 
