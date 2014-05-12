@@ -4,14 +4,19 @@ import hei.devweb.model.Tea;
 
 import java.util.Date;
 import java.util.List;
-
+/**
+ * Interface qui permet de faire le lien entre le manager des méthodes et la daoImpl des tea.
+ * 
+ * Elle permet d'utiliser des résultats de requetes de base de données qui concernent les annonces avec les tea.
+ * 
+ * @author Projet
+ *
+ */
 public interface TeaDao {
 
 	void ajouterTea(Integer id, String matricule);
 
 	List<Tea> getTeaByEleve(String string);
-
-
 
 	List<Tea> getTeaAValiderByStructure(Integer clestructure, Date datedujour);
 

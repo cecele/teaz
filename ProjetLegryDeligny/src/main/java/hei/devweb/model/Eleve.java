@@ -2,6 +2,7 @@ package hei.devweb.model;
 
 import java.sql.Date;
 
+
 public class Eleve{
 	
 
@@ -25,6 +26,30 @@ public class Eleve{
 	Integer cle_structure;
 	
 	
+	/**
+	 * Eleve
+	 * 
+	 * Le modèle Eleve permet de gérer les élèves en fonction de leurs données.
+	 * 
+	 * @param id_eleve : il est unique
+	 * @param eleve_nom : son nom
+	 * @param eleve_prenom : son prenom
+	 * @param date_naissance : sa date de naissance
+	 * @param numrue : son numéro de rue
+	 * @param nomrue : le nom de la rue
+	 * @param codepostal : le code postal
+	 * @param ville : la ville
+	 * @param date_entree : sa date d'entrée à HEI
+	 * @param cotisant : Integer egal à 0 s'il n'est pas cotisant et à 1 s'il l'est
+	 * @param eleve_profil : Integer qui définit son profil utilisateur (0 s'il est élève, 1 s'il est responsable de structure, 2 s'il est responsable TEA, 3 s'il fait partie de l'administration et 4 s'il est super administrateur)
+	 * @param diplome : Integer qui vaut 0 s'il nest pas diplomé, 1 sinon
+	 * @param motdepasse : son mot de passe
+	 * @param classe : sa classe
+	 * @param teaFaite : Le nombre d'heures de TEA faites
+	 * @param teaAfaire : le nombre d'heures de TEA à faire
+	 * @param teaEnAttente : le nombre d'heures de TEA en attente de validation par le responsable TEA
+	 * @param cle_structure : la clé de la structure qu'il préside s'il en préside une
+	 */
 	public Eleve(String id_eleve, String eleve_nom, String eleve_prenom,
 			Date date_naissance, Integer numrue, String nomrue,
 			String codepostal, String ville, String date_entree,

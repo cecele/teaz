@@ -30,6 +30,34 @@ String eleve_nom;
 String eleve_prenom;
 
 
+/**
+ * Informations sur une TEA. Une heure de TEA est dérivée d'une offre et doit être validée une première fois par le reponsable de la structure qui a déposé l'annonce, puis par le responsable TEA pour qu'elle soit valide
+ * 
+ * @param cle_tea : la clé de la tea, unique
+ * @param date_tea_realisee : la date à laquelle a été faite la tea
+ * @param nbheure_realisee : le nombre d'heures proposées
+ * @param nbheure_validee : le nombre d'heures validées pour cette TEA
+ * @param statut_valide : le statut de la TEA (O si en attente, 1 si validée par le resp de structure, 2 si validée définitivement
+ * @param date_validation
+ * @param cle_offre
+ * @param id_eleve
+ * @param date_depot
+ * @param date_miseenligne
+ * @param date_tea
+ * @param heure_debut
+ * @param heure_fin
+ * @param statut
+ * @param offre_description
+ * @param eleve_mail
+ * @param offre_titre
+ * @param cle_structure
+ * @param offre_place
+ * @param structure_nom
+ * @param structure_president_nom
+ * @param structure_president_prenom
+ * @param eleve_nom
+ * @param eleve_prenom
+ */
 public Tea(Integer cle_tea, Date date_tea_realisee, Integer nbheure_realisee,
 		Integer nbheure_validee, Integer statut_valide, Date date_validation,
 		Integer cle_offre, String id_eleve, Date date_depot,

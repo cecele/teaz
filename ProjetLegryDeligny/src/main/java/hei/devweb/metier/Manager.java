@@ -18,6 +18,14 @@ import hei.devweb.model.Eleve;
 import hei.devweb.model.Structure;
 import hei.devweb.model.Tea;
 
+/**
+ * Manager qui gère en privé les données de la base de donnée, en utilisant les méthodes de daoImpl
+ * 
+ * Cf les méthodes de chaque daoImpl
+ * 
+ * @author Projet
+ *
+ */
 public class Manager {
 private static Manager instance;
 	

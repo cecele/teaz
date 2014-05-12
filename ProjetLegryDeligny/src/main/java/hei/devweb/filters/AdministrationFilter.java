@@ -17,6 +17,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Servlet Filter implementation class AdministrationFilter
+ * 
+ * Filtre qui autorise uniquement le statut d'administrateur.
+ * Si le statut n'est pas le bon, il redirige vers la page d'accueil
  */
 @WebFilter("/AdministrationFilter")
 public class AdministrationFilter implements Filter {

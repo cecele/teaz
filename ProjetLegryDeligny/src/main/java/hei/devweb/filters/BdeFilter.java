@@ -17,6 +17,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Servlet Filter implementation class BdeFilter
+ * 
+ * Filtre qui autorise uniquement le statut d'administrateur au bde (responsable TEA).
+ * Si le statut n'est pas le bon, il redirige vers la page d'accueil
  */
 @WebFilter("/BdeFilter")
 public class BdeFilter implements Filter {

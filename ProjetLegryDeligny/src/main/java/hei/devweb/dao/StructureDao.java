@@ -5,7 +5,14 @@ import hei.devweb.model.Tea;
 
 import java.util.Date;
 import java.util.List;
-
+/**
+ * Interface qui permet de faire le lien entre le manager des méthodes et la daoImpl des structures.
+ * 
+ * Elle permet d'utiliser des résultats de requetes de base de données qui concernent les annonces avec les structures.
+ * 
+ * @author Projet
+ *
+ */
 public interface StructureDao {
 
 	List<Structure> getStructure_OrdreNom();

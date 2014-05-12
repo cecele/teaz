@@ -15,6 +15,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Servlet Filter implementation class EleveFilter
+ * 
+ * Filtre qui autorise uniquement le statut d'élève classique
+ * Si le statut n'est pas le bon, il redirige vers la page d'accueil
  */
 @WebFilter("/EleveFilter")
 public class EleveFilter implements Filter {

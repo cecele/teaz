@@ -17,6 +17,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Servlet Filter implementation class SuperAdminFilter
+ * 
+ * Filtre qui autorise uniquement le statut de superAdmin.
+ * Si le statut n'est pas le bon, il redirige vers la page d'accueil
  */
 @WebFilter("/SuperAdminFilter")
 public class SuperAdminFilter implements Filter {

@@ -17,6 +17,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Servlet Filter implementation class ResponsableFilter
+ * 
+ * Filtre qui autorise uniquement le statut de responsable de structure.
+ * Si le statut n'est pas le bon, il redirige vers la page d'accueil
  */
 @WebFilter("/ResponsableFilter")
 public class ResponsableFilter implements Filter {

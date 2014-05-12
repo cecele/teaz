@@ -3,6 +3,25 @@ package hei.devweb.model;
 import java.sql.Blob;
 import java.util.Date;
 
+/**
+ * Modèle Article
+ * 
+ * un article est composé de:
+ * <ul>
+ * <li>Une clé article</li>
+ * <li>une image</li>
+ * <li>le titre</li>
+ * <li>Un texte</li>
+ * <li>Une date d'écriture</li>
+ * <li>le matricule de l'auteur</li>
+ * <li>son nom</li>
+ * <li>son prénom</li>
+ * 
+ * Il doit permettre à l'administrateur de poster articles
+ * 
+ * @author Projet
+ *
+ */
 public class Article {
 
 	
@@ -16,6 +35,20 @@ public class Article {
 	String eleve_prenom;
 	
 	
+	/**
+	 * Article 
+	 * 
+	 * 
+	 * 
+	 * @param cle_article
+	 * @param image
+	 * @param titre
+	 * @param article
+	 * @param date_ecriture
+	 * @param id_eleve
+	 * @param eleve_nom
+	 * @param eleve_prenom
+	 */
 	public Article(Integer cle_article, Blob image, String titre,
 			String article, Date date_ecriture, String id_eleve,
 			String eleve_nom, String eleve_prenom) {

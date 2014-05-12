@@ -24,6 +24,26 @@ public class Offre{
 	
 	
 	
+	/**
+	 * Une offre est déposée par quelqu'un et comporte plusieurs paramètres
+	 * 
+	 * @param cle_offre : clé de l'offre, elle est unique 
+	 * @param date_depot : date de dépot de l'offre
+	 * @param date_miseenligne : date à laquelle l'offre a été validée
+	 * @param date_tea : date de la tea à faire 
+	 * @param heure_debut : heure du début
+	 * @param heure_fin : heure de la fin
+	 * @param statut : statut de l'offre (0 si en attente, 1 si validée, 2 si hors ligne)
+	 * @param offre_description : description de l'offre
+	 * @param eleve_mail : mail du responsable 
+	 * @param offre_titre : titre de l'offre
+	 * @param cle_structure : clé de la structure qui propose l'offre
+	 * @param offre_place : nombre de places disponibles 
+	 * @param structure_nom : nom de la structure
+	 * @param structure_president_nom : nom du président
+	 * @param structure_president_prenom : prénom du président
+	 * @param place_pourvue : nombre de places pourvues
+	 */
 	public Offre(Integer cle_offre, Date date_depot, Date date_miseenligne,
 			Date date_tea, String heure_debut, String heure_fin,
 			Integer statut, String offre_description, String eleve_mail,

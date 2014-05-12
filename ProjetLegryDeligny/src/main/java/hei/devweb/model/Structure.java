@@ -8,6 +8,16 @@ public class Structure {
 	String structure_president_nom;
 	
 	
+	/** 
+	 * 
+	 * Informations sur la structure
+	 * 
+	 * 
+	 * @param cle_structure : clé de la structure
+	 * @param structure_nom : nom de la structure
+	 * @param structure_president_prenom : prénom du président de la structure
+	 * @param structure_president_nom : nom du président de la structure
+	 */
 	public Structure(Integer cle_structure, String structure_nom,
 			String structure_president_prenom, String structure_president_nom) {
 		super();

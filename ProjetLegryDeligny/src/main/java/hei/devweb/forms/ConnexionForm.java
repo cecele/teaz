@@ -8,6 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import hei.devweb.model.Eleve;  
 import hei.devweb.metier.Manager;
 
+/**
+ * formulaire de connexion qui gère les erreurs de saisie
+ * 
+ * @author Projet
+ *
+ */
 public final class ConnexionForm {     
 	     
 	private String              resultat;     
