@@ -511,7 +511,7 @@ public void annonce_validation (Integer cle_offre,Date datedujour){
 	        }
 				
 				// récupérer l'id de l'eleve responsable
-				String idEleveResponsable = StructureDaoImpl.getPresidentIdById(clestructure);
+				String idEleveResponsable = Manager.getInstance().getPresidentIdById(clestructure);
 				
 				// le comparer à celui en cours
 				if(ideleve.equals(idEleveResponsable)) rep=true;

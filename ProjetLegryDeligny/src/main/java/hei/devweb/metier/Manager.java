@@ -223,7 +223,10 @@ private static Manager instance;
 		System.out.println("Dans Méthode getTeaByOffre");
 		return TeaDao.getTeaByOffre(cleoffre);
 	}
-
+	public String getPresidentIdById(Integer clestructure){
+		System.out.println("Dans Méthode getPresidentIdById");
+		return StructureDao.getPresidentIdById(clestructure);
+	}
 
 
 }

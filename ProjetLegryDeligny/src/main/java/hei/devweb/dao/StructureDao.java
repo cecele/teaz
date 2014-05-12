@@ -21,6 +21,8 @@ public interface StructureDao {
 	Structure getStructure_ElevePresident(String ideleve);
 
 	Integer getCleByNom(String nom);
+	
+	String getPresidentIdById(Integer clestructure);
 
 
 }

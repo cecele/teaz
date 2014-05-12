@@ -197,7 +197,7 @@ public class StructureDaoImpl implements StructureDao {
 		//-----------------------------------------------------------------------------------------------------------------
 		// recuperation du prenom du préseident en fonction de la cle_structure
 		// acces en lecture
-		public static String getPresidentIdById(Integer clestructure){
+		public  String getPresidentIdById(Integer clestructure){
 							String res="";
 								try {
 									Connection connection = DataSourceProvider.getDataSource()

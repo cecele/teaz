@@ -11,6 +11,7 @@ import java.util.List;
 import com.mysql.jdbc.PreparedStatement;
 
 import hei.devweb.dao.TeaDao;
+import hei.devweb.metier.Manager;
 import hei.devweb.model.Offre;
 import hei.devweb.model.Tea;
 
@@ -169,7 +170,7 @@ public class TeaDaoImpl implements TeaDao {
 
 			public void teaValidationByStructure(Integer cletea, Integer clestructure, String ideleve){
 				
-				if(StructureDaoImpl.getPresidentIdById(clestructure).equals(ideleve)){
+				if(Manager.getInstance().getPresidentIdById(clestructure).equals(ideleve)){
 				
 								
 				try {
