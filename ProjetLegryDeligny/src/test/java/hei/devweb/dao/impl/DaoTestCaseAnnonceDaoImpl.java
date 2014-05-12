@@ -225,45 +225,45 @@ private AnnonceDao daoAnnonce= new AnnonceDaoImpl();
 		     }
 		
 	//------------------------------------------------------------------------------------------------------------------------------
-//					 @Test
-//			     public void testAnnonceModification() throws Exception {
-//						 
-//						 String StringDatedepot = "2014-05-09";
-//						 
-//						 String StringDatetea = "2014-05-15";
-//						 SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd");                                  
-//						 Date datedepot = null; 
-//						 Date datemiseenligne=null;
-//						 Date datetea=null;
-//						 
-//						 try {                         
-//						 datedepot = sdf.parse(StringDatedepot);      
-//						
-//						 datetea =sdf.parse(StringDatetea);
-//						 } 
-//						 catch (ParseException e) 
-//						 {                         
-//						 // TODO Auto-generated catch block                         
-//						 e.printStackTrace();                 
-//						 }
-//				Offre offre1 = new Offre(1,datedepot,datemiseenligne,datetea,"12", "13", 0, "DESCRIPTION CHIANTE", "cc_le@hei.fr","TITRE INTERESSANT", 1, 3,"INTEGRALE-VP", "LEGRY","Céline", 0);
-//
-//			           daoAnnonce.AnnonceModification(offre1);
-//			
-//			           Connection connection = DataSourceProvider.getDataSource()
-//                             .getConnection();
-//             Statement stmt = connection.createStatement();
-//             ResultSet results = stmt.executeQuery("SELECT eleve_mail,cle_offre FROM `offre` WHERE `cle_offre`=1");
-//             Assert.assertTrue(results.next());
-//             Assert.assertEquals(1, results.getInt("cle_offre"));
-//             Assert.assertEquals("cc_le@hei.fr", results.getString("eleve_mail"));
-//            
-//			             
-//			             results.close();
-//			             stmt.close();
-//			             connection.close();
-//			     }
-//	
+					 @Test
+			     public void testAnnonceModification() throws Exception {
+						 
+						 String StringDatedepot = "2014-05-09";
+						 
+						 String StringDatetea = "2014-05-15";
+						 SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd");                                  
+						 Date datedepot = null; 
+						 Date datemiseenligne=null;
+						 Date datetea=null;
+						 
+						 try {                         
+						 datedepot = sdf.parse(StringDatedepot);      
+						
+						 datetea =sdf.parse(StringDatetea);
+						 } 
+						 catch (ParseException e) 
+						 {                         
+						 // TODO Auto-generated catch block                         
+						 e.printStackTrace();                 
+						 }
+				Offre offre1 = new Offre(1,datedepot,datemiseenligne,datetea,"12", "13", 0, "DESCRIPTION CHIANTE", "cc_le@hei.fr","TITRE INTERESSANT", 1, 3,"INTEGRALE-VP", "LEGRY","Céline", 0);
+
+			           daoAnnonce.AnnonceModification(offre1);
+			
+			           Connection connection = DataSourceProvider.getDataSource()
+                             .getConnection();
+             Statement stmt = connection.createStatement();
+             ResultSet results = stmt.executeQuery("SELECT eleve_mail,cle_offre FROM `offre` WHERE `cle_offre`=1");
+             Assert.assertTrue(results.next());
+             Assert.assertEquals(1, results.getInt("cle_offre"));
+             Assert.assertEquals("cc_le@hei.fr", results.getString("eleve_mail"));
+            
+			             
+			             results.close();
+			             stmt.close();
+			             connection.close();
+			     }
+	
 	//------------------------------------------------------------------------------------------------------------------------------
 			
 	    @Test
@@ -425,6 +425,25 @@ public void testgetNbPlaces() throws Exception {
         ResultSet results = stmt.executeQuery("SELECT offre_place FROM `offre` WHERE `cle_offre`=1");
         Assert.assertTrue(results.next());
         Assert.assertEquals(nbplace, results.getInt("offre_place"));
+        
+        results.close();
+        stmt.close();
+        connection.close();
+}
+	 
+		//------------------------------------------------------------------------------------------------------------------------------
+	 @Test
+public void testgetOffreEnAttente() throws Exception {
+	 
+		
+		 int nbplace=daoAnnonce.getOffreEnAttente();
+
+        Connection connection = DataSourceProvider.getDataSource()
+                        .getConnection();
+        Statement stmt = connection.createStatement();
+        ResultSet results = stmt.executeQuery("SELECT COUNT(offre_place) as total FROM `offre` WHERE `statut`=0");
+        Assert.assertTrue(results.next());
+        Assert.assertEquals(nbplace, results.getInt("total"));
         
         results.close();
         stmt.close();
