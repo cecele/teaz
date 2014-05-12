@@ -146,6 +146,23 @@ public void testCreateEleve () throws Exception {
 	        stmt.close();
 	        connection.close();
 	}
+			//------------------------------------------------------------------------------------------------------------------------------
+		 @Test
+	public void testgetCleClasse () throws Exception {
+			 
+		daoEleve.eleveChgtProfil("10153",2);
+
+	        Connection connection = DataSourceProvider.getDataSource()
+	                        .getConnection();
+	        Statement stmt = connection.createStatement();
+	        ResultSet results = stmt.executeQuery("SELECT eleve_profil FROM `eleve` WHERE `id_eleve`='10153'");
+	        Assert.assertTrue(results.next());
+	        Assert.assertEquals(2, results.getInt("eleve_profil"));
+
+	        results.close();
+	        stmt.close();
+	        connection.close();
+	}
 		//------------------------------------------------------------------------------------------------------------------------------
 		 @Test
 	public void testgetEleveById () throws Exception {

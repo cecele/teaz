@@ -424,6 +424,69 @@ public class TeaDaoImpl implements TeaDao {
 							}
 			return teas;	
 		}
+		//-----------------------------------------------------------------------------------------------------------------
+		//recupération les tea à valider par structure
+		//acc�s en lecture
+
+	public List<Tea> getTeaByStructure(Integer clestructure, java.util.Date datedujour){
+	List<Tea> teas = new ArrayList<Tea>();
+
+	java.util.Date utilDate = datedujour;
+	java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+	try {
+		Connection connection = DataSourceProvider.getDataSource()
+				.getConnection();
+
+		
+		PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tea INNER JOIN offre ON tea.cle_offre=offre.cle_offre WHERE cle_structure=? ");
+		stmt.setInt(1,clestructure);
+		stmt.setDate(2,sqlDate);
+		ResultSet results = stmt.executeQuery();
+		
+		while (results.next()) {
+			Tea tea =new Tea(
+		results.getInt("cle_tea"),
+		results.getDate("date_tea_realisee"),
+		results.getInt("nbheure_realisee"),
+		results.getInt("nbheure_validee"),
+		results.getInt("statut_valide"),
+		results.getDate("date_validation"),
+		results.getInt("cle_offre"),
+		results.getString("id_eleve"),
+		results.getDate("date_depot"),
+		results.getDate("date_miseenligne"),
+		results.getDate("date_tea"),
+		results.getString("heure_debut"),
+		results.getString("heure_fin"),
+		results.getInt("statut"),
+		results.getString("offre_description"),
+		results.getString("eleve_mail"),
+		results.getString("offre_titre"),
+		results.getInt("cle_structure"),
+		results.getInt("offre_place"),
+		Manager.getInstance().getNomStructure(results.getInt("cle_structure")),
+		Manager.getInstance().getPresidentNomById(results.getInt("cle_structure")),
+		Manager.getInstance().getPresidentPrenomById(results.getInt("cle_structure")),
+		Manager.getInstance().getEleveNomById(results.getString("id_eleve")),
+		Manager.getInstance().getElevePrenomById(results.getString("id_eleve"))
+		);
+			System.out.println("getTeaAValiderByStructure : requete " + results.getInt("cle_tea"));
+		
+			teas.add(tea);	
+			
+		}
+			// Fermer la connexion
+			results.close();
+			stmt.close();
+			connection.close();
+			
+	}
+		catch (SQLException e) {
+							e.printStackTrace();
+						}
+		return teas;	
+	}
 
 		//-----------------------------------------------------------------------------------------------------------------
 		//recupération des heures de TEA à valider par le resp TEA

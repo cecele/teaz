@@ -14,6 +14,7 @@ import hei.devweb.daoimpl.EleveDaoImpl;
 import hei.devweb.daoimpl.RechercheDaoImpl;
 import hei.devweb.daoimpl.StructureDaoImpl;
 import hei.devweb.daoimpl.TeaDaoImpl;
+import hei.devweb.metier.Manager;
 import hei.devweb.model.Offre;
 
 import java.sql.Connection;
@@ -106,7 +107,7 @@ private AnnonceDao daoAnnonce= new AnnonceDaoImpl();
 		 } 
 		 catch (ParseException e) 
 		 {                         
-		 // TODO Auto-generated catch block                         
+		                     
 		 e.printStackTrace();                 
 		 }
             Offre offre = new Offre(2,datedepot,datemiseenligne,datetea,"08", "11", 0, "description", "FF@hei.fr","titre", 1, 2,"INTEGRALE-VP", "LEGRY","Céline", 1);
@@ -213,16 +214,28 @@ private AnnonceDao daoAnnonce= new AnnonceDaoImpl();
 				 @Test
 		     public void testgetPostulerOffre( ) throws Exception {
 				 
+					 Boolean rep=false;
 					
 		           daoAnnonce.getPostulerOffre(1, "11111", 1 );
 		
 		             Connection connection = DataSourceProvider.getDataSource()
 		                             .getConnection();
 		             Statement stmt = connection.createStatement();
-		             ResultSet results = stmt.executeQuery("SELECT statut FROM `offre` WHERE `cle_offre`=1");
+		             ResultSet results = stmt.executeQuery("SELECT id_eleve FROM tea WHERE cle_offre = 1 ");
+		            
 		             Assert.assertTrue(results.next());
-		             Assert.assertEquals(0, results.getInt("statut"));
-		             
+		            	             
+		             while  (results.next()&& rep==false){
+		  	           String ideleveenbase= results.getString("id_eleve");
+		  	           
+		  	            if("11111".equals(ideleveenbase)) {rep=true; }
+		  	           }
+		         	// récupérer l'id de l'eleve responsable
+						String idEleveResponsable = Manager.getInstance().getPresidentIdById(1);
+						
+						// le comparer à celui en cours
+						if("11111".equals(idEleveResponsable)) rep=true;
+		             Assert.assertEquals(rep, true);
 		             results.close();
 		             stmt.close();
 		             connection.close();
@@ -247,7 +260,7 @@ private AnnonceDao daoAnnonce= new AnnonceDaoImpl();
 						 } 
 						 catch (ParseException e) 
 						 {                         
-						 // TODO Auto-generated catch block                         
+						                          
 						 e.printStackTrace();                 
 						 }
 				Offre offre1 = new Offre(1,datedepot,datemiseenligne,datetea,"12", "13", 0, "DESCRIPTION CHIANTE", "cc_le@hei.fr","TITRE INTERESSANT", 1, 3,"INTEGRALE-VP", "LEGRY","Céline", 0);
