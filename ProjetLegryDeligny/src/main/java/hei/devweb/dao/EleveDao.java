@@ -29,5 +29,7 @@ public interface EleveDao {
 	
 	boolean president(String ideleve);
 	
+	Integer getCleClasse(String ideleve);
+	
 
 }

@@ -150,14 +150,39 @@ public void testCreateEleve () throws Exception {
 		 @Test
 	public void testgetCleClasse () throws Exception {
 			 
-		daoEleve.eleveChgtProfil("10153",2);
+		Integer classe =daoEleve.getCleClasse("10153");
 
 	        Connection connection = DataSourceProvider.getDataSource()
 	                        .getConnection();
 	        Statement stmt = connection.createStatement();
-	        ResultSet results = stmt.executeQuery("SELECT eleve_profil FROM `eleve` WHERE `id_eleve`='10153'");
+	        ResultSet results = stmt.executeQuery("SELECT cle_classe FROM appartenir WHERE id_eleve='10153' ORDER BY cle_classe ASC LIMIT 1");
 	        Assert.assertTrue(results.next());
-	        Assert.assertEquals(2, results.getInt("eleve_profil"));
+	        Assert.assertEquals((int)classe, results.getInt("cle_classe"));
+
+	        results.close();
+	        stmt.close();
+	        connection.close();
+	}
+		 
+			//------------------------------------------------------------------------------------------------------------------------------
+		 @Test
+	public void testgetCleStructureById () throws Exception {
+			 int res=0;
+				
+				
+				Date date=new Date();
+				java.util.Date utilDate_syst = date;
+			    java.sql.Date sqlDateSyst = new java.sql.Date(utilDate_syst.getTime());
+			    
+		Integer clestructure =daoEleve.getCleStructureById ("11111");
+
+	        Connection connection = DataSourceProvider.getDataSource()
+	                        .getConnection();
+	        Statement stmt = connection.createStatement();
+	        ResultSet results = stmt.executeQuery("SELECT cle_structure FROM presider WHERE id_eleve='11111' ");
+	        
+	        Assert.assertTrue(results.next());
+	        Assert.assertEquals((int) clestructure, results.getInt("cle_structure"));
 
 	        results.close();
 	        stmt.close();
