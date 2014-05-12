@@ -2,6 +2,7 @@ package hei.devweb.controllers;
 
 import hei.devweb.metier.Manager;
 import hei.devweb.model.Eleve;
+import hei.devweb.model.Structure;
 
 import java.io.IOException;
 
@@ -41,8 +42,8 @@ public class AjouterCommissionServlet extends HttpServlet {
 		String nom = request.getParameter("nom");
 
 		Manager.getInstance().CreateStructure(nom);
-		System.out.println(nom);	
 		String cle_structure = String.valueOf(Manager.getInstance().getCleByNom(nom));
+		
 		
 		response.sendRedirect("modifiercommission?id="+cle_structure); 
 	}
