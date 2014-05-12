@@ -428,11 +428,8 @@ public class TeaDaoImpl implements TeaDao {
 		//recupération les tea à valider par structure
 		//acc�s en lecture
 
-	public List<Tea> getTeaByStructure(Integer clestructure, java.util.Date datedujour){
+	public List<Tea> getTeaByStructure(Integer clestructure){
 	List<Tea> teas = new ArrayList<Tea>();
-
-	java.util.Date utilDate = datedujour;
-	java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 
 	try {
 		Connection connection = DataSourceProvider.getDataSource()
@@ -441,7 +438,7 @@ public class TeaDaoImpl implements TeaDao {
 		
 		PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tea INNER JOIN offre ON tea.cle_offre=offre.cle_offre WHERE cle_structure=? ");
 		stmt.setInt(1,clestructure);
-		stmt.setDate(2,sqlDate);
+		
 		ResultSet results = stmt.executeQuery();
 		
 		while (results.next()) {

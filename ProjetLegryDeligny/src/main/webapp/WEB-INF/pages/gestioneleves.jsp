@@ -95,7 +95,7 @@
      <td><label for="pasajour" >Tea pas à jour</label></td>
      <td><input type="checkbox" value="pasajour_value" name="pasajour_id" id="pasajour_id"  checked="checked"/></td>
 </tr>
-
+<tr>
 							<td><label for="classe" >Classe</label></td>
 							<td>
 								<select name="classe" id="classe" required >
@@ -132,6 +132,17 @@
 								</select>
 							</td>
 						</tr>
+						<!-- <tr>
+							<td><label for="tri">Trier par</label></td>
+							<td>
+								<select name="tri" id="tri" required >
+									<option value="id_eleve">Matricule</option>
+									<option value="eleve_nom">Nom</option>
+									<option value="eleve_prenom">Prénom</option>
+									<option value="classe">Classe</option>
+								</select>
+							</td>
+						</tr> -->
 						<tr>
 							<td></td>
 							<td><input type="submit" value="Rechercher"/><input type="button" onClick="init()" value="Réinitialiser"/></td>
@@ -140,6 +151,8 @@
 				</form>	
 			</article>
 			<article>
+				<h2>Résultats</h2>
+				<p>${results } élève${results>1?'s':''} trouvé${results>1?'s':''}</p>
 				<table class="tableau">
 					<thead>
 						<tr>

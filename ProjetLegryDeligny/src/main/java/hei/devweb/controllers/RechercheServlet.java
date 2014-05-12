@@ -49,15 +49,15 @@ public class RechercheServlet extends HttpServlet {
 		String nom = "";
 		String prenom = "";
 		String classe = "";
-		String orderBy = "id_eleve";
+		String orderBy = request.getParameter("tri");
 		Boolean encours = true;
 		Boolean ajour = true;
 		Boolean pasajour = true;
 		Boolean diplome = true;
 		classe = request.getParameter("classe");
 		
-		System.out.println(request.getParameter("rech"));
 		
+		System.out.println(orderBy);
 		if(request.getParameter("rech").equals("1"))
 		{
 			matricule = request.getParameter("matricule");
@@ -78,8 +78,11 @@ public class RechercheServlet extends HttpServlet {
 			}
 		
 		List<Eleve> eleves = Manager.getInstance().rechercheByParameter(matricule,nom,prenom,classe,orderBy,diplome,encours,ajour,pasajour);
+		Integer results = Manager.getInstance().sizeReponse(eleves);
 		
 		request.setAttribute("eleves",eleves);
+		request.setAttribute("results", results);
+		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/gestioneleves.jsp");
 		view.forward(request, response);
 	}

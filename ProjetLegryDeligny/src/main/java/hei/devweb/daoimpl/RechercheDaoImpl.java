@@ -52,15 +52,15 @@ System.out.println("entrée ds le try parametre ideleve= " +ideleve+ " nom="+nom
 		
 		// tous les élèves
 		if(ideleve.equals("") && nom.equals("") && prenom.equals("") && classe.equals("tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve");
-		
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve ORDER BY ? DESC");
+		stmt.setString(1,orderBy);
 		 System.out.println("tous les élèves " +stmt);
 		}
 
 
 		// recherche effectuée par matricule uniquement : il doit être exact!
 		if(!ideleve.equals("") && nom.equals("") && prenom.equals("") && classe.equals("tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve WHERE id_eleve=? ORDER BY ?");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve WHERE id_eleve=? ORDER BY ? DESC");
 		stmt.setString(1,ideleve);
 		stmt.setString(2,orderBy);
 		System.out.println("matricule " +stmt);
@@ -70,7 +70,7 @@ System.out.println("entrée ds le try parametre ideleve= " +ideleve+ " nom="+nom
 		
 		// recherche par nom uniquement
 		if(ideleve.equals("") && !nom.equals("") && prenom.equals("") && classe.equals("tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve WHERE eleve_nom LIKE ? ORDER BY ?");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve WHERE eleve_nom LIKE ? ORDER BY ? DESC");
 		stmt.setString(1,nom);
 		stmt.setString(2,orderBy);
 		 System.out.println("nom " +stmt);}
@@ -78,7 +78,7 @@ System.out.println("entrée ds le try parametre ideleve= " +ideleve+ " nom="+nom
 		
 		// recherche par prenom
 		if(ideleve.equals("") && nom.equals("") && !prenom.equals("") && classe.equals("tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve WHERE eleve_prenom LIKE ? ORDER BY ?");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve WHERE eleve_prenom LIKE ? ORDER BY ? DESC");
 		stmt.setString(1,prenom);
 		stmt.setString(2,orderBy);
 		 System.out.println("prenom " +stmt);
@@ -86,7 +86,7 @@ System.out.println("entrée ds le try parametre ideleve= " +ideleve+ " nom="+nom
 				
 		// recherche par classe
 		if(ideleve.equals("") && nom.equals("") && prenom.equals("") && !classe.equals("tous")  ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? ORDER BY ?");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? ORDER BY ? DESC");
 		stmt.setString(1,classe);
 		stmt.setString(2,orderBy);
 		 System.out.println("classe " +stmt);
@@ -95,7 +95,7 @@ System.out.println("entrée ds le try parametre ideleve= " +ideleve+ " nom="+nom
 		
 		// recherche par nom prenom
 		if(ideleve.equals("") && !nom.equals("") && !prenom.equals("") && classe.equals("tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve WHERE eleve_nom LIKE ? AND eleve_prenom LIKE ? ORDER BY ?");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve WHERE eleve_nom LIKE ? AND eleve_prenom LIKE ? ORDER BY ? DESC");
 		stmt.setString(1,nom);
 		stmt.setString(2,prenom);
 		stmt.setString(3,orderBy);
@@ -105,7 +105,7 @@ System.out.println("entrée ds le try parametre ideleve= " +ideleve+ " nom="+nom
 		
 		// recherche par nom classe
 		if(ideleve.equals("") && !nom.equals("") && prenom.equals("") && !classe.equals("tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_nom LIKE ?ORDER BY ?");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_nom LIKE ?ORDER BY ? DESC");
 		stmt.setString(1,classe);
 		stmt.setString(2,nom);
 		stmt.setString(3,orderBy);
@@ -114,7 +114,7 @@ System.out.println("entrée ds le try parametre ideleve= " +ideleve+ " nom="+nom
 		
 		// recherche par prenom classe
 		if(ideleve.equals("") && nom.equals("") && !prenom.equals("") && !classe.equals("tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_prenom LIKE ?ORDER BY ?");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_prenom LIKE ?ORDER BY ? DESC");
 		stmt.setString(1,classe);
 		stmt.setString(2,prenom);
 		stmt.setString(3,orderBy);
@@ -123,7 +123,7 @@ System.out.println("entrée ds le try parametre ideleve= " +ideleve+ " nom="+nom
 				
 		// recherche par nom prenom et  classe
 		if(ideleve.equals("") && !nom.equals("") && !prenom.equals("") && !classe.equals("tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_nom LIKE ? AND eleve_prenom LIKE ? ORDER BY ?");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_nom LIKE ? AND eleve_prenom LIKE ? ORDER BY ? DESC");
 		stmt.setString(1,classe);
 		stmt.setString(2,nom);
 		stmt.setString(3,prenom);
@@ -160,23 +160,25 @@ System.out.println("entrée ds le try parametre ideleve= " +ideleve+ " nom="+nom
 			int teadues=Manager.getInstance().getTeaDuesEnCours(results.getString("id_eleve"));
 			if(Manager.getInstance().president(results.getString("id_eleve"))){ eleve.setCle_structure(Manager.getInstance().getCleStructureById(results.getString("id_eleve")));}
 		
+			if(!results.getString("id_eleve").equals("99999"))	{
+				if(results.getInt("diplome")==1 || results.getInt("diplome")==0 || teadues==0 || teadues >0)elevescas1.add(eleve);
+				if(results.getInt("diplome")==1 || results.getInt("diplome")==0 || teadues==0 )elevescas2.add(eleve);
+				if(results.getInt("diplome")==1 || results.getInt("diplome")==0 || teadues >0 )elevescas3.add(eleve);
+				if(results.getInt("diplome")==1 || results.getInt("diplome")==0 )elevescas4.add(eleve);
+				if(results.getInt("diplome")==1 || teadues==0 || teadues>0)elevescas5.add(eleve);
+				if(results.getInt("diplome")==1 || teadues==0 )elevescas6.add(eleve);
+				if(results.getInt("diplome")==1 || teadues >0 )elevescas7.add(eleve);
+				if(results.getInt("diplome")==1 )elevescas8.add(eleve);			
+				if(results.getInt("diplome")==0 || teadues==0 || teadues>0)elevescas9.add(eleve);
+				if(results.getInt("diplome")==0 || teadues==0 )elevescas10.add(eleve);
+				if(results.getInt("diplome")==0 || teadues >0 )elevescas11.add(eleve);
+				if(results.getInt("diplome")==0 )elevescas12.add(eleve);
+				if(teadues==0 || teadues>0)elevescas13.add(eleve);
+				if(teadues==0 )elevescas14.add(eleve);
+				if(teadues >0 )elevescas15.add(eleve);
+				if(results.getInt("diplome")==1 || results.getInt("diplome")==0 || teadues==0 || teadues >0)elevescas16.add(eleve);
+			}
 			
-			if(results.getInt("diplome")==1 || results.getInt("diplome")==0 || teadues==0 || teadues >0)elevescas1.add(eleve);
-			if(results.getInt("diplome")==1 || results.getInt("diplome")==0 || teadues==0 )elevescas2.add(eleve);
-			if(results.getInt("diplome")==1 || results.getInt("diplome")==0 || teadues >0 )elevescas3.add(eleve);
-			if(results.getInt("diplome")==1 || results.getInt("diplome")==0 )elevescas4.add(eleve);
-			if(results.getInt("diplome")==1 || teadues==0 || teadues>0)elevescas5.add(eleve);
-			if(results.getInt("diplome")==1 || teadues==0 )elevescas6.add(eleve);
-			if(results.getInt("diplome")==1 || teadues >0 )elevescas7.add(eleve);
-			if(results.getInt("diplome")==1 )elevescas8.add(eleve);			
-			if(results.getInt("diplome")==0 || teadues==0 || teadues>0)elevescas9.add(eleve);
-			if(results.getInt("diplome")==0 || teadues==0 )elevescas10.add(eleve);
-			if(results.getInt("diplome")==0 || teadues >0 )elevescas11.add(eleve);
-			if(results.getInt("diplome")==0 )elevescas12.add(eleve);
-			if(teadues==0 || teadues>0)elevescas13.add(eleve);
-			if(teadues==0 )elevescas14.add(eleve);
-			if(teadues >0 )elevescas15.add(eleve);
-			if(results.getInt("diplome")==1 || results.getInt("diplome")==0 || teadues==0 || teadues >0)elevescas16.add(eleve);
 
 	}
 		// Fermer la connexion
@@ -213,7 +215,7 @@ System.out.println("entrée ds le try parametre ideleve= " +ideleve+ " nom="+nom
 	return elevesreturn;
 }
 
-public int sizeReponse(List<Eleve> eleve){
+public Integer sizeReponse(List<Eleve> eleve){
 	return eleve.size();
 }
 
