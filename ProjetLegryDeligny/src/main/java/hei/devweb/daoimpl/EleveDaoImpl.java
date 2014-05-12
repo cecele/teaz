@@ -64,11 +64,11 @@ public class EleveDaoImpl implements EleveDao {
 	//-----------------------------------------------------------------------------------------------------------------
 		
 //-----------------------------------------------------------------------------------------------------------------
-		//Changement du profil d'un �tudiant (0=;1=;2=;3=) par d�faut le profil est �tudiant de base =0
+		//Changement du profil d'un �tudiant par d�faut le profil est �tudiant de base =0
 		//acc�s en ecriture (update)
 		//test junit
 		public void eleveChgtProfil (String ideleve, Integer profil){
-			
+			if(Manager.getInstance().getEleveById(ideleve).getEleve_profil()< profil){
 			try {
 				Connection connection = DataSourceProvider.getDataSource()
 						.getConnection();
@@ -85,6 +85,7 @@ public class EleveDaoImpl implements EleveDao {
 
 			} catch (SQLException e) {
 				e.printStackTrace();
+			}
 			}
 			}
 		
