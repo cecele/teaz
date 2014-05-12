@@ -43,10 +43,11 @@ public class MesAnnoncesServlet extends HttpServlet {
 		Eleve eleve = (Eleve) (session.getAttribute("sessionEleve"));
 		Integer clestructure = eleve.getCle_structure();
 		List<Offre> offres = Manager.getInstance().listerOffreByStructure(clestructure);
-		List<Tea> 
+		List<Tea> teas = Manager.getInstance().getTeaByStructure(clestructure);
 		
 		
 		request.setAttribute("offres",offres);
+		request.setAttribute("teas", teas);
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/mesannonces.jsp");
 		view.forward(request, response);

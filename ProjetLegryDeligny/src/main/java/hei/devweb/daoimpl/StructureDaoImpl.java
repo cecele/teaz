@@ -12,6 +12,7 @@ import com.mysql.jdbc.PreparedStatement;
 import hei.devweb.dao.StructureDao;
 import hei.devweb.metier.Manager;
 import hei.devweb.model.Structure;
+import hei.devweb.model.Tea;
 
 public class StructureDaoImpl implements StructureDao {
 //-----------------------------------------------------------------------------------------------------------------
@@ -415,7 +416,6 @@ public class StructureDaoImpl implements StructureDao {
 										}
 						return structure;	
 				}
-
 
 
 }

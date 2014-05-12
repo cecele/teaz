@@ -293,5 +293,10 @@ private static Manager instance;
 		// TODO Auto-generated method stub
 		return RechercheDao.sizeReponse(eleves);
 	}
+
+	public List<Tea> getTeaByStructure(Integer clestructure) {
+		// TODO Auto-generated method stub
+		return TeaDao.getTeaByStructure(clestructure);
+	}
 }
 
