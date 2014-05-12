@@ -20,6 +20,10 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ModifierCommissionServlet
  */
+/**
+ * @author Projet
+ *
+ */
 @WebServlet("/ModifierCommissionServlet")
 public class ModifierCommissionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -35,6 +39,9 @@ public class ModifierCommissionServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		System.out.println("dans DoGet");
@@ -43,6 +50,8 @@ public class ModifierCommissionServlet extends HttpServlet {
 		Structure structure = Manager.getInstance().getStructureByCle(id);
 		request.setAttribute("structure",structure);
 		
+		System.out.println("cle structure dans servlet modifiercommission :" +id);
+		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/modifiercommission.jsp");
 		view.forward(request, response); 
 	}
@@ -50,17 +59,23 @@ public class ModifierCommissionServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("dans DoPost");
 		
 		Integer idstruct = Integer.parseInt(request.getParameter("id"));
 		String idAncienPresident = Manager.getInstance().getPresidentIdById(idstruct);
 
+		System.out.println("cle structure dans servlet modification servlet :" +idstruct);
+		
 		String ideleve = request.getParameter("ideleve");
 		String StringDateDebut = request.getParameter("debut");
 		String StringDateFin = request.getParameter("fin");
 		SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd");
-		
+		Integer profil1 = 1;
+		Integer profil2 = 0;
 		Date dateDebut = null;
 		Date dateFin = null;
 		try {
@@ -77,8 +92,8 @@ public class ModifierCommissionServlet extends HttpServlet {
 		}
 		
 		Manager.getInstance().StructureChangement(ideleve,idstruct,dateDebut,dateFin);
-		Manager.getInstance().ajouterDroits(ideleve,1);
-		Manager.getInstance().ajouterDroits(idAncienPresident,0);
+		Manager.getInstance().ajouterDroits(ideleve,profil1);
+		Manager.getInstance().ajouterDroits(idAncienPresident,profil2);
 		
 		response.sendRedirect("administration"); 
 		

@@ -24,7 +24,7 @@
 					Plus de renseignements : ${offres.eleve_mail}@hei.fr<br/>
 					<br/>
 					Association : ${offres.structure_nom}<br/>
-					Président : ${offres.structure_president_prenom} ${offres.structure_president_nom}<br/>
+					Président : ${offres.structure_president_prenom} ${offres.structure_president_nom}<br/><br/>
 					${offres.offre_place} place${offres.offre_place >= 2 ? 's' : '' } disponible${offres.offre_place >= 2 ? 's' : '' }<br/>
 					</p>
 					<c:if test="${offres.statut==0}">
@@ -32,13 +32,12 @@
 							<input type="submit" value="Modifier"/>
 						</a>
 					</c:if>
-					<c:if test="${offres.cle_offre == teas.cle_offre}">
-						<hr/>
-						Participants :
-						<c:forEach var="teas" items="${teas}">
+					<c:forEach var="teas" items="${teas}">
+						<c:if test="${offres.cle_offre == teas.cle_offre}">
+							<hr/>						
 							${teas.eleve_prenom } ${teas.eleve_nom }
-						</c:forEach>
-					</c:if>
+						</c:if>
+					</c:forEach>
 			</article>
 			</c:forEach>
 			

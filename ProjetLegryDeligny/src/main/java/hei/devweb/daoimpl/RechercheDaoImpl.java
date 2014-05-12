@@ -52,17 +52,16 @@ System.out.println("entrée ds le try parametre ideleve= " +ideleve+ " nom="+nom
 		
 		// tous les élèves
 		if(ideleve.equals("") && nom.equals("") && prenom.equals("") && classe.equals("tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve ORDER BY ? DESC");
-		stmt.setString(1,orderBy);
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve ORDER BY " +orderBy+" ASC");
 		 System.out.println("tous les élèves " +stmt);
 		}
 
 
 		// recherche effectuée par matricule uniquement : il doit être exact!
 		if(!ideleve.equals("") && nom.equals("") && prenom.equals("") && classe.equals("tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve WHERE id_eleve=? ORDER BY ? DESC");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve WHERE id_eleve=? ORDER BY " +orderBy+" ASC");
 		stmt.setString(1,ideleve);
-		stmt.setString(2,orderBy);
+		
 		System.out.println("matricule " +stmt);
 		}
 		
@@ -70,64 +69,64 @@ System.out.println("entrée ds le try parametre ideleve= " +ideleve+ " nom="+nom
 		
 		// recherche par nom uniquement
 		if(ideleve.equals("") && !nom.equals("") && prenom.equals("") && classe.equals("tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve WHERE eleve_nom LIKE ? ORDER BY ? DESC");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve WHERE eleve_nom LIKE ? ORDER BY " +orderBy+" ASC");
 		stmt.setString(1,nom);
-		stmt.setString(2,orderBy);
+		
 		 System.out.println("nom " +stmt);}
 		
 		
 		// recherche par prenom
 		if(ideleve.equals("") && nom.equals("") && !prenom.equals("") && classe.equals("tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve WHERE eleve_prenom LIKE ? ORDER BY ? DESC");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve WHERE eleve_prenom LIKE ? ORDER BY " +orderBy+" ASC");
 		stmt.setString(1,prenom);
-		stmt.setString(2,orderBy);
+		
 		 System.out.println("prenom " +stmt);
 		}
 				
 		// recherche par classe
 		if(ideleve.equals("") && nom.equals("") && prenom.equals("") && !classe.equals("tous")  ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? ORDER BY ? DESC");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? ORDER BY " +orderBy+" ASC");
 		stmt.setString(1,classe);
-		stmt.setString(2,orderBy);
+		
 		 System.out.println("classe " +stmt);
 		}
 		
 		
 		// recherche par nom prenom
 		if(ideleve.equals("") && !nom.equals("") && !prenom.equals("") && classe.equals("tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve WHERE eleve_nom LIKE ? AND eleve_prenom LIKE ? ORDER BY ? DESC");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve WHERE eleve_nom LIKE ? AND eleve_prenom LIKE ? ORDER BY " +orderBy+" ASC");
 		stmt.setString(1,nom);
 		stmt.setString(2,prenom);
-		stmt.setString(3,orderBy);
+		
 		 System.out.println("nom prenom " +stmt);
 		}
 		
 		
 		// recherche par nom classe
 		if(ideleve.equals("") && !nom.equals("") && prenom.equals("") && !classe.equals("tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_nom LIKE ?ORDER BY ? DESC");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_nom LIKE ?ORDER BY " +orderBy+" ASC");
 		stmt.setString(1,classe);
 		stmt.setString(2,nom);
-		stmt.setString(3,orderBy);
+		
 		 System.out.println("nom classe " +stmt);
 		}
 		
 		// recherche par prenom classe
 		if(ideleve.equals("") && nom.equals("") && !prenom.equals("") && !classe.equals("tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_prenom LIKE ?ORDER BY ? DESC");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_prenom LIKE ?ORDER BY " +orderBy+" ASC");
 		stmt.setString(1,classe);
 		stmt.setString(2,prenom);
-		stmt.setString(3,orderBy);
+		
 		 System.out.println("prenom classe " +stmt);
 		}
 				
 		// recherche par nom prenom et  classe
 		if(ideleve.equals("") && !nom.equals("") && !prenom.equals("") && !classe.equals("tous") ){
-		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_nom LIKE ? AND eleve_prenom LIKE ? ORDER BY ? DESC");
+		stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM eleve INNER JOIN appartenir ON eleve.id_eleve=appartenir.id_eleve INNER JOIN classe ON appartenir.cle_classe=classe.cle_classe WHERE classe=? AND eleve_nom LIKE ? AND eleve_prenom LIKE ? ORDER BY " +orderBy+" ASC");
 		stmt.setString(1,classe);
 		stmt.setString(2,nom);
 		stmt.setString(3,prenom);
-		stmt.setString(4,orderBy);
+
 		
 		 System.out.println("nom prenom classe " +stmt);}
 		

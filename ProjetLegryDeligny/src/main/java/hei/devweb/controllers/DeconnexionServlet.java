@@ -10,7 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;  
 import javax.servlet.http.HttpSession;
 
+/**
+ * @author Projet
+ *
+ */
 public class DeconnexionServlet extends HttpServlet {           
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	@Override     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)                    
 			throws ServletException, IOException {    

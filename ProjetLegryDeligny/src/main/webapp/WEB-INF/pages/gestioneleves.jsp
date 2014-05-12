@@ -132,7 +132,7 @@
 								</select>
 							</td>
 						</tr>
-						<!-- <tr>
+						<tr>
 							<td><label for="tri">Trier par</label></td>
 							<td>
 								<select name="tri" id="tri" required >
@@ -142,7 +142,7 @@
 									<option value="classe">Classe</option>
 								</select>
 							</td>
-						</tr> -->
+						</tr>
 						<tr>
 							<td></td>
 							<td><input type="submit" value="Rechercher"/><input type="button" onClick="init()" value="Réinitialiser"/></td>
@@ -160,10 +160,10 @@
 							<th>Nom</th>
 							<th>Prénom</th>
 							<th>Classe</th>
-							<th>A faire</th>
-							<th>Fait</th>
+							<th>Dues</th>
+							<th>Faites</th>
 							<th>En attente</th>
-							<th>Justif</th>
+							<th>Détail</th>
 						</tr>
 					</thead>	
 					<c:forEach var="eleves" items="${eleves}">

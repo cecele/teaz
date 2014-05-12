@@ -14,6 +14,10 @@ import hei.devweb.model.Eleve;
 import hei.devweb.model.Structure;
 import hei.devweb.forms.ConnexionForm; 
 
+/**
+ * @author Projet
+ *
+ */
 public class ConnexionServlet extends HttpServlet {     
 	/**
 	 * 
@@ -24,6 +28,9 @@ public class ConnexionServlet extends HttpServlet {
 	public static final String ATT_SESSION_USER = "sessionEleve";     
 	public static final String VUE              = "/WEB-INF/pages/index.jsp";    
 	
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) 
 			throws ServletException, IOException {       
 		HttpSession session = request.getSession();    
@@ -35,6 +42,9 @@ public class ConnexionServlet extends HttpServlet {
 		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );     
 		}     
 	
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {         
 		/* Préparation de l'objet formulaire */   
 		
@@ -56,7 +66,6 @@ public class ConnexionServlet extends HttpServlet {
 			
 			session.setAttribute( "structure", structure );
 			
-			//if(eleve.getEleve_profil() == 2 || eleve.getEleve_profil() == 4){
 				Integer nbTeaEnAttente = Manager.getInstance().getTeaEnAttente();
 				Integer nbOffreEnAttente = Manager.getInstance().getOffreEnAttente();
 				Date date = new Date();
@@ -64,7 +73,7 @@ public class ConnexionServlet extends HttpServlet {
 				session.setAttribute( "nbTeaEnAttente", nbTeaEnAttente );
 				session.setAttribute( "nbOffreEnAttente", nbOffreEnAttente );
 				session.setAttribute( "nbTeaAValiderByStructure" , nbTeaAValiderByStructure);
-			//}
+			
 		} 
 		else {             
 			session.setAttribute( ATT_SESSION_USER, null );         
