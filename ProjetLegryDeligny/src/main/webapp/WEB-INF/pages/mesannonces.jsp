@@ -20,26 +20,26 @@
    		<section>
  
 			<h1>Mes Annonces</h1>			
-			<c:if test="${couples.isEmpty()}">
+			<c:if test="${empty offres}">
 			<article>
 				<p>Vous n'avez posté aucune annonce</p>
 			</article> 
 			</c:if>
-			<c:forEach var="couples" items="${applicationScope.couples}">
+			<c:forEach var="offres" items="${offres}">
 			<article>
 				
-					<table class="annonce"><tr><td class="left"><h2 class="${entry.key.statut == 1 ? 'valide' : 'attente'}"><fmt:formatDate value="${entry.key.date_tea}" pattern="d MMMM yyyy"/></h2></td><td class="center"><h2 class="${entry.key.statut == 1 ? 'valide' : 'attente'}">${entry.key.offre_titre} ${entry.key.statut==0 ? '(En attente de validation)' : '(En ligne)'  }</h2></td> <td  class="right"><h2 class="${entry.key.statut == 1 ? 'valide' : 'attente'}">${entry.key.heure_debut}H - ${entry.key.heure_fin}H</h2></td></tr></table>		
+					<table class="annonce"><tr><td class="left"><h2 class="${offres.statut == 1 ? 'valide' : 'attente'}"><fmt:formatDate value="${offres.date_tea}" pattern="d MMMM yyyy"/></h2></td><td class="center"><h2 class="${offres.statut == 1 ? 'valide' : 'attente'}">${offres.offre_titre} ${offres.statut==0 ? '(En attente de validation)' : '(En ligne)'  }</h2></td> <td  class="right"><h2 class="${offres.statut == 1 ? 'valide' : 'attente'}">${offres.heure_debut}H - ${offres.heure_fin}H</h2></td></tr></table>		
 					<hr/>
 					<p>
-					Description : ${entry.key.offre_description}<br/>
-					Plus de renseignements : ${entry.eleve_mail}@hei.fr<br/>
+					Description : ${offres.offre_description}<br/>
+					Plus de renseignements : ${offres.eleve_mail}@hei.fr<br/>
 					<br/>
-					Association : ${entry.key.structure_nom}<br/>
-					Président : ${entry.key.structure_president_prenom} ${entry.key.structure_president_nom}<br/>
-					${entry.key.offre_place} place${entry.key.offre_place >= 2 ? 's' : '' } disponible${entry.key.offre_place >= 2 ? 's' : '' }<br/>
+					Association : ${offres.structure_nom}<br/>
+					Président : ${offres.structure_president_prenom} ${offres.structure_president_nom}<br/>
+					${offres.offre_place} place${offres.offre_place >= 2 ? 's' : '' } disponible${offres.offre_place >= 2 ? 's' : '' }<br/>
 					</p>
-					<c:if test="${entry.key.statut==0}">
-						<a href="deposerannonce?id=${entry.key.cle_offre}">
+					<c:if test="${offres.statut==0}">
+						<a href="deposerannonce?id=${offres.cle_offre}">
 							<input type="submit" value="Modifier"/>
 						</a>
 					</c:if>

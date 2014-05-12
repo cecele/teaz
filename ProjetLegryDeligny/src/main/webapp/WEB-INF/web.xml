@@ -20,6 +20,7 @@
     <url-pattern>/validertea</url-pattern>
     <url-pattern>/gestioneleves</url-pattern>
     <url-pattern>/detail</url-pattern>
+    <url-pattern>/recherche</url-pattern>
     <url-pattern>/postuler</url-pattern>
     <url-pattern>/deconnexion</url-pattern>
     <url-pattern>/gestionadministration</url-pattern>
@@ -46,6 +47,7 @@
     <filter-name>AdministrationFilter</filter-name>
     <url-pattern>/gestioneleves</url-pattern>
     <url-pattern>/detail</url-pattern>
+    <url-pattern>/recherche</url-pattern>
   </filter-mapping>
   <filter>
     <filter-name>SuperAdminFilter</filter-name>

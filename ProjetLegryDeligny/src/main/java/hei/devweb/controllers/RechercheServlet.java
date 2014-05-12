@@ -63,10 +63,10 @@ public class RechercheServlet extends HttpServlet {
 		
 		if(request.getParameter("rech").equals("2")){
 			
-			encours = request.getParameter("encours_id")!=null?false:true;                         
-			ajour =request.getParameter("ajour_id")!=null?false:true;                         
-			pasajour = request.getParameter("pasajour_id")!=null?false:true;        
-			diplome = request.getParameter("diplome_id")!=null?false:true;
+			encours = request.getParameter("encours_id")==null?false:true;                         
+			ajour =request.getParameter("ajour_id")==null?false:true;                         
+			pasajour = request.getParameter("pasajour_id")==null?false:true;        
+			diplome = request.getParameter("diplome_id")==null?false:true;
 			nom = request.getParameter("nom");
 			prenom = request.getParameter("prenom");
 			classe = request.getParameter("classe");

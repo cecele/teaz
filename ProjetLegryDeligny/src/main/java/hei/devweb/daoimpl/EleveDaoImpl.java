@@ -180,9 +180,10 @@ public class EleveDaoImpl implements EleveDao {
 								null
 								);
 						
-						if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
-							
-						eleves.add(eleve);	
+						if(president(results.getString("id_eleve"))) 
+							eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
+						if(!results.getString("id_eleve").equals("99999"))	
+							eleves.add(eleve);	
 						
 					}
 						// Fermer la connexion
@@ -233,9 +234,10 @@ public class EleveDaoImpl implements EleveDao {
 									null
 									);
 							
-							if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
-								
-							eleves.add(eleve);	
+							if(president(results.getString("id_eleve"))) 
+								eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
+							if(!results.getString("id_eleve").equals("99999"))		
+								eleves.add(eleve);	
 							
 						}
 							// Fermer la connexion
@@ -287,9 +289,11 @@ public class EleveDaoImpl implements EleveDao {
 									null
 									);
 							
-							if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
+							if(president(results.getString("id_eleve"))) 
+								eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
 								
-							if(RechercheDaoImpl.getTeaDuesEnCours(results.getString("id_eleve"))!=0 )eleves.add(eleve);	
+							if(RechercheDaoImpl.getTeaDuesEnCours(results.getString("id_eleve"))!=0 && !results.getString("id_eleve").equals("99999"))
+								eleves.add(eleve);	
 							
 						}
 							// Fermer la connexion
@@ -340,9 +344,11 @@ public class EleveDaoImpl implements EleveDao {
 								null
 								);
 						
-						if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
+						if(president(results.getString("id_eleve"))) 
+							eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
 							
-						if(RechercheDaoImpl.getTeaDuesEnCours(results.getString("id_eleve"))==0 )eleves.add(eleve);	
+						if(RechercheDaoImpl.getTeaDuesEnCours(results.getString("id_eleve"))==0 && !results.getString("id_eleve").equals("99999"))
+							eleves.add(eleve);	
 						
 					}
 						// Fermer la connexion
@@ -449,9 +455,10 @@ public class EleveDaoImpl implements EleveDao {
 							null
 							);
 					
-					if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
-						                                                         
-				eleves.add(eleve);                                                        
+					if(president(results.getString("id_eleve"))) 
+						eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
+					if(!results.getString("id_eleve").equals("99999"))	                                                         
+						eleves.add(eleve);                                                        
 					}                                 
 				// Fermer la connexion                                
 				results.close();                                 

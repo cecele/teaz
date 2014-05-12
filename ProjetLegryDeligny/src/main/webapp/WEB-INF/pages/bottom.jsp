@@ -49,4 +49,4 @@
 	</c:if>
 </aside>
 
-<p id="footer">Petit message stylé pour afficher notre pouvoir supérieur</p>
+<p id="footer">CopyRight Legry et Deligny. 2014 pour l'intégrale HEI</p>

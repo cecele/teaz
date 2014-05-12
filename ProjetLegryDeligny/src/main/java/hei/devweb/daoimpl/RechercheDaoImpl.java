@@ -29,6 +29,13 @@ List<Eleve> elevescas6 = new ArrayList<Eleve>();
 List<Eleve> elevescas7 = new ArrayList<Eleve>();
 List<Eleve> elevescas8 = new ArrayList<Eleve>();
 List<Eleve> elevescas9 = new ArrayList<Eleve>();
+List<Eleve> elevescas10 = new ArrayList<Eleve>();
+List<Eleve> elevescas11 = new ArrayList<Eleve>();
+List<Eleve> elevescas12 = new ArrayList<Eleve>();
+List<Eleve> elevescas13 = new ArrayList<Eleve>();
+List<Eleve> elevescas14 = new ArrayList<Eleve>();
+List<Eleve> elevescas15 = new ArrayList<Eleve>();
+List<Eleve> elevescas16 = new ArrayList<Eleve>();
 List<Eleve> elevesreturn = new ArrayList<Eleve>();
 
 if(orderBy==""){orderBy="eleve_nom";}
@@ -153,21 +160,22 @@ System.out.println("entrée ds le try parametre ideleve= " +ideleve+ " nom="+nom
 			if(EleveDaoImpl.president(results.getString("id_eleve"))){ eleve.setCle_structure(EleveDaoImpl.getCleStructureById(results.getString("id_eleve")));}
 		
 			
-			if(diplome && etudiant && ajour && retard)elevescas1.add(eleve);
-			if(diplome && etudiant && ajour==false && teadues>0 && retard)elevescas3.add(eleve);
-			if(diplome && etudiant && ajour && teadues==0 && retard==false)elevescas2.add(eleve);
-		
-			
-			if(diplome==false && results.getInt("diplome")==0  && etudiant && ajour && retard )elevescas4.add(eleve);
-			if(diplome==false && results.getInt("diplome")==0  && etudiant && ajour==false && teadues>0 && retard )elevescas5.add(eleve);
-			if(diplome==false && results.getInt("diplome")==0  && etudiant && ajour && teadues==0 && retard==false )elevescas6.add(eleve);
-			
-			if(diplome && results.getInt("diplome")==1  && etudiant==false && ajour && retard )elevescas7.add(eleve);
-			if(diplome && results.getInt("diplome")==1  && etudiant==false && ajour==false && teadues>0 && retard )elevescas8.add(eleve);
-			if(diplome && results.getInt("diplome")==1  && etudiant==false && ajour && teadues==0 && retard==false )elevescas9.add(eleve);
-					
-
-		
+			if(results.getInt("diplome")==1 || results.getInt("diplome")==0 || teadues==0 || teadues >0)elevescas1.add(eleve);
+			if(results.getInt("diplome")==1 || results.getInt("diplome")==0 || teadues==0 )elevescas2.add(eleve);
+			if(results.getInt("diplome")==1 || results.getInt("diplome")==0 || teadues >0 )elevescas3.add(eleve);
+			if(results.getInt("diplome")==1 || results.getInt("diplome")==0 )elevescas4.add(eleve);
+			if(results.getInt("diplome")==1 || teadues==0 || teadues>0)elevescas5.add(eleve);
+			if(results.getInt("diplome")==1 || teadues==0 )elevescas6.add(eleve);
+			if(results.getInt("diplome")==1 || teadues >0 )elevescas7.add(eleve);
+			if(results.getInt("diplome")==1 )elevescas8.add(eleve);			
+			if(results.getInt("diplome")==0 || teadues==0 || teadues>0)elevescas9.add(eleve);
+			if(results.getInt("diplome")==0 || teadues==0 )elevescas10.add(eleve);
+			if(results.getInt("diplome")==0 || teadues >0 )elevescas11.add(eleve);
+			if(results.getInt("diplome")==0 )elevescas12.add(eleve);
+			if(teadues==0 || teadues>0)elevescas13.add(eleve);
+			if(teadues==0 )elevescas14.add(eleve);
+			if(teadues >0 )elevescas15.add(eleve);
+			if(results.getInt("diplome")==1 || results.getInt("diplome")==0 || teadues==0 || teadues >0)elevescas16.add(eleve);
 
 	}
 		// Fermer la connexion
@@ -183,14 +191,22 @@ System.out.println("entrée ds le try parametre ideleve= " +ideleve+ " nom="+nom
 	System.out.println("choix du cas " + diplome+  " " + etudiant+ " " + " " + ajour+ " " + retard);
 	
 	if(diplome && etudiant && ajour && retard)elevesreturn=elevescas1;
-	if(diplome && etudiant && ajour==false && retard)elevesreturn=elevescas2;
-	if(diplome && etudiant && ajour && retard==false)elevesreturn=elevescas3;
-	if(diplome==false && etudiant && ajour && retard )elevesreturn=elevescas4;
-	if(diplome==false && etudiant && ajour==false && retard )elevesreturn=elevescas5;
-	if(diplome==false && etudiant && ajour && retard==false )elevesreturn=elevescas6;
-	if(diplome==false && etudiant && ajour && retard==false )elevesreturn=elevescas7;
-	if(diplome && etudiant==false && ajour && retard )elevesreturn=elevescas8;
-	if(diplome && etudiant==false && ajour==false  && retard )elevesreturn=elevescas9;
+	if(diplome && etudiant && ajour && retard==false)elevesreturn=elevescas2;
+	if(diplome && etudiant && ajour==false && retard)elevesreturn=elevescas3;
+	if(diplome && etudiant && ajour==false && retard==false)elevesreturn=elevescas4;
+	if(diplome && etudiant==false && ajour && retard)elevesreturn=elevescas5;
+	if(diplome && etudiant==false && ajour && retard==false)elevesreturn=elevescas6;
+	if(diplome && etudiant==false && ajour==false && retard)elevesreturn=elevescas7;
+	if(diplome && etudiant==false && ajour==false && retard==false)elevesreturn=elevescas8;
+	if(diplome==false && etudiant && ajour && retard)elevesreturn=elevescas9;
+	if(diplome==false && etudiant && ajour && retard==false)elevesreturn=elevescas10;
+	if(diplome==false && etudiant && ajour==false && retard)elevesreturn=elevescas11;
+	if(diplome==false && etudiant && ajour==false && retard==false)elevesreturn=elevescas12;
+	if(diplome==false && etudiant==false && ajour && retard)elevesreturn=elevescas13;
+	if(diplome==false && etudiant==false && ajour && retard==false)elevesreturn=elevescas14;
+	if(diplome==false && etudiant==false && ajour==false && retard)elevesreturn=elevescas15;
+	if(diplome==false && etudiant==false && ajour==false && retard==false)elevesreturn=elevescas16;
+	
 	
 	
 	return elevesreturn;

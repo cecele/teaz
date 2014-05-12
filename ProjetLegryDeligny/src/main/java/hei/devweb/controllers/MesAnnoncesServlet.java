@@ -42,19 +42,9 @@ public class MesAnnoncesServlet extends HttpServlet {
 		
 		Eleve eleve = (Eleve) (session.getAttribute("sessionEleve"));
 		Integer clestructure = eleve.getCle_structure();
-		// On créée une map d'offres et de teas qui lui correspondent
-		Map<Offre, List<Tea>> couples = new HashMap<Offre, List<Tea>>(); 
-		// On récupère toutes les offres dans une liste
 		List<Offre> offres = Manager.getInstance().listerOffreByStructure(clestructure);
-		// on parcourt la liste d'offres
-		Iterator i = offres.iterator();
-		while(i.hasNext()){
-			Offre offre=(Offre) i.next();
-			Integer cleoffre = offre.getCle_offre();
-			List<Tea> teas = Manager.getInstance().getTeaByOffre(cleoffre); // On récupère les TEAs qui correspondent à cette offre précise
-			couples.put(offre, teas ); // on ajoute à la map couples l'offre et les teas qui lui correspondent 
-		}
-		request.setAttribute("couples",couples);
+		
+		request.setAttribute("offres",offres);
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/mesannonces.jsp");
 		view.forward(request, response);
