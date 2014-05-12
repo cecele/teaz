@@ -22,7 +22,7 @@ public class StructureDaoImpl implements StructureDao {
 		// creation de mandature pour une structure
 		// acces en ecriture
 					
-					public void StructureChangement (String idelev, Integer clestructure,Date datedebut, Date datefin ){
+					public void StructureChangement (String ideleve, Integer clestructure,Date datedebut, Date datefin ){
 						// creation de la mandature
 						
 						java.util.Date utilDate_debut = datedebut;
@@ -37,7 +37,7 @@ public class StructureDaoImpl implements StructureDao {
 
 							PreparedStatement stmt = (PreparedStatement) connection
 									.prepareStatement("INSERT INTO `presider`(`id_eleve`,`cle_structure`,`date_debut`,`date_fin`) VALUES(?,?,?,?) ");
-							stmt.setString(1,idelev);
+							stmt.setString(1,ideleve);
 							stmt.setInt(2,clestructure);
 							stmt.setDate(3, sqlDatedebut);
 							stmt.setDate(4, sqlDatefin);
@@ -81,32 +81,7 @@ public class StructureDaoImpl implements StructureDao {
 						
 					
 					
-//-----------------------------------------------------------------------------------------------------------------
-	// MODIFICATION ET MISE A JOUR
-//-----------------------------------------------------------------------------------------------------------------
 
-//-----------------------------------------------------------------------------------------------------------------
-//mise à jour du nom d'une comission en fonction de sa clé_structure
-//acc�s en ecriture (update)
-					public void StructureChangeNom (Integer cle_structure, String nom){
-						try {
-							Connection connection = DataSourceProvider.getDataSource()
-									.getConnection();
-
-							PreparedStatement stmt = (PreparedStatement) connection
-									.prepareStatement("UPDATE structure SET structure_nom=? WHERE cle_structure=?");
-							stmt.setString(1,nom);
-							stmt.executeUpdate();
-							// Fermer la connexion
-
-							stmt.close();
-							connection.close();
-
-						} catch (SQLException e) {
-							e.printStackTrace();
-						}
-					}
-					
 //-----------------------------------------------------------------------------------------------------------------
 	// AFFICHAGE
 //-----------------------------------------------------------------------------------------------------------------
@@ -150,7 +125,7 @@ public class StructureDaoImpl implements StructureDao {
 
 								
 								
-								PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT cle_structure FROM structure WHERE cle_structure=? ");
+								PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT cle_structure FROM structure WHERE structure_nom=? ");
 								stmt.setString(1,structurenom);
 								ResultSet results = stmt.executeQuery();
 								results.next();

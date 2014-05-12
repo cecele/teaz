@@ -63,6 +63,7 @@ public class DaoTestCaseStructureDaoImpl {
 		stmt.executeUpdate("INSERT INTO `eleve` (`id_eleve`, `eleve_nom`, `eleve_prenom`, `date_naissance`, `numrue`, `nomrue`, `codepostal`, `ville`, `date_entree`, `cotisant`, `eleve_profil`, `diplome`, `motdepasse`) VALUES ('10153', 'LEGRY', 'Céline', '1991-06-14', 59, 'rue des stations', '59000', 'Lille', 2009, 0, 0, 0, 'motdepasse')");
 		stmt.executeUpdate("INSERT INTO `eleve` (`id_eleve`, `eleve_nom`, `eleve_prenom`, `date_naissance`, `numrue`, `nomrue`, `codepostal`, `ville`, `date_entree`, `cotisant`, `eleve_profil`, `diplome`, `motdepasse`) VALUES ('11111', 'DELIGNY', 'MARTIN', '1991-03-11', 12, 'RUE DU PORT', '59000', 'LILLE', 2010, NULL, 1, 0, 'motdepasse')");
 		stmt.executeUpdate("INSERT INTO `structure` (`cle_structure`, `structure_nom`) VALUES (1, 'INTEGRALE-VP')");
+		stmt.executeUpdate("INSERT INTO `structure` (`cle_structure`, `structure_nom`) VALUES (2, 'INTEGRALE-P')");
 		stmt.executeUpdate("INSERT INTO `presider` (`id_eleve`, `cle_structure`, `date_debut`, `date_fin`) VALUES ('11111', 1, '2014-05-01', '2015-06-15')");
 		// attention penser à modifier la date de mise en ligne à la date du jour
 		stmt.executeUpdate("INSERT INTO `offre` (`cle_offre`, `date_depot`, `date_miseenligne`, `date_tea`, `heure_debut`, `heure_fin`, `statut`, `offre_description`, `eleve_mail`, `offre_titre`, `offre_place`, `cle_structure`) VALUES (1, '2014-05-09', '2014-05-11', '2014-05-19', '12', '13', 1, 'DESCRIPTION CHIANTE', 'cc@hei.fr', 'TITRE INTERESSANT', 3, 1)");
@@ -73,6 +74,7 @@ public class DaoTestCaseStructureDaoImpl {
 		stmt.executeUpdate("INSERT INTO `appartenir` (`id_eleve`, `cle_classe`) VALUES ('10153', 1)");
 		stmt.executeUpdate("INSERT INTO `appartenir` (`id_eleve`, `cle_classe`) VALUES ('11111', 2)");
 		stmt.close();
+		
 		connection.close();
 	}
 
@@ -80,38 +82,75 @@ public class DaoTestCaseStructureDaoImpl {
 	//------------------------------------------------------------------------------------------------------------------------------
 	// test StructureDaoImpl
 	//------------------------------------------------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------------------------------------------------
-//	 @Test
-//     public void testStructureChangement () throws Exception {
-//		 
-//		 	java.util.Date utilDate_debut = 2014-01-01;
-//		    java.sql.Date sqlDatedebut = new java.sql.Date(utilDate_debut.getTime());
-//		    
-//		    java.util.Date utilDate_fin = datefin;
-//		    java.sql.Date sqlDatefin = new java.sql.Date(utilDate_fin.getTime()); 
-//           daoStructure.StructureChangement(10153, 1, datetea, datetea);
-//
-//             Connection connection = DataSourceProvider.getDataSource()
-//                             .getConnection();
-//             Statement stmt = connection.createStatement();
-//             ResultSet results = stmt.executeQuery("SELECT * FROM `offre` WHERE `cle_offre`=2");
-//             Assert.assertTrue(results.next());
-//             Assert.assertNotNull(results.getInt("cle_offre"));
-//             Assert.assertEquals(offre.getDate_depot(), results.getDate("date_depot"));
-//             Assert.assertEquals(offre.getDate_miseenligne(),results.getDate("date_miseenligne"));
-//             Assert.assertEquals(offre.getDate_tea(), results.getDate("date_tea"));
-//             Assert.assertEquals(offre.getHeure_debut(), results.getString("heure_debut"));
-//             Assert.assertEquals(offre.getHeure_fin(), results.getString("heure_fin"));
-//             Assert.assertEquals((int)offre.getStatut(), results.getInt("statut"));
-//             Assert.assertEquals(offre.getOffre_description(), results.getString("offre_description"));
-//             Assert.assertEquals(offre.getEleve_mail(), results.getString("eleve_mail"));
-//             Assert.assertEquals(offre.getOffre_titre(), results.getString("offre_titre"));
-//             Assert.assertEquals((int)offre.getOffre_place(), results.getInt("offre_place"));
-//             Assert.assertEquals((int)offre.getCle_structure(), results.getInt("cle_structure"));
-//
-//             results.close();
-//             stmt.close();
-//             connection.close();
-//     }
-//	
+	
+	
+	//------------------------------------------------------------------------------------------------------------------------------
+		 @Test
+	public void testStructureChangement () throws Exception {
+
+String StringDateDebut = "2014-05-01";       
+ String StringDateFin = "2014-06-01";       
+ SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd");                              
+ Date dateDebut = null;       
+ Date dateFin = null;             
+  try {dateDebut = sdf.parse(StringDateDebut); } catch (ParseException e) { e.printStackTrace();}     
+try { dateFin = sdf.parse(StringDateFin); } catch (ParseException e) { e.printStackTrace();}
+
+			  
+		
+		daoStructure.StructureChangement ("10153",2,dateDebut,dateFin);
+
+	        Connection connection = DataSourceProvider.getDataSource()
+	                        .getConnection();
+	        Statement stmt = connection.createStatement();
+	        ResultSet results = stmt.executeQuery("SELECT * FROM presider WHERE id_eleve='10153' AND cle_structure=2 ");
+	        Assert.assertTrue(results.next());
+	        Assert.assertEquals(dateDebut, results.getString("date_debut"));
+	        Assert.assertEquals(dateFin, results.getString("date_fin"));
+	  
+
+	        results.close();
+	        stmt.close();
+	        connection.close();
+	}
+		 
+		//------------------------------------------------------------------------------------------------------------------------------
+		 @Test
+	public void testCreateStructure() throws Exception {
+
+
+		daoStructure.CreateStructure("nomdelastructuredemerde");
+
+	        Connection connection = DataSourceProvider.getDataSource()
+	                        .getConnection();
+	        Statement stmt = connection.createStatement();
+	        ResultSet results = stmt.executeQuery("SELECT * FROM structure WHERE cle_structure=3 ");
+	        Assert.assertTrue(results.next());
+	        Assert.assertEquals("nomdelastructuredemerde", results.getString("structure_nom"));
+	       
+	  
+
+	        results.close();
+	        stmt.close();
+	        connection.close();
+	}
+			//------------------------------------------------------------------------------------------------------------------------------
+		 @Test
+	public void testgetPresidentNomById () throws Exception {
+			 
+			String prez =daoStructure.getPresidentNomById(1);
+
+	        Connection connection = DataSourceProvider.getDataSource()
+	                        .getConnection();
+	        Statement stmt = connection.createStatement();
+	        ResultSet results = stmt.executeQuery("SELECT eleve_nom FROM eleve INNER JOIN presider ON eleve.id_eleve=presider.id_eleve WHERE presider.cle_structure=1 ");
+	        Assert.assertTrue(results.next());
+	        Assert.assertEquals(prez, results.getString("eleve_nom"));
+
+	        results.close();
+	        stmt.close();
+	        connection.close();
+	}
+		
+		
 }
