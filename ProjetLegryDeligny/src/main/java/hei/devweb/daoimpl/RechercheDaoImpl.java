@@ -1,6 +1,7 @@
 package hei.devweb.daoimpl;
 
 import hei.devweb.dao.RechercheDao;
+import hei.devweb.metier.Manager;
 import hei.devweb.model.Eleve;
 import hei.devweb.model.Structure;
 
@@ -149,15 +150,15 @@ System.out.println("entrée ds le try parametre ideleve= " +ideleve+ " nom="+nom
 					results.getInt("eleve_profil"),
 					results.getInt("diplome"),
 					results.getString("motdepasse"),
-					EleveDaoImpl.getPromotion(results.getString("id_eleve")),
-					TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
-					getTeaDuesEnCours(results.getString("id_eleve")),
-					TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
+					Manager.getInstance().getPromotion(results.getString("id_eleve")),
+					Manager.getInstance().getNbHeureTeaValide(results.getString("id_eleve")),
+					Manager.getInstance().getTeaDuesEnCours(results.getString("id_eleve")),
+					Manager.getInstance().getNbHeureEnAttente(results.getString("id_eleve")),
 					null
 					);
 		
-			int teadues=getTeaDuesEnCours(results.getString("id_eleve"));
-			if(EleveDaoImpl.president(results.getString("id_eleve"))){ eleve.setCle_structure(EleveDaoImpl.getCleStructureById(results.getString("id_eleve")));}
+			int teadues=Manager.getInstance().getTeaDuesEnCours(results.getString("id_eleve"));
+			if(Manager.getInstance().president(results.getString("id_eleve"))){ eleve.setCle_structure(Manager.getInstance().getCleStructureById(results.getString("id_eleve")));}
 		
 			
 			if(results.getInt("diplome")==1 || results.getInt("diplome")==0 || teadues==0 || teadues >0)elevescas1.add(eleve);
@@ -214,13 +215,6 @@ System.out.println("entrée ds le try parametre ideleve= " +ideleve+ " nom="+nom
 
 public int sizeReponse(List<Eleve> eleve){
 	return eleve.size();
-}
-
-public static  Integer getTeaDuesEnCours(String ideleve){
-	int nbtotal=0;
-	nbtotal=TeaDaoImpl.getNbHeureDues(ideleve)-TeaDaoImpl.getNbHeureTeaValide(ideleve);
-	if(nbtotal<=0)return 0;	return nbtotal;
-	
 }
 
 }

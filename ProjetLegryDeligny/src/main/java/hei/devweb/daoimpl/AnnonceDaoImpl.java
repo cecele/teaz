@@ -114,7 +114,7 @@ public void annonce_validation (Integer cle_offre,Date datedujour){
 	    
 		java.util.Date utilDate_tea = offre.getDate_tea();
 	    java.sql.Date sqlDateTea = new java.sql.Date(utilDate_tea.getTime());
-	    if( TeaDaoImpl.getNbPlacePourvue(offre.getCle_offre())==0){
+	    if( Manager.getInstance().getNbPlacePourvue(offre.getCle_offre())==0){
 		try {
 			Connection connection = DataSourceProvider.getDataSource()
 					.getConnection();
@@ -220,9 +220,9 @@ public void annonce_validation (Integer cle_offre,Date datedujour){
 							results.getInt("cle_structure"),
 							results.getInt("offre_place"),
 							Manager.getInstance().getNomStructure(results.getInt("cle_structure")),
-							StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-							StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
-							TeaDaoImpl.getNbPlacePourvue(results.getInt("cle_offre"))
+							Manager.getInstance().getPresidentNomById(results.getInt("cle_structure")),
+							Manager.getInstance().getPresidentPrenomById(results.getInt("cle_structure")),
+							Manager.getInstance().getNbPlacePourvue(results.getInt("cle_offre"))
 							
 							);
 					if(getPostulerOffre(results.getInt("cle_offre"), ideleve,results.getInt("cle_structure"))==false)
@@ -269,10 +269,11 @@ public void annonce_validation (Integer cle_offre,Date datedujour){
 								results.getString("offre_titre"),
 								results.getInt("cle_structure"),
 								results.getInt("offre_place"),
-								results.getString("structure_nom"),
-								StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-								StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
-								TeaDaoImpl.getNbPlacePourvue(results.getInt("cle_offre"))
+								
+								Manager.getInstance().getNomStructure(results.getInt("cle_structure")),
+								Manager.getInstance().getPresidentNomById(results.getInt("cle_structure")),
+								Manager.getInstance().getPresidentPrenomById(results.getInt("cle_structure")),
+								Manager.getInstance().getNbPlacePourvue(results.getInt("cle_offre"))
 								
 								);
 					
@@ -317,10 +318,11 @@ public void annonce_validation (Integer cle_offre,Date datedujour){
 							results.getString("offre_titre"),
 							results.getInt("cle_structure"),
 							results.getInt("offre_place"),
-							results.getString("structure_nom"),
-							StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-							StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
-							TeaDaoImpl.getNbPlacePourvue(results.getInt("cle_offre"))
+							
+							Manager.getInstance().getNomStructure(results.getInt("cle_structure")),
+							Manager.getInstance().getPresidentNomById(results.getInt("cle_structure")),
+							Manager.getInstance().getPresidentPrenomById(results.getInt("cle_structure")),
+							Manager.getInstance().getNbPlacePourvue(results.getInt("cle_offre"))
 							
 							);
 					
@@ -366,10 +368,12 @@ public void annonce_validation (Integer cle_offre,Date datedujour){
 							results.getString("offre_titre"),
 							results.getInt("cle_structure"),
 							results.getInt("offre_place"),
-							results.getString("structure_nom"),
-							StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-							StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
-							TeaDaoImpl.getNbPlacePourvue(results.getInt("cle_offre"))
+							
+							Manager.getInstance().getNomStructure(results.getInt("cle_structure")),
+							Manager.getInstance().getPresidentNomById(results.getInt("cle_structure")),
+							Manager.getInstance().getPresidentPrenomById(results.getInt("cle_structure")),
+							Manager.getInstance().getNbPlacePourvue(results.getInt("cle_offre"))
+							
 							);
 					
 					offres.add(offre);	
@@ -419,10 +423,12 @@ public void annonce_validation (Integer cle_offre,Date datedujour){
 								results.getString("offre_titre"),
 								results.getInt("cle_structure"),
 								results.getInt("offre_place"),
-								results.getString("structure_nom"),
-								StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-								StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
-								TeaDaoImpl.getNbPlacePourvue(results.getInt("cle_offre"))
+								
+								Manager.getInstance().getNomStructure(results.getInt("cle_structure")),
+								Manager.getInstance().getPresidentNomById(results.getInt("cle_structure")),
+								Manager.getInstance().getPresidentPrenomById(results.getInt("cle_structure")),
+								Manager.getInstance().getNbPlacePourvue(results.getInt("cle_offre"))
+								
 								);
 						
 						

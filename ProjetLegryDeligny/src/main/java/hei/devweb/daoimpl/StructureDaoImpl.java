@@ -10,6 +10,7 @@ import java.util.List;
 import com.mysql.jdbc.PreparedStatement;
 
 import hei.devweb.dao.StructureDao;
+import hei.devweb.metier.Manager;
 import hei.devweb.model.Structure;
 
 public class StructureDaoImpl implements StructureDao {
@@ -112,7 +113,7 @@ public class StructureDaoImpl implements StructureDao {
 //-----------------------------------------------------------------------------------------------------------------
 // recuperation du nom du préseident en fonction de la cle_structure
 // acces en lecture
-	public static String getPresidentNomById(Integer clestructure){
+	public  String getPresidentNomById(Integer clestructure){
 					String res="";
 						try {
 							Connection connection = DataSourceProvider.getDataSource()
@@ -168,7 +169,7 @@ public class StructureDaoImpl implements StructureDao {
 	//-----------------------------------------------------------------------------------------------------------------
 	// recuperation du prenom du préseident en fonction de la cle_structure
 	// acces en lecture
-		public static String getPresidentPrenomById(Integer clestructure){
+		public String getPresidentPrenomById(Integer clestructure){
 						String res="";
 							try {
 								Connection connection = DataSourceProvider.getDataSource()
@@ -251,31 +252,7 @@ public class StructureDaoImpl implements StructureDao {
 								return res;
 								
 							}		
-			public static  String getNomStructureStatic(Integer clestructure){
-				String res="";
-					try {
-						Connection connection = DataSourceProvider.getDataSource()
-								.getConnection();
-
-						
-						
-						PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT structure_nom FROM structure WHERE cle_structure=? ");
-						stmt.setInt(1,clestructure);
-						ResultSet results = stmt.executeQuery();
-						results.next();
-						res= results.getString("structure_nom");
-						// Fermer la connexion
-						results.close();
-						stmt.close();
-						connection.close();
-						
-				}
-					catch (SQLException e) {
-										e.printStackTrace();
-									}
-					return res;
-					
-				}		
+			
 	//-----------------------------------------------------------------------------------------------------------------
 	// recuperation des structures enregistr�es � hei par ordre alphabetique de nom de structure
 	// acces en lecture
@@ -423,8 +400,8 @@ public class StructureDaoImpl implements StructureDao {
 						structure = new Structure(
 						results.getInt("cle_structure"),
 						results.getString("structure_nom"),
-						StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-						StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure"))
+						Manager.getInstance().getPresidentNomById(results.getInt("cle_structure")),
+						Manager.getInstance().getPresidentPrenomById(results.getInt("cle_structure"))
 							);
 							
 							// Fermer la connexion
@@ -438,5 +415,7 @@ public class StructureDaoImpl implements StructureDao {
 										}
 						return structure;	
 				}
+
+
 
 }

@@ -15,15 +15,19 @@ public interface EleveDao {
 
 	void eleveChgtProfil(String id, Integer i);
 
-	//List<Eleve> rechercheEleveByNom(String nom);
-
-	//List<Eleve> rechercheEleveByClasse(String classe);
-
 	void CreateEleve(Eleve eleve);
 
-
+	List<Eleve> getEleveAjour();
 	
-
+	Integer getCleStructureById(String ideleve);
+	
+	String getElevePrenomById(String ideleve);
+	
+	String getPromotion(String ideleve);
+	
+	String getEleveNomById(String ideleve);
+	
+	boolean president(String ideleve);
 	
 
 }

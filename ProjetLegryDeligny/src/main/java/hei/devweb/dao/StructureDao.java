@@ -23,6 +23,11 @@ public interface StructureDao {
 	Integer getCleByNom(String nom);
 	
 	String getPresidentIdById(Integer clestructure);
+	
+	String getPresidentNomById(Integer clestructure);
+	
+	String getPresidentPrenomById(Integer clestructure);
 
+	
 
 }

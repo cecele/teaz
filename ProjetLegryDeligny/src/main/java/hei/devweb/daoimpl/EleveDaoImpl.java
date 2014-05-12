@@ -10,6 +10,7 @@ import java.util.List;
 import com.mysql.jdbc.PreparedStatement;
 
 import hei.devweb.dao.EleveDao;
+import hei.devweb.metier.Manager;
 import hei.devweb.model.Eleve;
 import hei.devweb.model.Offre;
 
@@ -173,10 +174,10 @@ public class EleveDaoImpl implements EleveDao {
 								results.getInt("eleve_profil"),
 								results.getInt("eleve_profil"),
 								results.getString("motdepasse"),
-								getPromotion(results.getString("id_eleve")),
-								TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
-								RechercheDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
-								TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
+								Manager.getInstance().getPromotion(results.getString("id_eleve")),
+								Manager.getInstance().getNbHeureTeaValide(results.getString("id_eleve")),
+								Manager.getInstance().getTeaDuesEnCours(results.getString("id_eleve")),
+								Manager.getInstance().getNbHeureEnAttente(results.getString("id_eleve")),
 								null
 								);
 						
@@ -227,10 +228,10 @@ public class EleveDaoImpl implements EleveDao {
 									results.getInt("eleve_profil"),
 									results.getInt("eleve_profil"),
 									results.getString("motdepasse"),
-									getPromotion(results.getString("id_eleve")),
-									TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
-									RechercheDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
-									TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
+									Manager.getInstance().getPromotion(results.getString("id_eleve")),
+									Manager.getInstance().getNbHeureTeaValide(results.getString("id_eleve")),
+									Manager.getInstance().getTeaDuesEnCours(results.getString("id_eleve")),
+									Manager.getInstance().getNbHeureEnAttente(results.getString("id_eleve")),
 									null
 									);
 							
@@ -282,17 +283,17 @@ public class EleveDaoImpl implements EleveDao {
 									results.getInt("eleve_profil"),
 									results.getInt("eleve_profil"),
 									results.getString("motdepasse"),
-									getPromotion(results.getString("id_eleve")),
-									TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
-									RechercheDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
-									TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
+									Manager.getInstance().getPromotion(results.getString("id_eleve")),
+									Manager.getInstance().getNbHeureTeaValide(results.getString("id_eleve")),
+									Manager.getInstance().getTeaDuesEnCours(results.getString("id_eleve")),
+									Manager.getInstance().getNbHeureEnAttente(results.getString("id_eleve")),
 									null
 									);
 							
 							if(president(results.getString("id_eleve"))) 
 								eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
 								
-							if(RechercheDaoImpl.getTeaDuesEnCours(results.getString("id_eleve"))!=0 && !results.getString("id_eleve").equals("99999"))
+							if(Manager.getInstance().getTeaDuesEnCours(results.getString("id_eleve"))!=0 && !results.getString("id_eleve").equals("99999"))
 								eleves.add(eleve);	
 							
 						}
@@ -312,7 +313,7 @@ public class EleveDaoImpl implements EleveDao {
 				//acc�s en lecture
 				
 						
-			public static List<Eleve> getEleveAjour(){
+			public  List<Eleve> getEleveAjour(){
 				List<Eleve> eleves = new ArrayList<Eleve>();
 				try {
 					Connection connection = DataSourceProvider.getDataSource()
@@ -337,17 +338,17 @@ public class EleveDaoImpl implements EleveDao {
 								results.getInt("eleve_profil"),
 								results.getInt("eleve_profil"),
 								results.getString("motdepasse"),
-								getPromotion(results.getString("id_eleve")),
-								TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
-								RechercheDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
-								TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
+								Manager.getInstance().getPromotion(results.getString("id_eleve")),
+								Manager.getInstance().getNbHeureTeaValide(results.getString("id_eleve")),
+								Manager.getInstance().getTeaDuesEnCours(results.getString("id_eleve")),
+								Manager.getInstance().getNbHeureEnAttente(results.getString("id_eleve")),
 								null
 								);
 						
 						if(president(results.getString("id_eleve"))) 
 							eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
 							
-						if(RechercheDaoImpl.getTeaDuesEnCours(results.getString("id_eleve"))==0 && !results.getString("id_eleve").equals("99999"))
+						if(Manager.getInstance().getTeaDuesEnCours(results.getString("id_eleve"))==0 && !results.getString("id_eleve").equals("99999"))
 							eleves.add(eleve);	
 						
 					}
@@ -400,10 +401,10 @@ public class EleveDaoImpl implements EleveDao {
 				results.getInt("eleve_profil"),
 				results.getInt("eleve_profil"),
 				results.getString("motdepasse"),
-				getPromotion(results.getString("id_eleve")),
-				TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
-				RechercheDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
-				TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
+				Manager.getInstance().getPromotion(results.getString("id_eleve")),
+				Manager.getInstance().getNbHeureTeaValide(results.getString("id_eleve")),
+				Manager.getInstance().getTeaDuesEnCours(results.getString("id_eleve")),
+				Manager.getInstance().getNbHeureEnAttente(results.getString("id_eleve")),
 				null
 				);
 				if(president(results.getString("id_eleve"))) eleve.setCle_structure(getCleStructureById(results.getString("id_eleve")));
@@ -424,7 +425,7 @@ public class EleveDaoImpl implements EleveDao {
 		//-----------------------------------------------------------------------------------------------------------------
 		//récupération des élèves responsables d'assos
 		//acc�s en lecture
-		// requet interne pas de test junit
+		
 		
 
 		public List<Eleve> getEleveResponsables(int profil){                 
@@ -448,10 +449,10 @@ public class EleveDaoImpl implements EleveDao {
 							results.getInt("eleve_profil"),                         
 							results.getInt("diplome"),                         
 							results.getString("motdepasse"),                         
-							getPromotion(results.getString("id_eleve")),
-							TeaDaoImpl.getNbHeureTeaValide(results.getString("id_eleve")),
-							RechercheDaoImpl.getTeaDuesEnCours(results.getString("id_eleve")),
-							TeaDaoImpl.getNbHeureEnAttente(results.getString("id_eleve")),
+							Manager.getInstance().getPromotion(results.getString("id_eleve")),
+							Manager.getInstance().getNbHeureTeaValide(results.getString("id_eleve")),
+							Manager.getInstance().getTeaDuesEnCours(results.getString("id_eleve")),
+							Manager.getInstance().getNbHeureEnAttente(results.getString("id_eleve")),
 							null
 							);
 					
@@ -481,9 +482,9 @@ public class EleveDaoImpl implements EleveDao {
 		//-----------------------------------------------------------------------------------------------------------------
 		//récupération de la cle_structure d'un élève en fonction de son id
 		//acc�s en lecture
-		// junit non nécessaire, requete interne
+		
 
-				public static Integer getCleStructureById(String ideleve){
+				public Integer getCleStructureById(String ideleve){
 					int res=0;
 					
 					
@@ -519,9 +520,9 @@ public class EleveDaoImpl implements EleveDao {
 				//-----------------------------------------------------------------------------------------------------------------
 				//recuperation du nom d'un élève en fonctio nde son id
 				//acc�s en lecture
-				// test junit non necessaire requete interne
 				
-				public static String getEleveNomById(String ideleve){
+				
+				public String getEleveNomById(String ideleve){
 					 String nom ="";	
 					
 					try {
@@ -553,9 +554,9 @@ public class EleveDaoImpl implements EleveDao {
 				//-----------------------------------------------------------------------------------------------------------------
 						//recuperation du prenom d'un élève en fonctio nde son id
 						//acc�s en lecture
-						// test junit non necessaire requete interne
 						
-						public static String getElevePrenomById(String ideleve){
+						
+						public  String getElevePrenomById(String ideleve){
 							 String prenom ="";	
 							 
 							try {
@@ -587,7 +588,7 @@ public class EleveDaoImpl implements EleveDao {
 						//booléen permettant de savoir si un élève est président de structure pour l'année en cours
 						//acc�s en lecture
 						// junit non nécessaire, requete interne
-								public static boolean president(String ideleve){
+								public boolean president(String ideleve){
 									boolean res= false;
 									
 									int rep= 0;
@@ -629,7 +630,7 @@ public class EleveDaoImpl implements EleveDao {
 			//Calcul de la promotion de l'�l�ve : recuperation de classe en cours pour le calcul
 			//acc�s en lecture
 			//test junit non nécessaire requete interne
-	public static Integer getCleClasse(String ideleve){
+	public Integer getCleClasse(String ideleve){
 		System.out.println("Dans la méthode getCleClasse, id eleve vaut:"+ideleve);
 		int cleclasse=0;
 		
@@ -657,7 +658,7 @@ public class EleveDaoImpl implements EleveDao {
 		
 		return cleclasse;
 	}
-	public static String getPromotion(String ideleve){
+	public  String getPromotion(String ideleve){
 		String classeencours="";
 		
 		Integer cleclasse= getCleClasse(ideleve);
@@ -688,7 +689,7 @@ public class EleveDaoImpl implements EleveDao {
 	}
 	
 	public int sizeEleveAjourEncours(){
-		List<Eleve> eleve=EleveDaoImpl.getEleveAjour();
+		List<Eleve> eleve=Manager.getInstance().getEleveAjour();
 		return eleve.size();
 	} 
 

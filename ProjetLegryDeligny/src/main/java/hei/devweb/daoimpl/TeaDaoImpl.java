@@ -47,12 +47,13 @@ public class TeaDaoImpl implements TeaDao {
 							results.getString("offre_titre"),
 							results.getInt("cle_structure"),
 							results.getInt("offre_place"),
-							StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
-							StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-							StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
-							TeaDaoImpl.getNbPlacePourvue(results.getInt("cle_offre"))
+							Manager.getInstance().getNomStructure(results.getInt("cle_structure")),
+							Manager.getInstance().getPresidentNomById(results.getInt("cle_structure")),
+							Manager.getInstance().getPresidentPrenomById(results.getInt("cle_structure")),
+							Manager.getInstance().getNbPlacePourvue(results.getInt("cle_offre"))
 							
 							);
+				
 			
 			// Fermer la connexion
 			results.close();
@@ -278,11 +279,11 @@ public class TeaDaoImpl implements TeaDao {
 					results.getString("offre_titre"),
 					results.getInt("cle_structure"),
 					results.getInt("offre_place"),
-					StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
-					StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-					StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
-					EleveDaoImpl.getEleveNomById(results.getString("id_eleve")),
-					EleveDaoImpl.getElevePrenomById(results.getString("id_eleve"))
+					Manager.getInstance().getNomStructure(results.getInt("cle_structure")),
+					Manager.getInstance().getPresidentNomById(results.getInt("cle_structure")),
+					Manager.getInstance().getPresidentPrenomById(results.getInt("cle_structure")),
+					Manager.getInstance().getEleveNomById(results.getString("id_eleve")),
+					Manager.getInstance().getElevePrenomById(results.getString("id_eleve"))
 					);
 					
 						teas.add(tea);	
@@ -338,11 +339,11 @@ public class TeaDaoImpl implements TeaDao {
 					results.getString("offre_titre"),
 					results.getInt("cle_structure"),
 					results.getInt("offre_place"),
-					StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
-					StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-					StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
-					EleveDaoImpl.getEleveNomById(results.getString("id_eleve")),
-					EleveDaoImpl.getElevePrenomById(results.getString("id_eleve"))
+					Manager.getInstance().getNomStructure(results.getInt("cle_structure")),
+					Manager.getInstance().getPresidentNomById(results.getInt("cle_structure")),
+					Manager.getInstance().getPresidentPrenomById(results.getInt("cle_structure")),
+					Manager.getInstance().getEleveNomById(results.getString("id_eleve")),
+					Manager.getInstance().getElevePrenomById(results.getString("id_eleve"))
 					);
 					
 						teas.add(tea);	
@@ -401,12 +402,11 @@ public class TeaDaoImpl implements TeaDao {
 			results.getString("offre_titre"),
 			results.getInt("cle_structure"),
 			results.getInt("offre_place"),
-			StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
-			StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-			StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
-			EleveDaoImpl.getEleveNomById(results.getString("id_eleve")),
-			EleveDaoImpl.getElevePrenomById(results.getString("id_eleve"))
-			
+			Manager.getInstance().getNomStructure(results.getInt("cle_structure")),
+			Manager.getInstance().getPresidentNomById(results.getInt("cle_structure")),
+			Manager.getInstance().getPresidentPrenomById(results.getInt("cle_structure")),
+			Manager.getInstance().getEleveNomById(results.getString("id_eleve")),
+			Manager.getInstance().getElevePrenomById(results.getString("id_eleve"))
 			);
 				System.out.println("getTeaAValiderByStructure : requete " + results.getInt("cle_tea"));
 			
@@ -460,11 +460,11 @@ public class TeaDaoImpl implements TeaDao {
 			results.getString("offre_titre"),
 			results.getInt("cle_structure"),
 			results.getInt("offre_place"),
-			StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
-			StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-			StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
-			EleveDaoImpl.getEleveNomById(results.getString("id_eleve")),
-			EleveDaoImpl.getElevePrenomById(results.getString("id_eleve"))
+			Manager.getInstance().getNomStructure(results.getInt("cle_structure")),
+			Manager.getInstance().getPresidentNomById(results.getInt("cle_structure")),
+			Manager.getInstance().getPresidentPrenomById(results.getInt("cle_structure")),
+			Manager.getInstance().getEleveNomById(results.getString("id_eleve")),
+			Manager.getInstance().getElevePrenomById(results.getString("id_eleve"))
 			);
 
 			
@@ -518,11 +518,11 @@ public class TeaDaoImpl implements TeaDao {
 			results.getString("offre_titre"),
 			results.getInt("cle_structure"),
 			results.getInt("offre_place"),
-			StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
-			StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-			StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
-			EleveDaoImpl.getEleveNomById(results.getString("id_eleve")),
-			EleveDaoImpl.getElevePrenomById(results.getString("id_eleve"))
+			Manager.getInstance().getNomStructure(results.getInt("cle_structure")),
+			Manager.getInstance().getPresidentNomById(results.getInt("cle_structure")),
+			Manager.getInstance().getPresidentPrenomById(results.getInt("cle_structure")),
+			Manager.getInstance().getEleveNomById(results.getString("id_eleve")),
+			Manager.getInstance().getElevePrenomById(results.getString("id_eleve"))
 			);
 			
 				teas.add(tea);	
@@ -574,11 +574,11 @@ public class TeaDaoImpl implements TeaDao {
 		results.getString("offre_titre"),
 		results.getInt("cle_structure"),
 		results.getInt("offre_place"),
-		StructureDaoImpl.getNomStructureStatic(results.getInt("cle_structure")),
-		StructureDaoImpl.getPresidentNomById(results.getInt("cle_structure")),
-		StructureDaoImpl.getPresidentPrenomById(results.getInt("cle_structure")),
-		EleveDaoImpl.getEleveNomById(results.getString("id_eleve")),
-		EleveDaoImpl.getElevePrenomById(results.getString("id_eleve"))
+		Manager.getInstance().getNomStructure(results.getInt("cle_structure")),
+		Manager.getInstance().getPresidentNomById(results.getInt("cle_structure")),
+		Manager.getInstance().getPresidentPrenomById(results.getInt("cle_structure")),
+		Manager.getInstance().getEleveNomById(results.getString("id_eleve")),
+		Manager.getInstance().getElevePrenomById(results.getString("id_eleve"))
 		);
 
 			teas.add(tea);	
@@ -744,7 +744,7 @@ public class TeaDaoImpl implements TeaDao {
 			//calcul du nombre d'heure de tea valides par élève
 			//acc�s en lecture
 		
-		public static int getNbHeureTeaValide(String ideleve){
+		public Integer getNbHeureTeaValide(String ideleve){
 			int nbtotal=0;
 			
 			
@@ -776,7 +776,7 @@ public class TeaDaoImpl implements TeaDao {
 		//calcul du nombre de tea dues pour un élève en fonction de son id
 		//acc�s en lecture
 		
-		public static int getNbHeureDues(String ideleve){
+		public Integer getNbHeureDues(String ideleve){
 			int nbtotal=0;
 			
 			
@@ -808,7 +808,7 @@ public class TeaDaoImpl implements TeaDao {
 		//calcul du nombre de teaEn attente pour un élève en fonction de son id
 		//acc�s en lecture
 		
-		public static int getNbHeureEnAttente(String ideleve){
+		public Integer getNbHeureEnAttente(String ideleve){
 			int nbtotal=0;
 			
 			
@@ -910,7 +910,7 @@ public class TeaDaoImpl implements TeaDao {
 				//calcul du nombre de personne ayant postuler à une offre en fonction de la clé de l'offre
 				//acc�s en lecture
 				
-				public static int getNbPlacePourvue(Integer cleoffre){
+				public Integer getNbPlacePourvue(Integer cleoffre){
 					int nbtotal=0;
 					
 					
@@ -945,10 +945,12 @@ public class TeaDaoImpl implements TeaDao {
 				
 				public  Integer getTeaDuesEnCours(String ideleve){
 					int nbtotal=0;
-					nbtotal=TeaDaoImpl.getNbHeureDues(ideleve)-TeaDaoImpl.getNbHeureTeaValide(ideleve);
+					nbtotal=Manager.getInstance().getNbHeureDues(ideleve)-Manager.getInstance().getNbHeureTeaValide(ideleve);
 					if(nbtotal<=0)return 0;	return nbtotal;
 					
 				}
+				
+
 
 			
 				

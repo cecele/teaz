@@ -30,6 +30,14 @@ public interface TeaDao {
 
 	List<Tea> getTeaByOffre(Integer cleoffre);
 	
+	Integer getNbPlacePourvue(Integer cleoffre);
+	
+	Integer getNbHeureEnAttente(String ideleve);
+	
+	Integer getNbHeureTeaValide(String ideleve);
+	
+	Integer getNbHeureDues(String ideleve);
+	
 	
 
 }

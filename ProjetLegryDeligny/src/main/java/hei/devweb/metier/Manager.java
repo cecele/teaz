@@ -228,5 +228,65 @@ private static Manager instance;
 		return StructureDao.getPresidentIdById(clestructure);
 	}
 
+	public List<Eleve> getEleveAjour() {
+		System.out.println("Dans Méthode getPresidentIdById");
+		return EleveDao.getEleveAjour();
+	}
+	
+	public Integer getCleStructureById(String ideleve){
+		System.out.println("Dans Méthode  getCleStructureById");
+		return EleveDao.getCleStructureById(ideleve);
+	}
+	
+	public  String getElevePrenomById(String ideleve){
+		System.out.println("Dans Méthode getElevePrenomById");
+		return EleveDao.getElevePrenomById(ideleve);
+	}
+	
+	public String getPromotion(String ideleve){
+		System.out.println("Dans Méthode  getPromotion");
+		return EleveDao.getPromotion(ideleve);
+		
+	}
+	
+	public String getEleveNomById(String ideleve){
+		System.out.println("Dans Méthode getEleveNomById");
+		return EleveDao.getEleveNomById(ideleve);
+	}
+	
+	public boolean president(String ideleve){
+		System.out.println("Dans Méthode president");
+		return EleveDao.president(ideleve);
+	}
 
+	public  String getPresidentNomById(Integer clestructure) {
+		System.out.println("Dans Méthode getPresidentNomById");
+		return StructureDao.getPresidentNomById(clestructure);
+	}
+
+	public String getPresidentPrenomById(Integer clestructure) {
+		System.out.println("Dans Méthode getPresidentPrenomById");
+		return StructureDao. getPresidentPrenomById(clestructure);
+	}
+
+	public Integer getNbPlacePourvue(Integer cleoffre) {
+		System.out.println("Dans Méthode dentgetNbPlacePourvue");
+		return TeaDao. getNbPlacePourvue(cleoffre);
+	}
+
+	public Integer getNbHeureEnAttente(String ideleve) {
+		System.out.println("Dans Méthode getNbHeureEnAttente");
+		return TeaDao. getNbHeureEnAttente(ideleve);
+	}
+
+	public Integer getNbHeureTeaValide(String ideleve) {
+		System.out.println("Dans Méthode getNbHeureTeaValide");
+		return TeaDao. getNbHeureTeaValide(ideleve);
+	}
+
+	public Integer getNbHeureDues(String ideleve) {
+		System.out.println("Dans Méthode getNbHeureDues");
+		return TeaDao. getNbHeureDues(ideleve);
+	}
 }
+
