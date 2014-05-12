@@ -15,10 +15,29 @@ import com.mysql.jdbc.PreparedStatement;
 
 public class RechercheDaoImpl implements RechercheDao {
 	
-	
-	//-----------------------------------------------------------------------------------------------------------------
-	//effectuer une recherche par paramètre d'élève (4 choix possibles, mettre null lorsque le paramètre n'est pas pris en compte!)
-	//acc�s en lecture
+	/**
+	 * retourne la liste des élèves en fonction des différents paramètres saisi dans le formulaire, lorque rien n'est saisi dans le formulaire cela prends une chaine vide
+	 * @param nom
+	 * 					nom de l'élève saisi dans le formulaire
+	 * @param prenom
+	 * 					prenom de l'élève saisi dans le formulaire
+	 * @param classe
+	 * 					classe choisi dans le formulaire
+	 * @param ideleve 
+	 * 					matricule sans le h permettant d'identifier l'élève
+	 * @param orderBy
+	 * 					champs saisi dans le formulaire permettant de choisir dans quel sens trier les réponse
+	 * @param diplome
+	 * 					champs saisi dans le formulaire permettant d'indiquer si on inclut les diplomés (oui= true)
+	 * @param etudiant
+	 * 					champs saisi dans le formulaire permettant d'indiquer si on inclut les étudiants (oui=true)
+	 * @param ajour
+	 * 					champs saisi dans le formulaire permettant d'indiquer si on inclut les personnes à jours dans leurs tea (oui=true)
+	 * @param retard
+	 * 					champs saisi dans le formulaire permettant d'indiquer si on inclut les personnes non à jours dans leurs tea (oui=true)
+	 
+	 * @return la liste des élèves remplissant l'ensemble des critères choisis
+	 */
 
 public List<Eleve> rechercheByParameter(String ideleve, String nom, String prenom, String classe, String orderBy, Boolean diplome, Boolean etudiant, Boolean ajour, Boolean retard){
 List<Eleve> elevescas1 = new ArrayList<Eleve>();

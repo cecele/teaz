@@ -16,13 +16,13 @@ import hei.devweb.model.Offre;
 import hei.devweb.model.Tea;
 
 public class TeaDaoImpl implements TeaDao {
-	//-----------------------------------------------------------------------------------------------------------------
-		// AJOUT/SUPPRESION
-	//-----------------------------------------------------------------------------------------------------------------
-		
-	//-----------------------------------------------------------------------------------------------------------------
-	// cr�ation d 'tea en fonction d'une clé d'offre passée en paramètre cle_offre, statut non valide 
-	// acces en �criture
+	/**
+	 * Récupère une offre en fonction de sa clé
+	 * @param cleoffre
+	 * 					cle de l'objet offre faisant référence à l'annonce que l'utilisateur a posté
+	
+	 * @return l'objet offre ayant la cleoffre comme clé de référence
+	 */
 		public Offre ajouterTeaRecupererOffre (Integer cleoffre ){
 			Offre offre= null;
 					
@@ -67,6 +67,15 @@ public class TeaDaoImpl implements TeaDao {
 			return offre;
 			
 		}
+
+		/**
+		 * Ajout d'une tea à la base 
+		 * @param cleoffre
+		 * 					cle de l'objet offre faisant référence à l'annonce que l'utilisateur a posté
+		 * @param offre
+		 * 					offre auquelle la tea va être rattachée
+		 * @return ajout d'une tea
+		 */
 			public void ajouterTea ( Integer cleoffre ,String ideleve ){
 					
 			Offre offre=  ajouterTeaRecupererOffre (cleoffre);	
@@ -101,74 +110,19 @@ public class TeaDaoImpl implements TeaDao {
 							}
 						}
 			
+
+			/**
+			 * Passage au statut=1 d'une tea non valide par le responsable de la structure
 			
-//	//-----------------------------------------------------------------------------------------------------------------
-//	// statut d'une tea
-//	// acces en �criture
-//			public Boolean getStatutTea (Integer cleoffre ){
-//			
-//				Boolean rep = false;
-//				
-//				try {
-//	                Connection connection = DataSourceProvider.getDataSource()
-//	                                .getConnection();
-//	                
-//	                PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT statut_valide FROM tea WHERE cle_offre = ? ");
-//	                stmt.setInt(1,cleoffre);
-//	                ResultSet results = stmt.executeQuery();
-//
-//	            results.next();
-//	           Integer statutvalide= results.getInt("statut_valide");
-//	           if (statutvalide == 1) rep=true;
-//
-//	                // Fermer la connexion
-//	                results.close();
-//	                stmt.close();
-//	                connection.close();
-//
-//	        } catch (SQLException e) {
-//	                e.printStackTrace();
-//	        }
-//				
-//				
-//				return rep;
-//			}
-//			
-//			
-//			public Boolean DeleteTea (Integer cleoffre){
-//				Boolean rep= getStatutTea(cleoffre);
-//				
-//				if (rep=false){
-//					try {
-//						Connection connection = DataSourceProvider.getDataSource()
-//								.getConnection();
-//
-//						PreparedStatement stmt = (PreparedStatement) connection
-//								.prepareStatement("DELETE  FROM tea WHERE cle_offre=?");
-//						stmt.setInt(1,cleoffre);
-//						stmt.executeUpdate();
-//						// Fermer la connexion
-//
-//						stmt.close();
-//						connection.close();
-//
-//					} catch (SQLException e) {
-//						e.printStackTrace();
-//					}
-//				}
-//				
-//				return rep;
-//			}
-//			
-	//-----------------------------------------------------------------------------------------------------------------
-	// MODIFICATION ET MISE A JOUR
-	//-----------------------------------------------------------------------------------------------------------------
-	
-
-			//-----------------------------------------------------------------------------------------------------------------
-			//mise au statut valide de l'annonce et donc modification de la date de mise en ligne ce processus est eff�ctu� par le reponsable TEA et provoque l'affichage de l'annonce dans la liste
-			//acces en �criture
-
+			 * @param ideleve 
+			 * 					matricule sans le h permettant d'identifier l'élève qui est responsable de la structure quu
+			 * @param clestructure
+			 * 					cle primaire de la table structure permettant d'identifier la structure
+			 * @param cletea
+			 * 					cle de référence d'une tea
+			 * 
+			
+			 */
 			public void teaValidationByStructure(Integer cletea, Integer clestructure, String ideleve){
 				
 				if(Manager.getInstance().getPresidentIdById(clestructure).equals(ideleve)){
@@ -198,9 +152,16 @@ public class TeaDaoImpl implements TeaDao {
 				}
 			}
 			
-			//-----------------------------------------------------------------------------------------------------------------
-			//mise au statut valide de l'annonce et donc modification de la date de mise en ligne ce processus est eff�ctu� par le reponsable TEA et provoque l'affichage de l'annonce dans la liste
-			//acces en �criture
+
+			/**
+			 * Passage au statut=2 d'une tea validé par la structure 
+			
+			
+			 * @param cletea
+			 * 					cle de référence d'une tea
+			 * 
+			
+			 */
 
 			public void teaValidationByResponsable(Integer cletea){
 				
@@ -239,14 +200,14 @@ public class TeaDaoImpl implements TeaDao {
 				}
 			
 				
+
+			/**
+			 * Retourne la liste des tea liées à une offre
+			 * @param cleoffre
+			 * 					cle de l'objet offre faisant référence à l'annonce que l'utilisateur a posté
 			
-	//-----------------------------------------------------------------------------------------------------------------
-	// AFFICHAGE LISTE
-	//-----------------------------------------------------------------------------------------------------------------
-	
-			//-----------------------------------------------------------------------------------------------------------------
-			//recupération tea qui correspondent à une offre 
-			//acc�s en lecture
+			 * @return Liste des teas rattachées à une offre
+			 */
 			public List<Tea> getTeaByOffre(Integer cleoffre){
 				List<Tea> teas = new ArrayList<Tea>();
 				try {
@@ -303,9 +264,15 @@ public class TeaDaoImpl implements TeaDao {
 				
 			}
 			
-			//-----------------------------------------------------------------------------------------------------------------
-					//recupération des heures de TEA d'un eleve en fonction son id
-					//acc�s en lecture
+
+			/**
+			 * Liste des teas rattachées à un élève
+			
+			 * @param ideleve 
+			 * 					matricule sans le h permettant d'identifier l'élève
+			
+			 * 	@return Liste des teas rattachées à un élève
+			 */
 			
 			public List<Tea> getTeaByEleve(String ideleve){
 				List<Tea> teas = new ArrayList<Tea>();
@@ -361,9 +328,14 @@ public class TeaDaoImpl implements TeaDao {
 					return teas;	
 			}
 			
-			//-----------------------------------------------------------------------------------------------------------------
-			//recupération des heures de TEA d'une structure en attente
-			//acc�s en lecture
+			/**
+			 * Liste des teas non valides rattachées à une structure (dont le statut est à 0)
+			
+			* @param clestructure
+			*				cle primaire de la table structure permettant d'identifier la structure
+			
+			 * 	@return Liste des teas non valide rattachées à une structure
+			 */
 
 		public List<Tea> getTeaAValiderByStructure(Integer clestructure, java.util.Date datedujour){
 		List<Tea> teas = new ArrayList<Tea>();
@@ -424,9 +396,15 @@ public class TeaDaoImpl implements TeaDao {
 							}
 			return teas;	
 		}
-		//-----------------------------------------------------------------------------------------------------------------
-		//recupération les tea à valider par structure
-		//acc�s en lecture
+		/**
+		 * Liste des teas  rattachées à une structure 
+		
+		* @param clestructure
+		*				cle primaire de la table structure permettant d'identifier la structure
+		
+		 * 	@return Liste des teas rattachées à une structure
+		 */
+
 
 	public List<Tea> getTeaByStructure(Integer clestructure){
 	List<Tea> teas = new ArrayList<Tea>();
@@ -485,9 +463,13 @@ public class TeaDaoImpl implements TeaDao {
 		return teas;	
 	}
 
-		//-----------------------------------------------------------------------------------------------------------------
-		//recupération des heures de TEA à valider par le resp TEA
-		//acc�s en lecture
+	/**
+	 * Liste des teas non valides par le responsable tea
+	
+	
+	 * 	@return Liste des teas non validé par le responsable tea
+	 */
+
 		public List<Tea> getTeaAValiderByRespTea(){
 		List<Tea> teas = new ArrayList<Tea>();
 		try {
@@ -543,9 +525,15 @@ public class TeaDaoImpl implements TeaDao {
 			return teas;	
 		}
 
-			//-----------------------------------------------------------------------------------------------------------------
-			//recupération des heures de TEA valide d'un eleve en fonction son id
-			//acc�s en lecture
+		/**
+		 * Liste des teas  valides rattachées d'un élève
+			
+		* @param ideleve 
+		 * 					matricule sans le h permettant d'identifier l'élève
+		
+		 * 	@return Liste des teas  valide d'un élève
+		 */
+
 		public List<Tea> getTeaValideByEleve(String ideleve){
 		List<Tea> teas = new ArrayList<Tea>();
 		try {
@@ -599,9 +587,14 @@ public class TeaDaoImpl implements TeaDao {
 							}
 			return teas;	
 		}
-		//-----------------------------------------------------------------------------------------------------------------
-		//recupération des heures de TEA non-valide d'un eleve en fonction son id
-		//acc�s en lecture
+		/**
+		 * Liste des teas non valides rattachées d'un élève
+			
+		* @param ideleve 
+		 * 					matricule sans le h permettant d'identifier l'élève
+		
+		 * 	@return Liste des teas non valide d'un élève
+		 */
 		public List<Tea> getTeaNonValideByEleve(String ideleve){
 		List<Tea> teas = new ArrayList<Tea>();
 		try {
@@ -659,12 +652,14 @@ public class TeaDaoImpl implements TeaDao {
 		
 				
 		
-		//-----------------------------------------------------------------------------------------------------------------
-		// AFFICHAGE RETOUR D'UN PARAMETRE D'UNE TEA
-		//-----------------------------------------------------------------------------------------------------------------
-		//-----------------------------------------------------------------------------------------------------------------
-		//recuperation 
-		//acc�s en lecture
+		/**
+		 * recupere le matricule de l'élève qui réalise la tea
+			
+		* * @param cletea
+			 * 					cle de référence d'une tea
+		
+		 * 	@return ideleve 
+		 */
 			
 			public String getIdeleveByCleTea(Integer cletea){
 				String ideleve="";
@@ -694,9 +689,13 @@ public class TeaDaoImpl implements TeaDao {
 					
 				return ideleve;
 			}
-			//-----------------------------------------------------------------------------------------------------------------
-			//calcul du nombre d'heure de tea effectuée pour une TEA
-			//acc�s en lecture
+			/**
+			 * calcul le nombre d'heure réalisée pour une tea
+			* * @param cletea
+				 * 					cle de référence d'une tea
+			
+			 * 	@return nombre d'heure réalisée pour une tea
+			 */
 			
 			public Integer getNbHeureTeaRealiseeByTea(Integer cletea){
 				int nbtotal=0;
@@ -727,14 +726,13 @@ public class TeaDaoImpl implements TeaDao {
 				return nbtotal;
 			}
 		
-		//-----------------------------------------------------------------------------------------------------------------
-		// AFFICHAGE CALCUL
-		//-----------------------------------------------------------------------------------------------------------------
-				
-	
-	//-----------------------------------------------------------------------------------------------------------------
-	//calcul du nombre d'heure de tea effectuée par un élève qq soit le statut de la TEA
-	//acc�s en lecture
+			/**
+			 * calcul le nombre d'heure réalisée pour un élève donné
+			 * @param ideleve 
+			 * 					matricule sans le h permettant d'identifier l'élève
+			
+			 * 	@return nombre d'heure réalisée par un élève
+			 */
 	
 	public Integer getNbHeureTeaRealisee(String ideleve){
 		int nbtotal=0;
@@ -765,9 +763,13 @@ public class TeaDaoImpl implements TeaDao {
 		return nbtotal;
 	}
 	
-//-----------------------------------------------------------------------------------------------------------------
-		//calcul du nombre d'heure de tea en attente (général)
-		//acc�s en lecture
+	/**
+	 * calcul le nombre d'heure en attente réalisée pour un élève donné
+	 * @param ideleve 
+	 * 					matricule sans le h permettant d'identifier l'élève
+	
+	 * 	@return nombre d'heure en attente réalisée par un élève
+	 */
 	
 	public int getNbHeureTeaEnAttente(){
 		int nbtotal=0;
@@ -797,9 +799,13 @@ public class TeaDaoImpl implements TeaDao {
 			
 		return nbtotal;
 	}
-	//-----------------------------------------------------------------------------------------------------------------
-			//calcul du nombre d'heure de tea valides par élève
-			//acc�s en lecture
+	/**
+	 * calcul le nombre d'heure valide réalisée pour un élève donné
+	 * @param ideleve 
+	 * 					matricule sans le h permettant d'identifier l'élève
+	
+	 * 	@return nombre d'heure valide réalisée par un élève
+	 */
 		
 		public Integer getNbHeureTeaValide(String ideleve){
 			int nbtotal=0;
@@ -829,9 +835,13 @@ public class TeaDaoImpl implements TeaDao {
 				
 			return nbtotal;
 		}
-	//-----------------------------------------------------------------------------------------------------------------
-		//calcul du nombre de tea dues pour un élève en fonction de son id
-		//acc�s en lecture
+		/**
+		 * calcul le nombre d'heure due à l'école pour un élève donné
+		 * @param ideleve 
+		 * 					matricule sans le h permettant d'identifier l'élève
+		
+		 * 	@return nombre d'heure dues à l'école réalisée par un élève
+		 */
 		
 		public Integer getNbHeureDues(String ideleve){
 			int nbtotal=0;
@@ -861,9 +871,13 @@ public class TeaDaoImpl implements TeaDao {
 				
 			return nbtotal;
 		}
-		//-----------------------------------------------------------------------------------------------------------------
-		//calcul du nombre de teaEn attente pour un élève en fonction de son id
-		//acc�s en lecture
+		/**
+		 * calcul le nombre d'heure en attente réalisée pour un élève donné
+		 * @param ideleve 
+		 * 					matricule sans le h permettant d'identifier l'élève
+		
+		 * 	@return nombre d'heure en attente réalisée par un élève
+		 */
 		
 		public Integer getNbHeureEnAttente(String ideleve){
 			int nbtotal=0;
@@ -893,9 +907,12 @@ public class TeaDaoImpl implements TeaDao {
 				
 			return nbtotal;
 		}
-		//-----------------------------------------------------------------------------------------------------------------
-				//calcul du nombre de tea en attente de validation
-				//acc�s en lecture
+		/**
+		 * calcul le nombre d'heure en attente réalisée
+		
+		
+		 * 	@return nombre d'heure en attente 
+		 */
 				
 				public Integer getTeaEnAttente(){
 					int nbtotal=0;
@@ -926,9 +943,13 @@ public class TeaDaoImpl implements TeaDao {
 					return nbtotal;
 				}
 				
-				//-----------------------------------------------------------------------------------------------------------------
-				//recupération des heures de TEA d'une structure en attente
-				//acc�s en lecture
+				/**
+				 * calcul le nombre d'heure en attente réalisée pour un élève donné
+				 * @param clestructure
+				 * 					cle primaire de la table structure permettant d'identifier la structure
+				
+				 * 	@return nombre d'heure en attente réalisée pour une structure
+				 */
 
 			public Integer getNbTeaAValiderByStructure(Integer clestructure, java.util.Date datedujour){
 				Integer nbtotal=0;
@@ -963,9 +984,13 @@ public class TeaDaoImpl implements TeaDao {
 			}
 			
 
-				//-----------------------------------------------------------------------------------------------------------------
-				//calcul du nombre de personne ayant postuler à une offre en fonction de la clé de l'offre
-				//acc�s en lecture
+			/**
+			 * calcul du nombre de place pourvue pour une offre
+			 * @param cleoffre
+		 * 					cle de l'objet offre faisant référence à l'annonce que l'utilisateur a posté
+			
+			 * 	@return calcul du nombre de place pourvue pour une offre
+			 */
 				
 				public Integer getNbPlacePourvue(Integer cleoffre){
 					int nbtotal=0;

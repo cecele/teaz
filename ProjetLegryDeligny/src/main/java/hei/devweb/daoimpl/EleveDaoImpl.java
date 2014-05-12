@@ -22,13 +22,6 @@ public class EleveDaoImpl implements EleveDao {
 	 * Permet d'ajouter un élève (normalement n'a pas d'utilité ici)
 	 * @param Eleve
 	 * 					Objet Eleve contenant toutes informations relatives à ce dernier
-	 * @param cleoffre
-	 * 					cle de l'objet offre faisant référence à l'annonce que l'utilisateur a posté
-	 * @param ideleve 
-	 * 					matricule sans le h permettant d'identifier l'élève
-	 * @param clestructure
-	 * 					cle primaire de la table structure permettant d'identifier la structure
-	 * @return Booleen retournant true si un élève a deja postulé, false sinon
 	 */
 
 	public void CreateEleve(Eleve eleve){
@@ -66,14 +59,13 @@ public class EleveDaoImpl implements EleveDao {
 					}
 		}
 		
-	//-----------------------------------------------------------------------------------------------------------------
-		//  MISE A JOUR
-	//-----------------------------------------------------------------------------------------------------------------
-		
-//-----------------------------------------------------------------------------------------------------------------
-		//Changement du profil d'un �tudiant par d�faut le profil est �tudiant de base =0
-		//acc�s en ecriture (update)
-		//test junit
+	/**
+	 * Permet de changer le profil d'un élève
+	 * @param profil 	
+	 * 					Niveau de profil auquel l'élève va être rattaché (groupe utilisateur)
+	 * @param ideleve 
+	 * 					matricule sans le h permettant d'identifier l'élève
+	 */
 		public void eleveChgtProfil (String ideleve, Integer profil){
 			
 			try {
@@ -96,10 +88,9 @@ public class EleveDaoImpl implements EleveDao {
 	
 			}
 		
-	//-----------------------------------------------------------------------------------------------------------------
-	//mise à jour du nombre d'heure de tea due
-	//acc�s en ecriture (update)
-	//test junit non nécessaire pour l'instant
+		/**
+		 * Permet de la mise à jour du nombre de TEA stocké dans la BDD. Nécessaire lors d'njection en masse dans la BDD
+		 */
 		public void majTeaByClasse (){
 			try {
 				Connection connection = DataSourceProvider.getDataSource()
@@ -149,13 +140,10 @@ public class EleveDaoImpl implements EleveDao {
 			}
 		}
 		
-	//-----------------------------------------------------------------------------------------------------------------
-		// AFFICHAGE LISTE
-	//-----------------------------------------------------------------------------------------------------------------
-		//-----------------------------------------------------------------------------------------------------------------
-				//r�cup�ration de la liste totale  des eleves de l'�cole
-				//acc�s en lecture
-				// test junit pas ok diplome?
+		/**
+		 * Retourne la liste d'élève de l'école sans différenciation (diplomé ou non etc...)
+		 * @return L'ensemble des élèves de l'école
+		 */
 						
 			public List<Eleve> getEleveTotal(){
 				List<Eleve> eleves = new ArrayList<Eleve>();
@@ -206,10 +194,11 @@ public class EleveDaoImpl implements EleveDao {
 									}
 					return eleves;	
 			}
-			//-----------------------------------------------------------------------------------------------------------------
-					//r�cup�ration de la liste totale  des eleves de l'�cole
-					//acc�s en lecture
-					//test junit 
+			/**
+			 * Permet de récupérer l'ensemble des élèves de l'école (uniquement , sans les diplomés)
+			
+			 * @return La liste des élèves étant actuellement en cours 
+			 */
 							
 				public List<Eleve> getEleveEnCours(){
 					List<Eleve> eleves = new ArrayList<Eleve>();
@@ -260,11 +249,10 @@ public class EleveDaoImpl implements EleveDao {
 										}
 						return eleves;	
 				}
-			//-----------------------------------------------------------------------------------------------------------------
-			//récupération des diplome pas à jours
-			//acc�s en lecture
-			// test junit
-					
+				/**
+				 * Permet de récupérer les élèves n'étant plus à l'école mais n'ayant pas leurs heures de tea à jour
+				 * @return La liste des élèves étant au  dela de la HEI5 mais n'ayant pas leurs heures de TEA à jour 
+				 */
 							
 				public List<Eleve> getEleveDiplomePasAjours(){
 					List<Eleve> eleves = new ArrayList<Eleve>();
@@ -316,10 +304,10 @@ public class EleveDaoImpl implements EleveDao {
 										}
 						return eleves;	
 				}
-				//-----------------------------------------------------------------------------------------------------------------
-				//récupération des élèves à jours
-				//acc�s en lecture
-				
+				/**
+				 * Permet de récupérer les élèves étant à jour dans leurs heures de TEA
+				 * @return La liste des élèves étant à jours dans leurs heure de TEA sans aucune restriction 
+				 */
 						
 			public  List<Eleve> getEleveAjour(){
 				List<Eleve> eleves = new ArrayList<Eleve>();
@@ -372,13 +360,14 @@ public class EleveDaoImpl implements EleveDao {
 					return eleves;	
 			}
 			
-	//-----------------------------------------------------------------------------------------------------------------
-				// AFFICHAGE OBJET ELEVE
-	//-----------------------------------------------------------------------------------------------------------------
-		//-----------------------------------------------------------------------------------------------------------------
-		//r�cup�ration des information d'un eleve en fonction de id (son id est numero de matricule sans le h)
-		//acc�s en lecture
-		// test junit ok
+			/**
+			 *Permet de récupérer un élève spécifiquement demandé
+		
+			 * @param ideleve 
+			 * 					matricule sans le h permettant d'identifier l'élève
+			
+			 * @return L'instance correspondant à l'élève visé
+			 */
 		
 		public Eleve getEleveById(String ideleve){
 			Eleve eleve = new Eleve(null,null,null, null, null, null, null, null, null, null, null,null,null,null, null,null, null, null); 
@@ -430,9 +419,12 @@ public class EleveDaoImpl implements EleveDao {
 		}
 
 
-		//-----------------------------------------------------------------------------------------------------------------
-		//récupération des élèves responsables d'assos
-		//acc�s en lecture
+		/**
+		 * Permet de récupérer la liste des élèves étant responsable à hei en fonction de leurs groupe utilsiateurs
+		 * @param profil 	
+		 * 					Niveau de profil auquel l'élève va être rattaché (groupe utilisateur)
+		 * @return La liste des élèves responsable à hei en fonction de leurs profil (0, 1, 2,3,4)
+		 */
 		
 		
 
@@ -484,13 +476,14 @@ public class EleveDaoImpl implements EleveDao {
 		
 		
 
-	//-----------------------------------------------------------------------------------------------------------------
-		// AFFICHAGE PARAMETRE OBJET ELEVE
-	//-----------------------------------------------------------------------------------------------------------------
-		//-----------------------------------------------------------------------------------------------------------------
-		//récupération de la cle_structure d'un élève en fonction de son id
-		//acc�s en lecture
+		/**
+		 * Retourne la cle primaire de la table structure dont un élève est responsable
+	
+		 * @param ideleve 
+		 * 					matricule sans le h permettant d'identifier l'élève
 		
+		 * @return  retourne la cle de la  structure dont l'élève est responsable
+		 */
 
 				public Integer getCleStructureById(String ideleve){
 					int res=0;
@@ -525,9 +518,14 @@ public class EleveDaoImpl implements EleveDao {
 					return res;
 					
 				}
-				//-----------------------------------------------------------------------------------------------------------------
-				//recuperation du nom d'un élève en fonctio nde son id
-				//acc�s en lecture
+				/**
+				 * Permet de récupérer le nom d'un élève en fonction de son matricule
+		
+				 * @param ideleve 
+				 * 					matricule sans le h permettant d'identifier l'élève
+			
+				 * @return le nom de cet élève
+				 */
 				
 				
 				public String getEleveNomById(String ideleve){
@@ -559,9 +557,14 @@ public class EleveDaoImpl implements EleveDao {
 						return nom;	
 				}
 				
-				//-----------------------------------------------------------------------------------------------------------------
-						//recuperation du prenom d'un élève en fonctio nde son id
-						//acc�s en lecture
+				/**
+				 * Permet de récupérer le prenom d'un élève en fonction de son matricule
+		
+				 * @param ideleve 
+				 * 					matricule sans le h permettant d'identifier l'élève
+			
+				 * @return le prenom de cet élève
+				 */
 						
 						
 						public  String getElevePrenomById(String ideleve){
@@ -592,17 +595,21 @@ public class EleveDaoImpl implements EleveDao {
 							 
 								return prenom;	
 						}
-						//-----------------------------------------------------------------------------------------------------------------
-						//booléen permettant de savoir si un élève est président de structure pour l'année en cours
-						//acc�s en lecture
-						// junit non nécessaire, requete interne
-								public boolean president(String ideleve){
-									boolean res= false;
-									
-									int rep= 0;
-									java.util.Date utildate = new Date();
-								    java.sql.Date sqlDate = new java.sql.Date(utildate.getTime());
-									try {
+						/**
+						 * Permet de savoir si un eleve est responsable au sein de la vie associative
+						
+						 * @param ideleve 
+						 * 					matricule sans le h permettant d'identifier l'élève
+					
+						 * @return true si l'élève est responsable, false sinon
+						 */
+public boolean president(String ideleve){
+	
+boolean res= false;
+int rep= 0;
+java.util.Date utildate = new Date();
+ java.sql.Date sqlDate = new java.sql.Date(utildate.getTime());
+		try {
 										Connection connection = DataSourceProvider.getDataSource()
 												.getConnection();
 										PreparedStatement stmt = (PreparedStatement) connection.prepareStatement("SELECT COUNT(cle_structure) as total FROM presider WHERE id_eleve=? AND date_fin>?" );
@@ -617,27 +624,26 @@ public class EleveDaoImpl implements EleveDao {
 										stmt.close();
 										connection.close();
 										
-								}
+				}
 									catch (SQLException e) {
 														e.printStackTrace();
 													}
 									
 									return res;
 									
-								}
+}
+
+/**
+ * Permet de connaitre la cle de la classe actuelle d'un élève
+ 
+ * @param ideleve 
+ * 					matricule sans le h permettant d'identifier l'élève
+
+ * @return la cle de la table classe visée
+ */							
+
 								
-
-	//-----------------------------------------------------------------------------------------------------------------
-				// CALCUL
-	//-----------------------------------------------------------------------------------------------------------------
-		
-		
-
-	
-	//-----------------------------------------------------------------------------------------------------------------
-			//Calcul de la promotion de l'�l�ve : recuperation de classe en cours pour le calcul
-			//acc�s en lecture
-			//test junit non nécessaire requete interne
+								 
 	public Integer getCleClasse(String ideleve){
 		System.out.println("Dans la méthode getCleClasse, id eleve vaut:"+ideleve);
 		int cleclasse=0;
@@ -666,6 +672,15 @@ public class EleveDaoImpl implements EleveDao {
 		
 		return cleclasse;
 	}
+
+	/**
+	 * Permet de récupérer le nom de classe actuelle d'un élève
+	 
+	 * @param ideleve 
+	 * 					matricule sans le h permettant d'identifier l'élève
+	 * @see getCleClasse
+	 * @return le nom de la classe de cet élève
+	 */
 	public  String getPromotion(String ideleve){
 		String classeencours="";
 		
@@ -695,21 +710,38 @@ public class EleveDaoImpl implements EleveDao {
 			
 		return classeencours;
 	}
-	
+	/**
+	 * retourne le nombre d'élève à jour
+
+	 * @return le nombre d'élève à jour
+	 */
 	public int sizeEleveAjourEncours(){
 		List<Eleve> eleve=Manager.getInstance().getEleveAjour();
 		return eleve.size();
 	} 
+	/**
+	 * retourne le nombre d'élève en cours
 
+	 * @return le nombre d'élève en cours
+	 */
 	public int sizeEleveEncours(){
 		List<Eleve> eleve=getEleveEnCours();
 		return eleve.size();
 	} 
-	
+	/**
+	 * retourne le nombre d'élève ayant passé la HEI5 et n'étant pas à jour
+
+	 * @return le nombre d'élève ayant passé la hei 5 et n'ayant pas à jour
+	 */
 	public int sizeDiplomePasAjour(){
 		List<Eleve> eleve=getEleveDiplomePasAjours();
 		return eleve.size();
 	} 
+	/**
+	 * retourne le nombre d'élève n'étant pas à jour dans 
+
+	 * @return le nombre d'élève ayant passé la hei 5 et n'ayant pas à jour
+	 */
 	 public int sizeElevePasAJour(){
 		 return sizeEleveEncours()-sizeEleveEncours();
 	 }

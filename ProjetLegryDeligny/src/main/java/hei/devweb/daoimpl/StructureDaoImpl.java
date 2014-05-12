@@ -15,12 +15,18 @@ import hei.devweb.model.Structure;
 import hei.devweb.model.Tea;
 
 public class StructureDaoImpl implements StructureDao {
-//-----------------------------------------------------------------------------------------------------------------
-	// AJOUT/SUPPRESION
-//-----------------------------------------------------------------------------------------------------------------
-	//-----------------------------------------------------------------------------------------------------------------
-		// creation de mandature pour une structure
-		// acces en ecriture
+	/**
+	 * Permet de créer un lien entre un élève et une structure
+	 
+	 * @param ideleve 
+	 * 					matricule sans le h permettant d'identifier l'élève
+	 *  @param clestructure
+	*				  	cle primaire de la table structure permettant d'identifier la structure
+	* @param datedebut
+	* 					date de début de prise de fonction au sein de l'association
+	* @param datefin
+	* 					date de fin de fonction au sein de l'association
+	 */
 					
 					public void StructureChangement (String ideleve, Integer clestructure,Date datedebut, Date datefin ){
 						// creation de la mandature
@@ -52,11 +58,16 @@ public class StructureDaoImpl implements StructureDao {
 						}
 						
 						
-					}
+}
 					
-	//-----------------------------------------------------------------------------------------------------------------
-	// creation d'une structure
-	// acces en ecriture		
+
+
+
+					/**
+					 * Retourne vrai ou faux afin de savoir si un élève a déjà postulé à une offre
+					*@param nom 
+					*			nom de la commission à créer tiré du poste exemple Integrale-Président
+					 */
 					
 					public void CreateStructure(String nom){
 						try {
@@ -82,13 +93,14 @@ public class StructureDaoImpl implements StructureDao {
 					
 					
 
-//-----------------------------------------------------------------------------------------------------------------
-	// AFFICHAGE
-//-----------------------------------------------------------------------------------------------------------------
+/**
+ * Retourne le nom du president d'une association
 
-//-----------------------------------------------------------------------------------------------------------------
-// recuperation du nom du préseident en fonction de la cle_structure
-// acces en lecture
+ * @param clestructure
+ * 					cle primaire de la table structure permettant d'identifier la structure
+ * @return le nom du président d'une comission
+ */
+
 	public  String getPresidentNomById(Integer clestructure){
 					String res="";
 						try {
@@ -114,9 +126,12 @@ public class StructureDaoImpl implements StructureDao {
 						return res;
 						
 					}
-	//-----------------------------------------------------------------------------------------------------------------
-	// recuperation du de la clé structure en fonction du niom de la structure
-	// acces en lecture
+	/**
+	 * Retourne la clé de la structure dont on connait le nom 
+
+	 * @return la clé de la structure dont on connait le nom
+	 */
+	
 		public  Integer getCleByNom(String structurenom){
 						int res=0;
 							try {
@@ -142,9 +157,14 @@ public class StructureDaoImpl implements StructureDao {
 							return res;
 							
 						}
-	//-----------------------------------------------------------------------------------------------------------------
-	// recuperation du prenom du préseident en fonction de la cle_structure
-	// acces en lecture
+		/**
+		 * Retourne le prenom du président d'une commission dont on connait la clé
+		
+		 * @param clestructure
+		 * 					cle primaire de la table structure permettant d'identifier la structure
+		 * @return le prénom du président d'une structure
+		 */
+		
 		public String getPresidentPrenomById(Integer clestructure){
 						String res="";
 							try {
@@ -171,9 +191,15 @@ public class StructureDaoImpl implements StructureDao {
 							
 						}
 		
-		//-----------------------------------------------------------------------------------------------------------------
-		// recuperation du prenom du préseident en fonction de la cle_structure
-		// acces en lecture
+
+		/**
+		 * Retourne le matricule du président d'une commission dont on connait la clé
+		
+		 * @param clestructure
+		 * 					cle primaire de la table structure permettant d'identifier la structure
+		 * @return le matricule du président d'une structure
+		 */
+		
 		public  String getPresidentIdById(Integer clestructure){
 							String res="";
 								try {
@@ -200,9 +226,14 @@ public class StructureDaoImpl implements StructureDao {
 								
 							}
 		
-		//-----------------------------------------------------------------------------------------------------------------
-		// recuperation du nom de la structure
-		// acces en lecture
+
+		/**
+		 * Retourne le nom d'une structure d'une commission dont on connait la clé
+		
+		 * @param clestructure
+		 * 					cle primaire de la table structure permettant d'identifier la structure
+		 * @return le nom de cette structure
+		 */
 			public  String getNomStructure(Integer clestructure){
 							String res="";
 								try {
@@ -228,10 +259,11 @@ public class StructureDaoImpl implements StructureDao {
 								return res;
 								
 							}		
-			
-	//-----------------------------------------------------------------------------------------------------------------
-	// recuperation des structures enregistr�es � hei par ordre alphabetique de nom de structure
-	// acces en lecture
+			/**
+			 * Retourne la liste des structures dans la base
+			 
+			 * @return la liste des strucutres de la base
+			 */
 	
 	public List<Structure> getStructure_OrdreNom(){
 		List<Structure> structures = new ArrayList<Structure>();
@@ -267,9 +299,11 @@ public class StructureDaoImpl implements StructureDao {
 	}
 	
 
-//-----------------------------------------------------------------------------------------------------------------
-// recuperation de la structure en fonction de l'�l�ve
-// acces en lecture
+	/**
+	 * Retourne la structure rattachée à au matricule d'un élève
+
+	 * @return Retourne la structure rattachée à au matricule d'un élève
+	 */
 				
 				public Structure getStructure_ElevePresident(String ideleve){
 					Structure structure = new Structure(null,null,null,null);
