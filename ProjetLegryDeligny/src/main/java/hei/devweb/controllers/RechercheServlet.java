@@ -40,6 +40,9 @@ public class RechercheServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
 		String matricule = "";
@@ -73,18 +76,7 @@ public class RechercheServlet extends HttpServlet {
 			
 			
 			}
-
-		System.out.println(request.getParameter("encours"));
 		
-		System.out.println(request.getParameter("ajour"));
-			
-		System.out.println(request.getParameter("pasajour"));
-		
-		System.out.println(request.getParameter("diplome"));
-		
-		
-		System.out.println("fonction recherche " + matricule+ " " +nom+ " " +prenom+ " " +classe+ " " +orderBy+ " " +diplome+ " " +encours+ " " +ajour+ " " +pasajour);
-		System.out.println(request.getParameter("rech")); 
 		List<Eleve> eleves = Manager.getInstance().rechercheByParameter(matricule,nom,prenom,classe,orderBy,diplome,encours,ajour,pasajour);
 		
 		request.setAttribute("eleves",eleves);

@@ -37,24 +37,25 @@ public class ModifierCommissionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		System.out.println("dans DoGet");
+		
 		int id = Integer.parseInt(request.getParameter("id"));
 		Structure structure = Manager.getInstance().getStructureByCle(id);
 		request.setAttribute("structure",structure);
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/modifiercommission.jsp");
-		view.forward(request, response);
+		view.forward(request, response); 
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("dans DoPost");
+		
 		Integer idstruct = Integer.parseInt(request.getParameter("id"));
-		Structure ancienneStructure = Manager.getInstance().getStructureByCle(idstruct);
-		Eleve AncienPresident = (Eleve) Manager.getInstance().rechercheByParameter("", ancienneStructure.getStructure_president_nom(), ancienneStructure.getStructure_president_prenom(), "", "", true,true,true,true);
-		String idAncienPresident = AncienPresident.getId_eleve();
-		
-		
+		String idAncienPresident = Manager.getInstance().getPresidentIdById(idstruct);
+
 		String ideleve = request.getParameter("ideleve");
 		String StringDateDebut = request.getParameter("debut");
 		String StringDateFin = request.getParameter("fin");
@@ -64,6 +65,11 @@ public class ModifierCommissionServlet extends HttpServlet {
 		Date dateFin = null;
 		try {
 			dateDebut = sdf.parse(StringDateDebut);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
 			dateFin = sdf.parse(StringDateFin);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block

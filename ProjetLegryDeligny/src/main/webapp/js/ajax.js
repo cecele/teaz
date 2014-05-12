@@ -105,15 +105,10 @@ $(document).ready(function(){
         
         $(".modifiercommission").click(function(){
             var okay = window.confirm("Voulez-vous vraiment donner les droits?");
-    		if(okay == true){
-    
-    			$.ajax({ 
-    				url:"modifiercommission", type:"POST",data:{id:$(this).attr("data-id")}
-    			});
+    		if(okay != true){
+    			return
     		}        
-    		else{
-    			return;
-    		}
+    		
                 
         });
         

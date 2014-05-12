@@ -145,7 +145,7 @@
 			</article>
 			<article>
 				<h2>Gestion des commissions</h2>
-				<form method="POST" action="ajoutercommission">
+				
 				<table class="tableau">
 					<thead>
 						<tr>
@@ -159,7 +159,7 @@
 					<tr>
 						<td>${commissions.structure_nom}</td>
 						<td>${commissions.structure_president_prenom} ${commissions.structure_president_nom}</td>
-						<td><a href="modifiercommission?id=${commissions.cle_structure}" >Modifier Président</a></td>
+						<td><a href="modifiercommission?id=${commissions.cle_structure}"><input type="submit" value="Modifier"/></a></td>
 				
 					</tr>
 					</c:forEach>
@@ -167,13 +167,15 @@
 						<th colspan="3" style="text-align:center;background-color:rgb(52,73,94);color:rgb(228,229,211)">Ajouter une commission</th>
 					</tr>
 					<tr>
+					<form method="POST" action="ajoutercommission">
 						<td>Nom de la commission</td>
 						<td><input type="text" name="nom" id="nom" required/></td>
 						<td><input type="submit" value="Ajouter"/></td>
+					</form>
 					</tr>
 					</tbody>
 				</table>
-				</form>
+				
 			</article>
 		</section>	
 		<jsp:include page="bottom.jsp" />

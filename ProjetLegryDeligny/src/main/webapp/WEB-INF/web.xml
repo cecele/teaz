@@ -25,7 +25,7 @@
     <url-pattern>/deconnexion</url-pattern>
     <url-pattern>/gestionadministration</url-pattern>
     <url-pattern>/ajouterdroit</url-pattern>
-    <url-pattern>/modifiercommission</url-pattern> 
+    <url-pattern>/modifiercommission</url-pattern>
     <url-pattern>/ajoutercommission</url-pattern>
   </filter-mapping>
   <filter>
@@ -55,7 +55,7 @@
   </filter>
   <filter-mapping>
     <filter-name>SuperAdminFilter</filter-name>
-    <url-pattern>/modifiercommission</url-pattern> 
+    <url-pattern>/modifiercommission</url-pattern>
     <url-pattern>/ajoutercommission</url-pattern>
     <url-pattern>/ajouterdroit</url-pattern>
     <url-pattern>/gestionadministration</url-pattern>

@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	<jsp:include page="menu.jsp" />
-	
+	 <div id="fb-root"></div> <script>(function(d, s, id) {   var js, fjs = d.getElementsByTagName(s)[0];   if (d.getElementById(id)) return;   js = d.createElement(s); js.id = id;   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";   fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>
 	<!-- Corps -->
    		<section>
  
@@ -48,7 +48,10 @@
 					<p>Bonjour et bienvenue sur le portail de gestion des Teas, ${sessionScope.sessionEleve.eleve_prenom } ${sessionScope.sessionEleve.eleve_nom }.</p>
 				</c:if>
 			</article>
-			
+			<article>
+				<H2>Suivez-nous sur Facebook</H2>
+				<div class="fb-follow" data-href="https://www.facebook.com/boulkiyheis2012" data-width="940px" data-colorscheme="light" data-layout="standard" data-show-faces="true"></div>
+			</article>
 		</section>	
 		<jsp:include page="bottom.jsp" />
 	</div>	

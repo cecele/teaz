@@ -44,7 +44,7 @@ public class AjouterCommissionServlet extends HttpServlet {
 		System.out.println(nom);	
 		String cle_structure = String.valueOf(Manager.getInstance().getCleByNom(nom));
 		
-		response.sendRedirect("modificationcommission?id="+cle_structure); 
+		response.sendRedirect("modifiercommission?id="+cle_structure); 
 	}
 
 }
