@@ -8,4 +8,6 @@ public interface RechercheDao {
 
 	List<Eleve> rechercheByParameter(String ideleve, String nom, String prenom, String classe, String orderBy, Boolean diplome, Boolean etudiant, Boolean ajour, Boolean retard);
 
+	Integer sizeReponse(List<Eleve> eleves);
+
 }

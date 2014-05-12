@@ -34,6 +34,7 @@
 						<td>${sessionScope.sessionEleve.teaAfaire == 0 ? 'A jour' : 'Pas à jour' }</td>
 						<td>${sessionScope.sessionEleve.teaAfaire}</td>
 						<td>${sessionScope.sessionEleve.teaFaite}</td>
+						<td>${nbTeaEnAttente }</td>
 						<td>${nbTeaDuesEnCours}</td>
 					</tr>
 				</table>

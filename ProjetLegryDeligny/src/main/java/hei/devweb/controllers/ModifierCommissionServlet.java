@@ -80,8 +80,7 @@ public class ModifierCommissionServlet extends HttpServlet {
 		Manager.getInstance().ajouterDroits(ideleve,1);
 		Manager.getInstance().ajouterDroits(idAncienPresident,0);
 		
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/administration.jsp");
-		view.forward(request, response);
+		response.sendRedirect("administration"); 
 		
 		
 	}

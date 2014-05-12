@@ -34,14 +34,18 @@ public class TeaServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/tea.jsp");
-		view.forward(request, response);
+		
 		
 		HttpSession session = request.getSession();    
 		Eleve eleve = (Eleve) (session.getAttribute("sessionEleve"));
 		String matricule = eleve.getId_eleve();
 		Integer nbTeaDuesEnCours = Manager.getInstance().getTeaDuesEnCours(matricule);
+		Integer nbTeaEnAttente = Manager.getInstance().getNbHeureEnAttente(matricule);
 		request.setAttribute("nbTeaDuesEnCours",nbTeaDuesEnCours);
+		request.setAttribute("nbTeaEnAttente",nbTeaEnAttente);
+		
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/tea.jsp");
+		view.forward(request, response);
 	}
 
 	/**

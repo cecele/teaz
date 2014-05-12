@@ -43,6 +43,8 @@ public class MesAnnoncesServlet extends HttpServlet {
 		Eleve eleve = (Eleve) (session.getAttribute("sessionEleve"));
 		Integer clestructure = eleve.getCle_structure();
 		List<Offre> offres = Manager.getInstance().listerOffreByStructure(clestructure);
+		List<Tea> 
+		
 		
 		request.setAttribute("offres",offres);
 		

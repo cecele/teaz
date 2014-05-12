@@ -19,10 +19,12 @@ public class GestionElevesServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	
 		
 		List<Eleve> eleves = Manager.getInstance().getEleveTotal();
+		Integer results = Manager.getInstance().sizeReponse(eleves);
+		
 		request.setAttribute("eleves",eleves);
+		request.setAttribute("results", results);
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/gestioneleves.jsp");
 		view.forward(request, response);

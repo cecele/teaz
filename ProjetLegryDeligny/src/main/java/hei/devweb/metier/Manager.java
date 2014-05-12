@@ -288,5 +288,10 @@ private static Manager instance;
 		System.out.println("Dans Méthode getNbHeureDues");
 		return TeaDao. getNbHeureDues(ideleve);
 	}
+
+	public Integer sizeReponse(List<Eleve> eleves) {
+		// TODO Auto-generated method stub
+		return RechercheDao.sizeReponse(eleves);
+	}
 }
 
