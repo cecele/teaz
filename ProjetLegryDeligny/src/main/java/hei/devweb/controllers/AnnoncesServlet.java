@@ -1,6 +1,7 @@
 package hei.devweb.controllers;
 
 import hei.devweb.metier.Manager;
+import hei.devweb.model.Eleve;
 import hei.devweb.model.Offre;
 
 import java.io.IOException;
@@ -11,15 +12,32 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+/**
+ * Servlet Annonces
+ * 
+ * Elle récupère les annonces validées par le responsable TEA dont la date n'est pas encore passée.
+ * Elle récupère le matricule de l'élève connecté via sa session, et appelle la méthode listerOffreByEleve avec ce matricule en paramètre pour ne pas afficher les annonces postées par l'utilisateur lui meme.
+ * 
+ * @author Projet
+ *
+ */
 public class AnnoncesServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		List<Offre> offres = Manager.getInstance().listerOffre();
+		HttpSession session = request.getSession();    
+		Eleve eleve = (Eleve) (session.getAttribute("sessionEleve"));
+		String matricule = eleve.getId_eleve();
+		
+		List<Offre> offres = Manager.getInstance().listerOffreByEleve(matricule);
 		request.setAttribute("offres",offres);
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/annonces.jsp");

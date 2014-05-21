@@ -1,6 +1,7 @@
 package hei.devweb.controllers;
 
 import hei.devweb.metier.Manager;
+import hei.devweb.model.Eleve;
 import hei.devweb.model.Offre;
 
 import java.io.IOException;
@@ -12,9 +13,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ValidationAnnoncesServlet
+ * 
+ * Elle liste les annonces en attente pour le responsable TEA, afin qu'il puisse les valider
+ */
+/**
+ * @author Projet
+ *
  */
 @WebServlet("/ValidationAnnoncesServlet")
 public class ValidationAnnoncesServlet extends HttpServlet {
@@ -23,6 +31,9 @@ public class ValidationAnnoncesServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
+    /**
+     * 
+     */
     public ValidationAnnoncesServlet() {
         super();
         // TODO Auto-generated constructor stub
@@ -30,6 +41,9 @@ public class ValidationAnnoncesServlet extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Offre> offres = Manager.getInstance().listerOffreNonValide();
@@ -41,6 +55,9 @@ public class ValidationAnnoncesServlet extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub

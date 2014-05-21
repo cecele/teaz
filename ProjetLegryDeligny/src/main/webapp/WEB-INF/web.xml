@@ -1,5 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <filter>
+    <filter-name>EleveFilter</filter-name>
+    <filter-class>hei.devweb.filters.EleveFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>EleveFilter</filter-name>
+    <url-pattern>/tea</url-pattern>
+    <url-pattern>/mestea</url-pattern>
+    <url-pattern>/annonces</url-pattern>
+    <url-pattern>/mesannonces</url-pattern>
+    <url-pattern>/deposerannonce</url-pattern>
+    <url-pattern>/fairetea</url-pattern>
+    <url-pattern>/faireteavalider</url-pattern>
+    <url-pattern>/administration</url-pattern>
+    <url-pattern>/validationannonces</url-pattern>
+    <url-pattern>/validerannonce</url-pattern>
+    <url-pattern>/validationtea</url-pattern>
+    <url-pattern>/validertea</url-pattern>
+    <url-pattern>/gestioneleves</url-pattern>
+    <url-pattern>/detail</url-pattern>
+    <url-pattern>/recherche</url-pattern>
+    <url-pattern>/postuler</url-pattern>
+    <url-pattern>/deconnexion</url-pattern>
+    <url-pattern>/gestionadministration</url-pattern>
+    <url-pattern>/ajouterdroit</url-pattern>
+    <url-pattern>/modifiercommission</url-pattern>
+    <url-pattern>/ajoutercommission</url-pattern>
+  </filter-mapping>
+  <filter>
+    <filter-name>ResponsableFilter</filter-name>
+    <filter-class>hei.devweb.filters.ResponsableFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>ResponsableFilter</filter-name>
+    <url-pattern>/deposerannonce</url-pattern>
+    <url-pattern>/mesannonces</url-pattern>
+    <url-pattern>/fairetea</url-pattern>
+    <url-pattern>/faireteavalider</url-pattern>
+  </filter-mapping>
+  <filter>
+    <filter-name>AdministrationFilter</filter-name>
+    <filter-class>hei.devweb.filters.AdministrationFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AdministrationFilter</filter-name>
+    <url-pattern>/gestioneleves</url-pattern>
+    <url-pattern>/detail</url-pattern>
+    <url-pattern>/recherche</url-pattern>
+  </filter-mapping>
+  <filter>
+    <filter-name>SuperAdminFilter</filter-name>
+    <filter-class>hei.devweb.filters.SuperAdminFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>SuperAdminFilter</filter-name>
+    <url-pattern>/modifiercommission</url-pattern>
+    <url-pattern>/ajoutercommission</url-pattern>
+    <url-pattern>/ajouterdroit</url-pattern>
+    <url-pattern>/gestionadministration</url-pattern>
+    <url-pattern>/administration</url-pattern>
+    <url-pattern>/modifiercommission</url-pattern>
+    <url-pattern>/ajoutercommission</url-pattern>
+    <url-pattern>/ajouterdroit</url-pattern>
+  </filter-mapping>
+  <filter>
+    <filter-name>BdeFilter</filter-name>
+    <filter-class>hei.devweb.filters.BdeFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>BdeFilter</filter-name>
+    <url-pattern>/validationannonces</url-pattern>
+    <url-pattern>/validerannonce</url-pattern>
+    <url-pattern>/validationtea</url-pattern>
+    <url-pattern>/validertea</url-pattern>
+  </filter-mapping>
   <servlet>
     <servlet-name>Accueil</servlet-name>
     <servlet-class>hei.devweb.controllers.AccueilServlet</servlet-class>
@@ -17,10 +92,6 @@
     <servlet-class>hei.devweb.controllers.DeposerAnnonceServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>GestionTea</servlet-name>
-    <servlet-class>hei.devweb.controllers.GestionTeaServlet</servlet-class>
-  </servlet>
-  <servlet>
     <servlet-name>Administration</servlet-name>
     <servlet-class>hei.devweb.controllers.AdministrationServlet</servlet-class>
   </servlet>
@@ -36,6 +107,134 @@
     <servlet-name>Postuler</servlet-name>
     <servlet-class>hei.devweb.controllers.PostulerServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Connexion</servlet-name>
+    <servlet-class>hei.devweb.controllers.ConnexionServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Deconnexion</servlet-name>
+    <servlet-class>hei.devweb.controllers.DeconnexionServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Integrale</servlet-name>
+    <servlet-class>hei.devweb.controllers.IntegraleServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>FaireTea</servlet-name>
+    <servlet-class>hei.devweb.controllers.FaireTeaServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ValidationTea</servlet-name>
+    <servlet-class>hei.devweb.controllers.ValidationTeaServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>FaireTeaValider</servlet-name>
+    <servlet-class>hei.devweb.controllers.FaireTeaValiderServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GestionAdministration</servlet-name>
+    <servlet-class>hei.devweb.controllers.GestionAdministrationServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AjouterDroit</servlet-name>
+    <servlet-class>hei.devweb.controllers.AjouterDroitServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Recherche</servlet-name>
+    <servlet-class>hei.devweb.controllers.RechercheServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Detail</servlet-name>
+    <servlet-class>hei.devweb.controllers.DetailServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ModifierCommission</servlet-name>
+    <servlet-class>hei.devweb.controllers.ModifierCommissionServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AjouterCommission</servlet-name>
+    <servlet-class>hei.devweb.controllers.AjouterCommissionServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>MesAnnonces</servlet-name>
+    <servlet-class>hei.devweb.controllers.MesAnnoncesServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ValiderTea</servlet-name>
+    <servlet-class>hei.devweb.controllers.ValiderTeaServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GestionEleves</servlet-name>
+    <servlet-class>hei.devweb.controllers.GestionElevesServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>MesTea</servlet-name>
+    <servlet-class>hei.devweb.controllers.MesTeaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MesTea</servlet-name>
+    <url-pattern>/mestea</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GestionEleves</servlet-name>
+    <url-pattern>/gestioneleves</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ValiderTea</servlet-name>
+    <url-pattern>/validertea</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MesAnnonces</servlet-name>
+    <url-pattern>/mesannonces</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AjouterCommission</servlet-name>
+    <url-pattern>/ajoutercommission</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ModifierCommission</servlet-name>
+    <url-pattern>/modifiercommission</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Detail</servlet-name>
+    <url-pattern>/detail</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Recherche</servlet-name>
+    <url-pattern>/recherche</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AjouterDroit</servlet-name>
+    <url-pattern>/ajouterdroit</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GestionAdministration</servlet-name>
+    <url-pattern>/gestionadministration</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>FaireTeaValider</servlet-name>
+    <url-pattern>/faireteavalider</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ValidationTea</servlet-name>
+    <url-pattern>/validationtea</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>FaireTea</servlet-name>
+    <url-pattern>/fairetea</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Integrale</servlet-name>
+    <url-pattern>/integrale</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Deconnexion</servlet-name>
+    <url-pattern>/deconnexion</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Connexion</servlet-name>
+    <url-pattern>/connexion</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Postuler</servlet-name>
     <url-pattern>/postuler</url-pattern>
@@ -51,10 +250,6 @@
   <servlet-mapping>
     <servlet-name>Administration</servlet-name>
     <url-pattern>/administration</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>GestionTea</servlet-name>
-    <url-pattern>/gestiontea</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>DeposerAnnonce</servlet-name>
