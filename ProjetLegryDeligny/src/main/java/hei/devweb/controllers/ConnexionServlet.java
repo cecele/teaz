@@ -75,7 +75,10 @@ public class ConnexionServlet extends HttpServlet {
 				Integer nbTeaEnAttente = Manager.getInstance().getTeaEnAttente();
 				Integer nbOffreEnAttente = Manager.getInstance().getOffreEnAttente();
 				Date date = new Date();
-				Integer nbTeaAValiderByStructure = Manager.getInstance().getNbTeaAValiderByStructure(eleve.getCle_structure(),date);
+				Integer nbTeaAValiderByStructure = 0;
+				if(eleve.getCle_structure() != null){
+					nbTeaAValiderByStructure = Manager.getInstance().getNbTeaAValiderByStructure(eleve.getCle_structure(),date);
+				}
 				session.setAttribute( "nbTeaEnAttente", nbTeaEnAttente );
 				session.setAttribute( "nbOffreEnAttente", nbOffreEnAttente );
 				session.setAttribute( "nbTeaAValiderByStructure" , nbTeaAValiderByStructure);
